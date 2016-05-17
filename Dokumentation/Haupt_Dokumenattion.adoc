@@ -71,6 +71,37 @@ User, Server
 User klickt Button
 
 ==== Vorstellung anhand Film finden
+===== Beschreibung
+Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Film mit Vorstellung existiert
+
+===== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Film suchen
+.. Film selektieren
+.. Vorstellungen anzeigen wählen
+. Korrekte Vorstellung des Filmes wird geladen
+
+===== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+===== Invarianten
+Keine veränderten Daten
+
+===== Akteuere
+Angestellter, Client, Server
+
+===== Auslösendes Ereignis
+User möchte eine Vorstellung finden
 
 ==== Vorstellung anhand Datum finden
 
