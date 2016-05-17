@@ -1,0 +1,144 @@
+Dokumentation
+=============
+Alain Keller, Pascal Honegger und Seraphin Rihm
+Version 1.0, 15.03.2016
+:toc:
+
+== Framework
+
+=== C#
+Wir werden C#6 / .Net 4.6.1 verwenden. Das Projekt wird als sogenannte Windows Universal App erstellt und ist somit auch für Windows-Mobile ausgelegt.
+
+== Datenstruktur
+
+=== Aufbau des Projektordner
+Die Dateien werden in verschiede Ordner (Namespaces) unterteilt. Diese werden nach Überthemen des Projektes geordnet. Die Ordner sind doppelt vorhanden, einmal im Haupt-Projekt und einmal im Test-Projekt.
+
+== Continous Integration
+
+link:https://ci.appveyor.com/project/PascalHonegger/spaceinvaders[AppVeyor]
+unterstützt als einzige CI neben Travis C#, benötigt aber weniger Konfigurationen.
+
+== VCS-Server
+link:https://github.com/PascalHonegger/SpaceInvaders[Github]
+
+== Pflichtenheft
+
+=== Chatfunktionen
+
+* User
+** Registrieren
+** Login
+** Kontakliste
+*** Kann nur mit Leuten in seiner Kontakliste chaten.
+** Status
+
+* Userinterface
+** Status der Nachricht wird angezeigt (Haken)
+** Logische gliederung der Nachrichten (Rechts und Links)
+** Man wird über neue Nachrichten informiert.
+
+* Chat
+** Nur Text
+** History
+** Gruppe
+
+
+== Architektur
+=== Usecase Beschreibung 
+==== Nachricht senden
+==== Beschreibung
+Der User möchte eine Nachricht versenden (Gruppen oder Privat Chat)
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+Das Programm ist gestartet, Eingeloggt, Chatraum ausgewählt.
+
+===== Nachbedingung
+Erfolg: Die Nachricht wird innerhalb des Chatraumes für alle Mitglieder angezeigt. 
+Fehlschlag: Die Nachricht wird nicht angezeigt.
+
+===== Invarianten
+Nichtbetroffene Chaträume
+
+===== Akteuere
+User, Server
+
+===== Auslösendes Ereignis
+Nachricht senden
+
+image:../Bilder/Nachricht_senden.JPG[Nachricht senden]
+
+==== Nachricht ansehen
+==== Beschreibung
+Der User möchte Nachrichten in Chaträumen ansehen (eigene und die von anderen Leuten)
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+Das Programm ist gestartet, Eingeloggt, Chatraum ausgewählt.
+
+===== Nachbedingung
+Erfolg: Der User sieht alle Nachrichten des Chatraumes korrekt angezeigt
+Fehlschlag: Der User bekommt keine Nachrichten angezeigt
+
+===== Invarianten
+Nichtbetroffene Chaträume
+
+===== Akteuere
+User, Server
+
+===== Auslösendes Ereignis
+Nachricht senden
+
+image:../Bilder/Nachricht_ansehen.JPG[Nachricht senden]
+
+==== Chat erstellen
+==== Beschreibung
+Der User möchte einen neuen Chat erstellen
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+Das Programm ist gestartet, Eingeloggt.
+
+===== Nachbedingung
+Erfolg: Ein neuer Chatraum wurde erstellt und angezeig
+Fehlschlag: Der Chatraum wurde nciht erstellt.
+
+===== Invarianten
+Chaträume
+
+===== Akteuere
+User, Server
+
+==== Freude zu Chat hinzufügen
+==== Beschreibung
+Der User möchte seine Freunde in einen Chatraum einladen.
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+Das Programm ist gestartet, Eingeloggt, Chatraum zu einladen ausgewählt
+
+===== Nachbedingung
+Erfolg: Die eingeldadenen Feunde können den Chatraum betreten und Nachrichten senden/ansehen.
+Fehlschlag: Freunde werden nicht zu Chat eingeladen.
+
+===== Invarianten
+nichtbetrofenen Chaträume
+
+===== Akteuere
+User, Server
+
+===== Auslösendes Ereignis
+Freunde werden zu Chat eingeldaden
+
+image:../Bilder/Freunde_Chat.jpg[Nachricht ansehen]
+
+== Fazit
