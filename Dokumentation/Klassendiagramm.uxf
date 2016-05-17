@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.1.1">
   <help_text>// fontsize=14
 // fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
 </help_text>
-  <zoom_level>7</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>364</x>
-      <y>147</y>
-      <w>315</w>
-      <h>133</h>
+      <x>384</x>
+      <y>138</y>
+      <w>270</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Cinema
@@ -25,10 +25,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>490</y>
-      <w>147</w>
-      <h>133</h>
+      <x>744</x>
+      <y>684</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Seat
@@ -45,16 +45,17 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>672</y>
-      <w>147</w>
-      <h>112</h>
+      <x>570</x>
+      <y>372</y>
+      <w>126</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Reservation
 --
-Customers: List&lt;Customer&gt;
-Seats: List&lt;Seat&gt;
++Customers: List&lt;Customer&gt;
++Seats: List&lt;Seat&gt;
++Presentation: Presentation
 --
 Responsibilities
 -- Besucher
@@ -65,10 +66,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>322</y>
-      <w>147</w>
-      <h>133</h>
+      <x>150</x>
+      <y>444</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Movie
@@ -84,10 +85,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>322</y>
-      <w>168</w>
-      <h>133</h>
+      <x>408</x>
+      <y>444</y>
+      <w>144</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Presentation
@@ -105,16 +106,18 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>399</x>
-      <y>490</y>
-      <w>147</w>
-      <h>133</h>
+      <x>738</x>
+      <y>534</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Room
 --
 +Seats: List&lt;Seat&gt;
 --
++GetLeftSeat(Seat):Seat
++GetRightSeat(Seat):Seat
 --
 Responsibilities
 -- Reihen / Sitze
@@ -124,10 +127,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>28</x>
-      <y>490</y>
-      <w>147</w>
-      <h>133</h>
+      <x>516</x>
+      <y>684</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 SeatType
@@ -144,76 +147,76 @@ eines Sitzplatzes</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>168</x>
-      <y>553</y>
-      <w>70</w>
-      <h>21</h>
+      <x>636</x>
+      <y>738</y>
+      <w>120</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;180.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>553</y>
-      <w>49</w>
-      <h>21</h>
+      <x>858</x>
+      <y>342</y>
+      <w>42</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+    <additional_attributes>10.0;420.0;50.0;420.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>273</y>
-      <w>21</w>
-      <h>63</h>
+      <x>480</x>
+      <y>246</y>
+      <w>18</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;330.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>364</x>
-      <y>385</y>
-      <w>105</w>
-      <h>21</h>
+      <x>270</x>
+      <y>498</y>
+      <w>150</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;230.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>364</x>
-      <y>553</y>
-      <w>49</w>
-      <h>21</h>
+      <x>858</x>
+      <y>612</y>
+      <w>42</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+    <additional_attributes>20.0;220.0;50.0;220.0;50.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>329</x>
-      <y>616</y>
-      <w>259</w>
-      <h>112</h>
+      <x>684</x>
+      <y>462</y>
+      <w>72</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0;350.0;140.0</additional_attributes>
+    <additional_attributes>100.0;420.0;10.0;420.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>497</y>
-      <w>378</w>
-      <h>140</h>
+      <x>726</x>
+      <y>222</y>
+      <w>324</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 PresentationReservationManager
@@ -221,6 +224,7 @@ PresentationReservationManager
 +CreatePresentations(): List&lt;Presentation&gt;
 +CreateReservation(): Reservation
 +DisplayReservations(presentation: Presentation): void
++Edit(Reservation)
 --
 Responsibilities
 -- Platzauswahl im GUI darstellen
@@ -233,43 +237,43 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>448</y>
-      <w>21</w>
-      <h>63</h>
+      <x>504</x>
+      <y>270</y>
+      <w>234</w>
+      <h>186</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>370.0;10.0;10.0;10.0;10.0;290.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
-      <y>630</y>
-      <w>21</w>
-      <h>56</h>
+      <x>660</x>
+      <y>318</y>
+      <w>78</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>658</x>
-      <y>273</y>
-      <w>21</w>
-      <h>238</h>
+      <x>648</x>
+      <y>192</y>
+      <w>168</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;320.0;10.0;10.0</additional_attributes>
+    <additional_attributes>260.0;50.0;260.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
-      <y>147</y>
-      <w>224</w>
-      <h>133</h>
+      <x>126</x>
+      <y>222</y>
+      <w>192</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 MovieManager
@@ -284,32 +288,32 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>238</y>
-      <w>98</w>
-      <h>21</h>
+      <x>312</x>
+      <y>186</y>
+      <w>84</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+    <additional_attributes>10.0;200.0;70.0;200.0;70.0;10.0;120.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>273</y>
-      <w>21</w>
-      <h>63</h>
+      <x>204</x>
+      <y>330</y>
+      <w>18</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;190.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>672</y>
-      <w>147</w>
-      <h>98</h>
+      <x>726</x>
+      <y>372</y>
+      <w>126</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Customer
@@ -325,21 +329,21 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>714</x>
-      <y>714</y>
-      <w>77</w>
-      <h>21</h>
+      <x>690</x>
+      <y>408</y>
+      <w>48</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1281</x>
-      <y>161</y>
-      <w>308</w>
-      <h>630</h>
+      <x>1458</x>
+      <y>168</y>
+      <w>264</w>
+      <h>540</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -347,10 +351,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1043</x>
-      <y>217</y>
-      <w>252</w>
-      <h>28</h>
+      <x>1254</x>
+      <y>216</y>
+      <w>216</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-()
 LoadPresentations(timerange)</panel_attributes>
@@ -359,10 +363,10 @@ LoadPresentations(timerange)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1043</x>
-      <y>245</y>
-      <w>252</w>
-      <h>28</h>
+      <x>1254</x>
+      <y>240</y>
+      <w>216</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-()
 CreatePresentations(movie, dates, price)</panel_attributes>
@@ -371,13 +375,106 @@ CreatePresentations(movie, dates, price)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1043</x>
-      <y>273</y>
-      <w>252</w>
-      <h>28</h>
+      <x>1254</x>
+      <y>264</y>
+      <w>216</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-()
 CreatePresentations(movie, date, price)</panel_attributes>
     <additional_attributes>340.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>462</y>
+      <w>102</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;120.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>0</y>
+      <w>270</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+CinemaManager
+--
++LoadCinemas(): List&lt;Cinema&gt;
++CreateCinema(name: string, location: string): Cinema
+--
+Responsibilities
+-- Vorstellungen verwalten
+-- Vorstellungen nach Filmtitel und Datum filtern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>108</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>582</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+RoomSeatManager
+--
++CreateRoom()
++EditRoom(room: Room)
+--
+Responsibilities
+-- Reihen / Sitze
+-- Saalnummer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>690</y>
+      <w>180</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>280.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>654</y>
+      <w>408</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>660.0;50.0;660.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>606</y>
+      <w>336</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>540.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
