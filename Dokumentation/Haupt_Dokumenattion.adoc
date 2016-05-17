@@ -48,7 +48,7 @@ link:https://github.com/PascalHonegger/SpaceInvaders[Github]
 === Usecase Beschreibung
 
 ==== Titel
-==== Beschreibung
+===== Beschreibung
 -
 
 ===== Kategorie
@@ -93,3 +93,27 @@ User klickt Button
 ==== Saal erfassen
 
 ==== Saal / Sitzplätze bearbeiten
+
+==== Reservation anhand Kunde finden
+===== Beschreibung
+Als User möchte ich alle Reservationen eines Kunden finden
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+
+===== Nachbedingung
+Erfolg: Alle Reservationen des Kundes werden angzeigt
+Fehlschlag: Reservationen werden nicht angezeigt
+
+===== Invarianten
+Alles
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+User möchte Reservationen von Kude finden
