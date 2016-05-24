@@ -114,8 +114,54 @@ User möchte eine Vorstellung finden
 ==== Reservierung anhand Telefonnummer(Kunde) suchen
 
 ==== Reservierung stornieren
+===== Beschreibung
+Ein Kunde möchte seine Reservation stornieren
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+* User ist im Reservationsmenu
+
+===== Nachbedingung
+Erfolg: Die Reservation wurde erfolgreich storniert und die Plätze sind wieder freigegeben
+Fehlschlag: Die Plätze sind immer noch vom Kunden reserviert
+
+===== Invarianten
+Vorstellung
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+Ein User möchte seine Reservation stornieren.
 
 ==== Reservierung anpassen
+===== Beschreibung
+Ein Kunde möchte seine Reservierung anpassen. Er möchte zwei weitere Sitze Reservieren
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+* Kunde hat eine Reservation gemacht
+
+===== Nachbedingung
+Erfolg: Die Anpassung war erfolgreich, der Reservation des Kundens wurden zwei weitere Sitze hinzugefügt
+Fehlschlag: Es war nicht möglich die Reservation anzupassen. Die zwei Sitze wurden nicht reserviert.
+
+===== Invarianten
+Alles
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+Ein Kunde möchte seine Reservation ändern.
 
 ==== Film anhand Namen suchen
 
