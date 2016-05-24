@@ -200,16 +200,119 @@ User möchte eine Vorstellung reservieren
 ==== Reservierung anhand Telefonnummer(Kunde) suchen
 
 ==== Reservierung stornieren
+===== Beschreibung
+Ein Kunde möchte seine Reservation stornieren
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+* User ist im Reservationsmenu
+
+===== Nachbedingung
+Erfolg: Die Reservation wurde erfolgreich storniert und die Plätze sind wieder freigegeben
+Fehlschlag: Die Plätze sind immer noch vom Kunden reserviert
+
+===== Invarianten
+Vorstellung
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+Ein User möchte seine Reservation stornieren.
 
 ==== Reservierung anpassen
+===== Beschreibung
+Ein Kunde möchte seine Reservierung anpassen. Er möchte zwei weitere Sitze Reservieren
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+* Kunde hat eine Reservation gemacht
+
+===== Nachbedingung
+Erfolg: Die Anpassung war erfolgreich, der Reservation des Kundens wurden zwei weitere Sitze hinzugefügt
+Fehlschlag: Es war nicht möglich die Reservation anzupassen. Die zwei Sitze wurden nicht reserviert.
+
+===== Invarianten
+Alles
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+Ein Kunde möchte seine Reservation ändern.
 
 ==== Film anhand Namen suchen
 
 ==== Film erstellen
 
 ==== Saal erfassen
+===== Beschreibung
+Als User möchte ich einen neuen Saal mit Sitzplätzen erfassen
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+
+===== Aktion
+. Saal Erfassungsmaske öffnen
+.. Erfassungsmaske öffnet sich
+.. User erstellt einen neuen Saal
+.. User erstellt Sitzplätze für neuen Saal
+. Die Daten werden auf der Datenbank geupdatet
+
+===== Nachbedingung
+Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
+Fehlschlag: Daten wurden nicht korrekt gespeichert
+
+===== Invarianten
+Alle Daten ausser Säle und Sitzplätze
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+User will neun Saal erfassen
 
 ==== Saal / Sitzplätze bearbeiten
+===== Beschreibung
+Als User möchte ich erfasste Säle und die sitzplätze eines Saales bearbeiten können
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Es sind Säle und Sitzplätze erfast
+
+===== Aktion
+. Bearbeitungsmaske öffnen
+.. Bearbeitungsmaske öffnet sich
+.. Der User wählt einen Saal aus
+.. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
+. Die Daten werden auf der Datenbank geupdatet
+
+===== Nachbedingung
+Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
+Fehlschlag: Daten wurden nicht korrekt gespeichert
+
+===== Invarianten
+Alle Daten auser Säle und Sitzplätze
+
+===== Akteuere
+User, Server, Client
+
+===== Auslösendes Ereignis
+User möchte einen Saal anpassen
 
 ==== Reservation anhand Kunde finden
 ===== Beschreibung
@@ -222,12 +325,19 @@ Primär
 * Das Programm ist gestartet
 * Der Kunde ist erfasst
 
+===== Aktion
+. Reservationsfilter asuwählen
+.. Reservationsfilterung öffnet sich
+.. User gibt Kunden Name oder Telefonnummer ein
+. Reservationen des Kundes werden zurückgegeben
+. Reservation selektieren für mehr Detais
+
 ===== Nachbedingung
 Erfolg: Alle Reservationen des Kundes werden angzeigt
 Fehlschlag: Reservationen werden nicht angezeigt
 
 ===== Invarianten
-Alles
+Keine Daten
 
 ===== Akteuere
 User, Server, Client
