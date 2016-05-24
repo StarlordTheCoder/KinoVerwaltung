@@ -1,0 +1,355 @@
+Dokumentation
+=============
+Alain Keller, Pascal Honegger und Seraphin Rihm
+Version 1.1, 24.05.2016
+:toc:
+
+= Vorstellung anhand Film finden
+=== Beschreibung
+Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Film mit Vorstellung existiert
+
+=== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Film suchen
+.. Film selektieren
+.. Vorstellungen anzeigen wählen
+. Korrekte Vorstellung des Filmes wird geladen
+
+=== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+Angestellter, Client, Server
+
+=== Auslösendes Ereignis
+User möchte eine Vorstellung finden
+
+
+= Vorstellung anhand Datum finden
+=== Beschreibung
+Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Film mit Vorstellung am korrekten Datum existiert
+
+=== Aktion
+. Vorestellung suchen anwählen
+.. Vorestellung suchen öffnet sich
+.. Datum eingeben
+. Korrekte Vorstellungen werden geladen
+
+=== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+Angestellter, Client, Server
+
+=== Auslösendes Ereignis
+User möchte eine Vorstellung finden
+
+= Freie Plätze einer Vorstellung anzeigen
+=== Beschreibung
+Als Kunde möchte ich alle alle freien Plätze erfahren, damit ich einen reservieren kann
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Vorstellung mit freien Sitzen existiert
+
+=== Aktion
+. Vorstellung suchen anwählen
+.. Vorstellung suchen öffnet sich
+.. Vorstellung mit freien Sitzplätzen selektieren
+.. Platz reservieren anwählen
+... Platz reservieren öffnet sich
+... Freie Plätze sind ersichtlich
+.... Besetzte Plätze sind markiert
+.... Selektierte Plätze sind hervorgehoben
+
+=== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+Angestellter, Client, Server
+
+=== Auslösendes Ereignis
+User möchte eine Vorstellung finden
+
+
+= Vorstellung reservieren
+=== Beschreibung
+Als Kunde möchte ich eine Vorstellung reservieren können
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* UseCase "Freie Plätze einer Vorstellung anzeigen"
+
+=== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Film suchen
+.. Film selektieren
+.. Vorstellungen anzeigen wählen
+. Korrekte Vorstellung des Filmes wird geladen
+
+=== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+Fehlschlag: Falsche Daten werden angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+Angestellter, Client, Server
+
+=== Auslösendes Ereignis
+User möchte eine Vorstellung finden
+
+
+= Reservierung stornieren
+=== Beschreibung
+Als Kunde möchte seine Reservation stornieren
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* UseCase "Vorstellung reservieren"
+
+=== Aktion
+. Reservationen anzeigen anwählen
+.. Reservationen anzeigen öffnet sich
+.. Gewünschte Reservation suchen
+.. Reservation über "Reservation stornieren" stornieren
+. Reservation ist storniert
+
+=== Nachbedingung
+Erfolg: Die Reservation wurde erfolgreich storniert und die Plätze sind wieder freigegeben
+Fehlschlag: Die Plätze sind immer noch vom Kunden reserviert
+
+=== Invarianten
+Vorstellung
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+Ein User möchte seine Reservation stornieren.
+
+
+= Reservierung anpassen
+=== Beschreibung
+Ein Kunde möchte seine Reservierung anpassen. Er möchte zwei weitere Sitze Reservieren
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+* Kunde hat eine Reservation gemacht
+
+=== Nachbedingung
+Erfolg: Die Anpassung war erfolgreich, der Reservation des Kundens wurden zwei weitere Sitze hinzugefügt
+Fehlschlag: Es war nicht möglich die Reservation anzupassen. Die zwei Sitze wurden nicht reserviert
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+Ein Kunde möchte seine Reservation ändern.
+
+
+= Film anhand Namen suchen
+=== Beschreibung
+Als Kunde möchte ich einen Film finden können, von welchem ich nur den Namen kenne.
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Gewünschter Film ist im System vorhanden
+
+=== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Namen eingeben
+.. Film suchen
+. Gesuchter Film wird gefunden
+
+=== Nachbedingung
+Erfolg: Der korrekte Film wird gefunden
+Fehlschlag: Falsche Daten werden angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+User, Server, Client
+=== Invarianten
+Keine 
+
+=== Auslösendes Ereignis
+Ein neuer Film soll im Kino angeboten werden
+
+
+= Film erstellen
+=== Beschreibung
+Als Kino möchte ich in der Lage sein, neue Filme zu erfassen.
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+
+=== Aktion
+. Film erfassen anwählen
+.. Film erfassen öffnet sich
+.. Daten für den Film eintragen
+.. Dialog bestätigen
+. Film ist erfasst
+
+=== Nachbedingung
+Erfolg: Film korrekt erfasst. Kann in anderen Modulen verwendet werden.
+Fehlschlag: Daten wurden nicht korrekt gespeichert
+
+=== Invarianten
+Alle Daten ausser Säle und Sitzplätze
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+User will neun Saal erfassen
+
+
+= Saal erfassen
+=== Beschreibung
+Als User möchte ich einen neuen Saal mit Sitzplätzen erfassen
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+
+=== Aktion
+. Saal Erfassungsmaske öffnen
+.. Erfassungsmaske öffnet sich
+.. User erstellt einen neuen Saal
+.. User erstellt Sitzplätze für neuen Saal
+. Die Daten werden auf der Datenbank geupdatet
+
+=== Nachbedingung
+Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
+Fehlschlag: Daten wurden nicht korrekt gespeichert
+
+=== Invarianten
+Alle Daten ausser Säle und Sitzplätze
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+User will neun Saal erfassen
+
+
+= Saal / Sitzplätze bearbeiten
+=== Beschreibung
+Als User möchte ich erfasste Säle und die sitzplätze eines Saales bearbeiten können
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Es sind Säle und Sitzplätze erfast
+
+=== Aktion
+. Bearbeitungsmaske öffnen
+.. Bearbeitungsmaske öffnet sich
+.. Der User wählt einen Saal aus
+.. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
+. Die Daten werden auf der Datenbank geupdatet
+
+=== Nachbedingung
+Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
+Fehlschlag: Daten wurden nicht korrekt gespeichert
+
+=== Invarianten
+Alle Daten ausser Säle und Sitzplätze
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+User möchte einen Saal anpassen
+
+
+= Reservation anhand Kunde finden
+=== Beschreibung
+Als User möchte ich alle Reservationen eines Kunden finden
+
+=== Kategorie
+Primär
+
+=== Vorbedingungen
+* Das Programm ist gestartet
+* Der Kunde ist erfasst
+
+=== Aktion
+. Reservationsfilter asuwählen
+.. Reservationsfilterung öffnet sich
+.. User gibt Kunden Name oder Telefonnummer ein
+. Reservationen des Kundes werden zurückgegeben
+. Reservation selektieren für mehr Detais
+
+=== Nachbedingung
+Erfolg: Alle Reservationen des Kundes werden angzeigt
+Fehlschlag: Reservationen werden nicht angezeigt
+
+=== Invarianten
+Keine veränderten Daten
+
+=== Akteuere
+User, Server, Client
+
+=== Auslösendes Ereignis
+User möchte Reservationen von Kude finden
