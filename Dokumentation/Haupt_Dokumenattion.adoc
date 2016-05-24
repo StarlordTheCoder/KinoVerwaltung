@@ -1,7 +1,7 @@
 Dokumentation
 =============
 Alain Keller, Pascal Honegger und Seraphin Rihm
-Version 1.0, 17.05.2016
+Version 1.1, 24.05.2016
 :toc:
 
 == Framework
@@ -12,63 +12,56 @@ Wir werden C#6 / .Net 4.6.1 verwenden. Das Projekt wird als WPF-Applikation umge
 == Datenstruktur
 
 === Aufbau des Projektordner
-Die Dateien werden in verschiede Ordner (Namespaces) unterteilt. Diese werden nach Überthemen des Projektes geordnet. Die Ordner sind doppelt vorhanden, einmal im Haupt-Projekt und einmal im Test-Projekt.
+Die Dateien werden in verschiedene Ordner (Namespaces) unterteilt. Diese werden nach Überthemen des Projektes geordnet. Die Ordner sind doppelt vorhanden, einmal im Haupt-Projekt und einmal im Test-Projekt.
 
 == Continous Integration
+AppVeyor unterstützt als einzige CI neben Travis C#, benötigt aber weniger Konfigurationen (One-Click-Setup).
 
-link:https://ci.appveyor.com/project/PascalHonegger/spaceinvaders[AppVeyor]
-unterstützt als einzige CI neben Travis C#, benötigt aber weniger Konfigurationen.
+=== link:https://ci.appveyor.com/project/PascalHonegger/kinoverwaltung[AppVeyor] Client
+
+=== link:https://ci.appveyor.com/project/PascalHonegger/kinoverwaltung[AppVeyor] Server
 
 == VCS-Server
-link:https://github.com/PascalHonegger/SpaceInvaders[Github]
+=== link:https://github.com/StarlordTheCoder/KinoVerwaltung[Client]
+C#-WPF-Client. Verantwortlich für die Darstellung der Daten.
+
+=== link:https://github.com/StarlordTheCoder/KinoVerwaltung_Server[Server]
+C#-WCF-Server. Verantwortlich für das Verwalten der Daten.
 
 == Pflichtenheft
 
-=== Chatfunktionen
+=== Anforderungen
 
-* User
-** Registrieren
-** Login
-** Kontakliste
-*** Kann nur mit Leuten in seiner Kontakliste chaten.
-** Status
+* Kino
+** Das Tool kann mehrere Kinos verwalten
+** Kinos können erstellt, bearbeitet und ausgewählt werden
 
-* Userinterface
-** Status der Nachricht wird angezeigt (Haken)
-** Logische gliederung der Nachrichten (Rechts und Links)
-** Man wird über neue Nachrichten informiert.
+* Saal
+** Es können Säle erstellt, angesehen und bearbeitet werden
+** Verfügt über mehrere Sitze und Reihen
 
-* Chat
-** Nur Text
-** History
-** Gruppe
+* Sitzplatz
+** Kann auch ein Spezial-Sitz sein
+*** Möglicher Preiszuschlag
+*** Eventuell mehr als eine Person pro Sitzplatz (Sofa)
+** Wird im GUI dargestellt
+
+* Film
+** Es können Filme erstellt, angesehen und bearbeitet werden
+** Ein Film hat ein Cover und einen optionalen Trailer-Link
+
+* Filter
+** Der Anwender kann in der Applikation diverse Daten suchen / filtern
+*** Benutzerkonto
+*** Film
+*** Aufführung
+*** Reservierung
+** Diese Filter sind eng verbunden
+*** Der Anwender muss in der Lage sein, anhand seines ausgewählten Filmes im "Film suchen" die Darstellung des "Aufführung suchen" anzupassen
+
 
 
 == Architektur
-=== Usecase Beschreibung
-
-==== Titel
-===== Beschreibung
--
-
-===== Kategorie
-Primär
-
-===== Vorbedingungen
-Das Programm ist gestartet
-
-===== Nachbedingung
-Erfolg: Alles gut
-Fehlschlag: Fehler
-
-===== Invarianten
-Nichtbetroffene Chaträume
-
-===== Akteuere
-User, Server
-
-===== Auslösendes Ereignis
-User klickt Button
 
 ==== Vorstellung anhand Film finden
 ===== Beschreibung
@@ -104,8 +97,101 @@ Angestellter, Client, Server
 User möchte eine Vorstellung finden
 
 ==== Vorstellung anhand Datum finden
+===== Beschreibung
+Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Film mit Vorstellung am korrekten Datum existiert
+
+===== Aktion
+. Vorestellung suchen anwählen
+.. Vorestellung suchen öffnet sich
+.. Datum eingeben
+. Korrekte Vorstellungen werden geladen
+
+===== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+===== Invarianten
+Keine veränderten Daten
+
+===== Akteuere
+Angestellter, Client, Server
+
+===== Auslösendes Ereignis
+User möchte eine Vorstellung finden
 
 ==== Freie Plätze einer Vorstellung anzeigen
+===== Beschreibung
+Als Kunde möchte ich alle alle freien Plätze erfahren, damit ich einen reservieren kann
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Vorstellung mit freien Sitzen existiert
+
+===== Aktion
+. Vorstellung suchen anwählen
+.. Vorstellung suchen öffnet sich
+.. Vorstellung mit freien Sitzplätzen selektieren
+.. Platz reservieren anwählen
+... Platz reservieren öffnet sich
+... Freie Plätze sind ersichtlich
+.... Besetzte Plätze sind markiert
+.... Selektierte Plätze sind hervorgehoben
+
+===== Nachbedingung
+Erfolg: Korrekte Vorstellungen werden angezeigt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+===== Invarianten
+Keine veränderten Daten
+
+===== Akteuere
+Angestellter, Client, Server
+
+===== Auslösendes Ereignis
+User möchte eine Vorstellung finden
+
+==== Vorstellung anhand Datum finden
+===== Beschreibung
+Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
+
+===== Kategorie
+Primär
+
+===== Vorbedingungen
+* Das Programm ist gestartet
+* Film mit Vorstellung am korrekten Datum existiert
+
+===== Aktion
+. Vorestellung suchen anwählen
+.. Vorestellung suchen öffnet sich
+.. Datum eingeben
+. Korrekte Vorstellungen werden geladen
+
+===== Nachbedingung
+Erfolg: Freie Plätzen werden korrekt dargestellt
+
+Fehlschlag: Falsche Daten werden angezeigt
+
+===== Invarianten
+Keine veränderten Daten
+
+===== Akteuere
+Angestellter, Client, Server
+
+===== Auslösendes Ereignis
+User möchte eine Vorstellung reservieren
 
 ==== Vorstellung reservieren
 
