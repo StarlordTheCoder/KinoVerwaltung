@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+		xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Menu Grid.Row="0">
+			<MenuItem Header="Tools">
+				<MenuItem Header="Movie Module" IsChecked="{Binding MovieModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
+				<MenuItem Header="Room Module" IsChecked="{Binding RoomModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
+				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
+			</MenuItem>
+			<MenuItem Header="Layout">
+				<MenuItem Header="Load" Command="{Binding LoadLayoutCommand}" />
+				<MenuItem Header="Save" Command="{Binding SaveLayoutCommand}" />
+			</MenuItem>
+		</Menu>
+
+		<dock:DockingManager 
+			Grid.Row = "1"
+			x:Name = "DockingManager"
+			AnchorablesSource = "{Binding Modules}">
+
+			<dock:DockingManager.LayoutItemContainerStyle>
+				<Style TargetType="{x:Type dock:LayoutAnchorableItem}">
+					<Setter Property="Title" Value="{Binding Model.Title}"/>
+					<Setter Property="ContentId" Value="{Binding Model.Title}"/>
+					<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+					<Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+				</Style>
+			</dock:DockingManager.LayoutItemContainerStyle>
+		</dock:DockingManager>
+	</Grid>
 </Window>
