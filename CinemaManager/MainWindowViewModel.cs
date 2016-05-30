@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System.Collections.ObjectModel;
 using System.Linq;
 using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;

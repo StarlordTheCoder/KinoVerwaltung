@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaManager"
         mc:Ignorable="d"
-		xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
-		xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
-		xmlns:user="clr-namespace:CinemaManager.Modules.User"
-		Title="MainWindow" Height="350" Width="525" WindowState="Maximized" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
+        xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
+        xmlns:user="clr-namespace:CinemaManager.Modules.User"
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="Tools">
-				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
-				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
+				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
+				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
 			</MenuItem>
 			<MenuItem Header="Layout">
 				<MenuItem Header="Load" Command="{Binding LoadLayoutCommand}" />
@@ -26,10 +27,10 @@
 			</MenuItem>
 		</Menu>
 
-		<dock:DockingManager 
-			Grid.Row = "1"
-			x:Name = "DockingManager"
-			AnchorablesSource = "{Binding Modules}">
+		<dock:DockingManager
+			Grid.Row="1"
+			x:Name="DockingManager"
+			AnchorablesSource="{Binding Modules}">
 
 			<dock:DockingManager.Resources>
 				<!-- add views for specific ViewModels -->
@@ -43,11 +44,12 @@
 
 			<dock:DockingManager.LayoutItemContainerStyle>
 				<Style TargetType="{x:Type dock:LayoutAnchorableItem}">
-					<Setter Property="Title" Value="{Binding Model.Title}"/>
-					<Setter Property="ContentId" Value="{Binding Model.Title}"/>
-					<Setter Property="AutoHideCommand" Value="{Binding Model.CloseCommand}"/>
-					<Setter Property="DockAsDocumentCommand" Value="{Binding Model.CloseCommand}"/>
-					<Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+					<Setter Property="Title" Value="{Binding Model.Title}" />
+					<Setter Property="ContentId" Value="{Binding Model.Title}" />
+					<Setter Property="AutoHideCommand" Value="{Binding Model.CloseCommand}" />
+					<Setter Property="DockAsDocumentCommand" Value="{Binding Model.CloseCommand}" />
+					<Setter Property="Visibility"
+					        Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}" />
 				</Style>
 			</dock:DockingManager.LayoutItemContainerStyle>
 		</dock:DockingManager>

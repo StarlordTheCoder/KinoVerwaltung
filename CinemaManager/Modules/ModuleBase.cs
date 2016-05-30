@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CinemaManager.Properties;
