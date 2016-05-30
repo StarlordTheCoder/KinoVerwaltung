@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using CinemaManager.Modules;
+using CinemaManager.Modules.Cinema;
+using CinemaManager.Modules.User;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock;
@@ -19,14 +21,13 @@ namespace CinemaManager
 
 			_layoutSerializer = new XmlLayoutSerializer(dockManager);
 
-			Modules = new ObservableCollection<IModule> {MovieModule, RoomModule, UserModule};
+			Modules = new ObservableCollection<IModule> {CinemaModule, UserModule};
 		}
 
 		#region Modules
 
-		public IModule UserModule { get; } = new ExampleModule(true, nameof(UserModule));
-		public IModule MovieModule { get; } = new ExampleModule(true, nameof(MovieModule));
-		public IModule RoomModule { get; } = new ExampleModule(false, nameof(RoomModule));
+		public IModule UserModule { get; } = new UserModule();
+		public IModule CinemaModule { get; } = new CinemaModule();
 
 		#endregion
 
@@ -46,6 +47,10 @@ namespace CinemaManager
 				_layoutSerializer.LayoutSerializationCallback += (sender, e) =>
 				{
 					var module = Modules.First(m => m.Title == e.Model.Title);
+
+					//TODO
+
+					e.Cancel = true;
 				};
 
 				_layoutSerializer.Deserialize(dialog.FileName);

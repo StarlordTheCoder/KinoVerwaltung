@@ -1,20 +1,17 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using CinemaManager.Annotations;
+using CinemaManager.Properties;
 using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules
 {
-	public class ExampleModule : IModule
+	public abstract class ModuleBase : IModule
 	{
-		private string _title;
 		private bool _isVisible;
 
-		public ExampleModule(bool isVisible, string title)
+		public ModuleBase()
 		{
-			IsVisible = isVisible;
-			Title = title;
 			CloseCommand = new DelegateCommand(() => IsVisible = false);
 		}
 
@@ -30,16 +27,7 @@ namespace CinemaManager.Modules
 			}
 		}
 
-		public string Title
-		{
-			get { return _title; }
-			set
-			{
-				_title = value;
-				OnPropertyChanged();
-			}
-		}
-
+		public abstract string Title { get; }
 		public ICommand CloseCommand { get; }
 
 

@@ -146,11 +146,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\Cinema\CinemaModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\User\UserModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="Modules\ExampleModule.cs" />
+    <Compile Include="Modules\Cinema\CinemaModule.cs" />
+    <Compile Include="Modules\Cinema\CinemaModuleView.xaml.cs">
+      <DependentUpon>CinemaModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ModuleBase.cs" />
     <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\User\UserModule.cs" />
+    <Compile Include="Modules\User\UserModuleView.xaml.cs">
+      <DependentUpon>UserModuleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -178,7 +194,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

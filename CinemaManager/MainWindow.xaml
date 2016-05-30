@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:CinemaManager"
         mc:Ignorable="d"
 		xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
+		xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
+		xmlns:user="clr-namespace:CinemaManager.Modules.User"
+		Title="MainWindow" Height="350" Width="525" WindowState="Maximized" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -15,8 +17,7 @@
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="Tools">
-				<MenuItem Header="Movie Module" IsChecked="{Binding MovieModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
-				<MenuItem Header="Room Module" IsChecked="{Binding RoomModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
+				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
 				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True"/>
 			</MenuItem>
 			<MenuItem Header="Layout">
@@ -30,11 +31,22 @@
 			x:Name = "DockingManager"
 			AnchorablesSource = "{Binding Modules}">
 
+			<dock:DockingManager.Resources>
+				<!-- add views for specific ViewModels -->
+				<DataTemplate DataType="{x:Type cinema:CinemaModule}">
+					<cinema:CinemaModuleView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type user:UserModule}">
+					<user:UserModuleView />
+				</DataTemplate>
+			</dock:DockingManager.Resources>
+
 			<dock:DockingManager.LayoutItemContainerStyle>
 				<Style TargetType="{x:Type dock:LayoutAnchorableItem}">
 					<Setter Property="Title" Value="{Binding Model.Title}"/>
 					<Setter Property="ContentId" Value="{Binding Model.Title}"/>
-					<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+					<Setter Property="AutoHideCommand" Value="{Binding Model.CloseCommand}"/>
+					<Setter Property="DockAsDocumentCommand" Value="{Binding Model.CloseCommand}"/>
 					<Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
 				</Style>
 			</dock:DockingManager.LayoutItemContainerStyle>

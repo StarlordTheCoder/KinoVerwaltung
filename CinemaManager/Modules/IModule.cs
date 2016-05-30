@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 
 namespace CinemaManager.Modules
@@ -11,7 +6,7 @@ namespace CinemaManager.Modules
 	public interface IModule : INotifyPropertyChanged
 	{
 		bool IsVisible { get; set; }
-		string Title { get; set; }
+		string Title { get; }
 
 		ICommand CloseCommand { get; }
 	}
