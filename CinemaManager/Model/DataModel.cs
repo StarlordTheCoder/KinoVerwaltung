@@ -1,39 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
+using CinemaManager.Properties;
 
 namespace CinemaManager.Model
 {
 	[Serializable]
-	public class DataModel
+	public class DataModel : IDataModel
 	{
 		[NonSerialized]
-		private readonly BinaryFormatter _binaryFormatter;
-
-		[NonSerialized]
-		private static string _path = "TODO";
+		private readonly XmlSerializer _serializer;
 
 		public IEnumerable<CinemaModel> Cinemas { get; private set; }
 
 		public DataModel()
 		{
-			_binaryFormatter = new BinaryFormatter();
+			_serializer = new XmlSerializer(typeof(DataModel));
+			Load();
 		}
 
 		public void Save()
 		{
-			//TODO
-			_binaryFormatter.Serialize(File.OpenWrite(_path), this);
+			_serializer.Serialize(File.OpenWrite(Settings.Default.DataPath), this);
 		}
 
 		public void Load()
 		{
-			//TODO
-			var result = (DataModel) _binaryFormatter.Deserialize(File.OpenWrite(_path));
+			var result = (DataModel) _serializer.Deserialize(File.OpenWrite(Settings.Default.DataPath));
 			Cinemas = result.Cinemas;
 		}
 	}

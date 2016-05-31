@@ -154,6 +154,7 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Model\CinemaModel.cs" />
     <Compile Include="Model\DataModel.cs" />
+    <Compile Include="Model\IDataModel.cs" />
     <Compile Include="Modules\Cinema\CinemaModule.cs" />
     <Compile Include="Modules\Cinema\CinemaModuleView.xaml.cs">
       <DependentUpon>CinemaModuleView.xaml</DependentUpon>
