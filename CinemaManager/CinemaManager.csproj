@@ -153,6 +153,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Model\AgeRestrictors.cs" />
+    <Compile Include="Model\CinemaModel.cs" />
+    <Compile Include="Model\DataModel.cs" />
+    <Compile Include="Model\FilmModel.cs" />
+    <Compile Include="Model\Presentation.cs" />
+    <Compile Include="Model\ReservationModel.cs" />
+    <Compile Include="Model\RoomModel.cs" />
+    <Compile Include="Model\SeatModel.cs" />
+    <Compile Include="Model\SeatType.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\IDataModel.cs" />
     <Compile Include="Modules\Cinema\CinemaModule.cs" />
     <Compile Include="Modules\Cinema\CinemaModuleView.xaml.cs">
       <DependentUpon>CinemaModuleView.xaml</DependentUpon>
@@ -200,6 +211,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".satan">
+      <Visible>False</Visible>
+      <Description>Satan%27s children</Description>
+      <Progid>satanfile</Progid>
+      <DefaultIcon>Resources\satan.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\satan.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

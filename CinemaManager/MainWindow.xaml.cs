@@ -11,11 +11,19 @@ namespace CinemaManager
 		/// <summary>
 		///     Constructor
 		/// </summary>
-		public MainWindow()
+		/// <param name="layoutToLoad"></param>
+		public MainWindow(string layoutToLoad)
 		{
 			InitializeComponent();
 
-			DataContext = new MainWindowViewModel(DockingManager);
+			var viewModel = new MainWindowViewModel(DockingManager);
+
+			if (!string.IsNullOrEmpty(layoutToLoad))
+			{
+				viewModel.LoadLayout(layoutToLoad);
+			}
+
+			DataContext = viewModel;
 		}
 	}
 }
