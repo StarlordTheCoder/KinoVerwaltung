@@ -17,7 +17,7 @@ namespace CinemaManager.Model
 		[NonSerialized]
 		private static string _path = "TODO";
 
-		public IEnumerable<CinemaModel> Cinemas { get; private set; }
+		public CinemaModel[] Cinemas { get; set; }
 
 		public DataModel()
 		{

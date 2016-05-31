@@ -9,6 +9,8 @@ namespace CinemaManager.Model
 	[Serializable]
 	public class CinemaModel
 	{
-
+		public string Name { get; set; }
+		public RoomModel[] Rooms { get; set; }
+		public string Address { get; set; }
 	}
 }
