@@ -12,7 +12,7 @@ namespace CinemaManager.Model
 		[NonSerialized]
 		private readonly XmlSerializer _serializer;
 
-		public IEnumerable<CinemaModel> Cinemas { get; private set; }
+		public CinemaModel[] Cinemas { get; set; }
 
 		public DataModel()
 		{

@@ -152,8 +152,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Model\AgeRestrictors.cs" />
     <Compile Include="Model\CinemaModel.cs" />
     <Compile Include="Model\DataModel.cs" />
+    <Compile Include="Model\FilmModel.cs" />
+    <Compile Include="Model\Presentation.cs" />
+    <Compile Include="Model\ReservationModel.cs" />
+    <Compile Include="Model\RoomModel.cs" />
+    <Compile Include="Model\SeatModel.cs" />
+    <Compile Include="Model\SeatType.cs" />
+    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\IDataModel.cs" />
     <Compile Include="Modules\Cinema\CinemaModule.cs" />
     <Compile Include="Modules\Cinema\CinemaModuleView.xaml.cs">
