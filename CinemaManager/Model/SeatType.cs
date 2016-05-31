@@ -10,6 +10,6 @@ namespace CinemaManager.Model
 	{
 		Basic,
 		Double,
-		Lounge,
+		Lounge
 	}
 }

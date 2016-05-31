@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DataPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%AppdData%/CinemaManager/Default.xml</Value>
+      <Value Profile="(Default)">%AppData%\CinemaManager\Default.satanData</Value>
     </Setting>
   </Settings>
 </SettingsFile>

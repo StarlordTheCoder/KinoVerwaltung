@@ -1,6 +1,9 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
+using System.IO;
+
 namespace CinemaManager
 {
 	/// <summary>
@@ -11,17 +14,14 @@ namespace CinemaManager
 		/// <summary>
 		///     Constructor
 		/// </summary>
-		/// <param name="layoutToLoad"></param>
-		public MainWindow(string layoutToLoad)
+		/// <param name="startupFile"></param>
+		public MainWindow(string startupFile)
 		{
 			InitializeComponent();
 
 			var viewModel = new MainWindowViewModel(DockingManager);
 
-			if (!string.IsNullOrEmpty(layoutToLoad))
-			{
-				viewModel.LoadLayout(layoutToLoad);
-			}
+			viewModel.LoadFile(startupFile);
 
 			DataContext = viewModel;
 		}

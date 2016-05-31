@@ -7,11 +7,8 @@ using System.Collections.Generic;
 namespace CinemaManager.Model
 {
 	[Serializable]
-	public class CinemaModel
+	public class CinemasModel
 	{
-		public string Name { get; set; }
-		public List<RoomModel> Rooms { get; set; }
-		public List<Presentation> Presentations { get; set; }
-		public string Address { get; set; }
+		public List<CinemaModel> Cinemas { get; } = new List<CinemaModel>();
 	}
 }

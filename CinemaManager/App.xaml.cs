@@ -15,9 +15,9 @@ namespace CinemaManager
 	{
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
-			var layoutToLoad = e.Args.FirstOrDefault(File.Exists);
+			var startupFile = e.Args.FirstOrDefault(File.Exists);
 
-			new MainWindow(layoutToLoad).Show();
+			new MainWindow(startupFile).Show();
 		}
 
 		private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

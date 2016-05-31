@@ -9,20 +9,20 @@ using System.Windows.Data;
 namespace CinemaManager.Converter
 {
 	/// <summary>
-	///     Konfigurierbarer Boolean to Visibility Konverter. 
-	///     <see cref="ConvertBack"/> gibt immer false zurück, ausser value ist die gleiche Visibility wie <see cref="True"/>
+	///     Konfigurierbarer Boolean to Visibility Konverter.
+	///     <see cref="ConvertBack" /> gibt immer false zurück, ausser value ist die gleiche Visibility wie <see cref="True" />
 	/// </summary>
 	public class BoolToVisConverter : IValueConverter
 	{
 		/// <summary>
 		///     Vibility im Falle von true
-		///     Default: <see cref="Visibility.Visible"/>
+		///     Default: <see cref="Visibility.Visible" />
 		/// </summary>
 		public Visibility True { get; set; } = Visibility.Visible;
 
 		/// <summary>
 		///     Visibility im Falle von false
-		///     Default: <see cref="Visibility.Collapsed"/>
+		///     Default: <see cref="Visibility.Collapsed" />
 		/// </summary>
 		public Visibility False { get; set; } = Visibility.Collapsed;
 

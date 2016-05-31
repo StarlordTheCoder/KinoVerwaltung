@@ -17,20 +17,24 @@
 		</Grid.RowDefinitions>
 
 		<Menu Grid.Row="0">
+			<MenuItem Header="File">
+				<MenuItem Header="Open..." Command="{Binding ChangeDatasourceCommand}" />
+				<MenuItem Header="Save" Command="{Binding SaveCommand}" />
+				<MenuItem Header="Refresh" Command="{Binding RefreshCommand}" />
+				<MenuItem Header="About" Command="{Binding AboutCommand}" />
+			</MenuItem>
 			<MenuItem Header="Tools">
 				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
 				<MenuItem Header="Movie Module" IsChecked="{Binding MovieModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
-				<MenuItem Header="Presentation Module" IsChecked="{Binding PresentationModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
-				<MenuItem Header="Reservation Module" IsChecked="{Binding ReservationModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
+				<MenuItem Header="Presentation Module" IsChecked="{Binding PresentationModule.IsVisible, Mode=TwoWay}"
+				          IsCheckable="True" />
+				<MenuItem Header="Reservation Module" IsChecked="{Binding ReservationModule.IsVisible, Mode=TwoWay}"
+				          IsCheckable="True" />
 				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
 			</MenuItem>
 			<MenuItem Header="Layout">
 				<MenuItem Header="Load" Command="{Binding LoadLayoutCommand}" />
 				<MenuItem Header="Save" Command="{Binding SaveLayoutCommand}" />
-			</MenuItem>
-			<MenuItem Header="Settings">
-				<MenuItem Header="Change Data" Command="{Binding ChangeDataCommand}" />
-				<MenuItem Header="About" Command="{Binding AboutCommand}" />
 			</MenuItem>
 		</Menu>
 
@@ -53,6 +57,8 @@
 				<Style TargetType="{x:Type dock:LayoutAnchorableItem}">
 					<Setter Property="Title" Value="{Binding Model.Title}" />
 					<Setter Property="ContentId" Value="{Binding Model.Title}" />
+					<Setter Property="Uid" Value="{Binding Model.Title}" />
+					<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
 					<Setter Property="AutoHideCommand" Value="{Binding Model.CloseCommand}" />
 					<Setter Property="DockAsDocumentCommand" Value="{Binding Model.CloseCommand}" />
 					<Setter Property="Visibility"

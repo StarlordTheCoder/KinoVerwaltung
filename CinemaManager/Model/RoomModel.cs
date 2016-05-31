@@ -1,4 +1,8 @@
-﻿using System;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System;
+using System.Collections.Generic;
 
 namespace CinemaManager.Model
 {
@@ -6,6 +10,6 @@ namespace CinemaManager.Model
 	public class RoomModel
 	{
 		public int RoomNumber { get; set; }
-		public SeatModel[] Seats { get; set; }
+		public List<SeatModel> Seats { get; set; }
 	}
 }

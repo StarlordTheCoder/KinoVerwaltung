@@ -154,6 +154,7 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Model\AgeRestrictors.cs" />
     <Compile Include="Model\CinemaModel.cs" />
+    <Compile Include="Model\CinemasModel.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Model\FilmModel.cs" />
     <Compile Include="Model\Presentation.cs" />
@@ -214,8 +215,14 @@
   <ItemGroup>
     <FileAssociation Include=".satan">
       <Visible>False</Visible>
-      <Description>Satan%27s children</Description>
+      <Description>Satan%27s layout</Description>
       <Progid>satanfile</Progid>
+      <DefaultIcon>Resources\satan.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".satanData">
+      <Visible>False</Visible>
+      <Description>Satan%27s children</Description>
+      <Progid>satandatafile</Progid>
       <DefaultIcon>Resources\satan.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>

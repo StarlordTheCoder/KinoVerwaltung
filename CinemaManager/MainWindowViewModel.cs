@@ -2,14 +2,18 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using CinemaManager.Model;
 using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
 using CinemaManager.Modules.User;
+using CinemaManager.Properties;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock;
@@ -20,15 +24,19 @@ namespace CinemaManager
 	public class MainWindowViewModel
 	{
 		private readonly XmlLayoutSerializer _layoutSerializer;
+		private readonly IDataModel _data;
 
 		public MainWindowViewModel(DockingManager dockManager)
 		{
 			LoadLayoutCommand = new DelegateCommand(LoadLayout);
 			SaveLayoutCommand = new DelegateCommand(SaveLayout);
-
-			ChangeDataCommand = new DelegateCommand(ChangeData);
-
+			ChangeDatasourceCommand = new DelegateCommand(ChangeDatasource);
+			RefreshCommand = new DelegateCommand(LoadData);
+			SaveCommand = new DelegateCommand(SaveData);
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
+
+			_data = new DataModel();
+			LoadData();
 
 			_layoutSerializer = new XmlLayoutSerializer(dockManager);
 
@@ -73,7 +81,7 @@ namespace CinemaManager
 			var dialog = new OpenFileDialog
 			{
 				DefaultExt = ".satan",
-				Filter = "Satan's children (*.satan)|*.satan"
+				Filter = "Satan's layout (*.satan)|*.satan"
 			};
 
 			var result = dialog.ShowDialog();
@@ -88,7 +96,7 @@ namespace CinemaManager
 			var dialog = new SaveFileDialog
 			{
 				DefaultExt = ".satan",
-				Filter = "Satan's children (*.satan)|*.satan"
+				Filter = "Satan's layout (*.satan)|*.satan"
 			};
 
 			var result = dialog.ShowDialog();
@@ -107,12 +115,56 @@ namespace CinemaManager
 
 		#region Data
 
-		private void ChangeData()
+		public void SaveData()
 		{
-			throw new NotImplementedException();
+			_data.Save();
 		}
 
-		public ICommand ChangeDataCommand { get; }
+		public void LoadData()
+		{
+			LoadData(Settings.Default.DataPath);
+		}
+
+		public void LoadData(string fileName)
+		{
+			if (Settings.Default.DataPath != fileName)
+			{
+				Settings.Default.DataPath = fileName;
+				Settings.Default.Save();
+			}
+
+			try
+			{
+				_data.Load();
+			}
+			catch
+			{
+				MessageBox.Show("Cannot interpret data!");
+			}
+		}
+
+		private void ChangeDatasource()
+		{
+			var dialog = new OpenFileDialog
+			{
+				DefaultExt = ".satan",
+				Filter = "Satan's children (*.satanData)|*.satanData",
+				CustomPlaces = new List<FileDialogCustomPlace>
+				{
+					new FileDialogCustomPlace(Environment.ExpandEnvironmentVariables(Settings.Default.DataPath))
+				}
+			};
+
+			var result = dialog.ShowDialog();
+			if (result.HasValue && result.Value)
+			{
+				LoadData(dialog.FileName);
+			}
+		}
+
+		public ICommand ChangeDatasourceCommand { get; }
+		public ICommand RefreshCommand { get; }
+		public ICommand SaveCommand { get; }
 
 		#endregion
 
@@ -128,12 +180,37 @@ namespace CinemaManager
 		{
 			get
 			{
-				var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+				var assembly = Assembly.GetExecutingAssembly();
 				var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
 				return fvi.FileVersion;
 			}
 		}
 
 		#endregion
+
+		public void LoadFile(string startupFile)
+		{
+			if (!string.IsNullOrEmpty(startupFile))
+			{
+				try
+				{
+					LoadData(startupFile);
+				}
+				catch
+				{
+					try
+					{
+						LoadLayout(startupFile);
+					}
+					catch
+					{
+						//File invalid
+						MessageBox.Show("Cannot read File content!");
+					}
+				}
+
+				
+			}
+		}
 	}
 }
