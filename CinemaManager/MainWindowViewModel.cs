@@ -118,12 +118,11 @@ namespace CinemaManager
 
 		public void SaveFile()
 		{
-			var dialog = new OpenFileDialog
+			var dialog = new SaveFileDialog
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's children (*.satanData)|*.satanData",
-				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath),
-				CheckFileExists = false
+				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath)
 			};
 
 			var result = dialog.ShowDialog();
