@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -30,9 +31,9 @@ namespace CinemaManager
 		{
 			LoadLayoutCommand = new DelegateCommand(LoadLayout);
 			SaveLayoutCommand = new DelegateCommand(SaveLayout);
-			ChangeDatasourceCommand = new DelegateCommand(ChangeDatasource);
+			OpenFileCommand = new DelegateCommand(OpenFile);
 			RefreshCommand = new DelegateCommand(LoadData);
-			SaveCommand = new DelegateCommand(SaveData);
+			SaveFileCommand = new DelegateCommand(SaveFile);
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
 
 			_data = new DataModel();
@@ -115,14 +116,31 @@ namespace CinemaManager
 
 		#region Data
 
-		public void SaveData()
+		public void SaveFile()
 		{
-			_data.Save();
+			var dialog = new OpenFileDialog
+			{
+				DefaultExt = ".satan",
+				Filter = "Satan's children (*.satanData)|*.satanData",
+				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath),
+				CheckFileExists = false
+			};
+
+			var result = dialog.ShowDialog();
+			if (result.HasValue && result.Value)
+			{
+				if (Settings.Default.DataPath != dialog.FileName)
+				{
+					Settings.Default.DataPath = dialog.FileName;
+					Settings.Default.Save();
+				}
+				_data.Save();
+			}
 		}
 
 		public void LoadData()
 		{
-			LoadData(Settings.Default.DataPath);
+			LoadData(Session.FullDataPath);
 		}
 
 		public void LoadData(string fileName)
@@ -143,16 +161,13 @@ namespace CinemaManager
 			}
 		}
 
-		private void ChangeDatasource()
+		private void OpenFile()
 		{
 			var dialog = new OpenFileDialog
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's children (*.satanData)|*.satanData",
-				CustomPlaces = new List<FileDialogCustomPlace>
-				{
-					new FileDialogCustomPlace(Environment.ExpandEnvironmentVariables(Settings.Default.DataPath))
-				}
+				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath)
 			};
 
 			var result = dialog.ShowDialog();
@@ -162,9 +177,9 @@ namespace CinemaManager
 			}
 		}
 
-		public ICommand ChangeDatasourceCommand { get; }
+		public ICommand OpenFileCommand { get; }
 		public ICommand RefreshCommand { get; }
-		public ICommand SaveCommand { get; }
+		public ICommand SaveFileCommand { get; }
 
 		#endregion
 

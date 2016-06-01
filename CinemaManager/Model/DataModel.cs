@@ -32,15 +32,13 @@ namespace CinemaManager.Model
 		/// </summary>
 		public void Save()
 		{
-			var path = Environment.ExpandEnvironmentVariables(Settings.Default.DataPath);
-
-			var folder = Path.GetDirectoryName(path);
+			var folder = Path.GetDirectoryName(Session.FullDataPath);
 			if (folder != null && !Directory.Exists(folder))
 			{
 				Directory.CreateDirectory(folder);
 			}
 
-			using (var stream = File.Open(path, FileMode.OpenOrCreate))
+			using (var stream = File.Open(Session.FullDataPath, FileMode.OpenOrCreate))
 			{
 				_serializer.Serialize(stream, CinemasModel);
 			}
@@ -48,16 +46,14 @@ namespace CinemaManager.Model
 
 		/// <summary>
 		///     Loads the <see cref="CinemasModel"/> from the configured file.
-		///     Calls <see cref="Save"/> ff the file doesn't exist.
+		///     Calls <see cref="Save"/> if the file doesn't exist.
 		/// </summary>
 		public void Load()
 		{
-			var path = Environment.ExpandEnvironmentVariables(Settings.Default.DataPath);
-
-			if (File.Exists(path))
+			if (File.Exists(Session.FullDataPath))
 			{
 				//Read file
-				using (var stream = File.OpenRead(path))
+				using (var stream = File.OpenRead(Session.FullDataPath))
 				{
 					CinemasModel = (CinemasModel)_serializer.Deserialize(stream);
 				}

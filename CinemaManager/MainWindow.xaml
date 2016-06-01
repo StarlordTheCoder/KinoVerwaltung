@@ -18,9 +18,9 @@
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="File">
-				<MenuItem Header="Open..." Command="{Binding ChangeDatasourceCommand}" />
-				<MenuItem Header="Save" Command="{Binding SaveCommand}" />
-				<MenuItem Header="Refresh" Command="{Binding RefreshCommand}" />
+				<MenuItem Header="Open..." Command="{Binding OpenFileCommand}" />
+				<MenuItem Header="Save as..." Command="{Binding SaveFileCommand}" />
+				<MenuItem Header="Synchronize" Command="{Binding RefreshCommand}" ToolTip="Save and reload all data"/>
 				<MenuItem Header="About" Command="{Binding AboutCommand}" />
 			</MenuItem>
 			<MenuItem Header="Tools">
