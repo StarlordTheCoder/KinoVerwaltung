@@ -15,10 +15,13 @@ namespace CinemaManager.MainView
 	public class LayoutService
 	{
 		private readonly DockingManager _dockingManager;
+		private static Session Session => Session.Instance;
 
 		public LayoutService(DockingManager dockingManager)
 		{
 			_dockingManager = dockingManager;
+
+			LoadLayout(Session.LayoutPath);
 
 			OpenLayoutCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
@@ -38,34 +41,32 @@ namespace CinemaManager.MainView
 
 		public void LoadLayout(string path)
 		{
-			if (Session.FullLayoutPath != path)
-			{
-				Settings.Default.LayoutPath = path;
-				Settings.Default.Save();
-			}
+			Session.LayoutPath = path;
 
-			var folder = Path.GetDirectoryName(Session.FullDataPath);
+			var folder = Path.GetDirectoryName(Session.LayoutPath);
 			if (folder != null && !Directory.Exists(folder))
 			{
 				Directory.CreateDirectory(folder);
 			}
 
-			try
+			if (File.Exists(path))
 			{
-				using (var stream = File.Open(Session.FullDataPath, FileMode.OpenOrCreate))
+				try
 				{
-					new XmlLayoutSerializer(_dockingManager).Serialize(stream);
+					using (var stream = File.Open(Session.LayoutPath, FileMode.OpenOrCreate))
+					{
+						new XmlLayoutSerializer(_dockingManager).Deserialize(stream);
+					}
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("Error loading layout!");
 				}
 			}
-			catch (Exception)
+			else
 			{
-				MessageBox.Show("Error loading layout!");
+				SaveLayout(path);
 			}
-		}
-
-		private void LoadLayout()
-		{
-			LoadLayout(Session.FullLayoutPath);
 		}
 
 		private void LoadLayoutFile()
@@ -74,7 +75,7 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's layout (*.satan)|*.satan",
-				InitialDirectory = Path.GetDirectoryName(Session.FullLayoutPath)
+				InitialDirectory = Path.GetDirectoryName(Session.LayoutPath)
 			};
 
 			var result = dialog.ShowDialog();
@@ -90,14 +91,19 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's layout (*.satan)|*.satan",
-				InitialDirectory = Path.GetDirectoryName(Session.FullLayoutPath)
+				InitialDirectory = Path.GetDirectoryName(Session.LayoutPath)
 			};
 
 			var result = dialog.ShowDialog();
 			if (result.HasValue && result.Value)
 			{
-				new XmlLayoutSerializer(_dockingManager).Serialize(dialog.FileName);
+				SaveLayout(dialog.FileName);
 			}
+		}
+
+		private void SaveLayout(string path)
+		{
+			new XmlLayoutSerializer(_dockingManager).Serialize(path);
 		}
 
 		public RoutedUICommand OpenLayoutCommand { get; }

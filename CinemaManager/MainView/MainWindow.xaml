@@ -69,6 +69,9 @@
 				</Style>
 			</dock:DockingManager.LayoutItemContainerStyle>
 		</dock:DockingManager>
-		<Label Grid.Row="2" Content="{x:Static cinemaManager:Session.FullDataPath}"/>
+		<StackPanel Grid.Row="2" Background="LightGray">
+			<Label Content="{Binding Session.DataPath}" />
+			<Label Content="{Binding Session.LayoutPath}" />
+		</StackPanel>
 	</Grid>
 </Window>

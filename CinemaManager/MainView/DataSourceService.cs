@@ -14,10 +14,12 @@ namespace CinemaManager.MainView
 	{
 		private readonly IDataModel _data;
 
+		private static Session Session => Session.Instance;
+
 		public DataSourceService(IDataModel data)
 		{
 			_data = data;
-			LoadData();
+			LoadData(Session.DataPath);
 
 			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
@@ -51,33 +53,20 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's children (*.satanData)|*.satanData",
-				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath)
+				InitialDirectory = Path.GetDirectoryName(Session.DataPath)
 			};
 
 			var result = dialog.ShowDialog();
 			if (result.HasValue && result.Value)
 			{
-				if (Settings.Default.DataPath != dialog.FileName)
-				{
-					Settings.Default.DataPath = dialog.FileName;
-					Settings.Default.Save();
-				}
+				Session.DataPath = dialog.FileName;
 				_data.Save();
 			}
 		}
 
-		private void LoadData()
-		{
-			LoadData(Session.FullDataPath);
-		}
-
 		public void LoadData(string fileName)
 		{
-			if (Session.FullDataPath != fileName)
-			{
-				Settings.Default.DataPath = fileName;
-				Settings.Default.Save();
-			}
+			Session.DataPath = fileName;
 
 			try
 			{
@@ -101,7 +90,7 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's children (*.satanData)|*.satanData",
-				InitialDirectory = Path.GetDirectoryName(Session.FullDataPath)
+				InitialDirectory = Path.GetDirectoryName(Session.DataPath)
 			};
 
 			var result = dialog.ShowDialog();

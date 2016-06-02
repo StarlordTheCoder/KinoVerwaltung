@@ -1,13 +1,8 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Windows;
 using System.Xml.Serialization;
-using CinemaManager.Properties;
 
 namespace CinemaManager.Model
 {
@@ -15,6 +10,8 @@ namespace CinemaManager.Model
 	{
 		//XmlSerializer only serializes public properties & fields
 		private readonly XmlSerializer _serializer;
+
+		private static Session Session => Session.Instance;
 
 		public DataModel()
 		{
@@ -32,13 +29,13 @@ namespace CinemaManager.Model
 		/// </summary>
 		public void Save()
 		{
-			var folder = Path.GetDirectoryName(Session.FullDataPath);
+			var folder = Path.GetDirectoryName(Session.DataPath);
 			if (folder != null && !Directory.Exists(folder))
 			{
 				Directory.CreateDirectory(folder);
 			}
 
-			using (var stream = File.Open(Session.FullDataPath, FileMode.OpenOrCreate))
+			using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
 			{
 				_serializer.Serialize(stream, CinemasModel);
 			}
@@ -50,10 +47,10 @@ namespace CinemaManager.Model
 		/// </summary>
 		public void Load()
 		{
-			if (File.Exists(Session.FullDataPath))
+			if (File.Exists(Session.DataPath))
 			{
 				//Read file
-				using (var stream = File.OpenRead(Session.FullDataPath))
+				using (var stream = File.OpenRead(Session.DataPath))
 				{
 					CinemasModel = (CinemasModel)_serializer.Deserialize(stream);
 				}

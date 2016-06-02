@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CinemaManager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DataPath" Type="System.String" Scope="User">
+    <Setting Name="DefaultDataPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">%AppData%\CinemaManager\Default.satanData</Value>
     </Setting>
-    <Setting Name="LayoutPath" Type="System.String" Scope="User">
+    <Setting Name="DefaultLayoutPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">%AppData%\CinemaManager\Default.satan</Value>
     </Setting>
   </Settings>

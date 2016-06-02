@@ -21,23 +21,16 @@ namespace CinemaManager.MainView
 {
 	public class MainWindowViewModel
 	{
-		public MainWindowViewModel(DockingManager dockingManager)
+		public static Session Session => Session.Instance;
+
+		public MainWindowViewModel()
 		{
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
 
-			DataSourceService = new DataSourceService(new DataModel());
-
-			LayoutService = new LayoutService(dockingManager);
-
-			Modules = new ObservableCollection<IModule> {CinemaModule, UserModule};
+			Modules = new ObservableCollection<IModule> {CinemaModule, MovieModule, PresentationModule, ReservationModule, UserModule};
 		}
 
-		#region TODO
-
-		public DataSourceService DataSourceService { get; set; }
-		public LayoutService LayoutService { get; set; }
-
-		public void LoadFile(string startupFile)
+		public void InitializeServices(DockingManager dockingManager, string startupFile)
 		{
 			if (!string.IsNullOrEmpty(startupFile))
 			{
@@ -45,18 +38,28 @@ namespace CinemaManager.MainView
 
 				if (Equals(extension, ".satan"))
 				{
-					LayoutService.LoadLayout(startupFile);
+					Session.LayoutPath = startupFile;
 				}
-				else if (Equals(extension, ".satanData"))
+
+				if (Equals(extension, ".satanData"))
 				{
-					DataSourceService.LoadData(startupFile);
+					Session.DataPath = startupFile;
 				}
 				else
 				{
 					MessageBox.Show($"{extension} isn't a valid file extension!");
 				}
 			}
+
+			DataSourceService = new DataSourceService(new DataModel());
+
+			LayoutService = new LayoutService(dockingManager);
 		}
+
+		#region Properties
+
+		public DataSourceService DataSourceService { get; set; }
+		public LayoutService LayoutService { get; set; }
 
 		#endregion
 
@@ -90,7 +93,8 @@ namespace CinemaManager.MainView
 			}
 		}
 
-		public ICollection CommandBindings => LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
+		public ICollection CommandBindings
+			=> LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
 
 		#endregion
 	}

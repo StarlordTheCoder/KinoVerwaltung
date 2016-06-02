@@ -11,7 +11,7 @@ namespace CinemaManager.Modules
 {
 	public abstract class ModuleBase : IModule
 	{
-		private bool _isVisible;
+		private bool _isVisible = true;
 
 		public ModuleBase()
 		{

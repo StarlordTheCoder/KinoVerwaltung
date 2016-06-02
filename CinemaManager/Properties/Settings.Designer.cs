@@ -26,24 +26,24 @@ namespace CinemaManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("%AppData%\\CinemaManager\\Default.satanData")]
-        public string DataPath {
+        public string DefaultDataPath {
             get {
-                return ((string)(this["DataPath"]));
+                return ((string)(this["DefaultDataPath"]));
             }
             set {
-                this["DataPath"] = value;
+                this["DefaultDataPath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("%AppData%\\CinemaManager\\Default.satan")]
-        public string LayoutPath {
+        public string DefaultLayoutPath {
             get {
-                return ((string)(this["LayoutPath"]));
+                return ((string)(this["DefaultLayoutPath"]));
             }
             set {
-                this["LayoutPath"] = value;
+                this["DefaultLayoutPath"] = value;
             }
         }
     }

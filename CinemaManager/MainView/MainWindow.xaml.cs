@@ -16,13 +16,13 @@ namespace CinemaManager.MainView
 		{
 			InitializeComponent();
 
-			var viewModel = new MainWindowViewModel(DockingManager);
-
-			viewModel.LoadFile(startupFile);
-
-			Window.CommandBindings.AddRange(viewModel.CommandBindings);
+			var viewModel = new MainWindowViewModel();
 
 			DataContext = viewModel;
+
+			viewModel.InitializeServices(DockingManager, startupFile);
+
+			Window.CommandBindings.AddRange(viewModel.CommandBindings);
 		}
 	}
 }

@@ -2,29 +2,69 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Timers;
 using CinemaManager.Properties;
 
 namespace CinemaManager
 {
 	/// <summary>
-	///     Session for howl Project
+	///     Session for whole Project
 	/// </summary>
-	public static class Session
+	public class Session : INotifyPropertyChanged
 	{
+		private Session()
+		{
+			
+		}
+
+		public static Session Instance { get; } = new Session();
+
 		/// <summary>
 		///     Global Ticker for Project
 		/// </summary>
-		public static Timer Ticker { get; } = new Timer(TimeSpan.FromMinutes(2).Ticks);
+		public Timer Ticker { get; } = new Timer(TimeSpan.FromMinutes(2).Ticks);
 
 		/// <summary>
-		///     Expanded <see cref="Settings.Default" /> DataPath
+		///     Expanded <see cref="Settings.Default" /> DefaultDataPath
 		/// </summary>
-		public static string FullDataPath => Environment.ExpandEnvironmentVariables(Settings.Default.DataPath);
+		public string DataPath
+		{
+			get { return _dataPath ?? Environment.ExpandEnvironmentVariables(Settings.Default.DefaultDataPath); }
+			set
+			{
+				if (Equals(_dataPath, value)) return;
+				_dataPath = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private static string _dataPath;
 
 		/// <summary>
-		///     Expanded <see cref="Settings.Default" /> LayoutPath
+		///     Expanded <see cref="Settings.Default" /> DefaultLayoutPath
 		/// </summary>
-		public static string FullLayoutPath => Environment.ExpandEnvironmentVariables(Settings.Default.LayoutPath);
+		public string LayoutPath
+		{
+			get { return _layoutPath ?? Environment.ExpandEnvironmentVariables(Settings.Default.DefaultLayoutPath); }
+			set
+			{
+				if (Equals(_layoutPath, value)) return;
+				_layoutPath = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private static string _layoutPath;
+
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
