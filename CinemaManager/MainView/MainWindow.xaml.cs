@@ -20,6 +20,8 @@ namespace CinemaManager.MainView
 
 			viewModel.LoadFile(startupFile);
 
+			Window.CommandBindings.AddRange(viewModel.CommandBindings);
+
 			DataContext = viewModel;
 		}
 	}

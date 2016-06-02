@@ -7,4 +7,7 @@
 	<Application.Resources>
 		<converter:BoolToVisConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Hidden" />
 	</Application.Resources>
+	<JumpList.JumpList>
+		<JumpList ShowRecentCategory="True"/>
+	</JumpList.JumpList>
 </Application>

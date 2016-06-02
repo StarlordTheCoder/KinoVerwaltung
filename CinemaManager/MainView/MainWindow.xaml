@@ -3,25 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CinemaManager"
         mc:Ignorable="d"
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
         xmlns:user="clr-namespace:CinemaManager.Modules.User"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
+        xmlns:cinemaManager="clr-namespace:CinemaManager"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized"
-        d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}">
+        d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}"
+		x:Name="Window">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="File">
-				<MenuItem Header="Open..." Command="{Binding DataSourceServce.OpenFileCommand}" />
-				<MenuItem Header="Save as..." Command="{Binding DataSourceServce.SaveFileCommand}" />
-				<MenuItem Header="Synchronize" Command="{Binding DataSourceServce.RefreshCommand}" ToolTip="Save and reload all data"/>
+				<MenuItem Header="Open..." Command="{Binding DataSourceService.OpenFileCommand}" />
+				<MenuItem Header="Save as..." Command="{Binding DataSourceService.SaveFileCommand}" />
+				<MenuItem Header="Synchronize" Command="{Binding DataSourceService.SynchronizeCommand}" ToolTip="Save and reload all data"/>
 				<MenuItem Header="About" Command="{Binding AboutCommand}" />
 			</MenuItem>
 			<MenuItem Header="Tools">
@@ -34,8 +36,8 @@
 				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}" IsCheckable="True" />
 			</MenuItem>
 			<MenuItem Header="Layout">
-				<MenuItem Header="Load" Command="{Binding LoadLayoutCommand}" />
-				<MenuItem Header="Save" Command="{Binding SaveLayoutCommand}" />
+				<MenuItem Header="Load" Command="{Binding LayoutService.OpenLayoutCommand}" />
+				<MenuItem Header="Save" Command="{Binding LayoutService.SaveAsLayoutCommand}" />
 			</MenuItem>
 		</Menu>
 
@@ -67,5 +69,6 @@
 				</Style>
 			</dock:DockingManager.LayoutItemContainerStyle>
 		</dock:DockingManager>
+		<Label Grid.Row="2" Content="{x:Static cinemaManager:Session.FullDataPath}"/>
 	</Grid>
 </Window>

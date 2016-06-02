@@ -137,6 +137,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainView\DataSourceService.cs" />
+    <Compile Include="MainView\LayoutService.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="MainView\MainWindow.xaml.cs">

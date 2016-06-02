@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using CinemaManager.Model;
@@ -16,12 +19,11 @@ namespace CinemaManager.MainView
 			_data = data;
 			LoadData();
 
-
-			OpenFileCommand = new RoutedUICommand("Open...","Open...", typeof(MainWindow), new InputGestureCollection
+			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
 				new KeyGesture(Key.O, ModifierKeys.Control)
 			});
-			RefreshCommand = new RoutedUICommand("Synchronize", "Synchronize", typeof(MainWindow), new InputGestureCollection
+			SynchronizeCommand = new RoutedUICommand("Synchronize", "Synchronize", typeof(MainWindow), new InputGestureCollection
 			{
 				new KeyGesture(Key.S, ModifierKeys.Control)
 			});
@@ -29,9 +31,21 @@ namespace CinemaManager.MainView
 			{
 				new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt)
 			});
+
+			CommandBindings = new List<CommandBinding>
+			{
+				new CommandBinding(OpenFileCommand, (sender, e) => OpenDataFile()),
+				new CommandBinding(SynchronizeCommand, (sender, e) => SynchronizeData()),
+				new CommandBinding(SaveFileCommand, (sender, e) => SaveDataFile()),
+			};
 		}
 
-		public void SaveDataFile()
+		public IList<CommandBinding> CommandBindings { get; }
+		public RoutedUICommand OpenFileCommand { get; }
+		public RoutedUICommand SynchronizeCommand { get; }
+		public RoutedUICommand SaveFileCommand { get; }
+
+		private void SaveDataFile()
 		{
 			var dialog = new SaveFileDialog
 			{
@@ -52,7 +66,7 @@ namespace CinemaManager.MainView
 			}
 		}
 
-		public void LoadData()
+		private void LoadData()
 		{
 			LoadData(Session.FullDataPath);
 		}
@@ -75,6 +89,12 @@ namespace CinemaManager.MainView
 			}
 		}
 
+		private void SynchronizeData()
+		{
+			_data.Save();
+			_data.Load();
+		}
+
 		private void OpenDataFile()
 		{
 			var dialog = new OpenFileDialog
@@ -90,9 +110,5 @@ namespace CinemaManager.MainView
 				LoadData(dialog.FileName);
 			}
 		}
-
-		public RoutedUICommand OpenFileCommand { get; }
-		public RoutedUICommand RefreshCommand { get; }
-		public RoutedUICommand SaveFileCommand { get; }
 	}
 }
