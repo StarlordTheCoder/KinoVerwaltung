@@ -14,15 +14,11 @@ namespace CinemaManager.MainView
 {
 	public class LayoutService
 	{
-		private readonly DockingManager _dockingManager;
+		private DockingManager _dockingManager;
 		private static Session Session => Session.Instance;
 
-		public LayoutService(DockingManager dockingManager)
+		public LayoutService()
 		{
-			_dockingManager = dockingManager;
-
-			LoadLayout(Session.LayoutPath);
-
 			OpenLayoutCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
 				new KeyGesture(Key.L, ModifierKeys.Control | ModifierKeys.Shift)
@@ -37,6 +33,13 @@ namespace CinemaManager.MainView
 				new CommandBinding(OpenLayoutCommand, (sender, e) => LoadLayoutFile()),
 				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile())
 			};
+		}
+
+		public void Initialize(DockingManager dockingManager)
+		{
+			_dockingManager = dockingManager;
+
+			LoadLayout(Session.LayoutPath);
 		}
 
 		public void LoadLayout(string path)

@@ -23,15 +23,10 @@ namespace CinemaManager.MainView
 	{
 		public static Session Session => Session.Instance;
 
-		public MainWindowViewModel()
+		public MainWindowViewModel(string startupFile)
 		{
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
 
-			Modules = new ObservableCollection<IModule> {CinemaModule, MovieModule, PresentationModule, ReservationModule, UserModule};
-		}
-
-		public void InitializeServices(DockingManager dockingManager, string startupFile)
-		{
 			if (!string.IsNullOrEmpty(startupFile))
 			{
 				var extension = Path.GetExtension(startupFile);
@@ -52,8 +47,9 @@ namespace CinemaManager.MainView
 			}
 
 			DataSourceService = new DataSourceService(new DataModel());
+			LayoutService = new LayoutService();
 
-			LayoutService = new LayoutService(dockingManager);
+			Modules = new ObservableCollection<IModule> {CinemaModule, MovieModule, PresentationModule, ReservationModule, UserModule};
 		}
 
 		#region Properties
