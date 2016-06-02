@@ -1,10 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
-using System.IO;
-
-namespace CinemaManager
+namespace CinemaManager.MainView
 {
 	/// <summary>
 	///     Interaction logic for MainWindow.xaml

@@ -34,5 +34,17 @@ namespace CinemaManager.Properties {
                 this["DataPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%AppData%\\CinemaManager\\Default.satan")]
+        public string LayoutPath {
+            get {
+                return ((string)(this["LayoutPath"]));
+            }
+            set {
+                this["LayoutPath"] = value;
+            }
+        }
     }
 }

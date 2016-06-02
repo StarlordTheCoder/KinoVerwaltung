@@ -21,5 +21,10 @@ namespace CinemaManager
 		///     Expanded <see cref="Settings.Default" /> DataPath
 		/// </summary>
 		public static string FullDataPath => Environment.ExpandEnvironmentVariables(Settings.Default.DataPath);
+
+		/// <summary>
+		///     Expanded <see cref="Settings.Default" /> LayoutPath
+		/// </summary>
+		public static string FullLayoutPath => Environment.ExpandEnvironmentVariables(Settings.Default.LayoutPath);
 	}
 }

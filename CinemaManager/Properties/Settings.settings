@@ -5,5 +5,8 @@
     <Setting Name="DataPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">%AppData%\CinemaManager\Default.satanData</Value>
     </Setting>
+    <Setting Name="LayoutPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%AppData%\CinemaManager\Default.satan</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
