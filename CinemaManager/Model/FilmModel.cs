@@ -2,17 +2,39 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Collections.Generic;
 
 namespace CinemaManager.Model
 {
+	/// <summary>
+	/// Ein Film
+	/// </summary>
 	[Serializable]
 	public class FilmModel
 	{
+		/// <summary>
+		/// Filmname
+		/// </summary>
 		public string FilmName { get; set; }
+		/// <summary>
+		/// Filmlänge
+		/// </summary>
 		public TimeSpan Length { get; set; }
+		/// <summary>
+		/// Verlag
+		/// </summary>
 		public string Publisher { get; set; }
-		public string Regisseur { get; set; }
-		public string[] MainActors { get; set; }
-		public AgeRestrictors AgeRestriction { get; set; }
+		/// <summary>
+		/// Regisseur
+		/// </summary>
+		public string Director { get; set; }
+		/// <summary>
+		/// Hauptdarsteller
+		/// </summary>
+		public List<string> MainActors { get; set; }
+		/// <summary>
+		/// Altersfreigabe
+		/// </summary>
+		public AgeRestriction AgeRestriction { get; set; }
 	}
 }

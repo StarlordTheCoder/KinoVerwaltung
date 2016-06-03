@@ -13,11 +13,8 @@ namespace CinemaManager.MainView
 {
 	public class DataSourceService : IDataSourceService
 	{
-		private readonly IDataModel _data;
-
-		public DataSourceService(IDataModel data)
+		public DataSourceService()
 		{
-			_data = data;
 			LoadData(Session.DataPath);
 
 			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
@@ -58,7 +55,7 @@ namespace CinemaManager.MainView
 
 			try
 			{
-				_data.Load();
+				Session.DataModel.Load();
 			}
 			catch
 			{
@@ -79,14 +76,14 @@ namespace CinemaManager.MainView
 			if (result.HasValue && result.Value)
 			{
 				Session.DataPath = dialog.FileName;
-				_data.Save();
+				Session.DataModel.Save();
 			}
 		}
 
 		private void SynchronizeData()
 		{
-			_data.Save();
-			_data.Load();
+			Session.DataModel.Save();
+			Session.DataModel.Load();
 		}
 
 		private void OpenDataFile()

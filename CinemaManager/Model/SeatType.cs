@@ -6,10 +6,14 @@ using System;
 namespace CinemaManager.Model
 {
 	[Serializable]
-	public enum SeatType
+	public class SeatType
 	{
-		Basic,
-		Double,
-		Lounge
+
+		public static SeatType Basic;
+		public static SeatType Double;
+		public static SeatType Lounge;
+
+		public int Capacity { get; set; }
+		public double PriceAddition { get; set; }
 	}
 }

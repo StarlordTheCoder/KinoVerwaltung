@@ -6,13 +6,31 @@ using System.Collections.Generic;
 
 namespace CinemaManager.Model
 {
+	/// <summary>
+	/// Vorstellung
+	/// </summary>
 	[Serializable]
 	public class Presentation
 	{
+		/// <summary>
+		/// Die Zeit, wann die Vorstellung beginnt
+		/// </summary>
 		public DateTime StartTime { get; set; }
+		/// <summary>
+		/// Der Film
+		/// </summary>
 		public FilmModel Film { get; set; }
+		/// <summary>
+		/// Der Saal
+		/// </summary>
 		public RoomModel Room { get; set; }
+		/// <summary>
+		/// Die Reservationen für diese Vorstellung
+		/// </summary>
 		public List<ReservationModel> Reservations { get; set; }
-		public bool Is3d { get; set; }
+		/// <summary>
+		/// Ob diese Vorstellung 3D-unterstützt - TODO
+		/// </summary>
+		public bool Is3D { get; set; }
 	}
 }

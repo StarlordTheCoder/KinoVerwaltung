@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 
 namespace CinemaManager.Model
 {
+	/// <summary>
+	/// Implementation von <see cref="IDataModel"/> mithilfe eines <see cref="XmlSerializer"/>
+	/// </summary>
 	public class DataModel : IDataModel
 	{
 		//XmlSerializer only serializes public properties & fields
@@ -13,6 +16,9 @@ namespace CinemaManager.Model
 
 		private static Session Session => Session.Instance;
 
+		/// <summary>
+		/// Initialisiert <see cref="_serializer"/>
+		/// </summary>
 		public DataModel()
 		{
 			_serializer = new XmlSerializer(typeof(CinemasModel));
@@ -24,8 +30,7 @@ namespace CinemaManager.Model
 		public CinemasModel CinemasModel { get; set; } = new CinemasModel();
 
 		/// <summary>
-		///     Save the <see cref="CinemasModel"/> to the configured file.
-		///     Creates the file, if it doesn't exist.
+		/// Speichert die Daten (<see cref="IDataModel.CinemasModel"/>) ab
 		/// </summary>
 		public void Save()
 		{
@@ -42,8 +47,7 @@ namespace CinemaManager.Model
 		}
 
 		/// <summary>
-		///     Loads the <see cref="CinemasModel"/> from the configured file.
-		///     Calls <see cref="Save"/> if the file doesn't exist.
+		/// Lädt die Daten (<see cref="IDataModel.CinemasModel"/>)
 		/// </summary>
 		public void Load()
 		{

@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using CinemaManager.Model;
 using CinemaManager.Properties;
 
 namespace CinemaManager
@@ -12,7 +13,7 @@ namespace CinemaManager
 	/// <summary>
 	///     Session for whole Project
 	/// </summary>
-	public class Session : INotifyPropertyChanged
+	public sealed class Session : INotifyPropertyChanged
 	{
 		private Session()
 		{
@@ -20,6 +21,8 @@ namespace CinemaManager
 		}
 
 		public static Session Instance { get; } = new Session();
+
+		public IDataModel DataModel { get; } = new DataModel();
 
 		/// <summary>
 		///     Global Ticker for Project
@@ -62,7 +65,7 @@ namespace CinemaManager
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}

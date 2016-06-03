@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace CinemaManager.Model
 {
+	/// <summary>
+	/// Überklasse aller Models. Beinhaltet eine liste aller Kinos. Der Anfangspunkt der Serialisierung.
+	/// </summary>
 	[Serializable]
 	public class CinemasModel
 	{

@@ -42,7 +42,7 @@ namespace CinemaManager.MainView
 				}
 			}
 
-			DataSourceService = new DataSourceService(new DataModel());
+			DataSourceService = new DataSourceService();
 			LayoutService = new LayoutService();
 
 			Modules = new ObservableCollection<IModule>

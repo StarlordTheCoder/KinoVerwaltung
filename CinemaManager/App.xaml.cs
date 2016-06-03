@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using CinemaManager.MainView;
+using CinemaManager.Metrics;
 
 namespace CinemaManager
 {
@@ -21,7 +22,13 @@ namespace CinemaManager
 				AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData?.FirstOrDefault(File.Exists) ??
 				e.Args.FirstOrDefault(File.Exists);
 
-			new MainWindow(startupFile).Show();
+			var view = new MainWindow(startupFile);
+
+			view.Show();
+
+#if DEBUG
+			new MetricsManager().StartMetrics(view.DataContext as MainWindowViewModel);
+#endif
 		}
 
 		private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

@@ -9,10 +9,16 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules
 {
+	/// <summary>
+	/// Grundimplementation von <see cref="IModule"/>
+	/// </summary>
 	public abstract class ModuleBase : IModule
 	{
 		private bool _isVisible = true;
 
+		/// <summary>
+		/// Initialisiert Commands
+		/// </summary>
 		public ModuleBase()
 		{
 			CloseCommand = new DelegateCommand(() => IsVisible = false);
