@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System.IO;
+using System.Windows.Shell;
 using System.Xml.Serialization;
 
 namespace CinemaManager.Model
@@ -53,6 +54,8 @@ namespace CinemaManager.Model
 		{
 			if (File.Exists(Session.DataPath))
 			{
+				JumpList.AddToRecentCategory(Session.DataPath);
+
 				//Read file
 				using (var stream = File.OpenRead(Session.DataPath))
 				{

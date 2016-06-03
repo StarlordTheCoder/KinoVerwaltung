@@ -51,8 +51,6 @@ namespace CinemaManager.MainView
 		{
 			Session.DataPath = path;
 
-			JumpList.AddToRecentCategory(path);
-
 			try
 			{
 				Session.DataModel.Load();
