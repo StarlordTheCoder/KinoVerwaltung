@@ -21,9 +21,9 @@
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="File">
-				<MenuItem Header="Open..." Command="{Binding DataSourceService.OpenFileCommand}" />
-				<MenuItem Header="Save as..." Command="{Binding DataSourceService.SaveFileCommand}" />
-				<MenuItem Header="Synchronize" Command="{Binding DataSourceService.SynchronizeCommand}"
+				<MenuItem Command="{Binding DataSourceService.OpenFileCommand}" />
+				<MenuItem Command="{Binding DataSourceService.SaveFileCommand}" />
+				<MenuItem Command="{Binding DataSourceService.SynchronizeCommand}"
 				          ToolTip="Save and reload all data" />
 				<MenuItem Header="About" Command="{Binding AboutCommand}" />
 			</MenuItem>
@@ -40,8 +40,9 @@
 				          IsCheckable="True" />
 			</MenuItem>
 			<MenuItem Header="Layout">
-				<MenuItem Header="Load" Command="{Binding LayoutService.OpenLayoutCommand}" />
-				<MenuItem Header="Save" Command="{Binding LayoutService.SaveAsLayoutCommand}" />
+				<MenuItem Command="{Binding LayoutService.OpenLayoutCommand}" />
+				<MenuItem Command="{Binding LayoutService.SaveLayoutCommand}" />
+				<MenuItem Command="{Binding LayoutService.SaveAsLayoutCommand}" />
 			</MenuItem>
 		</Menu>
 

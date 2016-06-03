@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -16,7 +17,9 @@ namespace CinemaManager
 	{
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
-			var startupFile = e.Args.FirstOrDefault(File.Exists);
+			var startupFile =
+				AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData?.FirstOrDefault(File.Exists) ??
+				e.Args.FirstOrDefault(File.Exists);
 
 			new MainWindow(startupFile).Show();
 		}

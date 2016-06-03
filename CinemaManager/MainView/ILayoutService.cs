@@ -12,6 +12,7 @@ namespace CinemaManager.MainView
 		IList<CommandBinding> CommandBindings { get; }
 		RoutedUICommand OpenLayoutCommand { get; }
 		RoutedUICommand SaveAsLayoutCommand { get; }
+		RoutedUICommand SaveLayoutCommand { get; }
 
 		void Initialize(DockingManager dockingManager);
 		void LoadLayout(string path);

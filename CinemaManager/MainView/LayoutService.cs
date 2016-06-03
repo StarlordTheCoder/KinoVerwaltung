@@ -25,13 +25,19 @@ namespace CinemaManager.MainView
 			SaveAsLayoutCommand = new RoutedUICommand("Save as...", "Save as...", typeof(MainWindow),
 				new InputGestureCollection
 				{
+					new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Shift)
+				});
+			SaveLayoutCommand = new RoutedUICommand("Save", "Save", typeof(MainWindow),
+				new InputGestureCollection
+				{
 					new KeyGesture(Key.S, ModifierKeys.Alt)
 				});
 
 			CommandBindings = new List<CommandBinding>
 			{
 				new CommandBinding(OpenLayoutCommand, (sender, e) => LoadLayoutFile()),
-				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile())
+				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile()),
+				new CommandBinding(SaveLayoutCommand, (sender, e) => SaveLayout(Session.LayoutPath)),
 			};
 		}
 
@@ -39,6 +45,7 @@ namespace CinemaManager.MainView
 
 		public RoutedUICommand OpenLayoutCommand { get; }
 		public RoutedUICommand SaveAsLayoutCommand { get; }
+		public RoutedUICommand SaveLayoutCommand { get; }
 		public IList<CommandBinding> CommandBindings { get; }
 
 		public void Initialize(DockingManager dockingManager)
