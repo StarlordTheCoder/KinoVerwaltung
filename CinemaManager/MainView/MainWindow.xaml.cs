@@ -25,6 +25,11 @@ namespace CinemaManager.MainView
 			DataContext = viewModel;
 		}
 
+		/// <summary>
+		///     Verzögertes Laden aufgrund des Dockingmanagers
+		/// </summary>
+		/// <param name="sender">Unused</param>
+		/// <param name="e">Unused</param>
 		private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
 		{
 			(DataContext as MainWindowViewModel)?.LayoutService.Initialize(DockingManager);

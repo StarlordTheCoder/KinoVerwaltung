@@ -15,14 +15,11 @@ using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
 using CinemaManager.Modules.User;
 using Microsoft.Practices.Prism.Commands;
-using Xceed.Wpf.AvalonDock;
 
 namespace CinemaManager.MainView
 {
 	public class MainWindowViewModel
 	{
-		public static Session Session => Session.Instance;
-
 		public MainWindowViewModel(string startupFile)
 		{
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
@@ -35,8 +32,7 @@ namespace CinemaManager.MainView
 				{
 					Session.LayoutPath = startupFile;
 				}
-
-				if (Equals(extension, ".satanData"))
+				else if (Equals(extension, ".satanData"))
 				{
 					Session.DataPath = startupFile;
 				}
@@ -49,13 +45,22 @@ namespace CinemaManager.MainView
 			DataSourceService = new DataSourceService(new DataModel());
 			LayoutService = new LayoutService();
 
-			Modules = new ObservableCollection<IModule> {CinemaModule, MovieModule, PresentationModule, ReservationModule, UserModule};
+			Modules = new ObservableCollection<IModule>
+			{
+				CinemaModule,
+				MovieModule,
+				PresentationModule,
+				ReservationModule,
+				UserModule
+			};
 		}
+
+		public static Session Session => Session.Instance;
 
 		#region Properties
 
-		public DataSourceService DataSourceService { get; set; }
-		public LayoutService LayoutService { get; set; }
+		public IDataSourceService DataSourceService { get; set; }
+		public ILayoutService LayoutService { get; set; }
 
 		#endregion
 

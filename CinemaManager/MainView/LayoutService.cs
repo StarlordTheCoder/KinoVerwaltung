@@ -1,32 +1,32 @@
-﻿using System;
-using System.Collections;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using CinemaManager.Properties;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace CinemaManager.MainView
 {
-	public class LayoutService
+	public class LayoutService : ILayoutService
 	{
 		private DockingManager _dockingManager;
-		private static Session Session => Session.Instance;
 
 		public LayoutService()
 		{
 			OpenLayoutCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
-				new KeyGesture(Key.L, ModifierKeys.Control | ModifierKeys.Shift)
+				new KeyGesture(Key.O, ModifierKeys.Alt)
 			});
-			SaveAsLayoutCommand = new RoutedUICommand("Save as...", "Save as...", typeof(MainWindow), new InputGestureCollection
-			{
-				new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift | ModifierKeys.Alt)
-			});
+			SaveAsLayoutCommand = new RoutedUICommand("Save as...", "Save as...", typeof(MainWindow),
+				new InputGestureCollection
+				{
+					new KeyGesture(Key.S, ModifierKeys.Alt)
+				});
 
 			CommandBindings = new List<CommandBinding>
 			{
@@ -34,6 +34,12 @@ namespace CinemaManager.MainView
 				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile())
 			};
 		}
+
+		private static Session Session => Session.Instance;
+
+		public RoutedUICommand OpenLayoutCommand { get; }
+		public RoutedUICommand SaveAsLayoutCommand { get; }
+		public IList<CommandBinding> CommandBindings { get; }
 
 		public void Initialize(DockingManager dockingManager)
 		{
@@ -108,9 +114,5 @@ namespace CinemaManager.MainView
 		{
 			new XmlLayoutSerializer(_dockingManager).Serialize(path);
 		}
-
-		public RoutedUICommand OpenLayoutCommand { get; }
-		public RoutedUICommand SaveAsLayoutCommand { get; }
-		public IList<CommandBinding> CommandBindings { get; }
 	}
 }
