@@ -15,6 +15,5 @@ namespace CinemaManager.MainView
 		RoutedUICommand SaveLayoutCommand { get; }
 
 		void Initialize(DockingManager dockingManager);
-		void LoadLayout(string path);
 	}
 }

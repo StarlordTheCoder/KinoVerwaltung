@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Windows.Input;
+using CinemaManager.Filter;
 
 namespace CinemaManager.Modules
 {
@@ -10,6 +11,8 @@ namespace CinemaManager.Modules
 	{
 		bool IsVisible { get; set; }
 		string Title { get; }
+
+		IFilterConfigurator FilterConfigurator { get; }
 
 		ICommand CloseCommand { get; }
 	}

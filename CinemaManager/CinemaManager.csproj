@@ -156,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Filter\FilterConfiguratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainView\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +168,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Filter\FIlterConfigurator.cs" />
+    <Compile Include="Filter\FilterConfiguratorView.xaml.cs">
+      <DependentUpon>FilterConfiguratorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Filter\IFilterAcceptor.cs" />
+    <Compile Include="Filter\IFilterConfigurator.cs" />
+    <Compile Include="Filter\IFilterVisitor.cs" />
+    <Compile Include="Filter\StringFilterAcceptor.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />
     <Compile Include="MainView\ILayoutService.cs" />

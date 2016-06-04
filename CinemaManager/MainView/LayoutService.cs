@@ -55,7 +55,7 @@ namespace CinemaManager.MainView
 			LoadLayout(Session.LayoutPath);
 		}
 
-		public void LoadLayout(string path)
+		private void LoadLayout(string path)
 		{
 			Session.LayoutPath = path;
 
