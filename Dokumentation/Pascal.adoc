@@ -1,7 +1,7 @@
 Pascal Lernjournal
 ==================
 Pascal Honegger
-Version 1.1, 04.06.2016
+Version 1.2, 06.06.2016
 :toc:
 
 === 31.05.2016
@@ -11,6 +11,14 @@ Die Idee ist, dass jedes Module beim Start seine Filter definieren kann. Auch an
 
 ==== DockingManager
 Beim diskutieren ist die Darstellung der Module ein Thema geworden. Da wir schlussendlich viele Module darstellen müssen, obwohl der Endbenutzer nicht alle benötigt. Wir kamen schnell auf die Schlussfolgerung, dass wir ein Art von Docking verwenden möchten. Der User sollte in der Lage sein, seine Applikation so auszulegen, wie er sie benötigt. Jedes Modul sollte ein Fenster darstellen, welches man mit den anderen Fenstern kombinieren kann.
-In der Arbeit verwende ich bereits ein solches Framework und habe daher Erfahrungen, wie ein solches verwendet werden kann. Damit die Appliaktion wirklich personalisierbar ist, muss das Layout auch beim Neustart noch das selbe sein => Es muss serialisiert werden.
+In der Arbeit verwende ich bereits ein solches Framework und habe daher Erfahrungen, wie ein solches verwendet werden kann. Damit die Applikation wirklich personalisierbar ist, muss das Layout auch beim Neustart noch das selbe sein => Es muss serialisiert werden.
 
 ==== Serialisierung: .satan & .satanData
+Mithilfe der Serialisierung können wir einfach unsere Daten persistieren. Das heisst, dass sie auf die Festplatte geschrieben und von dort gelesen werden. Zu erst war unser Plan nur die Serialisierung des Layouts, doch mit der Zeit wollten wir noch mehr serialisieren. Unsere Daten wollten wir zuerst auf einem zentralen Server verwalten. Aus Zeitlichen Gründen wollten wir bereits andere Funktionen kürzen, damit dieser zentrale Server platz hat. Ich kam dabei auf die Idee, einfach jegliche Datenbank wegzulassen und die Daten in Form einer Textdatei auf dem Dateisystem des Benutzers zu speichern. Der Nachteil dabei ist, dass wir eine einzelne Datei mit allen Informationen abspeichern müssten => Man könnte nur sehr erschwert zusammen daran arbeiten (Wer zuletzt kommt überschreibt die Änderungen der Anderen!). Aus Zeitmangel entschieden wir uns dafür, diese Kompromisse einzugehen. Wir möchten zwei Dateiendungen mit unserer Applikation verbinden: 
+
+* .satan speichert das Layout. Die Serialisierung des Layouts übernimmt das Docking-Framework.
+* .satanData speichert unsere Daten. Wir möchten die Daten ansich möglichst gut kapseln, dass ein Umstieg auf einen Server mit Datenbank kein grosser Aufwänd wäre. Dies sollte auch der Testbarkeit helfen!
+
+=== 06.06.2016
+==== Filter
+Das Filterkonzept ist ein sehr zentrales Konzept unserer Applikation. Zuerst wollte ich ein Visitor-Pattern umsetzen. Als ich mit diesem begonnen habe viel mir aber schnell auf, dass es nicht sehr sinnvoll ist. Wir haben spezifische Datentypen und müssen diese jeweils seziell behandeln. Das neue Konzept errinert eher an ein Chain-Of-Responsibility, ist aber auch dafür keine exakte Implementation.

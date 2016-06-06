@@ -22,7 +22,6 @@ namespace CinemaManager.Metrics
 			};
 
 			Metric.Config
-				.WithAllCounters()
 				.WithInternalMetrics()
 				.WithReporting(r => r.WithConsoleReport(TimeSpan.FromSeconds(30)))
 				.WithOwin(middleware => app.Use(middleware), config => config
@@ -32,6 +31,15 @@ namespace CinemaManager.Metrics
 					})
 					.WithMetricsEndpoint()
 				);
+
+			try
+			{
+				Metric.Config.WithAllCounters();
+			}
+			catch (Exception)
+			{
+				//Ignore
+			}
 		}
 	}
 }
