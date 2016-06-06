@@ -38,7 +38,6 @@ namespace CinemaManager.Modules
 		}
 
 		public abstract string Title { get; }
-		public IFilterConfigurator FilterConfigurator { get; } = new FilterConfigurator();
 		public ICommand CloseCommand { get; }
 
 

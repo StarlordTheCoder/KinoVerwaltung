@@ -12,8 +12,6 @@ namespace CinemaManager.Modules
 		bool IsVisible { get; set; }
 		string Title { get; }
 
-		IFilterConfigurator FilterConfigurator { get; }
-
 		ICommand CloseCommand { get; }
 	}
 }

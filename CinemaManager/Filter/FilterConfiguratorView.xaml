@@ -4,33 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CinemaManager.Filter"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-			 d:DataContext="{d:DesignInstance local:FilterConfigurator}">
-    <StackPanel Orientation="Horizontal">
-		<ItemsControl ItemsSource="{Binding StringAcceptors}">
+			 d:DataContext="{d:DesignData local:FilterConfigurator}">
+	<Grid HorizontalAlignment="Stretch">
+	    <Grid.ColumnDefinitions>
+		    <ColumnDefinition />
+			<ColumnDefinition />
+			<ColumnDefinition />
+	    </Grid.ColumnDefinitions>
+	    <ItemsControl Grid.Column="0" HorizontalAlignment="Stretch" ItemsSource="{Binding StringFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<TextBox Text="{Binding Value}"/>
-						<Button Command="{Binding RemoveFilterCommand}"/>
-					</StackPanel>
+					<DockPanel LastChildFill="True" Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}"/>
+						<TextBox DockPanel.Dock="Left" Text="{Binding Text}" IsEnabled="{Binding IsEnabled}"/>
+					</DockPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
-		<ItemsControl ItemsSource="{Binding DateAcceptors}">
+		<ItemsControl Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding DateFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<DatePicker SelectedDate="{Binding Value}"/>
-						<Button Command="{Binding RemoveFilterCommand}"/>
-					</StackPanel>
+					<DockPanel LastChildFill="True" Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}"/>
+						<xctk:DateTimePicker DockPanel.Dock="Left" Value="{Binding Date}" IsEnabled="{Binding IsEnabled}"/>
+					</DockPanel>
 				</DataTemplate>
-			</ItemsControl.ItemTemplate>
+				</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
-		<ItemsControl ItemsSource="{Binding ComplexAcceptors}">
+		<ItemsControl Grid.Column="2" HorizontalAlignment="Stretch" ItemsSource="{Binding ComplexFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal">
@@ -40,5 +46,5 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
-	</StackPanel>
+	</Grid>
 </UserControl>

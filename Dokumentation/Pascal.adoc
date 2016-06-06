@@ -1,8 +1,16 @@
 Pascal Lernjournal
 ==================
 Pascal Honegger
-Version 1.2, 02.01.2016
+Version 1.1, 04.06.2016
 :toc:
 
-=== 30.12.2015
-Gestern haben Seraphin und ich uns den Kopf über das Problem mit dem Spieler, Invader und allgemein Schiffen zerbrochen. Momentan bin ich immer noch mit dem Erstellen des Klassendiagramms beschäftigt. Ich gehe dabei jedoch nicht konventionell vor. Ich habe nicht Visio gestartet und dort ein Klassendiagramm erstellt, stattdessen habe ich Visual Studio gestartet und dort unser Projekt Projekt angepasst. Visual Studio hat die möglichkeit ein Klassendiagramm aus den klassen zu generieren und vice versa. Indem ich das Klassendiagramm in Visual Studio erstelle habe ich zwar nicht die Möglichkeit manuell Relationen einzutragen, dafür generiere ich den Code gleich dazu und muss diesen nicht nachführen. 
+=== 31.05.2016
+==== Module und Filter
+Wir waren uns zu Beginn unschlüssig, wie wir die UX optimieren können. Um herauszufinden, wie unsere Applikation verwendet wird, haben wir die Use-Cases umstrukturiert. In diesen geht es nun mehr darum, wie der Kunde sein Ziel erreicht. So kamen wir beim Erstellen der Use-Cases auf die Schlussfolgerung, dass der User im Normalfall die verschiedenen "Module" verbinden möchte. So ist ein Use-Case das filtern / suchen von Vorstellungen. Falls man nun die Vorstellungen anhand eines Filmes suchen möchte, muss man einen Film auswählen können. Wir haben uns dafür entschieden, all diese getrennten Themen in Module aufzuteilen. So haben wir ein Film-Modul und ein Vorstellungs-Modul. In dem Film-Modul kann dann ein Film ausgewählt werden und über einen Knopf gesagt werden, dass das Vorstellungs-Modul über diesen Filter verfügt. Alle Daten, welche geladen werden, werden dann durch diese Filter gesendet und gefiltert. Dies erlaubt das dynamische hinzufügen von Filtern, dazu ist es einfach erweiterbar (Falls neue Filtermöglichkeiten dazukommen) und eine angenehme Herausforderung umzusetzen.
+Die Idee ist, dass jedes Module beim Start seine Filter definieren kann. Auch andere Filtertypen (String und Date) sollten über diesen Konfigurator erstellt werden. Die Darstellung dieser Filter wird auch zentral umgesetzt und kann von jedem Modul verwendet werden.
+
+==== DockingManager
+Beim diskutieren ist die Darstellung der Module ein Thema geworden. Da wir schlussendlich viele Module darstellen müssen, obwohl der Endbenutzer nicht alle benötigt. Wir kamen schnell auf die Schlussfolgerung, dass wir ein Art von Docking verwenden möchten. Der User sollte in der Lage sein, seine Applikation so auszulegen, wie er sie benötigt. Jedes Modul sollte ein Fenster darstellen, welches man mit den anderen Fenstern kombinieren kann.
+In der Arbeit verwende ich bereits ein solches Framework und habe daher Erfahrungen, wie ein solches verwendet werden kann. Damit die Appliaktion wirklich personalisierbar ist, muss das Layout auch beim Neustart noch das selbe sein => Es muss serialisiert werden.
+
+==== Serialisierung: .satan & .satanData

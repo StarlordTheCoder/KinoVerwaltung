@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using CinemaManager.Filter;
+using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Cinema
 {
@@ -9,10 +10,13 @@ namespace CinemaManager.Modules.Cinema
 	{
 		public override string Title => "Cinema Manager";
 
+		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
+
 		public CinemaModule()
 		{
-			FilterConfigurator
-				.StringFilter(new StringFilterAcceptor(f => FilterConfigurator.StringAcceptors.Remove(f)));
+			CinemaFilterConfigurator
+				.StringFilter(new StringFilter<CinemaModel>(c => c.Name, "Name"))
+				.StringFilter(new StringFilter<CinemaModel>(c => c.Address, "Address"));
 		}
 	}
 }

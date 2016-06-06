@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CinemaManager.Model;
 
 namespace CinemaManager.Filter
 {
-	public interface IFilterAcceptor
+	public interface IFilter<in T>
 	{
-		object Value { get; set; }
+		bool IsEnabled { get; set; }
 
-		ICommand RemoveFilterCommand { get; }
+		string Label { get; }
 
-		void Accept(IFilterVisitor visitor);
+		bool Check(T data);
 	}
 }

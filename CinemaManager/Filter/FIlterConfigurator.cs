@@ -1,41 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CinemaManager.Model;
 
 namespace CinemaManager.Filter
 {
-	public class FilterConfigurator : IFilterConfigurator
+	public class FilterConfigurator<T> : IFilterConfigurator<T>
 	{
-		public ObservableCollection<IFilterAcceptor> StringAcceptors { get; } = new ObservableCollection<IFilterAcceptor>();
-		public ObservableCollection<IFilterAcceptor> DateAcceptors { get; } = new ObservableCollection<IFilterAcceptor>();
-		public ObservableCollection<IFilterAcceptor> ComplexAcceptors { get; } = new ObservableCollection<IFilterAcceptor>();
+		public ObservableCollection<DateFilter<T>> DateFilters { get; } = new ObservableCollection<DateFilter<T>>();
 
-		public IFilterConfigurator StringFilter(IFilterAcceptor acceptor)
+		public ObservableCollection<StringFilter<T>> StringFilters { get; } = new ObservableCollection<StringFilter<T>>();
+
+		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
+
+		public IFilterConfigurator<T> StringFilter(StringFilter<T> filter)
 		{
-			StringAcceptors.Add(acceptor);
+			StringFilters.Add(filter);
 
 			return this;
 		}
 
-		public IFilterConfigurator DateFilter(IFilterAcceptor acceptor)
+		public IFilterConfigurator<T> DateFilter(DateFilter<T> filter)
 		{
-			DateAcceptors.Add(acceptor);
+			DateFilters.Add(filter);
 
 			return this;
 		}
 
-		public IFilterConfigurator ComplexFilter(IFilterAcceptor acceptor)
+		public IFilterConfigurator<T> ComplexFilter(IFilter<T> filter)
 		{
-			ComplexAcceptors.Add(acceptor);
+			ComplexFilters.Add(filter);
 
 			return this;
 		}
 
-		public void FilterData(IFilterVisitor visitor)
+		public IEnumerable<T> FilterData(IEnumerable<T> data)
 		{
-			foreach (var acceptor in DateAcceptors.Concat(ComplexAcceptors).Concat(StringAcceptors))
+			var filters = DateFilters.Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
+
+			foreach (var item in data)
 			{
-				acceptor.Accept(visitor);
+				if (filters.All(f => f.Check(item)))
+				{
+					yield return item;
+				}
 			}
 		}
 	}

@@ -1,0 +1,34 @@
+﻿using System;
+
+namespace CinemaManager.Filter
+{
+	public sealed class StringFilter<T> : FilterBase<T>
+	{
+		private readonly Func<T, string> _valueToCompareTo;
+		private string _text;
+
+		public StringFilter(Func<T, string> valueToCompareTo, string label, bool isEnabled = true)
+		{
+			_valueToCompareTo = valueToCompareTo;
+			Text = string.Empty;
+			IsEnabled = isEnabled;
+			Label = label;
+		}
+
+		public string Text
+		{
+			get { return _text; }
+			set
+			{
+				if (Equals(value, _text)) return;
+				_text = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public override bool Check(T data)
+		{
+			return _valueToCompareTo.Invoke(data).ToLower().Contains(Text.ToLower());
+		}
+	}
+}

@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CinemaManager.Model;
 
 namespace CinemaManager.Filter
 {
-	public interface IFilterConfigurator
+	public interface IFilterConfigurator<T>
 	{
-		ObservableCollection<IFilterAcceptor> ComplexAcceptors { get; }
-		ObservableCollection<IFilterAcceptor> DateAcceptors { get; }
-		ObservableCollection<IFilterAcceptor> StringAcceptors { get; }
+		ObservableCollection<IFilter<T>> ComplexFilters { get; }
+		ObservableCollection<DateFilter<T>> DateFilters { get; }
+		ObservableCollection<StringFilter<T>> StringFilters { get; }
 
-		IFilterConfigurator ComplexFilter(IFilterAcceptor acceptor);
-		IFilterConfigurator DateFilter(IFilterAcceptor acceptor);
-		IFilterConfigurator StringFilter(IFilterAcceptor acceptor);
+		IFilterConfigurator<T> ComplexFilter(IFilter<T> filter);
+		IFilterConfigurator<T> DateFilter(DateFilter<T> filter);
+		IFilterConfigurator<T> StringFilter(StringFilter<T> filter);
 
-		void FilterData(IFilterVisitor visitor);
+		IEnumerable<T> FilterData(IEnumerable<T> data);
 	}
 }

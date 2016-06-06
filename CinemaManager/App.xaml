@@ -6,6 +6,7 @@
              DispatcherUnhandledException="App_OnDispatcherUnhandledException">
 	<Application.Resources>
 		<converter:BoolToVisConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Hidden" />
+		<converter:BoolToSolidColorBrushConverter x:Key="BoolToSolidColorBrushConverter" True="Transparent" False="LightGray" />
 	</Application.Resources>
 	<JumpList.JumpList>
 		<JumpList ShowRecentCategory="True"/>
