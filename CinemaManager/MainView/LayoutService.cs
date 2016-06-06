@@ -37,7 +37,7 @@ namespace CinemaManager.MainView
 			{
 				new CommandBinding(OpenLayoutCommand, (sender, e) => LoadLayoutFile()),
 				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile()),
-				new CommandBinding(SaveLayoutCommand, (sender, e) => SaveLayout(Session.LayoutPath)),
+				new CommandBinding(SaveLayoutCommand, (sender, e) => SaveLayout(Session.LayoutPath))
 			};
 		}
 

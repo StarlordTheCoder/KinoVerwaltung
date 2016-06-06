@@ -12,6 +12,7 @@ namespace CinemaManagerTest.Converter
 		protected override void DoSetup()
 		{
 			UnitUnderTest = new BoolToVisConverter();
+			base.DoSetup();
 		}
 
 		[TestCase(true)]

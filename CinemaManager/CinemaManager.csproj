@@ -174,9 +174,11 @@
     <Compile Include="Filter\FilterConfiguratorView.xaml.cs">
       <DependentUpon>FilterConfiguratorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Filter\IDateFilter.cs" />
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\IFilterConfigurator.cs" />
     <Compile Include="Filter\DateFilter.cs" />
+    <Compile Include="Filter\IStringFilter.cs" />
     <Compile Include="Filter\StringFilter.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />

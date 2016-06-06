@@ -3,7 +3,6 @@
 
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -16,12 +15,12 @@ namespace CinemaManager.Converter
 	public class BoolToSolidColorBrushConverter : IValueConverter
 	{
 		/// <summary>
-		///     <see cref="SolidColorBrush"/> im Falle von true
+		///     <see cref="SolidColorBrush" /> im Falle von true
 		/// </summary>
 		public Color True { get; set; }
 
 		/// <summary>
-		///     <see cref="SolidColorBrush"/> im Falle von false
+		///     <see cref="SolidColorBrush" /> im Falle von false
 		/// </summary>
 		public Color False { get; set; }
 

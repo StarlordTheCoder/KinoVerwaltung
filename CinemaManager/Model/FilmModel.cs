@@ -7,33 +7,38 @@ using System.Collections.Generic;
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Ein Film
+	///     Ein Film
 	/// </summary>
 	[Serializable]
 	public class FilmModel
 	{
 		/// <summary>
-		/// Filmname
+		///     Filmname
 		/// </summary>
 		public string FilmName { get; set; }
+
 		/// <summary>
-		/// Filmlänge
+		///     Filmlänge
 		/// </summary>
 		public TimeSpan Length { get; set; }
+
 		/// <summary>
-		/// Verlag
+		///     Verlag
 		/// </summary>
 		public string Publisher { get; set; }
+
 		/// <summary>
-		/// Regisseur
+		///     Regisseur
 		/// </summary>
 		public string Director { get; set; }
+
 		/// <summary>
-		/// Hauptdarsteller
+		///     Hauptdarsteller
 		/// </summary>
 		public List<string> MainActors { get; set; }
+
 		/// <summary>
-		/// Altersfreigabe
+		///     Altersfreigabe
 		/// </summary>
 		public AgeRestriction AgeRestriction { get; set; }
 	}

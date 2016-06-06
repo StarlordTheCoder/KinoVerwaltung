@@ -1,26 +1,28 @@
-﻿using System.Collections.Generic;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CinemaManager.Model;
 
 namespace CinemaManager.Filter
 {
 	public class FilterConfigurator<T> : IFilterConfigurator<T>
 	{
-		public ObservableCollection<DateFilter<T>> DateFilters { get; } = new ObservableCollection<DateFilter<T>>();
+		public ObservableCollection<IDateFilter<T>> DateFilters { get; } = new ObservableCollection<IDateFilter<T>>();
 
-		public ObservableCollection<StringFilter<T>> StringFilters { get; } = new ObservableCollection<StringFilter<T>>();
+		public ObservableCollection<IStringFilter<T>> StringFilters { get; } = new ObservableCollection<IStringFilter<T>>();
 
 		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
 
-		public IFilterConfigurator<T> StringFilter(StringFilter<T> filter)
+		public IFilterConfigurator<T> StringFilter(IStringFilter<T> filter)
 		{
 			StringFilters.Add(filter);
 
 			return this;
 		}
 
-		public IFilterConfigurator<T> DateFilter(DateFilter<T> filter)
+		public IFilterConfigurator<T> DateFilter(IDateFilter<T> filter)
 		{
 			DateFilters.Add(filter);
 
@@ -38,11 +40,21 @@ namespace CinemaManager.Filter
 		{
 			var filters = DateFilters.Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
 
-			foreach (var item in data)
+			if (filters.Any())
 			{
-				if (filters.All(f => f.Check(item)))
+				foreach (var item in data)
 				{
-					yield return item;
+					if (filters.All(f => f.Check(item)))
+					{
+						yield return item;
+					}
+				}
+			}
+			else
+			{
+				foreach (var i in data)
+				{
+					yield return i;
 				}
 			}
 		}

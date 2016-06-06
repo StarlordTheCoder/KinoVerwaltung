@@ -3,11 +3,9 @@
 
 namespace CinemaManager.Filter
 {
-	public interface IFilter<in T>
+	public interface IStringFilter<in T> : IFilter<T>
 	{
-		bool IsEnabled { get; set; }
-
-		string Label { get; }
+		string Text { get; set; }
 
 		bool Check(T data);
 	}

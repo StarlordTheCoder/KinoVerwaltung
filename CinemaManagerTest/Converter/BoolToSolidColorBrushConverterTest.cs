@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System.Windows;
 using System.Windows.Media;
 using CinemaManager.Converter;
 using NUnit.Framework;
@@ -13,6 +12,7 @@ namespace CinemaManagerTest.Converter
 		protected override void DoSetup()
 		{
 			UnitUnderTest = new BoolToSolidColorBrushConverter();
+			base.DoSetup();
 		}
 
 		[TestCase(true)]

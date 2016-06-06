@@ -10,7 +10,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using CinemaManager.Model;
 using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
 using CinemaManager.Modules.User;

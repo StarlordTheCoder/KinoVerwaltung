@@ -6,21 +6,23 @@ using System;
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Platz
+	///     Platz
 	/// </summary>
 	[Serializable]
 	public class SeatModel
 	{
 		/// <summary>
-		/// Reihe
+		///     Reihe
 		/// </summary>
 		public int Row { get; set; }
+
 		/// <summary>
-		/// Platznummer
+		///     Platznummer
 		/// </summary>
 		public int Number { get; set; }
+
 		/// <summary>
-		/// Platzart. Beispielsweise Sofa
+		///     Platzart. Beispielsweise Sofa
 		/// </summary>
 		public SeatType SeatType { get; set; }
 	}

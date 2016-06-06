@@ -15,9 +15,12 @@ namespace CinemaManager
 	/// </summary>
 	public sealed class Session : INotifyPropertyChanged
 	{
+		private static string _dataPath;
+
+		private static string _layoutPath;
+
 		private Session()
 		{
-			
 		}
 
 		public static Session Instance { get; } = new Session();
@@ -43,8 +46,6 @@ namespace CinemaManager
 			}
 		}
 
-		private static string _dataPath;
-
 		/// <summary>
 		///     Expanded <see cref="Settings.Default" /> DefaultLayoutPath
 		/// </summary>
@@ -58,8 +59,6 @@ namespace CinemaManager
 				OnPropertyChanged();
 			}
 		}
-
-		private static string _layoutPath;
 
 
 		public event PropertyChangedEventHandler PropertyChanged;

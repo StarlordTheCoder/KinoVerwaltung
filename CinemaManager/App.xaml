@@ -9,6 +9,6 @@
 		<converter:BoolToSolidColorBrushConverter x:Key="BoolToSolidColorBrushConverter" True="Transparent" False="LightGray" />
 	</Application.Resources>
 	<JumpList.JumpList>
-		<JumpList ShowRecentCategory="True"/>
+		<JumpList ShowRecentCategory="True" />
 	</JumpList.JumpList>
 </Application>

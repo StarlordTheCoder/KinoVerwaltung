@@ -1,8 +1,11 @@
-﻿using System;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System;
 
 namespace CinemaManager.Filter
 {
-	public sealed class StringFilter<T> : FilterBase<T>
+	public sealed class StringFilter<T> : FilterBase<T>, IStringFilter<T>
 	{
 		private readonly Func<T, string> _valueToCompareTo;
 		private string _text;

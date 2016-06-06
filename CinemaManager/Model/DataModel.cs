@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Implementation von <see cref="IDataModel"/> mithilfe eines <see cref="XmlSerializer"/>
+	///     Implementation von <see cref="IDataModel" /> mithilfe eines <see cref="XmlSerializer" />
 	/// </summary>
 	public class DataModel : IDataModel
 	{
 		//XmlSerializer only serializes public properties & fields
 		private readonly XmlSerializer _serializer;
 
-		private static Session Session => Session.Instance;
-
 		/// <summary>
-		/// Initialisiert <see cref="_serializer"/>
+		///     Initialisiert <see cref="_serializer" />
 		/// </summary>
 		public DataModel()
 		{
 			_serializer = new XmlSerializer(typeof(CinemasModel));
 		}
 
+		private static Session Session => Session.Instance;
+
 		/// <summary>
-		///    The main instance, containing all data from the models.
+		///     The main instance, containing all data from the models.
 		/// </summary>
 		public CinemasModel CinemasModel { get; set; } = new CinemasModel();
 
 		/// <summary>
-		/// Speichert die Daten (<see cref="IDataModel.CinemasModel"/>) ab
+		///     Speichert die Daten (<see cref="IDataModel.CinemasModel" />) ab
 		/// </summary>
 		public void Save()
 		{
@@ -48,7 +48,7 @@ namespace CinemaManager.Model
 		}
 
 		/// <summary>
-		/// Lädt die Daten (<see cref="IDataModel.CinemasModel"/>)
+		///     Lädt die Daten (<see cref="IDataModel.CinemasModel" />)
 		/// </summary>
 		public void Load()
 		{
@@ -59,7 +59,7 @@ namespace CinemaManager.Model
 				//Read file
 				using (var stream = File.OpenRead(Session.DataPath))
 				{
-					CinemasModel = (CinemasModel)_serializer.Deserialize(stream);
+					CinemasModel = (CinemasModel) _serializer.Deserialize(stream);
 				}
 			}
 			else

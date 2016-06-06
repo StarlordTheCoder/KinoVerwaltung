@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shell;
-using CinemaManager.Model;
 using Microsoft.Win32;
 
 namespace CinemaManager.MainView

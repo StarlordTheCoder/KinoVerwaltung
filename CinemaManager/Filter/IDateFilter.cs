@@ -1,13 +1,13 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
+
 namespace CinemaManager.Filter
 {
-	public interface IFilter<in T>
+	public interface IDateFilter<T> : IFilter<T>
 	{
-		bool IsEnabled { get; set; }
-
-		string Label { get; }
+		DateTime? Date { get; set; }
 
 		bool Check(T data);
 	}

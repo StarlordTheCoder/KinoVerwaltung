@@ -16,19 +16,19 @@ namespace CinemaManager.Model
 		///     Name des Kinos
 		/// </summary>
 		public string Name { get; set; }
-		
+
 		/// <summary>
-		/// Säle des Kinos
+		///     Säle des Kinos
 		/// </summary>
 		public List<RoomModel> Rooms { get; set; }
-		
+
 		/// <summary>
-		/// Vorstellungen des Kinos
+		///     Vorstellungen des Kinos
 		/// </summary>
 		public List<Presentation> Presentations { get; set; }
 
 		/// <summary>
-		/// Adresse des Kinos
+		///     Adresse des Kinos
 		/// </summary>
 		public string Address { get; set; }
 	}

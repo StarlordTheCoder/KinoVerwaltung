@@ -1,12 +1,14 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CinemaManager.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="DefaultDataPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%AppData%\CinemaManager\Default.satanData</Value>
-    </Setting>
-    <Setting Name="DefaultLayoutPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%AppData%\CinemaManager\Default.satan</Value>
-    </Setting>
-  </Settings>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="CinemaManager.Properties" GeneratedClassName="Settings">
+	<Profiles />
+	<Settings>
+		<Setting Name="DefaultDataPath" Type="System.String" Scope="User">
+			<Value Profile="(Default)">%AppData%\CinemaManager\Default.satanData</Value>
+		</Setting>
+		<Setting Name="DefaultLayoutPath" Type="System.String" Scope="User">
+			<Value Profile="(Default)">%AppData%\CinemaManager\Default.satan</Value>
+		</Setting>
+	</Settings>
 </SettingsFile>

@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CinemaManager.Model;
-using CinemaManager.Properties;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System;
 
 namespace CinemaManager.Filter
 {
-	public class DateFilter<T> : FilterBase<T>
+	public class DateFilter<T> : FilterBase<T>, IDateFilter<T>
 	{
 		private readonly Func<T, DateTime?> _valueToCompareTo;
 		private DateTime? _date;

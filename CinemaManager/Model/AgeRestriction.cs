@@ -12,7 +12,7 @@ namespace CinemaManager.Model
 	public enum AgeRestriction
 	{
 		/// <summary>
-		///    Ohne Alterseinschränkungen
+		///     Ohne Alterseinschränkungen
 		/// </summary>
 		None = 0,
 

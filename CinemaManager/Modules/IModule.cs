@@ -3,7 +3,6 @@
 
 using System.ComponentModel;
 using System.Windows.Input;
-using CinemaManager.Filter;
 
 namespace CinemaManager.Modules
 {
