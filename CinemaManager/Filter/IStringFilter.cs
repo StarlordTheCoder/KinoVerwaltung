@@ -6,7 +6,5 @@ namespace CinemaManager.Filter
 	public interface IStringFilter<in T> : IFilter<T>
 	{
 		string Text { get; set; }
-
-		bool Check(T data);
 	}
 }

@@ -38,9 +38,11 @@ namespace CinemaManager.Modules
 
 		public abstract string Title { get; }
 		public ICommand CloseCommand { get; }
+		public abstract void Refresh();
 
-
+		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
+
 
 		[NotifyPropertyChangedInvocator]
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

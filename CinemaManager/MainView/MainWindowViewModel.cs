@@ -44,14 +44,30 @@ namespace CinemaManager.MainView
 			DataSourceService = new DataSourceService();
 			LayoutService = new LayoutService();
 
+			InitialiseModules();
+		}
+
+		private void InitialiseModules()
+		{
+			//Create Module instances
+			CinemaModule = new CinemaModule();
+			UserModule = new UserModule();
+
+			//Add to list
 			Modules = new ObservableCollection<IModule>
 			{
 				CinemaModule,
-				MovieModule,
+				/*MovieModule,
 				PresentationModule,
-				ReservationModule,
+				ReservationModule,*/
 				UserModule
 			};
+
+			//Load data
+			foreach (var module in Modules)
+			{
+				module.Refresh();
+			}
 		}
 
 		public static Session Session => Session.Instance;
@@ -65,13 +81,13 @@ namespace CinemaManager.MainView
 
 		#region Modules
 
-		public ObservableCollection<IModule> Modules { get; }
+		public ObservableCollection<IModule> Modules { get; private set; }
 
-		public IModule CinemaModule { get; } = new CinemaModule();
-		public IModule MovieModule { get; }
-		public IModule PresentationModule { get; }
-		public IModule ReservationModule { get; }
-		public IModule UserModule { get; } = new UserModule();
+		public IModule CinemaModule { get; private set; }
+		public IModule MovieModule { get; private set; }
+		public IModule PresentationModule { get; private set; }
+		public IModule ReservationModule { get; private set; }
+		public IModule UserModule { get; private set; }
 
 		#endregion
 

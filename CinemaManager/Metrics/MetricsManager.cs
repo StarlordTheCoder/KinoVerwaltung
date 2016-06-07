@@ -33,7 +33,7 @@ namespace CinemaManager.Metrics
 
 		private void AddCustomValues()
 		{
-			Metric.Gauge("# Open Modules", () => _mainWindowViewModel.Modules.Count(m => m?.IsVisible ?? false), Unit.Items);
+			Metric.Gauge("# Open Modules", () => _mainWindowViewModel.Modules.Count(m => m.IsVisible), Unit.Items);
 		}
 
 		private static void RegisterHealthChecks()
