@@ -15,5 +15,6 @@ namespace CinemaManager.Modules
 		string Title { get; }
 
 		ICommand CloseCommand { get; }
+		void Refresh();
 	}
 }

@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Linq;
 
 namespace CinemaManager.Filter
 {
@@ -11,14 +12,14 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public sealed class StringFilter<T> : FilterBase<T>, IStringFilter<T>
 	{
-		private readonly Func<T, string> _valueToCompareTo;
+		private readonly Func<T, string>[] _valueToCompareTo;
 		private string _text;
 
-		public StringFilter(Func<T, string> valueToCompareTo, string label, bool isEnabled = true)
+		public StringFilter(string label, params Func<T, string>[] valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;
 			Text = string.Empty;
-			IsEnabled = isEnabled;
+			IsEnabled = true;
 			Label = label;
 		}
 
@@ -35,7 +36,7 @@ namespace CinemaManager.Filter
 
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.Invoke(data).ToLower().Contains(Text.ToLower());
+			return _valueToCompareTo.All(v => v.Invoke(data).ToLower().Contains(Text.ToLower()));
 		}
 	}
 }
