@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Model;
+using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Cinema
 {
@@ -14,12 +16,49 @@ namespace CinemaManager.Modules.Cinema
 	{
 		private CinemaModel _currentItem;
 
+		public ICommand AddCinemaCommand { get; }
+		public ICommand RemoveCinemaCommand { get; }
+
 		public CinemaModule()
 		{
 			CinemaFilterConfigurator
-				.StringFilter(new StringFilter<CinemaModel>("Name", c => c.Name, c => c.Address));
+				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address));
 
 			CinemaFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
+
+			AddCinemaCommand = new DelegateCommand(AddCinema);
+			RemoveCinemaCommand = new DelegateCommand(RemoveCinema);
+
+			Session.Instance.PrepareForSave += (sender, e) =>
+			{
+				var list = Session.Instance.DataModel.CinemasModel.Cinemas.ToList();
+
+				list.Except(_allCinemas).ToList().ForEach(l => Session.Instance.DataModel.CinemasModel.Cinemas.Remove(l));
+
+				Session.Instance.DataModel.CinemasModel.Cinemas.AddRange(_allCinemas.Except(list));
+			};
+		}
+
+		private void RemoveCinema()
+		{
+			_allCinemas.Remove(CurrentItem);
+			Cinemas.Remove(CurrentItem);
+			CurrentItem = Cinemas.FirstOrDefault();
+		}
+
+		private void AddCinema()
+		{
+			var newCinema = new CinemaModel
+			{
+				IsActive = true,
+				Address = "Hier",
+				Name = "Beispiel Kino"
+			};
+
+			_allCinemas.Add(newCinema);
+			Cinemas.Add(newCinema);
+
+			CurrentItem = newCinema;
 		}
 
 		public override string Title => "Cinema Manager";

@@ -25,6 +25,8 @@ namespace CinemaManager
 
 		public static Session Instance { get; } = new Session();
 
+		public event EventHandler PrepareForSave;
+
 		public IDataModel DataModel { get; } = new DataModel();
 
 		/// <summary>
@@ -67,6 +69,11 @@ namespace CinemaManager
 		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		public void OnPrepareForSave()
+		{
+			PrepareForSave?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

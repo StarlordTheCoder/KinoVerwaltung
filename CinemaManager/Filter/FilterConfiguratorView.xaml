@@ -3,24 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:CinemaManager.Filter"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignData local:FilterConfigurator}">
 	<Grid HorizontalAlignment="Stretch">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
-			<ColumnDefinition />
-			<ColumnDefinition />
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<ItemsControl Grid.Column="0" HorizontalAlignment="Stretch" ItemsSource="{Binding StringFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<DockPanel LastChildFill="True"
 					           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<Label Target="{Binding ElementName=SearchText}" Content="{Binding Label}"/>
 						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
-						<TextBox DockPanel.Dock="Left" Text="{Binding Text}" IsEnabled="{Binding IsEnabled}" />
+						<TextBox Name="SearchText" DockPanel.Dock="Left" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" />
 					</DockPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
@@ -31,8 +31,9 @@
 				<DataTemplate>
 					<DockPanel LastChildFill="True"
 					           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<Label Target="{Binding ElementName=SearchDate}" Content="{Binding Label}"/>
 						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
-						<xctk:DateTimePicker DockPanel.Dock="Left" Value="{Binding Date}" IsEnabled="{Binding IsEnabled}" />
+						<xctk:DateTimePicker Name="SearchDate" DockPanel.Dock="Left" Value="{Binding Date}" IsEnabled="{Binding IsEnabled}" />
 					</DockPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

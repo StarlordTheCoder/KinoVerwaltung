@@ -36,6 +36,8 @@ namespace CinemaManager.Model
 		/// </summary>
 		public void Save()
 		{
+			Session.OnPrepareForSave();
+
 			var folder = Path.GetDirectoryName(Session.DataPath);
 			if (folder != null && !Directory.Exists(folder))
 			{
@@ -44,6 +46,7 @@ namespace CinemaManager.Model
 
 			using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
 			{
+				stream.SetLength(0);
 				_serializer.Serialize(stream, CinemasModel);
 			}
 		}
@@ -74,7 +77,7 @@ namespace CinemaManager.Model
 
 		private void ValidateData()
 		{
-			if(CinemasModel.Cinemas.Count(c => c.IsActive) != 1)
+			if(CinemasModel.Cinemas.Any() && CinemasModel.Cinemas.Count(c => c.IsActive) != 1)
 			{
 				CinemasModel.Cinemas.ForEach(c => c.IsActive = false);
 				CinemasModel.Cinemas.First().IsActive = true;
