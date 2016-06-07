@@ -40,7 +40,7 @@ namespace CinemaManager.Modules.Cinema
 			foreach (var cinema in filteredData)
 			{
 				Cinemas.Add(cinema);
-			}
+		}
 		}
 
 		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();

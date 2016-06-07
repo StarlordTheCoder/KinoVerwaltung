@@ -10,6 +10,9 @@ namespace CinemaManager.Filter
 	/// </summary>
 	public partial class FilterConfiguratorView : UserControl
 	{
+		/// <summary>
+		/// Initializes the Filter Configurator View
+		/// </summary>
 		public FilterConfiguratorView()
 		{
 			InitializeComponent();

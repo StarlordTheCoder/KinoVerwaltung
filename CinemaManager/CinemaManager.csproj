@@ -186,6 +186,14 @@
     <Compile Include="MainView\LayoutService.cs" />
     <Compile Include="Metrics\MetricsManager.cs" />
     <Compile Include="Metrics\Startup.cs" />
+    <Compile Include="Modules\Film\FilmModule.cs" />
+    <Compile Include="Modules\Film\FilmModuleView.xaml.cs">
+      <DependentUpon>FilmModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Presentation\PresentationModuleView.xaml.cs">
+      <DependentUpon>PresentationModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Presentation\PresentationModule.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="MainView\MainWindow.xaml.cs">
@@ -193,6 +201,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Modules\Cinema\CinemaModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Film\FilmModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Presentation\PresentationModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,7 +305,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modules\Reservation\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

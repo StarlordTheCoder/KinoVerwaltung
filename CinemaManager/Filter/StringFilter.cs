@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// Ermöglicht das Filtern nach einem String.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public sealed class StringFilter<T> : FilterBase<T>, IStringFilter<T>
 	{
 		private readonly Func<T, string>[] _valueToCompareTo;
@@ -32,7 +36,7 @@ namespace CinemaManager.Filter
 
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.All(v => v.Invoke(data).ToLower().Contains(Text.ToLower()));
+			return _valueToCompareTo.Any(v => v.Invoke(data).ToLower().Contains(Text.ToLower()));
 		}
 	}
 }

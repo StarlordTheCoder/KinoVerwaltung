@@ -9,6 +9,9 @@ using Microsoft.Win32;
 
 namespace CinemaManager.MainView
 {
+	/// <summary>
+	/// Managed die momentane Dateiquelle. 
+	/// </summary>
 	public class DataSourceService : IDataSourceService
 	{
 		public DataSourceService()

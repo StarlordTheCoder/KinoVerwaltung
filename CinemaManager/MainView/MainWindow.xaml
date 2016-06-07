@@ -7,6 +7,8 @@
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
         xmlns:user="clr-namespace:CinemaManager.Modules.User"
+		xmlns:film ="clr-namespace:CinemaManager.Modules.Film"
+		xmlns:presentation ="clr-namespace:CinemaManager.Modules.Presentation"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized"
         d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}"
@@ -30,7 +32,7 @@
 			<MenuItem Header="Tools">
 				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
-				<MenuItem Header="Movie Module" IsChecked="{Binding MovieModule.IsVisible, Mode=TwoWay}"
+				<MenuItem Header="Movie Module" IsChecked="{Binding FilmModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
 				<MenuItem Header="Presentation Module" IsChecked="{Binding PresentationModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
@@ -58,6 +60,12 @@
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type user:UserModule}">
 					<user:UserModuleView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type film:FilmModule}">
+					<film:FilmModuleView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type presentation:PresentationModule}">
+					<presentation:PresentationModuleView />
 				</DataTemplate>
 			</dock:DockingManager.Resources>
 

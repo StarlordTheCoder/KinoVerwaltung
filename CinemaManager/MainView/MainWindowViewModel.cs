@@ -12,11 +12,16 @@ using System.Windows;
 using System.Windows.Input;
 using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
+using CinemaManager.Modules.Film;
+using CinemaManager.Modules.Presentation;
 using CinemaManager.Modules.User;
 using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.MainView
 {
+	/// <summary>
+	/// Bereitet die Daten für das Hauptfenster vor
+	/// </summary>
 	public class MainWindowViewModel
 	{
 		public MainWindowViewModel(string startupFile)
@@ -52,14 +57,16 @@ namespace CinemaManager.MainView
 			//Create Module instances
 			CinemaModule = new CinemaModule();
 			UserModule = new UserModule();
+			FilmModule = new FilmModule();
+			PresentationModule = new PresentationModule();
 
 			//Add to list
 			Modules = new ObservableCollection<IModule>
 			{
 				CinemaModule,
-				/*MovieModule,
+				FilmModule,
 				PresentationModule,
-				ReservationModule,*/
+				//ReservationModule,*/
 				UserModule
 			};
 
@@ -84,7 +91,7 @@ namespace CinemaManager.MainView
 		public ObservableCollection<IModule> Modules { get; private set; }
 
 		public IModule CinemaModule { get; private set; }
-		public IModule MovieModule { get; private set; }
+		public IModule FilmModule { get; private set; }
 		public IModule PresentationModule { get; private set; }
 		public IModule ReservationModule { get; private set; }
 		public IModule UserModule { get; private set; }

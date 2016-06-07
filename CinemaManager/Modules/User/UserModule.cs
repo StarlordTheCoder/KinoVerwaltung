@@ -3,6 +3,9 @@
 
 namespace CinemaManager.Modules.User
 {
+	/// <summary>
+	/// Modul zum ANzeigen der User.
+	/// </summary>
 	public class UserModule : ModuleBase
 	{
 		public override string Title => "User";

@@ -12,6 +12,9 @@ namespace CinemaManager.Modules.Cinema
 	/// </summary>
 	public partial class CinemaModuleView
 	{
+		/// <summary>
+		/// Initalisiert das Kinomodul im GUI
+		/// </summary>
 		public CinemaModuleView()
 		{
 			InitializeComponent();

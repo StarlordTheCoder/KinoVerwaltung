@@ -5,7 +5,11 @@ using System;
 
 namespace CinemaManager.Filter
 {
-	public interface IDateFilter<in T> : IFilter<T>
+	/// <summary>
+	/// Interface for the Function to Filter Dates. 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public interface IDateFilter<T> : IFilter<T>
 	{
 		DateTime? Date { get; set; }
 	}

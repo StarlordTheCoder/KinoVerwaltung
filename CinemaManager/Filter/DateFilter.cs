@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class DateFilter<T> : FilterBase<T>, IDateFilter<T>
 	{
 		private readonly Func<T, DateTime?>[] _valueToCompareTo;
@@ -32,7 +36,7 @@ namespace CinemaManager.Filter
 
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.All(v => Equals(v.Invoke(data), Date));
+			return _valueToCompareTo.Any(v => Equals(v.Invoke(data), Date));
 		}
 	}
 }

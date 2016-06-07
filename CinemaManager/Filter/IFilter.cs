@@ -5,6 +5,10 @@ using System;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// Interface for every Filter
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public interface IFilter<in T>
 	{
 		bool IsEnabled { get; set; }
