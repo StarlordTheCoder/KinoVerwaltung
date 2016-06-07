@@ -31,5 +31,10 @@ namespace CinemaManager.Model
 		///     Adresse des Kinos
 		/// </summary>
 		public string Address { get; set; }
+
+		/// <summary>
+		///     Ist das aktive Kino.
+		/// </summary>
+		public bool IsActive { get; set; }
 	}
 }

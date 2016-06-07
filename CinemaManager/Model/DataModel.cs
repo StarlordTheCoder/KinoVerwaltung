@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System.IO;
+using System.Linq;
 using System.Windows.Shell;
 using System.Xml.Serialization;
 
@@ -60,12 +61,23 @@ namespace CinemaManager.Model
 				using (var stream = File.OpenRead(Session.DataPath))
 				{
 					CinemasModel = (CinemasModel) _serializer.Deserialize(stream);
+
+					ValidateData();
 				}
 			}
 			else
 			{
 				//Create new file
 				Save();
+			}
+		}
+
+		private void ValidateData()
+		{
+			if(CinemasModel.Cinemas.Count(c => c.IsActive) != 1)
+			{
+				CinemasModel.Cinemas.ForEach(c => c.IsActive = false);
+				CinemasModel.Cinemas.First().IsActive = true;
 			}
 		}
 	}

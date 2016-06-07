@@ -2,19 +2,20 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Linq;
 
 namespace CinemaManager.Filter
 {
 	public class DateFilter<T> : FilterBase<T>, IDateFilter<T>
 	{
-		private readonly Func<T, DateTime?> _valueToCompareTo;
+		private readonly Func<T, DateTime?>[] _valueToCompareTo;
 		private DateTime? _date;
 
-		public DateFilter(Func<T, DateTime?> valueToCompareTo, string label, bool isEnabled = true)
+		public DateFilter(string label, params Func<T, DateTime?>[] valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;
 			Date = DateTime.UtcNow;
-			IsEnabled = isEnabled;
+			IsEnabled = true;
 			Label = label;
 		}
 
@@ -31,7 +32,7 @@ namespace CinemaManager.Filter
 
 		public override bool Check(T data)
 		{
-			return Equals(_valueToCompareTo.Invoke(data), Date);
+			return _valueToCompareTo.All(v => Equals(v.Invoke(data), Date));
 		}
 	}
 }

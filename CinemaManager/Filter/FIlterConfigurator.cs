@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,16 +16,23 @@ namespace CinemaManager.Filter
 
 		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
 
+
 		public IFilterConfigurator<T> StringFilter(IStringFilter<T> filter)
 		{
 			StringFilters.Add(filter);
 
+			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
+
 			return this;
 		}
+
+		public event EventHandler FilterChanged;
 
 		public IFilterConfigurator<T> DateFilter(IDateFilter<T> filter)
 		{
 			DateFilters.Add(filter);
+
+			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
 
 			return this;
 		}
@@ -32,6 +40,8 @@ namespace CinemaManager.Filter
 		public IFilterConfigurator<T> ComplexFilter(IFilter<T> filter)
 		{
 			ComplexFilters.Add(filter);
+
+			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
 
 			return this;
 		}
@@ -57,6 +67,11 @@ namespace CinemaManager.Filter
 					yield return i;
 				}
 			}
+		}
+
+		protected virtual void OnFilterChanged()
+		{
+			FilterChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
