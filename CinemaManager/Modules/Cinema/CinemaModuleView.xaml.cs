@@ -33,5 +33,10 @@ namespace CinemaManager.Modules.Cinema
 			var configurator = module?.CinemaFilterConfigurator;
 			var result = configurator?.FilterData(data);
 		}
+
+		private void ListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+
+		}
 	}
 }

@@ -8,14 +8,26 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance cinema:CinemaModule}">
-	<Grid>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
-			<filter:FilterConfiguratorView DataContext="{Binding CinemaFilterConfigurator}" />
-			<Button Grid.Row="1" Click="ButtonBase_OnClick" />
-		</Grid>
-	</Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <filter:FilterConfiguratorView DataContext="{Binding CinemaFilterConfigurator}" Grid.ColumnSpan="2"/>
+        <ListView ItemsSource="{Binding Cinemas}" Grid.Row="1" Grid.Column="0"
+                      SelectionChanged="ListView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Address}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </UserControl>
