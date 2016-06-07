@@ -12,6 +12,9 @@ namespace CinemaManager.Model
 	[Serializable]
 	public class CinemasModel
 	{
+		/// <summary>
+		/// Liste der Kinos für XML-Serialisierung
+		/// </summary>
 		public List<CinemaModel> Cinemas { get; } = new List<CinemaModel>();
 	}
 }

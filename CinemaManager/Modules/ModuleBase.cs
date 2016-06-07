@@ -24,6 +24,9 @@ namespace CinemaManager.Modules
 			CloseCommand = new DelegateCommand(() => IsVisible = false);
 		}
 
+		/// <summary>
+		/// La visibilité de la Module
+		/// </summary>
 		public bool IsVisible
 		{
 			get { return _isVisible; }

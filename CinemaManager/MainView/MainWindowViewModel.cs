@@ -17,6 +17,9 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.MainView
 {
+	/// <summary>
+	/// Bereitet die Daten für das Hauptfenster vor
+	/// </summary>
 	public class MainWindowViewModel
 	{
 		public MainWindowViewModel(string startupFile)

@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using CinemaManager.Filter;
 using CinemaManager.Model;
 
@@ -12,7 +13,8 @@ namespace CinemaManager.Modules.Cinema
 		{
 			CinemaFilterConfigurator
 				.StringFilter(new StringFilter<CinemaModel>(c => c.Name, "Name"))
-				.StringFilter(new StringFilter<CinemaModel>(c => c.Address, "Address"));
+				.StringFilter(new StringFilter<CinemaModel>(c => c.Address, "Address"))
+				.DateFilter(new DateFilter<CinemaModel>(c => new DateTime(), "est"));
 		}
 
 		public override string Title => "Cinema Manager";

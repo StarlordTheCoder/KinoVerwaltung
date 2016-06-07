@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace CinemaManager.MainView
 {
+	/// <summary>
+	/// Ermöglicht das Verwalten der aktuell geöffneten Datei.
+	/// </summary>
 	public interface IDataSourceService
 	{
 		IList<CommandBinding> CommandBindings { get; }

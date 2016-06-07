@@ -11,6 +11,9 @@ using Owin.Metrics;
 
 namespace CinemaManager.Metrics
 {
+	/// <summary>
+	/// Konfiguriert die Daten beim^Starten der Metriken.
+	/// </summary>
 	public class Startup
 	{
 		public void Configuration(IAppBuilder app)

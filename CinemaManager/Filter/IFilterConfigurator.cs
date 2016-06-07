@@ -6,6 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// Gibt dem Modul die Möglichkeit seine Filter zu konfigurieren.
+	/// Die Filter könne in der View angezeigt werden.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public interface IFilterConfigurator<T>
 	{
 		ObservableCollection<IFilter<T>> ComplexFilters { get; }

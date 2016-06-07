@@ -5,6 +5,10 @@ using System;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class DateFilter<T> : FilterBase<T>, IDateFilter<T>
 	{
 		private readonly Func<T, DateTime?> _valueToCompareTo;

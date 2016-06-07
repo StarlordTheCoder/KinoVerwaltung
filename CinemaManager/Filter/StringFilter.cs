@@ -5,6 +5,10 @@ using System;
 
 namespace CinemaManager.Filter
 {
+	/// <summary>
+	/// Ermöglicht das Filtern nach einem String.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public sealed class StringFilter<T> : FilterBase<T>, IStringFilter<T>
 	{
 		private readonly Func<T, string> _valueToCompareTo;
