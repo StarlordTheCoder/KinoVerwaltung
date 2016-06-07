@@ -36,7 +36,7 @@ namespace CinemaManager.Filter
 
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.All(v => Equals(v.Invoke(data), Date));
+			return _valueToCompareTo.Any(v => Equals(v.Invoke(data), Date));
 		}
 	}
 }
