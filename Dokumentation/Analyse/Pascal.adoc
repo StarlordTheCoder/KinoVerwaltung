@@ -1,0 +1,15 @@
+Pascal Analyse
+==============
+Pascal Honegger
+Version 1.0, 07.06.2016
+
+== Vorgehen
+Das Arbeiten nach dem vorgegebenen Beschreibungstextes ging schnell voran. Innert kürzester Zeit hatte ich eine Tabelle mit wichtigen Komponenten und deren Verantwortlichkeiten (Verben).  
+
+image::..\media\Substantive_Pascal.JPG[Tabelle der Substantive & Verben]
+
+== Probleme
+Das vorgegebene Konzept für die Umsetzung war, meiner Meinung nach, nicht zu gebrauchen. So wurde gesagt, dass das Kinobuchungssystem die Details der Vorstellung lädt.
+Ich bin der Meinung, dass die Vorstellung selber über diese Informationen verfügen muss. So habe ich bereits von Anfang an die vorgegebene Struktur mit den Reservationen umgestellt.
+Es sollte nicht ein Sitz reserviert werden, sondern eine Reservation zwischen einem User und einem Sitz erstellt werden. Das Problem bei dieser Referenz ist jedoch, dass beim Ändern eines Sitzes alle bestehenden Reservationen angepasst werden.
+Dies ist für das meiste Egal, ausser für den Preis. Daher habe ich mich dazu Entschieden eine Reservation einen festen Preis zuzuschreiben, welcher beim Erstellen festgelegt wird.
