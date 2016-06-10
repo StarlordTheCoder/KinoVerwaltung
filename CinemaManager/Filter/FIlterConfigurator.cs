@@ -69,6 +69,9 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		/// <summary>
+		/// Event invokator for <see cref="FilterChanged"/>
+		/// </summary>
 		protected virtual void OnFilterChanged()
 		{
 			FilterChanged?.Invoke(this, EventArgs.Empty);

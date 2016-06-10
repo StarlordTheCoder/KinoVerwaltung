@@ -14,9 +14,9 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public interface IFilterConfigurator<T>
 	{
-		ObservableCollection<IFilter<T>> ComplexFilters { get; }
 		ObservableCollection<IDateFilter<T>> DateFilters { get; }
 		ObservableCollection<IStringFilter<T>> StringFilters { get; }
+		ObservableCollection<IFilter<T>> ComplexFilters { get; }
 
 		IFilterConfigurator<T> ComplexFilter(IFilter<T> filter);
 		IFilterConfigurator<T> DateFilter(IDateFilter<T> filter);

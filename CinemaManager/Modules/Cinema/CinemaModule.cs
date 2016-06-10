@@ -13,7 +13,7 @@ namespace CinemaManager.Modules.Cinema
 {
 	public class CinemaModule : ModuleBase
 	{
-		private CinemaModel _currentItem;
+		private CinemaModel _selectedCinema;
 
 		public CinemaModule()
 		{
@@ -36,7 +36,14 @@ namespace CinemaManager.Modules.Cinema
 			};
 		}
 
+		/// <summary>
+		/// Command for <see cref="AddCinema"/>
+		/// </summary>
 		public ICommand AddCinemaCommand { get; }
+
+		/// <summary>
+		/// Command for <see cref="RemoveCinema"/>
+		/// </summary>
 		public ICommand RemoveCinemaCommand { get; }
 
 		/// <summary>
@@ -44,26 +51,29 @@ namespace CinemaManager.Modules.Cinema
 		/// </summary>
 		public override string Title => "Cinema Manager";
 
+		/// <summary>
+		/// Filter-Konfigurator für die Kinos
+		/// </summary>
 		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
 		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
 		public List<CinemaModel> _allCinemas { get; } = new List<CinemaModel>();
 
-		public CinemaModel CurrentItem
+		public CinemaModel SelectedCinema
 		{
-			get { return _currentItem; }
+			get { return _selectedCinema; }
 			set
 			{
-				if (Equals(value, _currentItem)) return;
-				_currentItem = value;
+				if (Equals(value, _selectedCinema)) return;
+				_selectedCinema = value;
 				OnPropertyChanged();
 			}
 		}
 
 		private void RemoveCinema()
 		{
-			_allCinemas.Remove(CurrentItem);
-			Cinemas.Remove(CurrentItem);
-			CurrentItem = Cinemas.FirstOrDefault();
+			_allCinemas.Remove(SelectedCinema);
+			Cinemas.Remove(SelectedCinema);
+			SelectedCinema = Cinemas.FirstOrDefault();
 		}
 
 		private void AddCinema()
@@ -78,7 +88,7 @@ namespace CinemaManager.Modules.Cinema
 			_allCinemas.Add(newCinema);
 			Cinemas.Add(newCinema);
 
-			CurrentItem = newCinema;
+			SelectedCinema = newCinema;
 		}
 
 		/// <summary>

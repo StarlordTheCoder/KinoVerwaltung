@@ -3,6 +3,7 @@
 
 using System;
 using System.Text.RegularExpressions;
+using CinemaManager.Properties;
 using Metrics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -14,8 +15,14 @@ namespace CinemaManager.Metrics
 	/// <summary>
 	///     Konfiguriert die Daten beim^Starten der Metriken.
 	/// </summary>
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class Startup
 	{
+		/// <summary>
+		///     Benutzt von Metrics
+		/// </summary>
+		/// <param name="app"></param>
+		[UsedImplicitly]
 		public void Configuration(IAppBuilder app)
 		{
 			JsonConvert.DefaultSettings = () => new JsonSerializerSettings

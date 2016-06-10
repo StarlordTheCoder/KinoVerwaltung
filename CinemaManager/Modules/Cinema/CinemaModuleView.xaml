@@ -20,7 +20,7 @@
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding CinemaFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Cinemas}" Grid.Row="1" Grid.Column="0"
-		          SelectedItem="{Binding CurrentItem}"
+		          SelectedItem="{Binding SelectedCinema}"
 		          SelectionChanged="ListView_SelectionChanged">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
@@ -43,8 +43,8 @@
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<TextBox Text="{Binding CurrentItem.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" />
-			<TextBox Text="{Binding CurrentItem.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
+			<TextBox Text="{Binding SelectedCinema.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" />
+			<TextBox Text="{Binding SelectedCinema.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
 			<Button Command="{Binding AddCinemaCommand}" Content="+" Grid.Row="2" />
 			<Button Command="{Binding RemoveCinemaCommand}" Content="-" Grid.Row="3" />
 		</Grid>

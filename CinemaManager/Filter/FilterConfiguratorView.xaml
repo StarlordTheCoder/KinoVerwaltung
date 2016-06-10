@@ -44,12 +44,12 @@
 						<CheckBox Grid.Column="1" Grid.Row="0" DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
 
 						<Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=StartDate}" Content="Start date" />
-						<DatePicker Grid.Column="1" Grid.Row="1" Name="StartDate" DockPanel.Dock="Left" SelectedDate="{Binding StartDate}"
-						                     IsEnabled="{Binding IsEnabled}" DisplayDateEnd="{Binding ElementName=StartDate, Path=SelectedDate}"/>
+						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1" Grid.Row="1" Name="StartDate" DockPanel.Dock="Left" Value="{Binding StartDate}"
+						                     IsEnabled="{Binding IsEnabled}" Maximum="{Binding ElementName=EndDate, Path=SelectedDate}"/>
 
 						<Label Grid.Column="0" Grid.Row="2" Target="{Binding ElementName=EndDate}" Content="End date" />
-						<DatePicker Grid.Column="1" Grid.Row="2" Name="EndDate" DockPanel.Dock="Left" SelectedDate="{Binding EndDate}"
-						                     IsEnabled="{Binding IsEnabled}" DisplayDateStart="{Binding ElementName=StartDate, Path=SelectedDate}" />
+						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1" Grid.Row="2" Name="EndDate" DockPanel.Dock="Left" Value="{Binding EndDate}"
+						                     IsEnabled="{Binding IsEnabled}" Minimum="{Binding ElementName=StartDate, Path=SelectedDate}" />
 					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
