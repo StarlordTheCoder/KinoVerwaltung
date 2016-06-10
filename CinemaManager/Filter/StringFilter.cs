@@ -7,7 +7,7 @@ using System.Linq;
 namespace CinemaManager.Filter
 {
 	/// <summary>
-	/// Ermöglicht das Filtern nach einem String.
+	///     Ermöglicht das Filtern nach einem String.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public sealed class StringFilter<T> : FilterBase<T>, IStringFilter<T>
@@ -34,9 +34,14 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		/// <summary>
+		/// Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
+		/// </summary>
+		/// <param name="data">Daten, welche zu prüfen sind</param>
+		/// <returns>True, wenn die Daten valid sind</returns>
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.Any(v => v.Invoke(data).ToLower().Contains(Text.ToLower()));
+			return _valueToCompareTo.Any(v => v.Invoke(data)?.ToLower().Contains(Text?.ToLower() ?? string.Empty) ?? false);
 		}
 	}
 }

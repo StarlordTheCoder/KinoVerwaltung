@@ -15,6 +15,11 @@ namespace CinemaManager.Filter
 
 		string Label { get; }
 
+		/// <summary>
+		/// Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
+		/// </summary>
+		/// <param name="data">Daten, welche zu prüfen sind</param>
+		/// <returns>True, wenn die Daten valid sind</returns>
 		bool Check(T data);
 
 		event EventHandler FilterChangedEvent;

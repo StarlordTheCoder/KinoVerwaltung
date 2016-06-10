@@ -63,7 +63,9 @@
   <ItemGroup>
     <Compile Include="Converter\BoolToSolidColorBrushConverterTest.cs" />
     <Compile Include="Converter\BooltoVisConverterTest.cs" />
+    <Compile Include="Filter\DummyModel.cs" />
     <Compile Include="Filter\FilterConfiguratorTest.cs" />
+    <Compile Include="Filter\StringFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTestBase.cs" />
     <Compile Include="UnitTestBase.cs" />
