@@ -43,10 +43,10 @@
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<TextBox Text="{Binding CurrentItem.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0"/>
-			<TextBox Text="{Binding CurrentItem.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1"/>
-			<Button Command="{Binding AddCinemaCommand}" Content="+" Grid.Row="2"/>
-			<Button Command="{Binding RemoveCinemaCommand}" Content="-" Grid.Row="3"/>
+			<TextBox Text="{Binding CurrentItem.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" />
+			<TextBox Text="{Binding CurrentItem.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
+			<Button Command="{Binding AddCinemaCommand}" Content="+" Grid.Row="2" />
+			<Button Command="{Binding RemoveCinemaCommand}" Content="-" Grid.Row="3" />
 		</Grid>
 	</Grid>
 </UserControl>

@@ -25,7 +25,7 @@ namespace CinemaManager.Modules
 		}
 
 		/// <summary>
-		/// La visibilité de la Module
+		///     La visibilité de la Module
 		/// </summary>
 		public bool IsVisible
 		{

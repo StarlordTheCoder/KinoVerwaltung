@@ -8,7 +8,7 @@ using Xceed.Wpf.AvalonDock;
 namespace CinemaManager.MainView
 {
 	/// <summary>
-	/// Ermöglicht das Speichern und Laden von Layoutdateien
+	///     Ermöglicht das Speichern und Laden von Layoutdateien
 	/// </summary>
 	public interface ILayoutService
 	{

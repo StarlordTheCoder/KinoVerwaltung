@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,9 +14,6 @@ namespace CinemaManager.Modules.Cinema
 	public class CinemaModule : ModuleBase
 	{
 		private CinemaModel _currentItem;
-
-		public ICommand AddCinemaCommand { get; }
-		public ICommand RemoveCinemaCommand { get; }
 
 		public CinemaModule()
 		{
@@ -37,6 +33,26 @@ namespace CinemaManager.Modules.Cinema
 
 				Session.Instance.DataModel.CinemasModel.Cinemas.AddRange(_allCinemas.Except(list));
 			};
+		}
+
+		public ICommand AddCinemaCommand { get; }
+		public ICommand RemoveCinemaCommand { get; }
+
+		public override string Title => "Cinema Manager";
+
+		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
+		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
+		public List<CinemaModel> _allCinemas { get; } = new List<CinemaModel>();
+
+		public CinemaModel CurrentItem
+		{
+			get { return _currentItem; }
+			set
+			{
+				if (Equals(value, _currentItem)) return;
+				_currentItem = value;
+				OnPropertyChanged();
+			}
 		}
 
 		private void RemoveCinema()
@@ -61,7 +77,6 @@ namespace CinemaManager.Modules.Cinema
 			CurrentItem = newCinema;
 		}
 
-		public override string Title => "Cinema Manager";
 		public override void Refresh()
 		{
 			_allCinemas.Clear();
@@ -79,21 +94,6 @@ namespace CinemaManager.Modules.Cinema
 			foreach (var cinema in filteredData)
 			{
 				Cinemas.Add(cinema);
-		}
-		}
-
-		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
-		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
-		public List<CinemaModel> _allCinemas { get; } = new List<CinemaModel>();
-
-		public CinemaModel CurrentItem
-		{
-			get { return _currentItem; }
-			set
-			{
-				if (Equals(value, _currentItem)) return;
-				_currentItem = value;
-				OnPropertyChanged();
 			}
 		}
 	}

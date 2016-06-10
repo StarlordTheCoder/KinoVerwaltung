@@ -12,7 +12,7 @@ using Owin.Metrics;
 namespace CinemaManager.Metrics
 {
 	/// <summary>
-	/// Konfiguriert die Daten beim^Starten der Metriken.
+	///     Konfiguriert die Daten beim^Starten der Metriken.
 	/// </summary>
 	public class Startup
 	{
@@ -28,11 +28,11 @@ namespace CinemaManager.Metrics
 				.WithInternalMetrics()
 				.WithReporting(r => r.WithConsoleReport(TimeSpan.FromSeconds(30)))
 				.WithOwin(middleware => app.Use(middleware), config => config
-					.WithRequestMetricsConfig(c => c.WithAllOwinMetrics(), new[]
-					{
-						new Regex("(?s).*")
-					})
-					.WithMetricsEndpoint()
+						.WithRequestMetricsConfig(c => c.WithAllOwinMetrics(), new[]
+						{
+							new Regex("(?s).*")
+						})
+						.WithMetricsEndpoint()
 				);
 
 			try

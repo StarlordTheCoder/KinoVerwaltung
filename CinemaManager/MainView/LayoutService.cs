@@ -13,7 +13,7 @@ using Xceed.Wpf.AvalonDock.Layout.Serialization;
 namespace CinemaManager.MainView
 {
 	/// <summary>
-	/// Speichert und Ladet die Layoutdateien
+	///     Speichert und Ladet die Layoutdateien
 	/// </summary>
 	public class LayoutService : ILayoutService
 	{

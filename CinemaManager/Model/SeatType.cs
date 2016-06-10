@@ -6,7 +6,7 @@ using System;
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Enthält die Sitztypen und deren Daten Serilaisierbar.
+	///     Enthält die Sitztypen und deren Daten Serilaisierbar.
 	/// </summary>
 	[Serializable]
 	public class SeatType

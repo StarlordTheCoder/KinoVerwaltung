@@ -20,7 +20,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace CinemaManager.MainView
 {
 	/// <summary>
-	/// Bereitet die Daten für das Hauptfenster vor
+	///     Bereitet die Daten für das Hauptfenster vor
 	/// </summary>
 	public class MainWindowViewModel
 	{
@@ -52,6 +52,8 @@ namespace CinemaManager.MainView
 			InitialiseModules();
 		}
 
+		public static Session Session => Session.Instance;
+
 		private void InitialiseModules()
 		{
 			//Create Module instances
@@ -76,8 +78,6 @@ namespace CinemaManager.MainView
 				module.Refresh();
 			}
 		}
-
-		public static Session Session => Session.Instance;
 
 		#region Properties
 

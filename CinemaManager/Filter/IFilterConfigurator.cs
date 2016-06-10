@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace CinemaManager.Filter
 {
 	/// <summary>
-	/// Gibt dem Modul die Möglichkeit seine Filter zu konfigurieren.
-	/// Die Filter könne in der View angezeigt werden.
+	///     Gibt dem Modul die Möglichkeit seine Filter zu konfigurieren.
+	///     Die Filter könne in der View angezeigt werden.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public interface IFilterConfigurator<T>

@@ -6,7 +6,7 @@ using System;
 namespace CinemaManager.Filter
 {
 	/// <summary>
-	/// Interface for every Filter
+	///     Interface for every Filter
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public interface IFilter<in T>
@@ -16,7 +16,7 @@ namespace CinemaManager.Filter
 		string Label { get; }
 
 		/// <summary>
-		/// Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
+		///     Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
 		/// </summary>
 		/// <param name="data">Daten, welche zu prüfen sind</param>
 		/// <returns>True, wenn die Daten valid sind</returns>

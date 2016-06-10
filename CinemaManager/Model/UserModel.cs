@@ -4,18 +4,18 @@
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Enthält daten der User Serialisierbar.
+	///     Enthält daten der User Serialisierbar.
 	/// </summary>
 	public class UserModel
 	{
 		/// <summary>
-		/// Name des Kundens
+		///     Name des Kundens
 		/// </summary>
 		public string Name { get; set; }
+
 		/// <summary>
-		/// Telefonnummer des Kundens
+		///     Telefonnummer des Kundens
 		/// </summary>
 		public string PhoneNumber { get; set; }
-
 	}
 }

@@ -9,18 +9,19 @@
              d:DataContext="{d:DesignData local:FilterConfigurator}">
 	<Grid HorizontalAlignment="Stretch">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<ItemsControl Grid.Column="0" HorizontalAlignment="Stretch" ItemsSource="{Binding StringFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<DockPanel LastChildFill="True"
 					           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
-						<Label Target="{Binding ElementName=SearchText}" Content="{Binding Label}"/>
+						<Label Target="{Binding ElementName=SearchText}" Content="{Binding Label}" />
 						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
-						<TextBox Name="SearchText" DockPanel.Dock="Left" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" />
+						<TextBox Name="SearchText" DockPanel.Dock="Left" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+						         IsEnabled="{Binding IsEnabled}" />
 					</DockPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
@@ -31,9 +32,10 @@
 				<DataTemplate>
 					<DockPanel LastChildFill="True"
 					           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
-						<Label Target="{Binding ElementName=SearchDate}" Content="{Binding Label}"/>
+						<Label Target="{Binding ElementName=SearchDate}" Content="{Binding Label}" />
 						<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
-						<xctk:DateTimePicker Name="SearchDate" DockPanel.Dock="Left" Value="{Binding Date}" IsEnabled="{Binding IsEnabled}" />
+						<xctk:DateTimePicker Name="SearchDate" DockPanel.Dock="Left" Value="{Binding Date}"
+						                     IsEnabled="{Binding IsEnabled}" />
 					</DockPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

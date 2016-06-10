@@ -9,7 +9,7 @@ using CinemaManager.Properties;
 namespace CinemaManager.Filter
 {
 	/// <summary>
-	/// Contains the Methods and Properties, every Filter must have
+	///     Contains the Methods and Properties, every Filter must have
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public abstract class FilterBase<T> : IFilter<T>, INotifyPropertyChanged

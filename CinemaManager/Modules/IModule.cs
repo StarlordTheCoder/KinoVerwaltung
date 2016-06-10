@@ -7,7 +7,7 @@ using System.Windows.Input;
 namespace CinemaManager.Modules
 {
 	/// <summary>
-	/// Ermöglicht einer Klasse ein Modul im GUI zu sein.
+	///     Ermöglicht einer Klasse ein Modul im GUI zu sein.
 	/// </summary>
 	public interface IModule : INotifyPropertyChanged
 	{

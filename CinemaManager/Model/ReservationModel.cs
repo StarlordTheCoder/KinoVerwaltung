@@ -6,13 +6,13 @@ using System;
 namespace CinemaManager.Model
 {
 	/// <summary>
-	/// Enthält die Daten der Reservation für Serialisierung
+	///     Enthält die Daten der Reservation für Serialisierung
 	/// </summary>
 	[Serializable]
 	public class ReservationModel
 	{
 		/// <summary>
-		/// Usermodel des Reservierers für Serialisierung
+		///     Usermodel des Reservierers für Serialisierung
 		/// </summary>
 		public UserModel Reservator { get; set; }
 	}

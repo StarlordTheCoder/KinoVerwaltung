@@ -35,7 +35,7 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
-		/// Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
+		///     Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
 		/// </summary>
 		/// <param name="data">Daten, welche zu prüfen sind</param>
 		/// <returns>True, wenn die Daten valid sind</returns>

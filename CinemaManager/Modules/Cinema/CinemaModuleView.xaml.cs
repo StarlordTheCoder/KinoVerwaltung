@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Cinema
@@ -13,7 +14,7 @@ namespace CinemaManager.Modules.Cinema
 	public partial class CinemaModuleView
 	{
 		/// <summary>
-		/// Initalisiert das Kinomodul im GUI
+		///     Initalisiert das Kinomodul im GUI
 		/// </summary>
 		public CinemaModuleView()
 		{
@@ -37,9 +38,8 @@ namespace CinemaManager.Modules.Cinema
 			var result = configurator?.FilterData(data);
 		}
 
-		private void ListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
 		}
 	}
 }

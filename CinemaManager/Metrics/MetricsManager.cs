@@ -11,7 +11,7 @@ using Microsoft.Owin.Hosting;
 namespace CinemaManager.Metrics
 {
 	/// <summary>
-	/// Wrapper für Metriken
+	///     Wrapper für Metriken
 	/// </summary>
 	public class MetricsManager
 	{
