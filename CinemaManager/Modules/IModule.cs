@@ -11,10 +11,26 @@ namespace CinemaManager.Modules
 	/// </summary>
 	public interface IModule : INotifyPropertyChanged
 	{
+		/// <summary>
+		///     Wird das Modul angezeigt
+		/// </summary>
 		bool IsVisible { get; set; }
+
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
 		string Title { get; }
 
+		/// <summary>
+		///     Command für das Dockingframework
+		/// </summary>
 		ICommand CloseCommand { get; }
+
+
+		/// <summary>
+		///     Aktualisiert die Daten im Modul. 
+		///     Beispielsweise wenn sich die Daten verändert haben.
+		/// </summary>
 		void Refresh();
 	}
 }

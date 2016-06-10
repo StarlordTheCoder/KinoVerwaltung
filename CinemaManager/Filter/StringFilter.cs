@@ -23,6 +23,9 @@ namespace CinemaManager.Filter
 			Label = label;
 		}
 
+		/// <summary>
+		///     Text, nach welchem gefiltert wird
+		/// </summary>
 		public string Text
 		{
 			get { return _text; }

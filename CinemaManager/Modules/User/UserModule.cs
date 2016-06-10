@@ -8,8 +8,15 @@ namespace CinemaManager.Modules.User
 	/// </summary>
 	public class UserModule : ModuleBase
 	{
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
 		public override string Title => "User";
 
+		/// <summary>
+		///     Aktualisiert die Daten im Modul. 
+		///     Beispielsweise wenn sich die Daten verändert haben.
+		/// </summary>
 		public override void Refresh()
 		{
 			//TODO

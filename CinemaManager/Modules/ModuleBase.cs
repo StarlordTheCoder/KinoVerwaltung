@@ -25,7 +25,7 @@ namespace CinemaManager.Modules
 		}
 
 		/// <summary>
-		///     La visibilité de la Module
+		///     Wird das Modul angezeigt
 		/// </summary>
 		public bool IsVisible
 		{
@@ -39,14 +39,30 @@ namespace CinemaManager.Modules
 			}
 		}
 
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
 		public abstract string Title { get; }
+
+		/// <summary>
+		///     Command für das Dockingframework
+		/// </summary>
 		public ICommand CloseCommand { get; }
+
+		/// <summary>
+		///     Aktualisiert die Daten im Modul. 
+		///     Beispielsweise wenn sich die Daten verändert haben.
+		/// </summary>
 		public abstract void Refresh();
 
 		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
 
+		/// <summary>
+		///     Event invokator for <see cref="PropertyChanged"/>
+		/// </summary>
+		/// <param name="propertyName">Property that changed</param>
 		[NotifyPropertyChangedInvocator]
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{

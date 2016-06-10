@@ -9,6 +9,9 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public interface IStringFilter<in T> : IFilter<T>
 	{
+		/// <summary>
+		///     Text, nach welchem gefiltert wird
+		/// </summary>
 		string Text { get; set; }
 	}
 }

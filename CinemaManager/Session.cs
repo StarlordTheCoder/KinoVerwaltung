@@ -3,6 +3,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using CinemaManager.Model;
@@ -13,6 +14,7 @@ namespace CinemaManager
 	/// <summary>
 	///     Session for whole Project
 	/// </summary>
+	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public sealed class Session : INotifyPropertyChanged
 	{
 		private static string _dataPath;
@@ -25,12 +27,12 @@ namespace CinemaManager
 
 		public static Session Instance { get; } = new Session();
 
-		public IDataModel DataModel { get; } = new DataModel();
+		public IDataModel DataModel { get; private set; } = new DataModel();
 
 		/// <summary>
 		///     Global Ticker for Project
 		/// </summary>
-		public Timer Ticker { get; } = new Timer(TimeSpan.FromMinutes(2).Ticks);
+		public Timer Ticker { get; private set; } = new Timer(TimeSpan.FromSeconds(30).Ticks);
 
 		/// <summary>
 		///     Expanded <see cref="Settings.Default" /> DefaultDataPath
@@ -74,6 +76,16 @@ namespace CinemaManager
 		public void OnPrepareForSave()
 		{
 			PrepareForSave?.Invoke(this, EventArgs.Empty);
+		}
+
+		~Session()
+		{
+			Ticker?.Stop();
+			Ticker?.Dispose();
+			Ticker = null;
+			PrepareForSave = null;
+			PropertyChanged = null;
+			DataModel = null;
 		}
 	}
 }

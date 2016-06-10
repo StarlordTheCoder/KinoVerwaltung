@@ -18,7 +18,8 @@ namespace CinemaManager.Modules.Cinema
 		public CinemaModule()
 		{
 			CinemaFilterConfigurator
-				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address));
+				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address))
+				.DateFilter(new DateFilter<CinemaModel>("TestDatum"));
 
 			CinemaFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
@@ -38,6 +39,9 @@ namespace CinemaManager.Modules.Cinema
 		public ICommand AddCinemaCommand { get; }
 		public ICommand RemoveCinemaCommand { get; }
 
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
 		public override string Title => "Cinema Manager";
 
 		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
@@ -77,6 +81,10 @@ namespace CinemaManager.Modules.Cinema
 			CurrentItem = newCinema;
 		}
 
+		/// <summary>
+		///     Aktualisiert die Daten im Modul. 
+		///     Beispielsweise wenn sich die Daten verändert haben.
+		/// </summary>
 		public override void Refresh()
 		{
 			_allCinemas.Clear();
