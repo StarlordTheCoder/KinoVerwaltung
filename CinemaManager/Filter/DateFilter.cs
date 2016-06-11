@@ -71,7 +71,7 @@ namespace CinemaManager.Filter
 				var result = v.Invoke(data);
 
 				return
-					result?.Date <= StartDate?.Date &&
+					result?.Date <= EndDate?.Date &&
 					result.Value.Date >= StartDate?.Date;
 			});
 		}
