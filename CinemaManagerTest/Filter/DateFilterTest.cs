@@ -8,11 +8,14 @@ using NUnit.Framework;
 
 namespace CinemaManagerTest.Filter
 {
-	public class DateFilterTest : UnitTestBase<DateFilter<DummyModel>>
+	public class DateFilterTest : UnitTestBase<DateFilter<IDummyModel>>
 	{
-		private void Setup(params Func<DummyModel, DateTime?>[] setup)
+		private readonly DateTime _startDate = DateTime.Today;
+		private readonly DateTime _endDate = DateTime.Today + TimeSpan.FromDays(1);
+
+		private void Setup(params Func<IDummyModel, DateTime?>[] setup)
 		{
-			UnitUnderTest = new DateFilter<DummyModel>(string.Empty, setup);
+			UnitUnderTest = new DateFilter<IDummyModel>(string.Empty, setup);
 		}
 
 		[Test]
@@ -21,7 +24,7 @@ namespace CinemaManagerTest.Filter
 			//Arrange
 			Setup(d => d.DateTimeProperty);
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 
 			//Act
 			UnitUnderTest.Check(dummyData.Object);
@@ -31,23 +34,27 @@ namespace CinemaManagerTest.Filter
 		}
 
 		[Test]
-		public void TestGivenCorrectDates()
+		public void TestGivenCorrectDatesTrueIsReturned()
 		{
-			TestDateGivesCorrectResult(DateTime.Today, DateTime.Today + TimeSpan.FromDays(1), DateTime.Today, true);
-			TestDateGivesCorrectResult(DateTime.Today, DateTime.Today + TimeSpan.FromDays(1), DateTime.Today - TimeSpan.FromDays(1), false);
-			TestDateGivesCorrectResult(DateTime.Today, DateTime.Today + TimeSpan.FromDays(1), DateTime.Today + TimeSpan.FromDays(1), true);
-			TestDateGivesCorrectResult(DateTime.Today, DateTime.Today + TimeSpan.FromDays(2), DateTime.Today + TimeSpan.FromDays(1), true);
-			TestDateGivesCorrectResult(DateTime.Today, DateTime.Today + TimeSpan.FromDays(1), DateTime.Today + TimeSpan.FromDays(2), false);
+			TestDateGivesCorrectResult(_startDate, _endDate, _startDate, true);
+			TestDateGivesCorrectResult(_startDate, _endDate, _endDate, true);
 		}
 
-		public void TestDateGivesCorrectResult(DateTime start, DateTime end, DateTime input, bool expectedResult)
+		[Test]
+		public void TestGivenWrongDatesFalseIsReturned()
+		{
+			TestDateGivesCorrectResult(_startDate, _endDate, _startDate - TimeSpan.FromDays(1), false);
+			TestDateGivesCorrectResult(_startDate, _endDate, _endDate + TimeSpan.FromDays(1), false);
+		}
+
+		private void TestDateGivesCorrectResult(DateTime start, DateTime end, DateTime input, bool expectedResult)
 		{
 			//Arrange
 			Setup(d => d.DateTimeProperty);
 			UnitUnderTest.StartDate = start;
 			UnitUnderTest.EndDate = end;
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 			dummyData.Setup(d => d.DateTimeProperty).Returns(input);
 
 			//Act
