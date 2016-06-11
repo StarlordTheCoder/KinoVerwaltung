@@ -8,11 +8,11 @@ using NUnit.Framework;
 
 namespace CinemaManagerTest.Filter
 {
-	public class StringFilterTest : UnitTestBase<StringFilter<DummyModel>>
+	public class StringFilterTest : UnitTestBase<StringFilter<IDummyModel>>
 	{
-		private void Setup(params Func<DummyModel, string>[] setup)
+		private void Setup(params Func<IDummyModel, string>[] setup)
 		{
-			UnitUnderTest = new StringFilter<DummyModel>(string.Empty, setup);
+			UnitUnderTest = new StringFilter<IDummyModel>(string.Empty, setup);
 		}
 
 		[Test]
@@ -21,7 +21,7 @@ namespace CinemaManagerTest.Filter
 			//Arrange
 			Setup(d => d.StringProperty);
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 
 			//Act
 			UnitUnderTest.Check(dummyData.Object);
@@ -37,7 +37,7 @@ namespace CinemaManagerTest.Filter
 			Setup(d => d.StringProperty);
 			UnitUnderTest.Text = "UchTeX";
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 			dummyData.Setup(v => v.StringProperty).Returns("suchtext");
 
 			//Act
@@ -55,7 +55,7 @@ namespace CinemaManagerTest.Filter
 			Setup(d => d.StringProperty);
 			UnitUnderTest.Text = "Nicht gefundener Text";
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 			dummyData.Setup(v => v.StringProperty).Returns("Zu filternder Text");
 
 			//Act
@@ -73,7 +73,7 @@ namespace CinemaManagerTest.Filter
 			Setup(d => d.StringProperty);
 			UnitUnderTest.Text = string.Empty;
 
-			var dummyData = new Mock<DummyModel>();
+			var dummyData = new Mock<IDummyModel>();
 			dummyData.Setup(v => v.StringProperty).Returns("Zu filternder Text");
 
 			//Act

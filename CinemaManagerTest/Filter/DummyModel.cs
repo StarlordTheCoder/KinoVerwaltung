@@ -5,9 +5,15 @@ using System;
 
 namespace CinemaManagerTest.Filter
 {
-	public class DummyModel
+	public interface IDummyModel
 	{
-		public virtual string StringProperty { get; set; }
-		public virtual DateTime? DateTimeProperty { get; set; }
+		string StringProperty { get; set; }
+		DateTime? DateTimeProperty { get; set; }
+	}
+
+	public class DummyModel : IDummyModel
+	{
+		public string StringProperty { get; set; }
+		public DateTime? DateTimeProperty { get; set; }
 	}
 }
