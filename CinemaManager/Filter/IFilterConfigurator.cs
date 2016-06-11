@@ -14,13 +14,13 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public interface IFilterConfigurator<T>
 	{
-		ObservableCollection<IDateFilter<T>> DateFilters { get; }
-		ObservableCollection<IStringFilter<T>> StringFilters { get; }
+		ObservableCollection<IFilter<T>> DateFilters { get; }
+		ObservableCollection<IFilter<T>> StringFilters { get; }
 		ObservableCollection<IFilter<T>> ComplexFilters { get; }
 
 		IFilterConfigurator<T> ComplexFilter(IFilter<T> filter);
-		IFilterConfigurator<T> DateFilter(IDateFilter<T> filter);
-		IFilterConfigurator<T> StringFilter(IStringFilter<T> filter);
+		IFilterConfigurator<T> DateFilter(IFilter<T> filter);
+		IFilterConfigurator<T> StringFilter(IFilter<T> filter);
 
 		event EventHandler FilterChanged;
 

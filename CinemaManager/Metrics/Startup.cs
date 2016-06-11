@@ -1,6 +1,8 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+#if DEBUG
+
 using System;
 using System.Text.RegularExpressions;
 using CinemaManager.Properties;
@@ -35,11 +37,11 @@ namespace CinemaManager.Metrics
 				.WithInternalMetrics()
 				.WithReporting(r => r.WithConsoleReport(TimeSpan.FromSeconds(30)))
 				.WithOwin(middleware => app.Use(middleware), config => config
-						.WithRequestMetricsConfig(c => c.WithAllOwinMetrics(), new[]
-						{
-							new Regex("(?s).*")
-						})
-						.WithMetricsEndpoint()
+					.WithRequestMetricsConfig(c => c.WithAllOwinMetrics(), new[]
+					{
+						new Regex("(?s).*")
+					})
+					.WithMetricsEndpoint()
 				);
 
 			try
@@ -53,3 +55,5 @@ namespace CinemaManager.Metrics
 		}
 	}
 }
+
+#endif

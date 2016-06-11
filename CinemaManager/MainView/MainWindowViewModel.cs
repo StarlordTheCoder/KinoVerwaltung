@@ -60,7 +60,7 @@ namespace CinemaManager.MainView
 			CinemaModule = new CinemaModule();
 			UserModule = new UserModule();
 			FilmModule = new FilmModule();
-			PresentationModule = new PresentationModule();
+			PresentationModule = new PresentationModule(CinemaModule);
 
 			//Add to list
 			Modules = new ObservableCollection<IModule>
@@ -90,11 +90,11 @@ namespace CinemaManager.MainView
 
 		public ObservableCollection<IModule> Modules { get; private set; }
 
-		public IModule CinemaModule { get; private set; }
-		public IModule FilmModule { get; private set; }
-		public IModule PresentationModule { get; private set; }
+		public CinemaModule CinemaModule { get; private set; }
+		public FilmModule FilmModule { get; private set; }
+		public PresentationModule PresentationModule { get; private set; }
 		public IModule ReservationModule { get; private set; }
-		public IModule UserModule { get; private set; }
+		public UserModule UserModule { get; private set; }
 
 		#endregion
 

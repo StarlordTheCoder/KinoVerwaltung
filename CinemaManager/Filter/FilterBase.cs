@@ -17,6 +17,9 @@ namespace CinemaManager.Filter
 		private bool _isEnabled;
 		private string _label;
 
+		/// <summary>
+		///     Ob der Filter aktiv ist
+		/// </summary>
 		public bool IsEnabled
 		{
 			get { return _isEnabled; }
@@ -28,6 +31,9 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		/// <summary>
+		///     Wird im GUI neben dem Filter angezeigt
+		/// </summary>
 		public string Label
 		{
 			get { return _label; }
@@ -39,12 +45,22 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		/// <summary>
+		///     Überprüft, ob die <paramref name="data" /> diesem Filter entsprechen.
+		/// </summary>
+		/// <param name="data">Daten, welche zu prüfen sind</param>
+		/// <returns>True, wenn die Daten valid sind</returns>
 		public abstract bool Check(T data);
-		public event EventHandler FilterChangedEvent;
+
+		public event EventHandler FilterChanged;
 
 		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		/// <summary>
+		///     Event invokator for <see cref="PropertyChanged" />
+		/// </summary>
+		/// <param name="propertyName">Property that changed</param>
 		[NotifyPropertyChangedInvocator]
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
@@ -52,9 +68,12 @@ namespace CinemaManager.Filter
 			OnFilterChangedEvent();
 		}
 
+		/// <summary>
+		///     Event invokator for <see cref="FilterChanged" />
+		/// </summary>
 		protected void OnFilterChangedEvent()
 		{
-			FilterChangedEvent?.Invoke(this, EventArgs.Empty);
+			FilterChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

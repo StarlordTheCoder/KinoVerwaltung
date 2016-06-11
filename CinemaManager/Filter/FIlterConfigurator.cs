@@ -10,29 +10,29 @@ namespace CinemaManager.Filter
 {
 	public class FilterConfigurator<T> : IFilterConfigurator<T>
 	{
-		public ObservableCollection<IDateFilter<T>> DateFilters { get; } = new ObservableCollection<IDateFilter<T>>();
+		public ObservableCollection<IFilter<T>> DateFilters { get; } = new ObservableCollection<IFilter<T>>();
 
-		public ObservableCollection<IStringFilter<T>> StringFilters { get; } = new ObservableCollection<IStringFilter<T>>();
+		public ObservableCollection<IFilter<T>> StringFilters { get; } = new ObservableCollection<IFilter<T>>();
 
 		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
 
 
-		public IFilterConfigurator<T> StringFilter(IStringFilter<T> filter)
+		public IFilterConfigurator<T> StringFilter(IFilter<T> filter)
 		{
 			StringFilters.Add(filter);
 
-			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
+			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
 			return this;
 		}
 
 		public event EventHandler FilterChanged;
 
-		public IFilterConfigurator<T> DateFilter(IDateFilter<T> filter)
+		public IFilterConfigurator<T> DateFilter(IFilter<T> filter)
 		{
 			DateFilters.Add(filter);
 
-			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
+			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
 			return this;
 		}
@@ -41,7 +41,7 @@ namespace CinemaManager.Filter
 		{
 			ComplexFilters.Add(filter);
 
-			filter.FilterChangedEvent += (sender, e) => OnFilterChanged();
+			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
 			return this;
 		}
@@ -70,7 +70,7 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
-		/// Event invokator for <see cref="FilterChanged"/>
+		///     Event invokator for <see cref="FilterChanged" />
 		/// </summary>
 		protected virtual void OnFilterChanged()
 		{

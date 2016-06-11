@@ -25,7 +25,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Vorstellungen des Kinos
 		/// </summary>
-		public List<Presentation> Presentations { get; set; }
+		public List<PresentationModel> Presentations { get; set; }
 
 		/// <summary>
 		///     Adresse des Kinos

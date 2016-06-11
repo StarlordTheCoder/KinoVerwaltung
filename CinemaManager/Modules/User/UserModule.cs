@@ -14,7 +14,7 @@ namespace CinemaManager.Modules.User
 		public override string Title => "User";
 
 		/// <summary>
-		///     Aktualisiert die Daten im Modul. 
+		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
 		/// </summary>
 		public override void Refresh()

@@ -11,15 +11,25 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public interface IDataSourceService
 	{
+		/// <summary>
+		///     List of the used <see cref="CommandBindings" />
+		///     Binds the commands to the associated actions
+		/// </summary>
 		IList<CommandBinding> CommandBindings { get; }
-		RoutedUICommand OpenFileCommand { get; }
-		RoutedUICommand SaveFileCommand { get; }
-		RoutedUICommand SynchronizeCommand { get; }
 
 		/// <summary>
-		///     Try to load the Datafile at the specified <paramref name="path" />/>
+		///     Command to open a file
 		/// </summary>
-		/// <param name="path">Path to load data from</param>
-		void LoadData(string path);
+		RoutedUICommand OpenFileCommand { get; }
+
+		/// <summary>
+		///     Command to save a file (as)
+		/// </summary>
+		RoutedUICommand SaveFileCommand { get; }
+
+		/// <summary>
+		///     Command to save the current file and reload it
+		/// </summary>
+		RoutedUICommand SynchronizeCommand { get; }
 	}
 }

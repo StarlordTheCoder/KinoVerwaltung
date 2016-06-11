@@ -1,6 +1,8 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+#if DEBUG
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,10 @@ namespace CinemaManager.Metrics
 	{
 		private MainWindowViewModel _mainWindowViewModel;
 
+		/// <summary>
+		///     Starte die lokalen Metriken.
+		/// </summary>
+		/// <param name="mainWindowViewModel">Das allgemeine Viewmodel zum holend aller Daten.</param>
 		public async void StartMetrics(MainWindowViewModel mainWindowViewModel)
 		{
 			_mainWindowViewModel = mainWindowViewModel;
@@ -52,3 +58,5 @@ namespace CinemaManager.Metrics
 		}
 	}
 }
+
+#endif

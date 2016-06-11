@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CinemaManager.Model;
 using Microsoft.Win32;
 
 namespace CinemaManager.MainView
@@ -14,6 +15,10 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public class DataSourceService : IDataSourceService
 	{
+		/// <summary>
+		///     Loads the default data
+		///     Creates the Command and CommandBindings
+		/// </summary>
 		public DataSourceService()
 		{
 			LoadData(Session.DataPath);
@@ -43,12 +48,32 @@ namespace CinemaManager.MainView
 
 		private static Session Session => Session.Instance;
 
+		/// <summary>
+		///     List of the used <see cref="IDataSourceService.CommandBindings" />
+		///     Binds the commands to the associated actions
+		/// </summary>
 		public IList<CommandBinding> CommandBindings { get; }
+
+		/// <summary>
+		///     Command to open a file
+		/// </summary>
 		public RoutedUICommand OpenFileCommand { get; }
+
+		/// <summary>
+		///     Command to save the current file and reload it
+		/// </summary>
 		public RoutedUICommand SynchronizeCommand { get; }
+
+		/// <summary>
+		///     Command to save a file (as)
+		/// </summary>
 		public RoutedUICommand SaveFileCommand { get; }
 
-		public void LoadData(string path)
+		/// <summary>
+		///     Try to load the Datafile at the specified <paramref name="path" />/>
+		/// </summary>
+		/// <param name="path">Path to load data from</param>
+		private static void LoadData(string path)
 		{
 			Session.DataPath = path;
 
@@ -62,7 +87,10 @@ namespace CinemaManager.MainView
 			}
 		}
 
-		private void SaveDataFile()
+		/// <summary>
+		///     Opens a save dialog
+		/// </summary>
+		private static void SaveDataFile()
 		{
 			var dialog = new SaveFileDialog
 			{
@@ -79,13 +107,19 @@ namespace CinemaManager.MainView
 			}
 		}
 
-		private void SynchronizeData()
+		/// <summary>
+		///     Calls Load and Save on the <see cref="IDataModel" />
+		/// </summary>
+		private static void SynchronizeData()
 		{
 			Session.DataModel.Save();
 			Session.DataModel.Load();
 		}
 
-		private void OpenDataFile()
+		/// <summary>
+		///     Opens a open file dialog
+		/// </summary>
+		private static void OpenDataFile()
 		{
 			var dialog = new OpenFileDialog
 			{

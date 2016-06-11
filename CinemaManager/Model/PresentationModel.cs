@@ -10,7 +10,7 @@ namespace CinemaManager.Model
 	///     Vorstellung
 	/// </summary>
 	[Serializable]
-	public class Presentation
+	public class PresentationModel
 	{
 		/// <summary>
 		///     Die Zeit, wann die Vorstellung beginnt

@@ -169,6 +169,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converter\BoolToSolidColorBrushConverter.cs" />
+    <Compile Include="Filter\ComplexFilter.cs" />
     <Compile Include="Filter\FilterBase.cs" />
     <Compile Include="Filter\FIlterConfigurator.cs" />
     <Compile Include="Filter\FilterConfiguratorView.xaml.cs">
@@ -178,6 +179,7 @@
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\IFilterConfigurator.cs" />
     <Compile Include="Filter\DateFilter.cs" />
+    <Compile Include="Filter\IComplexFilter.cs" />
     <Compile Include="Filter\IStringFilter.cs" />
     <Compile Include="Filter\StringFilter.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
@@ -224,7 +226,7 @@
     <Compile Include="Model\CinemasModel.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Model\FilmModel.cs" />
-    <Compile Include="Model\Presentation.cs" />
+    <Compile Include="Model\PresentationModel.cs" />
     <Compile Include="Model\ReservationModel.cs" />
     <Compile Include="Model\RoomModel.cs" />
     <Compile Include="Model\SeatModel.cs" />

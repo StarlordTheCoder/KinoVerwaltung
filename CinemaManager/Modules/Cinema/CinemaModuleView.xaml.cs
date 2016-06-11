@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Cinema
@@ -36,10 +35,6 @@ namespace CinemaManager.Modules.Cinema
 
 			var configurator = module?.CinemaFilterConfigurator;
 			var result = configurator?.FilterData(data);
-		}
-
-		private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
 		}
 	}
 }

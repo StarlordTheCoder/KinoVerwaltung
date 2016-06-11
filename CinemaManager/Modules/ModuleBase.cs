@@ -50,7 +50,7 @@ namespace CinemaManager.Modules
 		public ICommand CloseCommand { get; }
 
 		/// <summary>
-		///     Aktualisiert die Daten im Modul. 
+		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
 		/// </summary>
 		public abstract void Refresh();
@@ -60,7 +60,7 @@ namespace CinemaManager.Modules
 
 
 		/// <summary>
-		///     Event invokator for <see cref="PropertyChanged"/>
+		///     Event invokator for <see cref="PropertyChanged" />
 		/// </summary>
 		/// <param name="propertyName">Property that changed</param>
 		[NotifyPropertyChangedInvocator]

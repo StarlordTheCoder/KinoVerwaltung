@@ -25,6 +25,9 @@ namespace CinemaManager
 		{
 		}
 
+		/// <summary>
+		///     Instanz. Singleton!
+		/// </summary>
 		public static Session Instance { get; } = new Session();
 
 		public IDataModel DataModel { get; private set; } = new DataModel();
@@ -63,8 +66,12 @@ namespace CinemaManager
 		}
 
 
+		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		/// <summary>
+		///     Tritt ein, wenn der User versucht die Daten zu spiecher. Gibt den Modulen die Möglichkeit ihre Daten zu speichern.
+		/// </summary>
 		public event EventHandler PrepareForSave;
 
 		[NotifyPropertyChangedInvocator]
@@ -73,11 +80,18 @@ namespace CinemaManager
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
+		/// <summary>
+		///     Event invokator for <see cref="PrepareForSave" />
+		/// </summary>
 		public void OnPrepareForSave()
 		{
 			PrepareForSave?.Invoke(this, EventArgs.Empty);
 		}
 
+		/// <summary>
+		///     Gibt einem Objekt Gelegenheit zu dem Versuch, Ressourcen freizugeben und andere Bereinigungen durchzuführen,
+		///     bevor es von der Garbage Collection freigegeben wird.
+		/// </summary>
 		~Session()
 		{
 			Ticker?.Stop();

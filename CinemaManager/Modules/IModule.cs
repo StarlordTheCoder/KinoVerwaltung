@@ -28,7 +28,7 @@ namespace CinemaManager.Modules
 
 
 		/// <summary>
-		///     Aktualisiert die Daten im Modul. 
+		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
 		/// </summary>
 		void Refresh();

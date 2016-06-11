@@ -30,25 +30,29 @@
 		<ItemsControl Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding DateFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Grid HorizontalAlignment="Stretch" Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+					<Grid HorizontalAlignment="Stretch"
+					      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto"/>
-							<RowDefinition Height="Auto"/>
-							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Label}" />
-						<CheckBox Grid.Column="1" Grid.Row="0" DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
+						<CheckBox Grid.Column="1" Grid.Row="0" DockPanel.Dock="Right" HorizontalAlignment="Right"
+						          IsChecked="{Binding IsEnabled}" />
 
 						<Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=StartDate}" Content="Start date" />
-						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1" Grid.Row="1" Name="StartDate" DockPanel.Dock="Left" Value="{Binding StartDate}"
-						                     IsEnabled="{Binding IsEnabled}" Maximum="{Binding ElementName=EndDate, Path=SelectedDate}"/>
+						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1"
+						                     Grid.Row="1" Name="StartDate" DockPanel.Dock="Left" Value="{Binding StartDate}"
+						                     IsEnabled="{Binding IsEnabled}" Maximum="{Binding ElementName=EndDate, Path=SelectedDate}" />
 
 						<Label Grid.Column="0" Grid.Row="2" Target="{Binding ElementName=EndDate}" Content="End date" />
-						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1" Grid.Row="2" Name="EndDate" DockPanel.Dock="Left" Value="{Binding EndDate}"
+						<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1"
+						                     Grid.Row="2" Name="EndDate" DockPanel.Dock="Left" Value="{Binding EndDate}"
 						                     IsEnabled="{Binding IsEnabled}" Minimum="{Binding ElementName=StartDate, Path=SelectedDate}" />
 					</Grid>
 				</DataTemplate>
@@ -58,10 +62,17 @@
 		<ItemsControl Grid.Column="2" HorizontalAlignment="Stretch" ItemsSource="{Binding ComplexFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<Button Command="{Binding Value}" />
-						<Button Command="{Binding RemoveFilterCommand}" />
-					</StackPanel>
+					<Grid HorizontalAlignment="Stretch"
+					      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" Text="{Binding Label}" />
+						<TextBlock Grid.Column="1" Text="{Binding Module.Title}" />
+						<CheckBox Grid.Column="2" DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
+					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>

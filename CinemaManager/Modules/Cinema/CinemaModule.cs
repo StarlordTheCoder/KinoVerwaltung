@@ -13,6 +13,7 @@ namespace CinemaManager.Modules.Cinema
 {
 	public class CinemaModule : ModuleBase
 	{
+		private readonly List<CinemaModel> _allCinemas = new List<CinemaModel>();
 		private CinemaModel _selectedCinema;
 
 		public CinemaModule()
@@ -37,12 +38,12 @@ namespace CinemaManager.Modules.Cinema
 		}
 
 		/// <summary>
-		/// Command for <see cref="AddCinema"/>
+		///     Command for <see cref="AddCinema" />
 		/// </summary>
 		public ICommand AddCinemaCommand { get; }
 
 		/// <summary>
-		/// Command for <see cref="RemoveCinema"/>
+		///     Command for <see cref="RemoveCinema" />
 		/// </summary>
 		public ICommand RemoveCinemaCommand { get; }
 
@@ -52,11 +53,11 @@ namespace CinemaManager.Modules.Cinema
 		public override string Title => "Cinema Manager";
 
 		/// <summary>
-		/// Filter-Konfigurator für die Kinos
+		///     Filter-Konfigurator für die Kinos
 		/// </summary>
 		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
+
 		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
-		public List<CinemaModel> _allCinemas { get; } = new List<CinemaModel>();
 
 		public CinemaModel SelectedCinema
 		{
@@ -80,9 +81,8 @@ namespace CinemaManager.Modules.Cinema
 		{
 			var newCinema = new CinemaModel
 			{
-				IsActive = true,
-				Address = "Hier",
-				Name = "Beispiel Kino"
+				Address = "Examplestreet 42",
+				Name = $"Cinema #{_allCinemas.Count}"
 			};
 
 			_allCinemas.Add(newCinema);
@@ -92,7 +92,7 @@ namespace CinemaManager.Modules.Cinema
 		}
 
 		/// <summary>
-		///     Aktualisiert die Daten im Modul. 
+		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
 		/// </summary>
 		public override void Refresh()
@@ -104,7 +104,7 @@ namespace CinemaManager.Modules.Cinema
 			FilterChanged();
 		}
 
-		public void FilterChanged()
+		private void FilterChanged()
 		{
 			var filteredData = CinemaFilterConfigurator.FilterData(_allCinemas);
 			Cinemas.Clear();

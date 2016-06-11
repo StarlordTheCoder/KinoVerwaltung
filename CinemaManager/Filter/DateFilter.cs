@@ -26,7 +26,7 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
-		/// Startdatum. Von-Datum
+		///     Startdatum. Von-Datum
 		/// </summary>
 		public DateTime? StartDate
 		{
@@ -43,7 +43,7 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
-		/// Enddatum. Bis-Datum
+		///     Enddatum. Bis-Datum
 		/// </summary>
 		public DateTime? EndDate
 		{

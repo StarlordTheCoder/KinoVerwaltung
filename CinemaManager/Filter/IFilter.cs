@@ -11,8 +11,14 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public interface IFilter<in T>
 	{
+		/// <summary>
+		///     Ob der Filter aktiv ist
+		/// </summary>
 		bool IsEnabled { get; set; }
 
+		/// <summary>
+		///     Wird im GUI neben dem Filter angezeigt
+		/// </summary>
 		string Label { get; }
 
 		/// <summary>
@@ -22,6 +28,6 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		bool Check(T data);
 
-		event EventHandler FilterChangedEvent;
+		event EventHandler FilterChanged;
 	}
 }
