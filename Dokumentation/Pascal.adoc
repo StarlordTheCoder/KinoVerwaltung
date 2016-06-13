@@ -1,7 +1,7 @@
 Pascal Lernjournal
 ==================
 Pascal Honegger
-Version 1.3, 07.06.2016
+Version 1.4, 13.06.2016
 :toc:
 
 == 31.05.2016
@@ -37,3 +37,24 @@ image::media/metrics.png[Metrics Beispiel]
 Man sollte beim Entwickeln nicht immer das Rad neu erfinden. Für viele bekannte Probleme gibt es ein Pattern, womit man das Problem elegant lösen kann. Hat man nun ein grösseres Anliegen wie beispielsweise das oben genannte Docking-GUI müsste man trotzdem sehr viel Code neu schreiben, obwohl andere Entwickler diesen Code bereits geschrieben haben. Eine Lösung für diese Problem sind sogenannte DLLs. Beispiel: Man kann eine DLL eines Docking-Frameworks im Projekt referenzieren. Dadurch kann man auf die Methoden und GUI-Komponenten davon zugreifen. 
 
 Eine bessere Alternative zu den DLLs ist link:https://www.nuget.org/[NuGet]. NuGet ist der bekannteste Package-Manager für C#-Applikationen. Darüber lassen sich anstelle von DLLs sogenannte Packages (Pakete) mit dem Projekt verbinden. Dieses Paket kann auch DLLs beinhalten und unterscheidet sich von der Funktionalität her nicht gross von einer DLL. Der grosse Vorteil dieser Pakete ist, dass NuGet Updates und Abhängigkeiten übernimmt. So kann ein Paket andere Pakete als Abhängigkeit definieren und diese werden automatisch aufgelöst. Dazu bekommt man in Visual Studio benachrichtigungen, wenn ein Paket eine neue Version hat. Auch das Installieren der Pakete ist sehr einfach und direkt in Visual Studio integriert. Es werden auch keine unnötigen Daten in GIT hinterlegt, lediglich ein Eintrag in einer .packages-Datei mit dem Namen des Paketes.
+
+=== Generics
+Beim Implementieren der Filter habe ich Genercis angewendet. Generics erlaubt es einen Datentypen beim Initialisieren einer Klasse oder beim Aufruf einer Methode anzugeben. So kann man ansteller einer List eine List<T> erstellen. Dieses T stellt dann einen Datentypen dar. Dieser kann in der Klasse beliebig verwendet werden, sowohl als Rerturn-Wert als auch als Paramter-Typ. Es können unendlich viele dieser Datentypen definiert werden, wie Beispielsweise List<T, U>
+
+|====
+| where T: struct | Ein beliebiges Struct (Value-Type) ausser Nullable.
+| where T : class | Irgend eine Klasse, Interface, Delegate oder Array.
+| where T : new() | Spezifiziert, dass der Typ einen Standardkonstruktor besitzen muss. Muss als letztes angegeben werden.
+| where T : <base class name> | Der Typ muss eine spezifische Klasse implementieren.
+| where T : <interface name> | Der Typ muss ein spezifisches Interface implementieren.
+| where T : U | Der Typ T muss den Typ U implementieren. Dabei kann der Typ U alles oben genannte sein.
+|====
+
+Die Vorteile von Generic:
+
+* Erlaubt es Typ-Sicheren Code zu schreiben. So beinhaltet eine List<string> garantiert strings, und keine anderen Datentypen!
+* Der Kompiler und die IDE können im falle von falsch verwendeten Datentypen einen Kompiler-Fehler anzeigen.
+* Benötigt weniger Casting von und nach object.
+* Erlaubt es generische Klassen zu schreiben. So verwenden List<string> und List<int> den gleichen Code. Man bruacht nicht für jeden Fall eine eigene Implementation.
+
+In unserem Fall muss man beim Erstellen eines Filters einen Datentyp angeben. Dieser wird dann für die mitgegebenen Actions benötigt. Details dazu in der Filter-Dokumentation.

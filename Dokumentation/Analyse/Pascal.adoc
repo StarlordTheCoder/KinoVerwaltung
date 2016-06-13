@@ -1,7 +1,7 @@
 Pascal Analyse
 ==============
 Pascal Honegger
-Version 1.0, 07.06.2016
+Version 1.1, 13.06.2016
 
 == Vorgehen
 Das Arbeiten nach dem vorgegebenen Beschreibungstextes ging schnell voran. Innert kürzester Zeit hatte ich eine Tabelle mit wichtigen Komponenten und deren Verantwortlichkeiten (Verben).  
@@ -9,7 +9,17 @@ Das Arbeiten nach dem vorgegebenen Beschreibungstextes ging schnell voran. Inner
 image::..\media\Substantive_Pascal.JPG[Tabelle der Substantive & Verben]
 
 == Probleme
+=== Kinobuchungssystem
 Das vorgegebene Konzept für die Umsetzung war, meiner Meinung nach, nicht zu gebrauchen. So wurde gesagt, dass das Kinobuchungssystem die Details der Vorstellung lädt.
 Ich bin der Meinung, dass die Vorstellung selber über diese Informationen verfügen muss. So habe ich bereits von Anfang an die vorgegebene Struktur mit den Reservationen umgestellt.
 Es sollte nicht ein Sitz reserviert werden, sondern eine Reservation zwischen einem User und einem Sitz erstellt werden. Das Problem bei dieser Referenz ist jedoch, dass beim Ändern eines Sitzes alle bestehenden Reservationen angepasst werden.
 Dies ist für das meiste Egal, ausser für den Preis. Daher habe ich mich dazu Entschieden eine Reservation einen festen Preis zuzuschreiben, welcher beim Erstellen festgelegt wird.
+
+=== Sitzplatz => Typ
+Ein weiteres Problem ist der Platztyp. Ich bin mir bis heute noch unschlüssig, wie man diesen speichern sollte. Entweder ist es ein Enum oder eine Klasse. Im Falle einer Klasse müsste man bei jedem Sitz sehr viel redundant speichern. Daher denke ich, dass der Enum mehr sinn ergibt.
+
+=== Reihe
+Im Dossier ist beschrieben, dass man in dieser Phase der Planung noch nicht zu sehr filtern sollte. Trotzdem finde ich, dass ein eigenes Reihe-Objekt keinen Sinn ergibt. Es ist meiner Meinung nach nicht in der Verantwortung eines Reihe-Objektes die Sitze zu speichern, dies sollte direkt der Saal übernehmen. Ich habe die Reihe trotzdem in der Liste gelassen, werde sie aber nicht verwenden beziehungsweise spätzer entfernen.
+
+== Datenverwaltung
+Dieser Datenbank-ähnliche datenverwaltung wirkt auf mich realisierbar. Eine Datenbank zu verwenden ist ansich ohnehin eine Idee, braucht aber viel Zeit. Die neuen Verantwortlichkeiten finde ich persönlich besser, als die Verantwortlichkeiten vom Dossier.
