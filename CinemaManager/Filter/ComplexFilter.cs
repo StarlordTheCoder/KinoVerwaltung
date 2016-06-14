@@ -27,7 +27,8 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.Invoke(Module).Contains(data);
+			var list = _valueToCompareTo.Invoke(Module).ToList();
+			return list.Count == 0 || list.Contains(data);
 		}
 
 		public TM Module { get; }

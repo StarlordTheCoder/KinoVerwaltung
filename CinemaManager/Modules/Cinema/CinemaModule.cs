@@ -19,8 +19,7 @@ namespace CinemaManager.Modules.Cinema
 		public CinemaModule()
 		{
 			CinemaFilterConfigurator
-				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address))
-				.DateFilter(new DateFilter<CinemaModel>("TestDatum"));
+				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address));
 
 			CinemaFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
