@@ -14,16 +14,48 @@ namespace CinemaManager.Filter
 	/// <typeparam name="T"></typeparam>
 	public interface IFilterConfigurator<T>
 	{
+		/// <summary>
+		/// List der <see cref="IDateFilter{T}"/>
+		/// </summary>
 		ObservableCollection<IFilter<T>> DateFilters { get; }
+		/// <summary>
+		/// List der <see cref="IStringFilter{T}"/>
+		/// </summary>
 		ObservableCollection<IFilter<T>> StringFilters { get; }
+		/// <summary>
+		/// List der <see cref="IComplexFilter{T,TM}"/>
+		/// </summary>
 		ObservableCollection<IFilter<T>> ComplexFilters { get; }
 
+		/// <summary>
+		/// Fügt einen <see cref="IComplexFilter{T,TM}"/> hinzu
+		/// </summary>
+		/// <param name="filter">Filter</param>
+		/// <returns>This</returns>
 		IFilterConfigurator<T> ComplexFilter(IFilter<T> filter);
+		/// <summary>
+		/// Fügt einen <see cref="IDateFilter{T}"/> hinzu
+		/// </summary>
+		/// <param name="filter">Filter</param>
+		/// <returns>This</returns>
 		IFilterConfigurator<T> DateFilter(IFilter<T> filter);
+		/// <summary>
+		/// Fügt einen <see cref="IStringFilter{T}"/> hinzu
+		/// </summary>
+		/// <param name="filter">Filter</param>
+		/// <returns>This</returns>
 		IFilterConfigurator<T> StringFilter(IFilter<T> filter);
 
+		/// <summary>
+		/// Einer der Filter hat <see cref="IFilter{T}.FilterChanged"/> geworfen
+		/// </summary>
 		event EventHandler FilterChanged;
 
+		/// <summary>
+		/// Filter die Daten
+		/// </summary>
+		/// <param name="data">Zu filternde Daten</param>
+		/// <returns>Gefilterte Daten</returns>
 		IEnumerable<T> FilterData(IEnumerable<T> data);
 	}
 }
