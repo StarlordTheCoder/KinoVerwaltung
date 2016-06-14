@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace CinemaManager.Modules.Cinema
 {
 	public class CinemaModule : ModuleBase
 	{
+		private readonly Action<IModule> _refreshModules;
 		private CinemaModel _selectedCinema;
 
-		public CinemaModule()
+		public CinemaModule(Action<IModule> refreshModules)
 		{
+			_refreshModules = refreshModules;
 			CinemaFilterConfigurator
 				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address));
 
@@ -56,6 +59,8 @@ namespace CinemaManager.Modules.Cinema
 				if (Equals(value, _selectedCinema)) return;
 				_selectedCinema = value;
 				OnPropertyChanged();
+
+				_refreshModules.Invoke(this);
 			}
 		}
 

@@ -21,7 +21,8 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
-		<ListView ItemsSource="{Binding FilmList}" Grid.RowSpan="4" Grid.Row="1">
+		<ListView ItemsSource="{Binding FilmList}" Grid.RowSpan="4" Grid.Row="1"
+				  SelectedItem="{Binding SelectedFilm}" SelectionMode="Single">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
@@ -31,5 +32,21 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
+
+		<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+				Grid.Row="1" Grid.Column="1"/>
+		<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+				Grid.Row="2" Grid.Column="1"/>
+		<Button Command="{Binding AddFilmCommand}"
+				Grid.Row="0" Grid.Column="1" Width="40px" Height="40px"
+				HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="35" FontWeight="Bold" BorderThickness="0" Margin="0,10,60,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+			<Image Source="../../Resources/AddButton.png"/>
+		</Button>
+		<Button Command="{Binding RemoveFilmCommand}" 
+				Grid.Column="1" Width="40px" Height="40px"
+				HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="40" FontWeight="Bold" Margin="0,10,10,0" BorderThickness="0"
+		        Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+			<Image Source="../../Resources/RemoveButton.png"/>
+		</Button>
 	</Grid>
 </UserControl>
