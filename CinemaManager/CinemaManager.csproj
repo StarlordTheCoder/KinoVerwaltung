@@ -169,6 +169,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converter\BoolToSolidColorBrushConverter.cs" />
+    <Compile Include="DynamicGrid\GridHelpers.cs" />
     <Compile Include="Filter\ComplexFilter.cs" />
     <Compile Include="Filter\FilterBase.cs" />
     <Compile Include="Filter\FIlterConfigurator.cs" />
@@ -196,6 +197,10 @@
       <DependentUpon>PresentationModuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Presentation\PresentationModule.cs" />
+    <Compile Include="Modules\Room\RoomModule.cs" />
+    <Compile Include="Modules\Room\RoomModuleView.xaml.cs">
+      <DependentUpon>RoomModuleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="MainView\MainWindow.xaml.cs">
@@ -211,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Presentation\PresentationModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Room\RoomModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
