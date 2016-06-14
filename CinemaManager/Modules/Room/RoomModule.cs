@@ -1,31 +1,31 @@
-﻿using System;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CinemaManager.Filter;
 using CinemaManager.Model;
-using CinemaManager.Properties;
 
 namespace CinemaManager.Modules.Room
 {
 	public class RoomModule : ModuleBase
 	{
 		private RoomModel _selectetRoom;
+
+		public RoomModule()
+		{
+			RoomFilterConfigurator
+				.StringFilter(new StringFilter<RoomModel>("RoomNumber", c => c.RoomNumber.ToString()));
+
+			RoomFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
+
+			Refresh();
+		}
+
 		public override string Title => "Room Module";
 		public ObservableCollection<RoomModel> RoomList { get; } = new ObservableCollection<RoomModel>();
 		public IFilterConfigurator<RoomModel> RoomFilterConfigurator { get; } = new FilterConfigurator<RoomModel>();
-		public override void Refresh()
-		{
-			var list = Session.Instance.SelectedCinemaModel?.Rooms;
-
-			RoomList.Clear();
-			if (list?.Any() ?? false)
-			{
-				list.ForEach(l => RoomList.Add(l));
-			}
-		}
 
 		public RoomModel SelectetRoom
 		{
@@ -38,17 +38,18 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
-		public RoomModule()
-		{
-			RoomFilterConfigurator
-				.StringFilter(new StringFilter<RoomModel>("RoomNumber", c => c.RoomNumber.ToString()));
-
-			RoomFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
-
-			Refresh();
-		}
-
 		private IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel.Rooms;
+
+		public override void Refresh()
+		{
+			var list = Session.Instance.SelectedCinemaModel?.Rooms;
+
+			RoomList.Clear();
+			if (list?.Any() ?? false)
+			{
+				list.ForEach(l => RoomList.Add(l));
+			}
+		}
 
 		private void FilterChanged()
 		{

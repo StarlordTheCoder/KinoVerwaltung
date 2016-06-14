@@ -71,7 +71,7 @@
 					<presentation:PresentationModuleView />
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type room:RoomModule}">
-					<room:RoomModuleView/>
+					<room:RoomModuleView />
 				</DataTemplate>
 			</dock:DockingManager.Resources>
 

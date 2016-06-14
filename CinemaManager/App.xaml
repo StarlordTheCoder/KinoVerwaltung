@@ -9,25 +9,25 @@
 		<converter:BoolToSolidColorBrushConverter x:Key="BoolToSolidColorBrushConverter" True="Transparent" False="LightGray" />
 
 		<Style TargetType="Button" x:Key="AddRemoveButtonBase" BasedOn="{StaticResource {x:Type Button}}">
-			<Setter Property="Width" Value="40px"/>
-			<Setter Property="Height" Value="40px"/>
-			<Setter Property="VerticalAlignment" Value="Top"/>
-			<Setter Property="HorizontalAlignment" Value="Right"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Width" Value="40px" />
+			<Setter Property="Height" Value="40px" />
+			<Setter Property="VerticalAlignment" Value="Top" />
+			<Setter Property="HorizontalAlignment" Value="Right" />
+			<Setter Property="BorderThickness" Value="0" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
 		</Style>
 		<Style TargetType="Button" x:Key="AddButton" BasedOn="{StaticResource AddRemoveButtonBase}">
 			<Setter Property="Content">
 				<Setter.Value>
-					<Image Source="../../Resources/AddButton.png"/>
+					<Image Source="../../Resources/AddButton.png" />
 				</Setter.Value>
 			</Setter>
 		</Style>
 		<Style TargetType="Button" x:Key="RemoveButton" BasedOn="{StaticResource AddRemoveButtonBase}">
 			<Setter Property="Content">
 				<Setter.Value>
-					<Image Source="../../Resources/RemoveButton.png"/>
+					<Image Source="../../Resources/RemoveButton.png" />
 				</Setter.Value>
 			</Setter>
 		</Style>

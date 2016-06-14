@@ -1,10 +1,8 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Model;
@@ -14,6 +12,20 @@ namespace CinemaManager.Modules.Film
 {
 	public class FilmModule : ModuleBase
 	{
+		private FilmModel _selectedFilm;
+
+		public FilmModule()
+		{
+			AddFilmCommand = new DelegateCommand(AddFilm);
+			RemoveFilmCommand = new DelegateCommand(RemoveFilm);
+
+			FilterConfigurator
+				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))
+				.StringFilter(new StringFilter<FilmModel>("Director", f => f.Director, f => f.Publisher));
+
+			FilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
+		}
+
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
@@ -23,6 +35,9 @@ namespace CinemaManager.Modules.Film
 
 		public ObservableCollection<FilmModel> FilmList { get; set; } = new ObservableCollection<FilmModel>();
 
+		/// <summary>
+		///     Ausgewählter Film
+		/// </summary>
 		public FilmModel SelectedFilm
 		{
 			get { return _selectedFilm; }
@@ -38,20 +53,7 @@ namespace CinemaManager.Modules.Film
 
 		public ICommand RemoveFilmCommand { get; private set; }
 
-		private CinemaModel CinemaModel;
-		private FilmModel _selectedFilm;
-
-		public FilmModule()
-		{
-			AddFilmCommand = new DelegateCommand(AddFilm);
-			RemoveFilmCommand = new DelegateCommand(RemoveFilm);
-
-			FilterConfigurator
-				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))
-				.StringFilter(new StringFilter<FilmModel>("Director", f => f.Director, f => f.Publisher));
-
-			FilterConfigurator.FilterChanged += (sender, e) => Refresh();
-		}
+		private static CinemaModel CinemaModel => Session.Instance.SelectedCinemaModel;
 
 		private void RemoveFilm()
 		{
@@ -62,23 +64,36 @@ namespace CinemaManager.Modules.Film
 
 		private void AddFilm()
 		{
-			var newFilm = new FilmModel();
-			newFilm.Director = "ExampleDirector";
-			newFilm.FilmName = "Example Name";
+			var newFilm = new FilmModel
+			{
+				Director = "Director",
+				FilmName = "Film #" + CinemaModel.Films.Count
+			};
+
 			FilmList.Add(newFilm);
 			CinemaModel.Films.Add(newFilm);
 			SelectedFilm = newFilm;
 		}
 
+		/// <summary>
+		///     Aktualisiert die Daten im Modul.
+		///     Beispielsweise wenn sich die Daten verändert haben.
+		/// </summary>
 		public override void Refresh()
 		{
-			CinemaModel = Session.Instance.SelectedCinemaModel;
+			OnFilterChanged();
+		}
 
-			var list = FilterConfigurator.FilterData(CinemaModel?.Films).ToList();
+		private void OnFilterChanged()
+		{
+			if (CinemaModel != null)
+			{
+				var films = FilterConfigurator.FilterData(CinemaModel.Films).ToList();
 
-			FilmList.Clear();
+				FilmList.Clear();
 
-			list.ForEach(l => FilmList.Add(l));
+				films.ForEach(f => FilmList.Add(f));
+			}
 		}
 	}
 }

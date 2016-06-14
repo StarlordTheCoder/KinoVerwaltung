@@ -18,6 +18,22 @@ namespace CinemaManagerTest.Filter
 			UnitUnderTest = new DateFilter<IDummyModel>(string.Empty, setup);
 		}
 
+		private void TestDateGivesCorrectResult(DateTime start, DateTime end, DateTime input, bool expectedResult)
+		{
+			//Arrange
+			Setup(d => d.DateTimeProperty);
+			UnitUnderTest.StartDate = start;
+			UnitUnderTest.EndDate = end;
+
+			var dummyData = new Mock<IDummyModel>();
+			dummyData.Setup(d => d.DateTimeProperty).Returns(input);
+
+			//Act
+			var result = UnitUnderTest.Check(dummyData.Object);
+			//Assert
+			Assert.That(result, Is.EqualTo(expectedResult));
+		}
+
 		[Test]
 		public void TestCheckCallsValue()
 		{
@@ -45,22 +61,6 @@ namespace CinemaManagerTest.Filter
 		{
 			TestDateGivesCorrectResult(_startDate, _endDate, _startDate - TimeSpan.FromDays(1), false);
 			TestDateGivesCorrectResult(_startDate, _endDate, _endDate + TimeSpan.FromDays(1), false);
-		}
-
-		private void TestDateGivesCorrectResult(DateTime start, DateTime end, DateTime input, bool expectedResult)
-		{
-			//Arrange
-			Setup(d => d.DateTimeProperty);
-			UnitUnderTest.StartDate = start;
-			UnitUnderTest.EndDate = end;
-
-			var dummyData = new Mock<IDummyModel>();
-			dummyData.Setup(d => d.DateTimeProperty).Returns(input);
-
-			//Act
-			var result = UnitUnderTest.Check(dummyData.Object);
-			//Assert
-			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 	}
 }
