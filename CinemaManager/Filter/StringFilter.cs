@@ -44,7 +44,17 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.Any(v => v.Invoke(data)?.ToLower().Contains(Text?.ToLower() ?? string.Empty) ?? false);
+			return _valueToCompareTo.Any(v =>
+			{
+				var value = v.Invoke(data);
+
+				if (string.IsNullOrEmpty(value) && string.IsNullOrEmpty(Text))
+				{
+					return true;
+				}
+
+				return value != null && value.ToLower().Contains(Text.ToLower());
+			});
 		}
 	}
 }
