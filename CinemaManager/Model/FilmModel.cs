@@ -18,6 +18,11 @@ namespace CinemaManager.Model
 		public string FilmName { get; set; }
 
 		/// <summary>
+		///		Film ID
+		/// </summary>
+		public int FilmId { get; set; }
+
+		/// <summary>
 		///     Filmlänge
 		/// </summary>
 		public TimeSpan Length { get; set; }

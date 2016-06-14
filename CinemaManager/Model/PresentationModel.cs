@@ -20,7 +20,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Der Film
 		/// </summary>
-		public FilmModel Film { get; set; }
+		public int FilmId { get; set; }
 
 		/// <summary>
 		///     Der Saal
