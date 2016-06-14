@@ -51,3 +51,8 @@ C#-WPF-Client. Verantwortlich für die Darstellung und das Verwalten der Daten.
 *** Reservierung
 ** Diese Filter sind eng verbunden
 *** Der Anwender muss in der Lage sein, anhand seines ausgewählten Filmes im "Film suchen" die Darstellung des "Aufführung suchen" anzupassen
+
+== Konzepte
+
+=== Filter
+Um die Daten der Kinoverwaltung zu filtern, entschieden wir uns dafür, dass jedes Modul seine eigene Filter besizt. Damit die Filter im Code zentral verwaltet werden können, machten wir diese generisch. Dort haben wir drei Grundfilter, einen DateFilter, StringFilter und einen ComplexFilter. Wobei letzterer nach Werten von anderen Modulen filtern kann. Dies ist nötig, wenn man die Reservationen einer Person von einem bestimmen FIlm ansehen will. Die Module können nun über den FilterConfigurator ihren Filter konfigurieren. Sie können zum Beispiel einen Stringfilter für den Filmnamen und einen DateFilter für das Präsentationsdatum anfordern. Dem Filter wird zusätzlich die Liste mit den zu filternden Daten mitgegeben. Beim ComplexFilter wird angegeben nach welcher Liste im anderen Modul gefiltert werden muss. Zusätzlich wird angegeben welche Liste im eigenen Modul den werten des anderen Modules entsprechen müssen. Der Filter und die Liste können im GUI angezeigt werden. 
