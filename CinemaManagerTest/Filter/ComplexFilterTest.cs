@@ -34,28 +34,6 @@ namespace CinemaManagerTest.Filter
 		}
 
 		[Test]
-		public void TestCheckReturnsTrue()
-		{
-			//Arrange
-			var moduleMock = new Mock<IDummyModule>();
-
-			var dummyData = new Mock<IDummyModel>();
-
-			moduleMock.Setup(m => m.ExampleList).Returns(new List<IDummyModel>
-			{
-				dummyData.Object
-			});
-
-			Setup(moduleMock.Object, d => d.ExampleList);
-
-			//Act
-			var result = UnitUnderTest.Check(dummyData.Object);
-
-			//Assert
-			Assert.That(result, Is.True);
-		}
-
-		[Test]
 		public void TestCheckReturnsFalse()
 		{
 			//Arrange
@@ -76,6 +54,28 @@ namespace CinemaManagerTest.Filter
 
 			//Assert
 			Assert.That(result, Is.False);
+		}
+
+		[Test]
+		public void TestCheckReturnsTrue()
+		{
+			//Arrange
+			var moduleMock = new Mock<IDummyModule>();
+
+			var dummyData = new Mock<IDummyModel>();
+
+			moduleMock.Setup(m => m.ExampleList).Returns(new List<IDummyModel>
+			{
+				dummyData.Object
+			});
+
+			Setup(moduleMock.Object, d => d.ExampleList);
+
+			//Act
+			var result = UnitUnderTest.Check(dummyData.Object);
+
+			//Assert
+			Assert.That(result, Is.True);
 		}
 
 		[Test]

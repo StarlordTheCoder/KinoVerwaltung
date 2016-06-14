@@ -64,6 +64,8 @@ namespace CinemaManager.Modules.Cinema
 			}
 		}
 
+		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
+
 		private void RemoveCinema()
 		{
 			CinemaModels.Remove(SelectedCinema);
@@ -93,8 +95,6 @@ namespace CinemaManager.Modules.Cinema
 		{
 			FilterChanged();
 		}
-
-		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
 
 		private void FilterChanged()
 		{

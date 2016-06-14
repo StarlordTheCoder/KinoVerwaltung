@@ -9,9 +9,9 @@
              d:DataContext="{d:DesignData local:FilterConfigurator}">
 	<Grid HorizontalAlignment="Stretch">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="{Binding FirstColumnWidth}" />
+			<ColumnDefinition Width="{Binding SecondColumnWidth}" />
+			<ColumnDefinition Width="{Binding ThirdColumnWidth}" />
 		</Grid.ColumnDefinitions>
 		<ItemsControl Grid.Column="0" HorizontalAlignment="Stretch" ItemsSource="{Binding StringFilters}">
 			<ItemsControl.ItemTemplate>

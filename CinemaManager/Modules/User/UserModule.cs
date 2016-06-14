@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using CinemaManager.Filter;
 using CinemaManager.Model;
 
@@ -16,13 +15,6 @@ namespace CinemaManager.Modules.User
 	{
 		private UserModel _selectedUser;
 
-		/// <summary>
-		///     Titel für das Dockingframework
-		/// </summary>
-		public override string Title => "User Module";
-
-		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
-
 		public UserModule()
 		{
 			UserFilterConfigurator
@@ -31,6 +23,13 @@ namespace CinemaManager.Modules.User
 
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
+
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
+		public override string Title => "User Module";
+
+		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
 
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
 
@@ -45,6 +44,8 @@ namespace CinemaManager.Modules.User
 			}
 		}
 
+		private static IEnumerable<UserModel> UserModels => Session.Instance.SelectedCinemaModel.Users;
+
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
@@ -53,8 +54,6 @@ namespace CinemaManager.Modules.User
 		{
 			FilterChanged();
 		}
-
-		private static IEnumerable<UserModel> UserModels => Session.Instance.SelectedCinemaModel.Users;
 
 		private void FilterChanged()
 		{

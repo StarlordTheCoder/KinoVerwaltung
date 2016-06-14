@@ -18,7 +18,7 @@ namespace CinemaManager.Model
 		public string FilmName { get; set; }
 
 		/// <summary>
-		///		Film ID
+		///     Film ID
 		/// </summary>
 		public int FilmId { get; set; }
 

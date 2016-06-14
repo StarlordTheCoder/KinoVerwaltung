@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using CinemaManager.MainView;
+using CinemaManager.Metrics;
 
 namespace CinemaManager
 {
@@ -26,7 +27,7 @@ namespace CinemaManager
 			view.Show();
 
 #if DEBUG
-			new Metrics.MetricsManager().StartMetrics(view.DataContext as MainWindowViewModel);
+			new MetricsManager().StartMetrics(view.DataContext as MainWindowViewModel);
 #endif
 		}
 

@@ -4,30 +4,43 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using CinemaManager.Properties;
 
 namespace CinemaManager.Filter
 {
-	public class FilterConfigurator<T> : IFilterConfigurator<T>
+	public class FilterConfigurator<T> : IFilterConfigurator<T>, INotifyPropertyChanged
 	{
+		public GridLength FirstColumnWidth
+			=> StringFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+
+		public GridLength SecondColumnWidth
+			=> DateFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+
+		public GridLength ThirdColumnWidth
+			=> ComplexFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+
 		/// <summary>
-		/// List der <see cref="IDateFilter{T}"/>
+		///     List der <see cref="IDateFilter{T}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> DateFilters { get; } = new ObservableCollection<IFilter<T>>();
 
 		/// <summary>
-		/// List der <see cref="IStringFilter{T}"/>
+		///     List der <see cref="IStringFilter{T}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> StringFilters { get; } = new ObservableCollection<IFilter<T>>();
 
 		/// <summary>
-		/// List der <see cref="IComplexFilter{T,TM}"/>
+		///     List der <see cref="IComplexFilter{T,TM}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
 
 
 		/// <summary>
-		/// Fügt einen <see cref="IStringFilter{T}"/> hinzu
+		///     Fügt einen <see cref="IStringFilter{T}" /> hinzu
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
@@ -37,16 +50,18 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
+			OnPropertyChanged(nameof(FirstColumnWidth));
+
 			return this;
 		}
 
 		/// <summary>
-		/// Einer der Filter hat <see cref="IFilter{T}.FilterChanged"/> geworfen
+		///     Einer der Filter hat <see cref="IFilter{T}.FilterChanged" /> geworfen
 		/// </summary>
 		public event EventHandler FilterChanged;
 
 		/// <summary>
-		/// Fügt einen <see cref="IDateFilter{T}"/> hinzu
+		///     Fügt einen <see cref="IDateFilter{T}" /> hinzu
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
@@ -56,11 +71,13 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
+			OnPropertyChanged(nameof(SecondColumnWidth));
+
 			return this;
 		}
 
 		/// <summary>
-		/// Fügt einen <see cref="IComplexFilter{T,TM}"/> hinzu
+		///     Fügt einen <see cref="IComplexFilter{T,TM}" /> hinzu
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
@@ -70,11 +87,13 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
+			OnPropertyChanged(nameof(ThirdColumnWidth));
+
 			return this;
 		}
 
 		/// <summary>
-		/// Filter die Daten
+		///     Filter die Daten
 		/// </summary>
 		/// <param name="data">Zu filternde Daten</param>
 		/// <returns>Gefilterte Daten</returns>
@@ -101,12 +120,20 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>
 		///     Event invokator for <see cref="FilterChanged" />
 		/// </summary>
 		protected virtual void OnFilterChanged()
 		{
 			FilterChanged?.Invoke(this, EventArgs.Empty);
+		}
+
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace CinemaManager.Model
 		///     Adresse des Kinos
 		/// </summary>
 		public string Address { get; set; }
-		
+
 		/// <summary>
 		///     Filme des Kinos
 		/// </summary>

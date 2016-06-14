@@ -89,11 +89,11 @@ namespace CinemaManagerTest.Filter
 			};
 
 			var filterMock = new Mock<IFilter<IDummyModel>>();
-			
+
 			filterMock.Setup(f => f.IsEnabled).Returns(() => true);
 			filterMock.Setup(f => f.Check(wichtig)).Returns(() => true);
 			filterMock.Setup(f => f.Check(leer)).Returns(() => false);
-			
+
 			UnitUnderTest.StringFilter(filterMock.Object);
 
 			//Act
