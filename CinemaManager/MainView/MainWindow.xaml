@@ -10,6 +10,7 @@
         xmlns:film="clr-namespace:CinemaManager.Modules.Film"
         xmlns:presentation="clr-namespace:CinemaManager.Modules.Presentation"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
+        xmlns:room="clr-namespace:CinemaManager.Modules.Room"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized"
         d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}"
         x:Name="Window"
@@ -40,6 +41,8 @@
 				          IsCheckable="True" />
 				<MenuItem Header="User Module" IsChecked="{Binding UserModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
+				<MenuItem Header="Room Module" IsChecked="{Binding RoomModule.IsVisible, Mode=TwoWay}"
+				          IsCheckable="True" />
 			</MenuItem>
 			<MenuItem Header="Layout">
 				<MenuItem Command="{Binding LayoutService.OpenLayoutCommand}" />
@@ -66,6 +69,9 @@
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type presentation:PresentationModule}">
 					<presentation:PresentationModuleView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type room:RoomModule}">
+					<room:RoomModuleView/>
 				</DataTemplate>
 			</dock:DockingManager.Resources>
 
