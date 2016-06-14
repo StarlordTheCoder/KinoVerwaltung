@@ -17,17 +17,13 @@
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding UserFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Users}" Grid.Row="1" Grid.Column="0"
-		          SelectedItem="{Binding SelectedCinema}" SelectionMode="Single">
-			<ListView.ItemContainerStyle>
-				<Style TargetType="ListViewItem">
-					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
-				</Style>
-			</ListView.ItemContainerStyle>
+		          SelectedItem="{Binding SelectedUser}" SelectionMode="Single">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Text="{Binding UserId}" />
 						<TextBlock Text="{Binding Name}" />
-						<TextBlock Text="{Binding Address}" />
+						<TextBlock Text="{Binding PhoneNumber}" />
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
@@ -37,12 +33,10 @@
 				<RowDefinition />
 				<RowDefinition />
 				<RowDefinition />
-				<RowDefinition />
 			</Grid.RowDefinitions>
-			<TextBox Text="{Binding SelectedCinema.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" />
-			<TextBox Text="{Binding SelectedCinema.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
-			<Button Command="{Binding AddCinemaCommand}" Content="+" Grid.Row="2" />
-			<Button Command="{Binding RemoveCinemaCommand}" Content="-" Grid.Row="3" />
+			<TextBox IsReadOnly="True" Text="{Binding SelectedUser.UserId, Mode=OneWay}" Grid.Row="0" />
+			<TextBox Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
+			<TextBox Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="2" />
 		</Grid>
 	</Grid>
 </UserControl>

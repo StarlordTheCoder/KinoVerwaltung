@@ -312,6 +312,8 @@
     </FileAssociation>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\AddButton.png" />
+    <Resource Include="Resources\RemoveButton.png" />
     <Content Include="Resources\satan.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

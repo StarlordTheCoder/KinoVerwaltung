@@ -58,7 +58,7 @@ namespace CinemaManager.MainView
 		private void InitialiseModules()
 		{
 			//Create Module instances
-			CinemaModule = new CinemaModule();
+			CinemaModule = new CinemaModule(RefreshModules);
 			UserModule = new UserModule();
 			FilmModule = new FilmModule();
 			PresentationModule = new PresentationModule(CinemaModule);
@@ -76,7 +76,12 @@ namespace CinemaManager.MainView
 			};
 
 			//Load data
-			foreach (var module in Modules)
+			RefreshModules(null);
+		}
+
+		private void RefreshModules(IModule except)
+		{
+			foreach (var module in Modules.Where(m => !Equals(m, except)))
 			{
 				module.Refresh();
 			}
