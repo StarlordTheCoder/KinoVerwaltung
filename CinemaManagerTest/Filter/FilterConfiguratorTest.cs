@@ -28,8 +28,8 @@ namespace CinemaManagerTest.Filter
 				new DummyModel()
 			};
 
-			var stringFilterMock = new Mock<IStringFilter<IDummyModel>>();
-			var dateFilterMock = new Mock<IDateFilter<IDummyModel>>();
+			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
+			var dateFilterMock = new Mock<IFilter<IDummyModel>>();
 
 			stringFilterMock.Setup(f => f.IsEnabled).Returns(() => true);
 			stringFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => true);
@@ -57,17 +57,12 @@ namespace CinemaManagerTest.Filter
 				new DummyModel()
 			};
 
-			var stringFilterMock = new Mock<IStringFilter<IDummyModel>>();
-			var dateFilterMock = new Mock<IDateFilter<IDummyModel>>();
+			var filterMock = new Mock<IFilter<IDummyModel>>();
 
-			stringFilterMock.Setup(f => f.IsEnabled).Returns(() => false);
-			stringFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => false);
+			filterMock.Setup(f => f.IsEnabled).Returns(() => false);
+			filterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => false);
 
-			dateFilterMock.Setup(f => f.IsEnabled).Returns(() => false);
-			dateFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => false);
-
-			UnitUnderTest.StringFilter(stringFilterMock.Object);
-			UnitUnderTest.DateFilter(dateFilterMock.Object);
+			UnitUnderTest.StringFilter(filterMock.Object);
 
 			//Act
 			var result = UnitUnderTest.FilterData(data);
@@ -93,18 +88,13 @@ namespace CinemaManagerTest.Filter
 				wichtig
 			};
 
-			var stringFilterMock = new Mock<IStringFilter<IDummyModel>>();
-			var dateFilterMock = new Mock<IDateFilter<IDummyModel>>();
-
-			stringFilterMock.Setup(f => f.IsEnabled).Returns(() => true);
-			stringFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => true);
-
-			dateFilterMock.Setup(f => f.IsEnabled).Returns(() => true);
-			dateFilterMock.Setup(f => f.Check(wichtig)).Returns(() => true);
-			dateFilterMock.Setup(f => f.Check(leer)).Returns(() => false);
-
-			UnitUnderTest.StringFilter(stringFilterMock.Object);
-			UnitUnderTest.DateFilter(dateFilterMock.Object);
+			var filterMock = new Mock<IFilter<IDummyModel>>();
+			
+			filterMock.Setup(f => f.IsEnabled).Returns(() => true);
+			filterMock.Setup(f => f.Check(wichtig)).Returns(() => true);
+			filterMock.Setup(f => f.Check(leer)).Returns(() => false);
+			
+			UnitUnderTest.StringFilter(filterMock.Object);
 
 			//Act
 			var result = UnitUnderTest.FilterData(data).ToList();
@@ -141,8 +131,8 @@ namespace CinemaManagerTest.Filter
 				new DummyModel()
 			};
 
-			var stringFilterMock = new Mock<IStringFilter<IDummyModel>>();
-			var dateFilterMock = new Mock<IDateFilter<IDummyModel>>();
+			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
+			var dateFilterMock = new Mock<IFilter<IDummyModel>>();
 
 			stringFilterMock.Setup(f => f.IsEnabled).Returns(() => true);
 			stringFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => true);
@@ -173,8 +163,8 @@ namespace CinemaManagerTest.Filter
 				new DummyModel()
 			};
 
-			var stringFilterMock = new Mock<IStringFilter<IDummyModel>>();
-			var dateFilterMock = new Mock<IDateFilter<IDummyModel>>();
+			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
+			var dateFilterMock = new Mock<IFilter<IDummyModel>>();
 
 			stringFilterMock.Setup(f => f.IsEnabled).Returns(() => true);
 			stringFilterMock.Setup(f => f.Check(It.IsAny<IDummyModel>())).Returns(() => false);
