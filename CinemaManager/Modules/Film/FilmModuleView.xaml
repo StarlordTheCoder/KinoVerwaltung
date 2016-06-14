@@ -10,15 +10,18 @@
 
 	<Grid Background="Aqua">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="1*"/>
-			<RowDefinition Height="5*"/>
+			<RowDefinition Height=".75*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-		<ListView ItemsSource="{Binding FilmList}" Grid.Row="1">
+		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+		<ListView ItemsSource="{Binding FilmList}" Grid.RowSpan="4" Grid.Row="1">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
