@@ -26,7 +26,6 @@ namespace CinemaManager.Modules
 		/// </summary>
 		ICommand CloseCommand { get; }
 
-
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.

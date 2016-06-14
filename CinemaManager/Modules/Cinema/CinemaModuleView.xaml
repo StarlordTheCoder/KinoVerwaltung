@@ -19,7 +19,7 @@
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding CinemaFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Cinemas}" Grid.Row="1" Grid.Column="0"
-		          SelectedItem="{Binding SelectedCinema}">
+		          SelectedItem="{Binding SelectedCinema}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
 					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
