@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection.Emit;
 using CinemaManager.Filter;
 using CinemaManager.Model;
@@ -17,18 +18,23 @@ namespace CinemaManager.Modules.Film
 
 		public IFilterConfigurator<FilmModel> FilterConfigurator { get; } = new FilterConfigurator<FilmModel>();
 
-		public ObservableCollection<FilmModel> FilmList = new ObservableCollection<FilmModel>();
+		public ObservableCollection<FilmModel> FilmList { get; set; } = new ObservableCollection<FilmModel>();
 
 		public FilmModule()
 		{
 			FilterConfigurator.StringFilter(new StringFilter<FilmModel>("Schinkechäästoast", f => f.FilmName
 					)).StringFilter(new StringFilter<FilmModel>("SchinkeToastChääs", f => f.Director, f => f.Publisher));
-			
 		}
 
 		public override void Refresh()
 		{
-			// TODO
+			var list = Session.Instance.SelectedCinemaModel?.Films;
+
+			FilmList.Clear();
+			if (list?.Any() ?? false)
+			{
+				list.ForEach(l => FilmList.Add(l));
+			}
 		}
 	}
 }

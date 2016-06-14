@@ -9,6 +9,24 @@
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}">
 
 	<Grid Background="Aqua">
-		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*"/>
+			<RowDefinition Height="5*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+		<ListView ItemsSource="{Binding FilmList}" Grid.Row="1">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding FilmName}"/>
+						<TextBlock Text="{Binding Director}"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
 	</Grid>
 </UserControl>
