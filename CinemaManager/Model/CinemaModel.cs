@@ -28,6 +28,11 @@ namespace CinemaManager.Model
 		public List<PresentationModel> Presentations { get; set; }
 
 		/// <summary>
+		///     Benutzer des Kinos
+		/// </summary>
+		public List<UserModel> Users { get; set; }
+
+		/// <summary>
 		///     Adresse des Kinos
 		/// </summary>
 		public string Address { get; set; }
