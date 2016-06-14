@@ -19,7 +19,7 @@ namespace CinemaManager.Modules
 		/// <summary>
 		///     Initialisiert Commands
 		/// </summary>
-		public ModuleBase()
+		protected ModuleBase()
 		{
 			CloseCommand = new DelegateCommand(() => IsVisible = false);
 		}
