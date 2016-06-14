@@ -14,6 +14,7 @@ using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
 using CinemaManager.Modules.Film;
 using CinemaManager.Modules.Presentation;
+using CinemaManager.Modules.Room;
 using CinemaManager.Modules.User;
 using Microsoft.Practices.Prism.Commands;
 
@@ -61,6 +62,7 @@ namespace CinemaManager.MainView
 			UserModule = new UserModule();
 			FilmModule = new FilmModule();
 			PresentationModule = new PresentationModule(CinemaModule);
+			RoomModule = new RoomModule();
 
 			//Add to list
 			Modules = new ObservableCollection<IModule>
@@ -69,7 +71,8 @@ namespace CinemaManager.MainView
 				FilmModule,
 				PresentationModule,
 				//ReservationModule,*/
-				UserModule
+				UserModule,
+				RoomModule
 			};
 
 			//Load data
@@ -95,6 +98,7 @@ namespace CinemaManager.MainView
 		public PresentationModule PresentationModule { get; private set; }
 		public IModule ReservationModule { get; private set; }
 		public UserModule UserModule { get; private set; }
+		public RoomModule RoomModule { get; private set; }
 
 		#endregion
 
