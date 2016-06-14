@@ -14,10 +14,12 @@ namespace CinemaManager.Modules.User
 	/// </summary>
 	public class UserModule : ModuleBase
 	{
+		private UserModel _selectedUser;
+
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "User";
+		public override string Title => "User Module";
 
 		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
 
@@ -31,6 +33,17 @@ namespace CinemaManager.Modules.User
 		}
 
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
+
+		public UserModel SelectedUser
+		{
+			get { return _selectedUser; }
+			set
+			{
+				if (Equals(_selectedUser, value)) return;
+				_selectedUser = value;
+				OnPropertyChanged();
+			}
+		}
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
