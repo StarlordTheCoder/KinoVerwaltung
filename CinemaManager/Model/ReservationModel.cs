@@ -14,6 +14,6 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Usermodel des Reservierers für Serialisierung
 		/// </summary>
-		public UserModel Reservator { get; set; }
+		public int ReservatorId { get; set; }
 	}
 }
