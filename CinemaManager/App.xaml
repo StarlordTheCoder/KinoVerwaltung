@@ -7,6 +7,18 @@
 	<Application.Resources>
 		<converter:BoolToVisConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Hidden" />
 		<converter:BoolToSolidColorBrushConverter x:Key="BoolToSolidColorBrushConverter" True="Transparent" False="LightGray" />
+		<Style TargetType="Button" x:Key="AddButton">
+			<Setter Property="Content">
+				<Image Source="../../Resources/RemoveButton.png"/>
+			</Setter>
+			<Setter Property="Width" Value="40px"/>
+			<Setter Property="Height" Value="40px"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
 	</Application.Resources>
 	<JumpList.JumpList>
 		<JumpList ShowRecentCategory="True" />
