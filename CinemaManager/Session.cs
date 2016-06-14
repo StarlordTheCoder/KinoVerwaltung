@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using CinemaManager.Model;
@@ -31,6 +32,8 @@ namespace CinemaManager
 		public static Session Instance { get; } = new Session();
 
 		public IDataModel DataModel { get; private set; } = new DataModel();
+
+		public CinemaModel SelectedCinemaModel => DataModel.CinemasModel.Cinemas.FirstOrDefault(c => c.IsActive);
 
 		/// <summary>
 		///     Global Ticker for Project
