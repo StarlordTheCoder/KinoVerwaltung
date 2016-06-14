@@ -13,7 +13,6 @@ namespace CinemaManager.Modules.Cinema
 {
 	public class CinemaModule : ModuleBase
 	{
-		private readonly List<CinemaModel> _allCinemas = new List<CinemaModel>();
 		private CinemaModel _selectedCinema;
 
 		public CinemaModule()
@@ -25,15 +24,6 @@ namespace CinemaManager.Modules.Cinema
 
 			AddCinemaCommand = new DelegateCommand(AddCinema);
 			RemoveCinemaCommand = new DelegateCommand(RemoveCinema);
-
-			Session.Instance.PrepareForSave += (sender, e) =>
-			{
-				var list = Session.Instance.DataModel.CinemasModel.Cinemas.ToList();
-
-				list.Except(_allCinemas).ToList().ForEach(l => Session.Instance.DataModel.CinemasModel.Cinemas.Remove(l));
-
-				Session.Instance.DataModel.CinemasModel.Cinemas.AddRange(_allCinemas.Except(list));
-			};
 		}
 
 		/// <summary>
@@ -71,7 +61,7 @@ namespace CinemaManager.Modules.Cinema
 
 		private void RemoveCinema()
 		{
-			_allCinemas.Remove(SelectedCinema);
+			CinemaModels.Remove(SelectedCinema);
 			Cinemas.Remove(SelectedCinema);
 			SelectedCinema = Cinemas.FirstOrDefault();
 		}
@@ -81,10 +71,10 @@ namespace CinemaManager.Modules.Cinema
 			var newCinema = new CinemaModel
 			{
 				Address = "Examplestreet 42",
-				Name = $"Cinema #{_allCinemas.Count}"
+				Name = $"Cinema #{CinemaModels.Count + 1}"
 			};
 
-			_allCinemas.Add(newCinema);
+			CinemaModels.Add(newCinema);
 			Cinemas.Add(newCinema);
 
 			SelectedCinema = newCinema;
@@ -96,16 +86,14 @@ namespace CinemaManager.Modules.Cinema
 		/// </summary>
 		public override void Refresh()
 		{
-			_allCinemas.Clear();
-
-			_allCinemas.AddRange(Session.Instance.DataModel.CinemasModel.Cinemas);
-
 			FilterChanged();
 		}
 
+		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
+
 		private void FilterChanged()
 		{
-			var filteredData = CinemaFilterConfigurator.FilterData(_allCinemas);
+			var filteredData = CinemaFilterConfigurator.FilterData(CinemaModels);
 			Cinemas.Clear();
 
 			foreach (var cinema in filteredData)
