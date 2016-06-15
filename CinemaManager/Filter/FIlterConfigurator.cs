@@ -14,13 +14,17 @@ namespace CinemaManager.Filter
 {
 	public class FilterConfigurator<T> : IFilterConfigurator<T>, INotifyPropertyChanged
 	{
-		public GridLength FirstColumnWidth
+		public GridLength StringColumnWidth
 			=> StringFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
-		public GridLength SecondColumnWidth
+		public GridLength NumberColumnWidth
+			=> NumberFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+
+
+		public GridLength DateColumnWidth
 			=> DateFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
-		public GridLength ThirdColumnWidth
+		public GridLength ComplexColumnWidth
 			=> ComplexFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
 		/// <summary>
@@ -32,6 +36,12 @@ namespace CinemaManager.Filter
 		///     List der <see cref="IStringFilter{T}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> StringFilters { get; } = new ObservableCollection<IFilter<T>>();
+		
+		/// <summary>
+		///     List der <see cref="INumberFilter{T}" />
+		/// </summary>
+		public ObservableCollection<IFilter<T>> NumberFilters { get; } = new ObservableCollection<IFilter<T>>();
+
 
 		/// <summary>
 		///     List der <see cref="IComplexFilter{T,TM}" />
@@ -50,7 +60,23 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
-			OnPropertyChanged(nameof(FirstColumnWidth));
+			OnPropertyChanged(nameof(StringColumnWidth));
+
+			return this;
+		}
+
+		/// <summary>
+		///     Fügt einen <see cref="IStringFilter{T}" /> hinzu
+		/// </summary>
+		/// <param name="filter">Filter</param>
+		/// <returns>This</returns>
+		public IFilterConfigurator<T> NumberFilter(IFilter<T> filter)
+		{
+			NumberFilters.Add(filter);
+
+			filter.FilterChanged += (sender, e) => OnFilterChanged();
+
+			OnPropertyChanged(nameof(NumberColumnWidth));
 
 			return this;
 		}
@@ -71,7 +97,7 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
-			OnPropertyChanged(nameof(SecondColumnWidth));
+			OnPropertyChanged(nameof(DateColumnWidth));
 
 			return this;
 		}
@@ -87,7 +113,7 @@ namespace CinemaManager.Filter
 
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
 
-			OnPropertyChanged(nameof(ThirdColumnWidth));
+			OnPropertyChanged(nameof(ComplexColumnWidth));
 
 			return this;
 		}
@@ -120,6 +146,7 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
