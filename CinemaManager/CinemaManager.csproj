@@ -181,7 +181,9 @@
     <Compile Include="Filter\IFilterConfigurator.cs" />
     <Compile Include="Filter\DateFilter.cs" />
     <Compile Include="Filter\IComplexFilter.cs" />
+    <Compile Include="Filter\INumberFilter.cs" />
     <Compile Include="Filter\IStringFilter.cs" />
+    <Compile Include="Filter\NumberFilter.cs" />
     <Compile Include="Filter\StringFilter.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />
