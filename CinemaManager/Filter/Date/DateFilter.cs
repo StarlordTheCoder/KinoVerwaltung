@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.Date
 {
 	/// <summary>
 	///     Filter

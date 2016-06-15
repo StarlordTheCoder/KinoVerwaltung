@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CinemaManager.Modules;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.Complex
 {
 	public class ComplexFilter<T, TM> : FilterBase<T>, IComplexFilter<T, TM> where TM : IModule
 	{
@@ -16,6 +16,7 @@ namespace CinemaManager.Filter
 		{
 			_valueToCompareTo = valueToCompareTo;
 			Module = module;
+			Module.ModuleDataChanged += (sender, e) => OnFilterChanged();
 			IsEnabled = true;
 			Label = label;
 		}
@@ -31,6 +32,9 @@ namespace CinemaManager.Filter
 			return list.Count == 0 || list.Contains(data);
 		}
 
+		/// <summary>
+		///     Referenz zum Modul, welches gefilter wird
+		/// </summary>
 		public TM Module { get; }
 	}
 }

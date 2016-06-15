@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.Number
 {
 	/// <summary>
 	///     Ermöglicht das Filtern nach einem String.
@@ -43,7 +43,7 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		public override bool Check(T data)
 		{
-			return _valueToCompareTo.Any(v => v.Invoke(data) == Number);
+			return !Number.HasValue || _valueToCompareTo.Any(v => v.Invoke(data) == Number.Value);
 		}
 	}
 }

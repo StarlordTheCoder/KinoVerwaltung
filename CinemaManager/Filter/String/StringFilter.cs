@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.String
 {
 	/// <summary>
 	///     Ermöglicht das Filtern nach einem String.

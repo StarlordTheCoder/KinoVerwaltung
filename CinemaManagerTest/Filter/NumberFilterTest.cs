@@ -3,24 +3,25 @@
 
 using System;
 using CinemaManager.Filter;
-using CinemaManager.Filter.String;
+using CinemaManager.Filter.Number;
 using Moq;
 using NUnit.Framework;
 
 namespace CinemaManagerTest.Filter
 {
-	public class StringFilterTest : UnitTestBase<StringFilter<IDummyModel>>
+	public class NumberFilterTest : UnitTestBase<NumberFilter<IDummyModel>>
 	{
-		private void Setup(params Func<IDummyModel, string>[] setup)
+		private void Setup(params Func<IDummyModel, int>[] setup)
 		{
-			UnitUnderTest = new StringFilter<IDummyModel>(string.Empty, setup);
+			UnitUnderTest = new NumberFilter<IDummyModel>(string.Empty, setup);
 		}
 
 		[Test]
 		public void TestCheckCallsValue()
 		{
 			//Arrange
-			Setup(d => d.StringProperty);
+			Setup(d => d.NumberProperty);
+			UnitUnderTest.Number = 12;
 
 			var dummyData = new Mock<IDummyModel>();
 
@@ -28,18 +29,18 @@ namespace CinemaManagerTest.Filter
 			UnitUnderTest.Check(dummyData.Object);
 
 			//Assert
-			dummyData.Verify(d => d.StringProperty, Times.Once);
+			dummyData.Verify(d => d.NumberProperty, Times.Once);
 		}
 
 		[Test]
 		public void TestCheckIgnoresCase()
 		{
 			//Arrange
-			Setup(d => d.StringProperty);
-			UnitUnderTest.Text = "UchTeX";
+			Setup(d => d.NumberProperty);
+			UnitUnderTest.Number = 12;
 
 			var dummyData = new Mock<IDummyModel>();
-			dummyData.Setup(v => v.StringProperty).Returns("suchtext");
+			dummyData.Setup(v => v.NumberProperty).Returns(12);
 
 			//Act
 			var result = UnitUnderTest.Check(dummyData.Object);
@@ -52,11 +53,11 @@ namespace CinemaManagerTest.Filter
 		public void TestCheckReturnsFalse()
 		{
 			//Arrange
-			Setup(d => d.StringProperty);
-			UnitUnderTest.Text = "Nicht gefundener Text";
+			Setup(d => d.NumberProperty);
+			UnitUnderTest.Number = 12;
 
 			var dummyData = new Mock<IDummyModel>();
-			dummyData.Setup(v => v.StringProperty).Returns("Zu filternder Text");
+			dummyData.Setup(v => v.NumberProperty).Returns(42);
 
 			//Act
 			var result = UnitUnderTest.Check(dummyData.Object);
@@ -69,11 +70,11 @@ namespace CinemaManagerTest.Filter
 		public void TestCheckWithEmptyTextReturnTrue()
 		{
 			//Arrange
-			Setup(d => d.StringProperty);
-			UnitUnderTest.Text = string.Empty;
+			Setup(d => d.NumberProperty);
+			UnitUnderTest.Number = null;
 
 			var dummyData = new Mock<IDummyModel>();
-			dummyData.Setup(v => v.StringProperty).Returns("Zu filternder Text");
+			dummyData.Setup(v => v.NumberProperty).Returns(12);
 
 			//Act
 			var result = UnitUnderTest.Check(dummyData.Object);
@@ -92,7 +93,7 @@ namespace CinemaManagerTest.Filter
 			UnitUnderTest.FilterChanged += (sender, e) => eventCalled = true;
 
 			//Act
-			UnitUnderTest.Text = "Neuer Wert";
+			UnitUnderTest.Number = 12;
 
 			//Assert
 			Assert.That(eventCalled);

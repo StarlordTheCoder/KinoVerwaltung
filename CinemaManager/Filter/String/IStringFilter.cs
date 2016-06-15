@@ -1,17 +1,17 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.String
 {
 	/// <summary>
 	///     Gibt die Möglichkeit nach Strings zu Filtern.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface INumberFilter<in T> : IFilter<T>
+	public interface IStringFilter<in T> : IFilter<T>
 	{
 		/// <summary>
-		///     Zahl, nach welcher gefiltert wird
+		///     Text, nach welchem gefiltert wird
 		/// </summary>
-		int? Number { get; set; }
+		string Text { get; set; }
 	}
 }

@@ -8,6 +8,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using CinemaManager.Filter.Complex;
+using CinemaManager.Filter.Date;
+using CinemaManager.Filter.Number;
+using CinemaManager.Filter.String;
 using CinemaManager.Properties;
 
 namespace CinemaManager.Filter

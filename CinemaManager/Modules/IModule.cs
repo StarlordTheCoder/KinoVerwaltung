@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -31,5 +32,10 @@ namespace CinemaManager.Modules
 		///     Beispielsweise wenn sich die Daten verändert haben.
 		/// </summary>
 		void Refresh();
+
+		/// <summary>
+		///     Die Moduldate, welche für die Filter der anderen Module relevant sind, haben sich verändert.
+		/// </summary>
+		event EventHandler ModuleDataChanged;
 	}
 }

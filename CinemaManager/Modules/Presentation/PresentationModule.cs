@@ -2,6 +2,10 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using CinemaManager.Filter;
+using CinemaManager.Filter.Complex;
+using CinemaManager.Filter.Date;
+using CinemaManager.Filter.Number;
+using CinemaManager.Filter.String;
 using CinemaManager.Model;
 using CinemaManager.Modules.Cinema;
 
@@ -9,11 +13,11 @@ namespace CinemaManager.Modules.Presentation
 {
 	public class PresentationModule : ModuleBase
 	{
-		public PresentationModule(CinemaModule cinemaModule)
+		public PresentationModule()
 		{
 			PresentationFilterConfigurator
-				.ComplexFilter(new ComplexFilter<PresentationModel, CinemaModule>("Rooms", cinemaModule,
-					m => m.SelectedCinema.Presentations));
+				.NumberFilter(new NumberFilter<PresentationModel>("ID", p => p.FilmId))
+				.DateFilter(new DateFilter<PresentationModel>("Day", p => p.StartTime));
 		}
 
 		/// <summary>

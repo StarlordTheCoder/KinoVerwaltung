@@ -66,6 +66,7 @@
     <Compile Include="Filter\DummyTypes.cs" />
     <Compile Include="Filter\FilterConfiguratorTest.cs" />
     <Compile Include="Filter\ComplexFilterTest.cs" />
+    <Compile Include="Filter\NumberFilterTest.cs" />
     <Compile Include="Filter\StringFilterTest.cs" />
     <Compile Include="Filter\DateFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

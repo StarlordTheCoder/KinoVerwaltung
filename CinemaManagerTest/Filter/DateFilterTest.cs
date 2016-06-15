@@ -3,6 +3,7 @@
 
 using System;
 using CinemaManager.Filter;
+using CinemaManager.Filter.Date;
 using Moq;
 using NUnit.Framework;
 
@@ -61,6 +62,22 @@ namespace CinemaManagerTest.Filter
 		{
 			TestDateGivesCorrectResult(_startDate, _endDate, _startDate - TimeSpan.FromDays(1), false);
 			TestDateGivesCorrectResult(_startDate, _endDate, _endDate + TimeSpan.FromDays(1), false);
+		}
+
+		[Test]
+		public void TestChangeValueCallsFilterChanged()
+		{
+			//Arrange
+			Setup();
+			var eventCalled = 0;
+
+			UnitUnderTest.FilterChanged += (sender, e) => eventCalled++;
+
+			//Act
+			UnitUnderTest.StartDate = UnitUnderTest.EndDate = DateTime.Now;
+
+			//Assert
+			Assert.That(eventCalled, Is.EqualTo(2));
 		}
 	}
 }

@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CinemaManager.Filter;
+using CinemaManager.Filter.String;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.User

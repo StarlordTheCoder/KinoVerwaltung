@@ -65,13 +65,13 @@ namespace CinemaManager.Filter
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-			OnFilterChangedEvent();
+			OnFilterChanged();
 		}
 
 		/// <summary>
 		///     Event invokator for <see cref="FilterChanged" />
 		/// </summary>
-		protected void OnFilterChangedEvent()
+		protected void OnFilterChanged()
 		{
 			FilterChanged?.Invoke(this, EventArgs.Empty);
 		}

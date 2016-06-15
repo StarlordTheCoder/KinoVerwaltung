@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -55,6 +56,11 @@ namespace CinemaManager.Modules
 		/// </summary>
 		public abstract void Refresh();
 
+		/// <summary>
+		///     Die Moduldate, welche für die Filter der anderen Module relevant sind, haben sich verändert.
+		/// </summary>
+		public event EventHandler ModuleDataChanged;
+
 		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -67,6 +73,14 @@ namespace CinemaManager.Modules
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		/// <summary>
+		///     Event invokator for <see cref="ModuleDataChanged" />
+		/// </summary>
+		protected void OnModuleDataChanged()
+		{
+			ModuleDataChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

@@ -16,11 +16,6 @@ namespace CinemaManagerTest.Filter
 	{
 		string StringProperty { get; set; }
 		DateTime? DateTimeProperty { get; set; }
-	}
-
-	public class DummyModel : IDummyModel
-	{
-		public string StringProperty { get; set; }
-		public DateTime? DateTimeProperty { get; set; }
+		int NumberProperty { get; set; }
 	}
 }

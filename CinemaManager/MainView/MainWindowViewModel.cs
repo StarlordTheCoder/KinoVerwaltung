@@ -61,7 +61,7 @@ namespace CinemaManager.MainView
 			CinemaModule = new CinemaModule(RefreshModules);
 			UserModule = new UserModule();
 			FilmModule = new FilmModule();
-			PresentationModule = new PresentationModule(CinemaModule);
+			PresentationModule = new PresentationModule();
 			RoomModule = new RoomModule();
 
 			//Add to list

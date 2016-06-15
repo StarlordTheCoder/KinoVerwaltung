@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using CinemaManager.Filter;
+using CinemaManager.Filter.Complex;
 using Moq;
 using NUnit.Framework;
 
@@ -95,6 +96,26 @@ namespace CinemaManagerTest.Filter
 
 			//Assert
 			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public void TestModuleChangedThrowsFilterChanged()
+		{
+			//Arrange
+			var moduleMock = new Mock<IDummyModule>();
+
+			var dummyData = new Mock<IDummyModel>();
+
+			Setup(moduleMock.Object, d => d.ExampleList);
+			var eventCalled = false;
+
+			UnitUnderTest.FilterChanged += (sender, e) => eventCalled = true;
+
+			//Act
+			moduleMock.Raise(m => m.ModuleDataChanged += null, EventArgs.Empty);
+
+			//Assert
+			Assert.That(eventCalled);
 		}
 	}
 }
