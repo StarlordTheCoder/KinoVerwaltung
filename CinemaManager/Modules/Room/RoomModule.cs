@@ -49,7 +49,7 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
-		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel.Rooms;
+		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
@@ -62,6 +62,8 @@ namespace CinemaManager.Modules.Room
 
 		private void FilterChanged()
 		{
+			if (RoomModels == null) return;
+
 			var filteredData = RoomFilterConfigurator.FilterData(RoomModels);
 			Rooms.Clear();
 

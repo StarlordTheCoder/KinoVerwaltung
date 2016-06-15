@@ -43,7 +43,7 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 		
-		<ItemsControl Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding DateFilters}">
+		<ItemsControl Grid.Column="2" HorizontalAlignment="Stretch" ItemsSource="{Binding DateFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Grid HorizontalAlignment="Stretch"
@@ -75,7 +75,7 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
-		<ItemsControl Grid.Column="2" HorizontalAlignment="Stretch" ItemsSource="{Binding ComplexFilters}">
+		<ItemsControl Grid.Column="3" HorizontalAlignment="Stretch" ItemsSource="{Binding ComplexFilters}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Grid HorizontalAlignment="Stretch"

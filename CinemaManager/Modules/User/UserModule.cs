@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CinemaManager.Filter;
 using CinemaManager.Filter.String;
 using CinemaManager.Model;
@@ -45,7 +46,7 @@ namespace CinemaManager.Modules.User
 			}
 		}
 
-		private static IEnumerable<UserModel> UserModels => Session.Instance.SelectedCinemaModel.Users;
+		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
@@ -58,6 +59,8 @@ namespace CinemaManager.Modules.User
 
 		private void FilterChanged()
 		{
+			if (UserModels == null) return;
+
 			var filteredData = UserFilterConfigurator.FilterData(UserModels);
 			Users.Clear();
 

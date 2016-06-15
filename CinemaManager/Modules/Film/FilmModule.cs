@@ -17,8 +17,8 @@ namespace CinemaManager.Modules.Film
 
 		public FilmModule()
 		{
-			AddFilmCommand = new DelegateCommand(AddFilm);
-			RemoveFilmCommand = new DelegateCommand(RemoveFilm);
+			AddFilmCommand = new DelegateCommand(AddFilm, () => CinemaModel != null);
+			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => CinemaModel != null);
 
 			FilterConfigurator
 				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))

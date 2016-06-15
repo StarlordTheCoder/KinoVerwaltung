@@ -161,6 +161,10 @@ namespace CinemaManager.Filter
 			FilterChanged?.Invoke(this, EventArgs.Empty);
 		}
 
+		/// <summary>
+		///     Event invokator for <see cref="PropertyChanged" />
+		/// </summary>
+		/// <param name="propertyName">Property that changed</param>
 		[NotifyPropertyChangedInvocator]
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
