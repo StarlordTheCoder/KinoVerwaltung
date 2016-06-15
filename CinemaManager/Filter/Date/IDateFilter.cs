@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.Date
 {
 	/// <summary>
 	///     Interface for the Function to Filter Dates.

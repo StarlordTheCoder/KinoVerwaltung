@@ -3,7 +3,7 @@
 
 using CinemaManager.Modules;
 
-namespace CinemaManager.Filter
+namespace CinemaManager.Filter.Complex
 {
 	/// <summary>
 	///     Erlaubt Modulübergreifende Filter

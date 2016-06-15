@@ -11,6 +11,8 @@ namespace CinemaManagerTest.Filter
 {
 	public class FilterConfiguratorTest : UnitTestBase<FilterConfigurator<IDummyModel>>
 	{
+		private IDummyModel EmptyDummyModel => new Mock<IDummyModel>().Object;
+
 		protected override void DoSetup()
 		{
 			UnitUnderTest = new FilterConfigurator<IDummyModel>();
@@ -24,8 +26,8 @@ namespace CinemaManagerTest.Filter
 			//Arrange
 			var data = new List<IDummyModel>
 			{
-				new DummyModel(),
-				new DummyModel()
+				EmptyDummyModel,
+				EmptyDummyModel
 			};
 
 			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
@@ -51,10 +53,10 @@ namespace CinemaManagerTest.Filter
 		public void GivenDisabledFilterEmptyNoResultReturned()
 		{
 			//Arrange
-			var data = new List<DummyModel>
+			var data = new List<IDummyModel>
 			{
-				new DummyModel(),
-				new DummyModel()
+				EmptyDummyModel,
+				EmptyDummyModel
 			};
 
 			var filterMock = new Mock<IFilter<IDummyModel>>();
@@ -76,22 +78,20 @@ namespace CinemaManagerTest.Filter
 		{
 			//Arrange
 
-			var leer = new DummyModel();
-			var wichtig = new DummyModel
-			{
-				StringProperty = "Wichtiges Dummymodel!"
-			};
+			var leer = EmptyDummyModel;
+			var wichtig = new Mock<IDummyModel>();
+			wichtig.Setup(d => d.StringProperty).Returns("Wichtiges Dummymodel!");
 
-			var data = new List<DummyModel>
+			var data = new List<IDummyModel>
 			{
 				leer,
-				wichtig
+				wichtig.Object
 			};
 
 			var filterMock = new Mock<IFilter<IDummyModel>>();
 
 			filterMock.Setup(f => f.IsEnabled).Returns(() => true);
-			filterMock.Setup(f => f.Check(wichtig)).Returns(() => true);
+			filterMock.Setup(f => f.Check(wichtig.Object)).Returns(() => true);
 			filterMock.Setup(f => f.Check(leer)).Returns(() => false);
 
 			UnitUnderTest.StringFilter(filterMock.Object);
@@ -100,7 +100,7 @@ namespace CinemaManagerTest.Filter
 			var result = UnitUnderTest.FilterData(data).ToList();
 
 			//Assert
-			Assert.That(result, Does.Contain(wichtig));
+			Assert.That(result, Does.Contain(wichtig.Object));
 			Assert.That(result, !Does.Contain(leer));
 		}
 
@@ -110,8 +110,8 @@ namespace CinemaManagerTest.Filter
 			//Arrange
 			var data = new List<IDummyModel>
 			{
-				new DummyModel(),
-				new DummyModel()
+				EmptyDummyModel,
+				EmptyDummyModel
 			};
 
 			//Act
@@ -125,10 +125,10 @@ namespace CinemaManagerTest.Filter
 		public void GivenPartiallyDisabledFilterDisabledFiltersIgnored()
 		{
 			//Arrange
-			var data = new List<DummyModel>
+			var data = new List<IDummyModel>
 			{
-				new DummyModel(),
-				new DummyModel()
+				EmptyDummyModel,
+				EmptyDummyModel
 			};
 
 			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
@@ -159,8 +159,8 @@ namespace CinemaManagerTest.Filter
 			//Arrange
 			var data = new List<IDummyModel>
 			{
-				new DummyModel(),
-				new DummyModel()
+				EmptyDummyModel,
+				EmptyDummyModel
 			};
 
 			var stringFilterMock = new Mock<IFilter<IDummyModel>>();
