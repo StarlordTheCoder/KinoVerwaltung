@@ -11,7 +11,7 @@ namespace CinemaManager.Modules.Room
 {
 	public class RoomModule : ModuleBase
 	{
-		private RoomModel _selectetRoom;
+		private RoomViewModel _selectedRoom;
 
 		public RoomModule()
 		{
@@ -34,7 +34,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Alle gefilterten Räume
 		/// </summary>
-		public ObservableCollection<RoomModel> Rooms { get; } = new ObservableCollection<RoomModel>();
+		public ObservableCollection<RoomViewModel> Rooms { get; } = new ObservableCollection<RoomViewModel>();
 
 		/// <summary>
 		///     Filter-Configurator für die Räume
@@ -44,13 +44,13 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Ausgewählter Raum
 		/// </summary>
-		public RoomModel SelectetRoom
+		public RoomViewModel SelectedRoom
 		{
-			get { return _selectetRoom; }
+			get { return _selectedRoom; }
 			set
 			{
-				if (Equals(value, _selectetRoom)) return;
-				_selectetRoom = value;
+				if (Equals(value, _selectedRoom)) return;
+				_selectedRoom = value;
 				OnPropertyChanged();
 			}
 		}
@@ -75,7 +75,7 @@ namespace CinemaManager.Modules.Room
 
 				foreach (var room in filteredData)
 				{
-					Rooms.Add(room);
+					Rooms.Add(new RoomViewModel(room));
 				}
 			}
 

@@ -24,7 +24,7 @@
 		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0"
 		                               Grid.ColumnSpan="1" />
 		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
-		          SelectedItem="{Binding SelectetRoom}" SelectionMode="Single">
+		          SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
 					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
@@ -38,7 +38,6 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" dynamicGrid:GridHelpers.RowCount="6"
-		      dynamicGrid:GridHelpers.ColumnCount="3" />
+		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" />
 	</Grid>
 </UserControl>
