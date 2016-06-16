@@ -80,7 +80,12 @@ namespace CinemaManager.Modules.Cinema
 			var newCinema = new CinemaModel
 			{
 				Address = "Examplestreet 42",
-				Name = $"Cinema #{CinemaModels.Count + 1}"
+				Name = $"Cinema #{CinemaModels.Count + 1}",
+				Films = new List<FilmModel>(),
+				Presentations = new List<PresentationModel>(),
+				Users = new List<UserModel>(),
+				Rooms = new List<RoomModel>(),
+				IsActive = true,
 			};
 
 			CinemaModels.Add(newCinema);
