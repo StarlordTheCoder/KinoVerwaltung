@@ -7,7 +7,7 @@
              xmlns:user="clr-namespace:CinemaManager.Modules.User"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance user:UserModule}"
-			 IsEnabled="{Binding DataAvailable}">
+             IsEnabled="{Binding Enabled}">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -42,8 +42,10 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding SelectedUser.UserId, Mode=OneWay}" Grid.Row="0" />
-			<TextBox Grid.Column="1" Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
-			<TextBox Grid.Column="1" Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="2" />
+			<TextBox Grid.Column="1" Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="1" />
+			<TextBox Grid.Column="1" Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="2" />
 			<Button Grid.Row="3" Grid.Column="0" Style="{StaticResource AddButton}" />
 			<Button Grid.Row="3" Grid.Column="1" Style="{StaticResource RemoveButton}" />
 		</Grid>

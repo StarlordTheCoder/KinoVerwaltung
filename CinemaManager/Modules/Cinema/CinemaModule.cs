@@ -41,6 +41,11 @@ namespace CinemaManager.Modules.Cinema
 		public DelegateCommand RemoveCinemaCommand { get; }
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public override bool Enabled { get; } = true;
+
+		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
 		public override string Title => "Cinema Manager";
@@ -85,7 +90,7 @@ namespace CinemaManager.Modules.Cinema
 				Presentations = new List<PresentationModel>(),
 				Users = new List<UserModel>(),
 				Rooms = new List<RoomModel>(),
-				IsActive = true,
+				IsActive = true
 			};
 
 			CinemaModels.Add(newCinema);

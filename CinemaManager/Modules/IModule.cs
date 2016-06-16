@@ -18,6 +18,11 @@ namespace CinemaManager.Modules
 		bool IsVisible { get; set; }
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		bool Enabled { get; }
+
+		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
 		string Title { get; }

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:CinemaManager.Modules.Film"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}" IsEnabled="{Binding DataAvailable}">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}"
+             IsEnabled="{Binding Enabled}">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -40,11 +41,11 @@
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-		         Grid.Row="0" Grid.Column="1" />
+			         Grid.Row="0" Grid.Column="1" />
 			<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-		         Grid.Row="1" Grid.Column="1" />
+			         Grid.Row="1" Grid.Column="1" />
 			<Button Command="{Binding AddFilmCommand}"
-		        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
+			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
 			<Button Command="{Binding RemoveFilmCommand}"
 			        Grid.Row="2" Grid.Column="1" Style="{StaticResource RemoveButton}" />
 		</Grid>
