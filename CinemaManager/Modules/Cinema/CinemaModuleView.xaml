@@ -14,8 +14,9 @@
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="8*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding CinemaFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Cinemas}" Grid.Row="1" Grid.Column="0"
@@ -34,6 +35,8 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
+		<Button Command="{Binding AddCinemaCommand}" Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
+		<Button Command="{Binding RemoveCinemaCommand}" Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,0,0,0"/>
 		<Grid Grid.Row="1" Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition />
@@ -43,8 +46,7 @@
 			</Grid.RowDefinitions>
 			<TextBox Text="{Binding SelectedCinema.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" />
 			<TextBox Text="{Binding SelectedCinema.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" />
-			<Button Command="{Binding AddCinemaCommand}" Content="+" Grid.Row="2" />
-			<Button Command="{Binding RemoveCinemaCommand}" Content="-" Grid.Row="3" />
+			
 		</Grid>
 	</Grid>
 </UserControl>

@@ -14,8 +14,9 @@
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="8*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding UserFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Users}" Grid.Row="1" Grid.Column="0"
@@ -30,6 +31,8 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
+		<Button Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0" />
+		<Button Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,0,0,0" />
 		<Grid Grid.Row="1" Grid.Column="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
@@ -46,8 +49,6 @@
 			         Grid.Row="1" />
 			<TextBox Grid.Column="1" Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
 			         Grid.Row="2" />
-			<Button Grid.Row="3" Grid.Column="0" Style="{StaticResource AddButton}" />
-			<Button Grid.Row="3" Grid.Column="1" Style="{StaticResource RemoveButton}" />
 		</Grid>
 	</Grid>
 </UserControl>
