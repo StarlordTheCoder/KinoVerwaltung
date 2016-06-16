@@ -129,7 +129,7 @@ namespace CinemaManager.Filter
 		/// <returns>Gefilterte Daten</returns>
 		public IEnumerable<T> FilterData(IEnumerable<T> data)
 		{
-			var filters = DateFilters.Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
+			var filters = NumberFilters.Concat(DateFilters).Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
 
 			if (filters.Any())
 			{
