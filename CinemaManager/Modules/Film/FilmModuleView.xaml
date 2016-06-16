@@ -6,40 +6,47 @@
              xmlns:local="clr-namespace:CinemaManager.Modules.Film"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}">
-
-	<Grid Background="Aqua">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}" IsEnabled="{Binding DataAvailable}">
+	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height=".75*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition />
+			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" Grid.RowSpan="5" />
-		<ListView ItemsSource="{Binding FilmList}" Grid.RowSpan="4" Grid.Row="1"
+		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" />
+		<ListView ItemsSource="{Binding FilmList}" Grid.Row="1" Grid.Column="0"
 		          SelectedItem="{Binding SelectedFilm}" SelectionMode="Single">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<TextBlock Text="{Binding FilmName}" />
-						<TextBlock Text="{Binding Director}" />
+						<TextBlock ToolTip="Name" Text="{Binding FilmName}" />
+						<TextBlock ToolTip="Director" Text="{Binding Director}" />
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
 
-		<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+		<Grid Grid.Row="1" Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+		         Grid.Row="0" Grid.Column="1" />
+			<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
 		         Grid.Row="1" Grid.Column="1" />
-		<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-		         Grid.Row="2" Grid.Column="1" />
-		<Button Command="{Binding AddFilmCommand}"
-		        Grid.Row="0" Grid.Column="1" Style="{StaticResource AddButton}" Margin="0,10,60,0" />
-		<Button Command="{Binding RemoveFilmCommand}"
-		        Grid.Column="1" Grid.Row="0" Margin="0,10,10,0" Style="{StaticResource RemoveButton}" />
+			<Button Command="{Binding AddFilmCommand}"
+		        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
+			<Button Command="{Binding RemoveFilmCommand}"
+			        Grid.Row="2" Grid.Column="1" Style="{StaticResource RemoveButton}" />
+		</Grid>
 	</Grid>
 </UserControl>

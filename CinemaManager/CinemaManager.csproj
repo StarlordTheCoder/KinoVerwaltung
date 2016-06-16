@@ -172,7 +172,7 @@
     <Compile Include="DynamicGrid\GridHelpers.cs" />
     <Compile Include="Filter\Complex\ComplexFilter.cs" />
     <Compile Include="Filter\FilterBase.cs" />
-    <Compile Include="Filter\FIlterConfigurator.cs" />
+    <Compile Include="Filter\FilterConfigurator.cs" />
     <Compile Include="Filter\FilterConfiguratorView.xaml.cs">
       <DependentUpon>FilterConfiguratorView.xaml</DependentUpon>
     </Compile>

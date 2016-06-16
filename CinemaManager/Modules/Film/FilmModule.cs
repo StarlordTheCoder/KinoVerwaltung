@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -17,8 +18,8 @@ namespace CinemaManager.Modules.Film
 
 		public FilmModule()
 		{
-			AddFilmCommand = new DelegateCommand(AddFilm, () => CinemaModel != null);
-			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => CinemaModel != null);
+			AddFilmCommand = new DelegateCommand(AddFilm);
+			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => SelectedFilm != null);
 
 			FilterConfigurator
 				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))
@@ -26,6 +27,8 @@ namespace CinemaManager.Modules.Film
 
 			FilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
 		}
+
+		public bool DataAvailable => FilmModels != null;
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -47,19 +50,20 @@ namespace CinemaManager.Modules.Film
 				if (Equals(_selectedFilm, value)) return;
 				_selectedFilm = value;
 				OnPropertyChanged();
+				RemoveFilmCommand.RaiseCanExecuteChanged();
 			}
 		}
 
-		public ICommand AddFilmCommand { get; private set; }
+		public ICommand AddFilmCommand { get; }
 
-		public ICommand RemoveFilmCommand { get; private set; }
+		public DelegateCommand RemoveFilmCommand { get; }
 
-		private static CinemaModel CinemaModel => Session.Instance.SelectedCinemaModel;
+		private static IList<FilmModel> FilmModels => Session.Instance.SelectedCinemaModel?.Films;
 
 		private void RemoveFilm()
 		{
+			FilmModels.Remove(SelectedFilm);
 			FilmList.Remove(SelectedFilm);
-			CinemaModel.Films.Remove(SelectedFilm);
 			SelectedFilm = FilmList.FirstOrDefault();
 		}
 
@@ -68,11 +72,11 @@ namespace CinemaManager.Modules.Film
 			var newFilm = new FilmModel
 			{
 				Director = "Director",
-				FilmName = "Film #" + CinemaModel.Films.Count
+				FilmName = "Film #" + FilmModels.Count
 			};
 
 			FilmList.Add(newFilm);
-			CinemaModel.Films.Add(newFilm);
+			FilmModels.Add(newFilm);
 			SelectedFilm = newFilm;
 		}
 
@@ -87,14 +91,16 @@ namespace CinemaManager.Modules.Film
 
 		private void OnFilterChanged()
 		{
-			if (CinemaModel != null)
+			if (FilmModels != null)
 			{
-				var films = FilterConfigurator.FilterData(CinemaModel.Films).ToList();
+				var films = FilterConfigurator.FilterData(FilmModels).ToList();
 
 				FilmList.Clear();
 
 				films.ForEach(f => FilmList.Add(f));
 			}
+
+			OnPropertyChanged(nameof(DataAvailable));
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace CinemaManager.Modules.Cinema
 			CinemaFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
 			AddCinemaCommand = new DelegateCommand(AddCinema);
-			RemoveCinemaCommand = new DelegateCommand(RemoveCinema);
+			RemoveCinemaCommand = new DelegateCommand(RemoveCinema, () => SelectedCinema != null);
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace CinemaManager.Modules.Cinema
 		/// <summary>
 		///     Command for <see cref="RemoveCinema" />
 		/// </summary>
-		public ICommand RemoveCinemaCommand { get; }
+		public DelegateCommand RemoveCinemaCommand { get; }
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -60,6 +60,7 @@ namespace CinemaManager.Modules.Cinema
 				if (Equals(value, _selectedCinema)) return;
 				_selectedCinema = value;
 				OnPropertyChanged();
+				RemoveCinemaCommand.RaiseCanExecuteChanged();
 
 				_refreshModules.Invoke(this);
 			}

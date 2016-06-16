@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CinemaManager.Filter;
+using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
 using CinemaManager.Model;
 
@@ -21,7 +22,8 @@ namespace CinemaManager.Modules.User
 		{
 			UserFilterConfigurator
 				.StringFilter(new StringFilter<UserModel>("Name", u => u.Name))
-				.StringFilter(new StringFilter<UserModel>("Phone", u => u.PhoneNumber));
+				.StringFilter(new StringFilter<UserModel>("Phone", u => u.PhoneNumber))
+				.NumberFilter(new NumberFilter<UserModel>("ID", u => u.UserId));
 
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
@@ -30,6 +32,8 @@ namespace CinemaManager.Modules.User
 		///     Titel für das Dockingframework
 		/// </summary>
 		public override string Title => "User Module";
+
+		public bool DataAvailable => UserModels != null;
 
 		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
 
@@ -59,15 +63,18 @@ namespace CinemaManager.Modules.User
 
 		private void FilterChanged()
 		{
-			if (UserModels == null) return;
-
-			var filteredData = UserFilterConfigurator.FilterData(UserModels);
-			Users.Clear();
-
-			foreach (var cinema in filteredData)
+			if (UserModels != null)
 			{
-				Users.Add(cinema);
+				var filteredData = UserFilterConfigurator.FilterData(UserModels);
+				Users.Clear();
+
+				foreach (var cinema in filteredData)
+				{
+					Users.Add(cinema);
+				}
 			}
+
+			OnPropertyChanged(nameof(DataAvailable));
 		}
 	}
 }
