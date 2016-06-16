@@ -2,12 +2,9 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using CinemaManager.Filter;
-using CinemaManager.Filter.Complex;
 using CinemaManager.Filter.Date;
 using CinemaManager.Filter.Number;
-using CinemaManager.Filter.String;
 using CinemaManager.Model;
-using CinemaManager.Modules.Cinema;
 
 namespace CinemaManager.Modules.Presentation
 {
@@ -25,6 +22,11 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public IFilterConfigurator<PresentationModel> PresentationFilterConfigurator { get; } =
 			new FilterConfigurator<PresentationModel>();
+
+		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public override bool Enabled => true;
 
 		/// <summary>
 		///     Titel für das Dockingframework

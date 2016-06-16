@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using CinemaManager.Filter;
 using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
@@ -33,7 +32,10 @@ namespace CinemaManager.Modules.User
 		/// </summary>
 		public override string Title => "User Module";
 
-		public bool DataAvailable => UserModels != null;
+		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public override bool Enabled => UserModels != null;
 
 		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
 
@@ -74,7 +76,7 @@ namespace CinemaManager.Modules.User
 				}
 			}
 
-			OnPropertyChanged(nameof(DataAvailable));
+			OnPropertyChanged(nameof(Enabled));
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace CinemaManager.Modules.Film
 			FilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
 		}
 
-		public bool DataAvailable => FilmModels != null;
+		public override bool Enabled => FilmModels != null;
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -100,7 +100,7 @@ namespace CinemaManager.Modules.Film
 				films.ForEach(f => FilmList.Add(f));
 			}
 
-			OnPropertyChanged(nameof(DataAvailable));
+			OnPropertyChanged(nameof(Enabled));
 		}
 	}
 }

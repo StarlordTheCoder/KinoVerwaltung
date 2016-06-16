@@ -22,9 +22,15 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public override bool Enabled => RoomModels != null;
+
+		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
 		public override string Title => "Room Module";
+
 		/// <summary>
 		///     Alle gefilterten Räume
 		/// </summary>
@@ -62,15 +68,18 @@ namespace CinemaManager.Modules.Room
 
 		private void FilterChanged()
 		{
-			if (RoomModels == null) return;
-
-			var filteredData = RoomFilterConfigurator.FilterData(RoomModels);
-			Rooms.Clear();
-
-			foreach (var room in filteredData)
+			if (RoomModels != null)
 			{
-				Rooms.Add(room);
+				var filteredData = RoomFilterConfigurator.FilterData(RoomModels);
+				Rooms.Clear();
+
+				foreach (var room in filteredData)
+				{
+					Rooms.Add(room);
+				}
 			}
+
+			OnPropertyChanged(nameof(Enabled));
 		}
 	}
 }

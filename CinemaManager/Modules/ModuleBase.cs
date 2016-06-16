@@ -40,6 +40,8 @@ namespace CinemaManager.Modules
 			}
 		}
 
+		public abstract bool Enabled { get; }
+
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
