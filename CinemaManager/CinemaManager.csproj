@@ -203,6 +203,13 @@
     <Compile Include="Modules\Room\RoomModuleView.xaml.cs">
       <DependentUpon>RoomModuleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Room\RoomViewModel.cs" />
+    <Compile Include="Modules\Room\Rows.xaml.cs">
+      <DependentUpon>Rows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Room\SeatControl.xaml.cs">
+      <DependentUpon>SeatControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="MainView\MainWindow.xaml.cs">
@@ -222,6 +229,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Room\RoomModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Room\Rows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Room\SeatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
