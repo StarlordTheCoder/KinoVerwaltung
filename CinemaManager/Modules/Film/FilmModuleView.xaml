@@ -12,6 +12,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -29,9 +30,16 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
+		<Button Command="{Binding AddFilmCommand}"
+			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+		<Button Command="{Binding RemoveFilmCommand}"
+			        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,0,0,0" />
 
 		<Grid Grid.Row="1" Grid.Column="1">
 			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
 				<RowDefinition />
 				<RowDefinition />
 				<RowDefinition />
@@ -40,14 +48,44 @@
 				<ColumnDefinition />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
+			<TextBlock Text="Film Name: "
+			         Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBlock Text="Länge: "
+			         Grid.Row="1" Grid.Column="0" 
+					   HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBlock Text="Veröffentlicher: "
+			         Grid.Row="2" Grid.Column="0" 
+					   HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBlock Text="Regisseur: "
+			         Grid.Row="3" Grid.Column="0" 
+					   HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBlock Text="Schauspieler: "
+			         Grid.Row="4" Grid.Column="0" 
+					   HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBlock Text="Altersfreigabe: "
+			         Grid.Row="5" Grid.Column="0" 
+					   HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+
+
 			<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="0" Grid.Column="1" />
+			         Grid.Row="0" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBox Text="{Binding SelectedFilm.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="1" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBox Text="{Binding SelectedFilm.Publisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="2" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" />
 			<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="1" Grid.Column="1" />
-			<Button Command="{Binding AddFilmCommand}"
-			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
-			<Button Command="{Binding RemoveFilmCommand}"
-			        Grid.Row="2" Grid.Column="1" Style="{StaticResource RemoveButton}" />
+			         Grid.Row="3" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<TextBox Text="{Binding SelectedFilm.MainActors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="4" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,13" Width="24" />
+			<TextBox Text="{Binding SelectedFilm.AgeRestriction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="5" Grid.Column="1" 
+					 HorizontalAlignment="Center" VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

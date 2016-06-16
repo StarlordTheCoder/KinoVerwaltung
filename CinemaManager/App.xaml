@@ -21,6 +21,9 @@
 							<Trigger Property="IsPressed" Value="True">
 								<Setter TargetName="B" Property="Opacity" Value="0.9"/>
 							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter TargetName="B" Property="Opacity" Value="0.5"/>
+							</Trigger>
 						</ControlTemplate.Triggers>
 					</ControlTemplate>
 				</Setter.Value>
