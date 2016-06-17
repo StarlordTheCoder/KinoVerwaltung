@@ -11,7 +11,7 @@
         xmlns:presentation="clr-namespace:CinemaManager.Modules.Presentation"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
         xmlns:room="clr-namespace:CinemaManager.Modules.Room"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized"
+        Title="Cinema Manager" Height="350" Width="525" WindowState="Maximized"
         d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}"
         x:Name="Window"
         Loaded="MainWindow_OnLoaded">
