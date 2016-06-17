@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace CinemaManager.Modules.Film
 		public FilmModule()
 		{
 			AddFilmCommand = new DelegateCommand(AddFilm);
-			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => SelectedFilm != null);
+			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => ValueSelected);
 
 			FilterConfigurator
 				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))
@@ -50,6 +51,7 @@ namespace CinemaManager.Modules.Film
 				if (Equals(_selectedFilm, value)) return;
 				_selectedFilm = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
 				RemoveFilmCommand.RaiseCanExecuteChanged();
 			}
 		}
@@ -59,6 +61,10 @@ namespace CinemaManager.Modules.Film
 		public DelegateCommand RemoveFilmCommand { get; }
 
 		private static IList<FilmModel> FilmModels => Session.Instance.SelectedCinemaModel?.Films;
+
+		public IEnumerable<AgeRestriction> AgeRestrictions => Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
+
+		public bool ValueSelected => SelectedFilm != null;
 
 		private void RemoveFilm()
 		{

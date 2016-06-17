@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CinemaManager.Modules.Film"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}"
              IsEnabled="{Binding Enabled}">
@@ -31,11 +32,11 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<Button Command="{Binding AddFilmCommand}"
-			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
 		<Button Command="{Binding RemoveFilmCommand}"
-			        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,0,0,0" />
+			        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" />
 
-		<Grid Grid.Row="1" Grid.Column="1">
+		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
 				<RowDefinition />
 				<RowDefinition />
@@ -45,47 +46,30 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
+				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Film Name: "
-			         Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBlock Text="Länge: "
-			         Grid.Row="1" Grid.Column="0" 
-					   HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBlock Text="Veröffentlicher: "
-			         Grid.Row="2" Grid.Column="0" 
-					   HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBlock Text="Regisseur: "
-			         Grid.Row="3" Grid.Column="0" 
-					   HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBlock Text="Schauspieler: "
-			         Grid.Row="4" Grid.Column="0" 
-					   HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBlock Text="Altersfreigabe: "
-			         Grid.Row="5" Grid.Column="0" 
-					   HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-
-
-			<TextBox Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="0" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBox Text="{Binding SelectedFilm.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="1" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBox Text="{Binding SelectedFilm.Publisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="2" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBox Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="3" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<TextBox Text="{Binding SelectedFilm.MainActors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="4" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,13" Width="24" />
-			<TextBox Text="{Binding SelectedFilm.AgeRestriction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="5" Grid.Column="1" 
-					 HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Name}" Content="Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+			<TextBox Name="Name" Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+			<Label  Target="{Binding ElementName=Length}" Content="Length" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+			<xctk:DateTimeUpDown Name="Length" Format="LongTime" Value="{Binding SelectedFilm.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+			<Label  Target="{Binding ElementName=Publisher}" Content="Publisher" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+			<TextBox Name="Publisher" Text="{Binding SelectedFilm.Publisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Director}" Content="Director" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+			<TextBox Name="Director" Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
+			<Label  Target="{Binding ElementName=Actors}" Content="Actors" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+			<TextBox Name="Actors" Text="{Binding SelectedFilm.MainActors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			         Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
+			<Label Target="{Binding ElementName=Age}" Content="Age restriction" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
+			<ComboBox Name="Age" SelectedItem="{Binding SelectedFilm.AgeRestriction}"
+					  ItemsSource="{Binding AgeRestrictions}"
+			          Grid.Row="5" Grid.Column="1" 
+					  VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

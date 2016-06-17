@@ -26,12 +26,10 @@ namespace CinemaManager.Model
 		/// </summary>
 		Twelve = 12,
 
-
 		/// <summary>
 		///     Freigegeben ab 16 Jahren
 		/// </summary>
 		Sixteen = 16,
-
 
 		/// <summary>
 		///     Freigegeben ab 18 Jahren
