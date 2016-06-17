@@ -3,10 +3,13 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
 using CinemaManager.Model;
+using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.User
 {
@@ -19,6 +22,9 @@ namespace CinemaManager.Modules.User
 
 		public UserModule()
 		{
+			AddUserCommand = new DelegateCommand(AddUser);
+			RemoveUserCommand = new DelegateCommand(RemoveUser, () => ValueSelected);
+
 			UserFilterConfigurator
 				.StringFilter(new StringFilter<UserModel>("Name", u => u.Name))
 				.StringFilter(new StringFilter<UserModel>("Phone", u => u.PhoneNumber))
@@ -26,6 +32,33 @@ namespace CinemaManager.Modules.User
 
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
+
+		private void RemoveUser()
+		{
+			UserModels.Remove(SelectedUser);
+
+			Users.Remove(SelectedUser);
+			SelectedUser = Users.FirstOrDefault();
+		}
+
+		private void AddUser()
+		{
+			var user = new UserModel
+			{
+				Name = string.Empty,
+				PhoneNumber = string.Empty,
+				UserId = UserModels.Any() ? UserModels.Max(u => u.UserId) + 1 : 1
+			};
+
+			UserModels.Add(user);
+
+			Users.Add(user);
+			SelectedUser = user;
+		}
+
+		public DelegateCommand RemoveUserCommand { get; set; }
+
+		public ICommand AddUserCommand { get; set; }
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -49,10 +82,14 @@ namespace CinemaManager.Modules.User
 				if (Equals(_selectedUser, value)) return;
 				_selectedUser = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
+				RemoveUserCommand.RaiseCanExecuteChanged();
 			}
 		}
 
 		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
+
+		public bool ValueSelected => SelectedUser != null;
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

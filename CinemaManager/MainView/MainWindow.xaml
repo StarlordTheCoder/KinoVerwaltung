@@ -33,7 +33,7 @@
 			<MenuItem Header="Tools">
 				<MenuItem Header="Cinema Module" IsChecked="{Binding CinemaModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
-				<MenuItem Header="Movie Module" IsChecked="{Binding FilmModule.IsVisible, Mode=TwoWay}"
+				<MenuItem Header="Film Module" IsChecked="{Binding FilmModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
 				<MenuItem Header="Presentation Module" IsChecked="{Binding PresentationModule.IsVisible, Mode=TwoWay}"
 				          IsCheckable="True" />
@@ -88,9 +88,19 @@
 				</Style>
 			</dock:DockingManager.LayoutItemContainerStyle>
 		</dock:DockingManager>
-		<StackPanel Grid.Row="2" Background="LightGray">
-			<Label Content="{Binding Session.DataPath}" />
-			<Label Content="{Binding Session.LayoutPath}" />
-		</StackPanel>
+		<Grid Grid.Row="2" Background="LightGray">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=Data}" Content="Data"/>
+			<Label Grid.Column="1" Grid.Row="0" Name="Data" Content="{Binding Session.DataPath}" />
+			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Layout}" Content="Layout"/>
+			<Label Grid.Column="1" Grid.Row="1" Name="Layout" Content="{Binding Session.LayoutPath}" />
+		</Grid>
 	</Grid>
 </Window>
