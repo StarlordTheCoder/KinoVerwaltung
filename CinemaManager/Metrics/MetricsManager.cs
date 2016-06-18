@@ -6,6 +6,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CinemaManager.Infrastructure;
 using CinemaManager.MainView;
 using Metrics;
 using Microsoft.Owin.Hosting;

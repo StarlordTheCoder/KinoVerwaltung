@@ -19,8 +19,8 @@
 			<ColumnDefinition />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding FilterConfigurator}" Grid.ColumnSpan="2" />
-		<ListView ItemsSource="{Binding FilmList}" Grid.Row="1" Grid.Column="0"
+		<filter:FilterConfiguratorView DataContext="{Binding FilmFilterConfigurator}" Grid.ColumnSpan="2" />
+		<ListView ItemsSource="{Binding Films}" Grid.Row="1" Grid.Column="0"
 		          SelectedItem="{Binding SelectedFilm}" SelectionMode="Single">
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -32,9 +32,9 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<Button Command="{Binding AddFilmCommand}"
-			        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
+		        Grid.Row="2" Grid.Column="0" Style="{StaticResource AddButton}" />
 		<Button Command="{Binding RemoveFilmCommand}"
-			        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" />
+		        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" />
 
 		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
@@ -46,30 +46,37 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 
-			<Label Target="{Binding ElementName=Name}" Content="Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-			<TextBox Name="Name" Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			<Label Target="{Binding ElementName=FilmName}" Content="Name" Grid.Row="0" Grid.Column="0"
+			       VerticalAlignment="Center" />
+			<TextBox Name="FilmName" Text="{Binding SelectedFilm.FilmName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
 			         Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-			<Label  Target="{Binding ElementName=Length}" Content="Length" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
-			<xctk:DateTimeUpDown Name="Length" Format="LongTime" Value="{Binding SelectedFilm.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-			<Label  Target="{Binding ElementName=Publisher}" Content="Publisher" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Length}" Content="Length" Grid.Row="1" Grid.Column="0"
+			       VerticalAlignment="Center" />
+			<xctk:DateTimeUpDown Name="Length" Format="LongTime"
+			                     Value="{Binding SelectedFilm.Length, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+			                     Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Publisher}" Content="Publisher" Grid.Row="2" Grid.Column="0"
+			       VerticalAlignment="Center" />
 			<TextBox Name="Publisher" Text="{Binding SelectedFilm.Publisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
 			         Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
-			<Label Target="{Binding ElementName=Director}" Content="Director" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Director}" Content="Director" Grid.Row="3" Grid.Column="0"
+			       VerticalAlignment="Center" />
 			<TextBox Name="Director" Text="{Binding SelectedFilm.Director, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
 			         Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
-			<Label  Target="{Binding ElementName=Actors}" Content="Actors" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Actors}" Content="Actors" Grid.Row="4" Grid.Column="0"
+			       VerticalAlignment="Center" />
 			<TextBox Name="Actors" Text="{Binding SelectedFilm.MainActors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
-			<Label Target="{Binding ElementName=Age}" Content="Age restriction" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
+			         Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=Age}" Content="Age restriction" Grid.Row="5" Grid.Column="0"
+			       VerticalAlignment="Center" />
 			<ComboBox Name="Age" SelectedItem="{Binding SelectedFilm.AgeRestriction}"
-					  ItemsSource="{Binding AgeRestrictions}"
-			          Grid.Row="5" Grid.Column="1" 
-					  VerticalAlignment="Center" />
+			          ItemsSource="{Binding AgeRestrictions}"
+			          Grid.Row="5" Grid.Column="1"
+			          VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

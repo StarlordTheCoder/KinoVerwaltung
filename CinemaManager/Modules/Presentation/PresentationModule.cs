@@ -33,6 +33,10 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public override string Title => "Presentation";
 
+		//TODO
+		public PresentationModel SelectedPresentation { get; set; }
+		public bool ValueSelected => SelectedPresentation != null;
+
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.

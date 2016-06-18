@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CinemaManager.Infrastructure;
 using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
@@ -40,11 +41,15 @@ namespace CinemaManager.MainView
 			{
 				new CommandBinding(OpenLayoutCommand, (sender, e) => LoadLayoutFile()),
 				new CommandBinding(SaveAsLayoutCommand, (sender, e) => SaveLayoutFile()),
-				new CommandBinding(SaveLayoutCommand, (sender, e) => SaveLayout(Session.LayoutPath))
+				new CommandBinding(SaveLayoutCommand, (sender, e) => SaveLayout(LayoutPath))
 			};
 		}
 
-		private static Session Session => Session.Instance;
+		private static string LayoutPath
+		{
+			get { return Session.Instance.LayoutPath; }
+			set { Session.Instance.LayoutPath = value; }
+		}
 
 		public RoutedUICommand OpenLayoutCommand { get; }
 		public RoutedUICommand SaveAsLayoutCommand { get; }
@@ -55,24 +60,24 @@ namespace CinemaManager.MainView
 		{
 			_dockingManager = dockingManager;
 
-			LoadLayout(Session.LayoutPath);
+			LoadLayout(LayoutPath);
 		}
 
 		private void LoadLayout(string path)
 		{
-			Session.LayoutPath = path;
+			LayoutPath = path;
 
-			var folder = Path.GetDirectoryName(Session.LayoutPath);
+			var folder = Path.GetDirectoryName(LayoutPath);
 			if (folder != null && !Directory.Exists(folder))
 			{
 				Directory.CreateDirectory(folder);
 			}
 
-			if (File.Exists(path))
+			if (File.Exists(LayoutPath))
 			{
 				try
 				{
-					using (var stream = File.Open(Session.LayoutPath, FileMode.OpenOrCreate))
+					using (var stream = File.Open(LayoutPath, FileMode.OpenOrCreate))
 					{
 						new XmlLayoutSerializer(_dockingManager).Deserialize(stream);
 					}
@@ -94,7 +99,7 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's layout (*.satan)|*.satan",
-				InitialDirectory = Path.GetDirectoryName(Session.LayoutPath)
+				InitialDirectory = Path.GetDirectoryName(LayoutPath)
 			};
 
 			var result = dialog.ShowDialog();
@@ -110,7 +115,7 @@ namespace CinemaManager.MainView
 			{
 				DefaultExt = ".satan",
 				Filter = "Satan's layout (*.satan)|*.satan",
-				InitialDirectory = Path.GetDirectoryName(Session.LayoutPath)
+				InitialDirectory = Path.GetDirectoryName(LayoutPath)
 			};
 
 			var result = dialog.ShowDialog();

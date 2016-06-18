@@ -21,8 +21,7 @@
 			<RowDefinition />
 			<RowDefinition />
 		</Grid.RowDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0"
-		                               Grid.ColumnSpan="1" />
+		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0" />
 		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
 		          SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>

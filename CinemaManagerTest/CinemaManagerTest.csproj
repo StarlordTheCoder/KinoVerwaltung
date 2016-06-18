@@ -69,6 +69,7 @@
     <Compile Include="Filter\NumberFilterTest.cs" />
     <Compile Include="Filter\StringFilterTest.cs" />
     <Compile Include="Filter\DateFilterTest.cs" />
+    <Compile Include="MainView\MainWindowViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTestBase.cs" />
     <Compile Include="UnitTestBase.cs" />

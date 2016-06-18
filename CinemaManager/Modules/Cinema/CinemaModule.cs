@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Filter.String;
+using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using Microsoft.Practices.Prism.Commands;
 

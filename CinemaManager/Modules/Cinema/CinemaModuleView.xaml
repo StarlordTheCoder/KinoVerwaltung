@@ -43,14 +43,20 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=Name}" Content="Name" VerticalAlignment="Center"/>
-			<TextBox Grid.Column="1" Name="Name" Text="{Binding SelectedCinema.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" VerticalAlignment="Center"/>
-			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Address}" Content="Address" VerticalAlignment="Center"/>
-			<TextBox Grid.Column="1" Name="Address" Text="{Binding SelectedCinema.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" VerticalAlignment="Center"/>
-			
+			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=CinemaName}" Content="Name"
+			       VerticalAlignment="Center" />
+			<TextBox Grid.Column="1" Name="CinemaName"
+			         Text="{Binding SelectedCinema.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0"
+			         VerticalAlignment="Center" />
+			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Address}" Content="Address"
+			       VerticalAlignment="Center" />
+			<TextBox Grid.Column="1" Name="Address"
+			         Text="{Binding SelectedCinema.Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1"
+			         VerticalAlignment="Center" />
+
 		</Grid>
 	</Grid>
 </UserControl>

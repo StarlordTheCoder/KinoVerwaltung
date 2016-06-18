@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using Microsoft.Win32;
 

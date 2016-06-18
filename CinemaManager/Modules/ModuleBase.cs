@@ -2,10 +2,8 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using CinemaManager.Properties;
+using CinemaManager.Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules
@@ -13,7 +11,7 @@ namespace CinemaManager.Modules
 	/// <summary>
 	///     Grundimplementation von <see cref="IModule" />
 	/// </summary>
-	public abstract class ModuleBase : IModule
+	public abstract class ModuleBase : NotifyPropertyChangedBase, IModule
 	{
 		private bool _isVisible = true;
 
@@ -62,20 +60,6 @@ namespace CinemaManager.Modules
 		///     Die Moduldate, welche für die Filter der anderen Module relevant sind, haben sich verändert.
 		/// </summary>
 		public event EventHandler ModuleDataChanged;
-
-		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		/// <summary>
-		///     Event invokator for <see cref="PropertyChanged" />
-		/// </summary>
-		/// <param name="propertyName">Property that changed</param>
-		[NotifyPropertyChangedInvocator]
-		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
 
 		/// <summary>
 		///     Event invokator for <see cref="ModuleDataChanged" />

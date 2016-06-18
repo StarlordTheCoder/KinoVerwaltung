@@ -11,6 +11,7 @@
         xmlns:presentation="clr-namespace:CinemaManager.Modules.Presentation"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
         xmlns:room="clr-namespace:CinemaManager.Modules.Room"
+        xmlns:reservation="clr-namespace:CinemaManager.Modules.Reservation"
         Title="Cinema Manager" Height="350" Width="525" WindowState="Maximized"
         d:DataContext="{d:DesignInstance mainView:MainWindowViewModel}"
         x:Name="Window"
@@ -73,6 +74,9 @@
 				<DataTemplate DataType="{x:Type room:RoomModule}">
 					<room:RoomModuleView />
 				</DataTemplate>
+				<DataTemplate DataType="{x:Type reservation:ReservationModule}">
+					<reservation:ReservationModuleView />
+				</DataTemplate>
 			</dock:DockingManager.Resources>
 
 			<dock:DockingManager.LayoutItemContainerStyle>
@@ -90,16 +94,16 @@
 		</dock:DockingManager>
 		<Grid Grid.Row="2" Background="LightGray">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=Data}" Content="Data"/>
+			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=Data}" Content="Data" />
 			<Label Grid.Column="1" Grid.Row="0" Name="Data" Content="{Binding Session.DataPath}" />
-			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Layout}" Content="Layout"/>
+			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Layout}" Content="Layout" />
 			<Label Grid.Column="1" Grid.Row="1" Name="Layout" Content="{Binding Session.LayoutPath}" />
 		</Grid>
 	</Grid>

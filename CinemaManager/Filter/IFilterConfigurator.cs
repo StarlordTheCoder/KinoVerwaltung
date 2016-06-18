@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using CinemaManager.Filter.Complex;
 using CinemaManager.Filter.Date;
 using CinemaManager.Filter.Number;

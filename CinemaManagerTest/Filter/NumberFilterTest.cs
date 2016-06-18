@@ -2,7 +2,6 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
-using CinemaManager.Filter;
 using CinemaManager.Filter.Number;
 using Moq;
 using NUnit.Framework;
@@ -14,6 +13,22 @@ namespace CinemaManagerTest.Filter
 		private void Setup(params Func<IDummyModel, int>[] setup)
 		{
 			UnitUnderTest = new NumberFilter<IDummyModel>(string.Empty, setup);
+		}
+
+		[Test]
+		public void TestChangeValueCallsFilterChanged()
+		{
+			//Arrange
+			Setup();
+			var eventCalled = false;
+
+			UnitUnderTest.FilterChanged += (sender, e) => eventCalled = true;
+
+			//Act
+			UnitUnderTest.Number = 12;
+
+			//Assert
+			Assert.That(eventCalled);
 		}
 
 		[Test]
@@ -81,22 +96,6 @@ namespace CinemaManagerTest.Filter
 
 			//Assert
 			Assert.That(result, Is.True);
-		}
-
-		[Test]
-		public void TestChangeValueCallsFilterChanged()
-		{
-			//Arrange
-			Setup();
-			var eventCalled = false;
-
-			UnitUnderTest.FilterChanged += (sender, e) => eventCalled = true;
-
-			//Act
-			UnitUnderTest.Number = 12;
-
-			//Assert
-			Assert.That(eventCalled);
 		}
 	}
 }
