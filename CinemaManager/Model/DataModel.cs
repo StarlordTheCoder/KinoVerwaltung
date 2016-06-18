@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Shell;
 using System.Xml.Serialization;
+using CinemaManager.Infrastructure;
 
 namespace CinemaManager.Model
 {
@@ -39,7 +40,7 @@ namespace CinemaManager.Model
 			Session.OnPrepareForSave();
 
 			var folder = Path.GetDirectoryName(Session.DataPath);
-			if (folder != null && !Directory.Exists(folder))
+			if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder))
 			{
 				Directory.CreateDirectory(folder);
 			}

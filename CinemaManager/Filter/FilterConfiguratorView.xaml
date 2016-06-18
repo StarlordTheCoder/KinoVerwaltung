@@ -19,11 +19,11 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<DockPanel LastChildFill="True"
-					           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
 							<Label Target="{Binding ElementName=SearchText}" Content="{Binding Label}" />
 							<CheckBox DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
 							<TextBox Name="SearchText" DockPanel.Dock="Left" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-						         IsEnabled="{Binding IsEnabled}" />
+							         IsEnabled="{Binding IsEnabled}" />
 						</DockPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
@@ -32,13 +32,15 @@
 			<ItemsControl Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding NumberFilters}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<DockPanel LastChildFill="True" Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						<DockPanel LastChildFill="True"
+						           Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
 							<Label Content="{Binding Label}" />
 							<CheckBox DockPanel.Dock="Right" HorizontalAlignment="Right"
-						          IsChecked="{Binding IsEnabled}" />
+							          IsChecked="{Binding IsEnabled}" />
 
-							<xctk:IntegerUpDown Name="Number" DockPanel.Dock="Left" Value="{Binding Number, UpdateSourceTrigger=PropertyChanged}" 
-						                     IsEnabled="{Binding IsEnabled}" />
+							<xctk:IntegerUpDown Name="Number" DockPanel.Dock="Left"
+							                    Value="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
+							                    IsEnabled="{Binding IsEnabled}" />
 						</DockPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
@@ -48,7 +50,7 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Grid HorizontalAlignment="Stretch"
-					      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -60,17 +62,18 @@
 							</Grid.RowDefinitions>
 							<TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Label}" />
 							<CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right"
-						          IsChecked="{Binding IsEnabled}" />
+							          IsChecked="{Binding IsEnabled}" />
 
 							<Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=StartDate}" Content="Start date" />
 							<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1"
-						                     Grid.Row="1" Name="StartDate" Value="{Binding StartDate}"
-						                     IsEnabled="{Binding IsEnabled}" Maximum="{Binding ElementName=EndDate, Path=SelectedDate}" />
+							                     Grid.Row="1" Name="StartDate" Value="{Binding StartDate}"
+							                     IsEnabled="{Binding IsEnabled}" Maximum="{Binding ElementName=EndDate, Path=SelectedDate}" />
 
 							<Label Grid.Column="0" Grid.Row="2" Target="{Binding ElementName=EndDate}" Content="End date" />
 							<xctk:DateTimePicker TimePickerVisibility="Collapsed" AutoCloseCalendar="True" Format="LongDate" Grid.Column="1"
-						                     Grid.Row="2" Name="EndDate" Value="{Binding EndDate}"
-						                     IsEnabled="{Binding IsEnabled}" Minimum="{Binding ElementName=StartDate, Path=SelectedDate}" />
+							                     Grid.Row="2" Name="EndDate" Value="{Binding EndDate}"
+							                     IsEnabled="{Binding IsEnabled}"
+							                     Minimum="{Binding ElementName=StartDate, Path=SelectedDate}" />
 						</Grid>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
@@ -80,15 +83,13 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Grid HorizontalAlignment="Stretch"
-					      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
+						      Background="{Binding IsEnabled, Converter={StaticResource BoolToSolidColorBrushConverter}}">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 							<TextBlock Grid.Column="0" Text="{Binding Label}" />
-							<TextBlock Grid.Column="1" Text="{Binding Module.Title}" />
-							<CheckBox Grid.Column="2" DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
+							<CheckBox Grid.Column="1" DockPanel.Dock="Right" IsChecked="{Binding IsEnabled}" />
 						</Grid>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

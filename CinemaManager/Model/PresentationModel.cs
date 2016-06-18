@@ -25,7 +25,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Der Saal
 		/// </summary>
-		public RoomModel Room { get; set; }
+		public int RoomId { get; set; }
 
 		/// <summary>
 		///     Die Reservationen für diese Vorstellung

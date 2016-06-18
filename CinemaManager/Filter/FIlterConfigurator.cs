@@ -4,26 +4,23 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using CinemaManager.Filter.Complex;
 using CinemaManager.Filter.Date;
 using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
-using CinemaManager.Properties;
+using CinemaManager.Infrastructure;
 
 namespace CinemaManager.Filter
 {
-	public class FilterConfigurator<T> : IFilterConfigurator<T>, INotifyPropertyChanged
+	public class FilterConfigurator<T> : NotifyPropertyChangedBase, IFilterConfigurator<T>
 	{
 		public GridLength StringColumnWidth
 			=> StringFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
 		public GridLength NumberColumnWidth
 			=> NumberFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
-
 
 		public GridLength DateColumnWidth
 			=> DateFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
@@ -40,7 +37,7 @@ namespace CinemaManager.Filter
 		///     List der <see cref="IStringFilter{T}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> StringFilters { get; } = new ObservableCollection<IFilter<T>>();
-		
+
 		/// <summary>
 		///     List der <see cref="INumberFilter{T}" />
 		/// </summary>
@@ -129,7 +126,8 @@ namespace CinemaManager.Filter
 		/// <returns>Gefilterte Daten</returns>
 		public IEnumerable<T> FilterData(IEnumerable<T> data)
 		{
-			var filters = NumberFilters.Concat(DateFilters).Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
+			var filters =
+				NumberFilters.Concat(DateFilters).Concat(ComplexFilters).Concat(StringFilters).Where(f => f.IsEnabled).ToList();
 
 			if (filters.Any())
 			{
@@ -150,25 +148,12 @@ namespace CinemaManager.Filter
 			}
 		}
 
-		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-
 		/// <summary>
 		///     Event invokator for <see cref="FilterChanged" />
 		/// </summary>
 		protected virtual void OnFilterChanged()
 		{
 			FilterChanged?.Invoke(this, EventArgs.Empty);
-		}
-
-		/// <summary>
-		///     Event invokator for <see cref="PropertyChanged" />
-		/// </summary>
-		/// <param name="propertyName">Property that changed</param>
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

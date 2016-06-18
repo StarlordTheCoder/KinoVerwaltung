@@ -10,10 +10,12 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using CinemaManager.Infrastructure;
 using CinemaManager.Modules;
 using CinemaManager.Modules.Cinema;
 using CinemaManager.Modules.Film;
 using CinemaManager.Modules.Presentation;
+using CinemaManager.Modules.Reservation;
 using CinemaManager.Modules.Room;
 using CinemaManager.Modules.User;
 using Microsoft.Practices.Prism.Commands;
@@ -59,9 +61,10 @@ namespace CinemaManager.MainView
 		{
 			//Create Module instances
 			CinemaModule = new CinemaModule(RefreshModules);
-			UserModule = new UserModule();
 			FilmModule = new FilmModule();
 			PresentationModule = new PresentationModule();
+			UserModule = new UserModule();
+			ReservationModule = new ReservationModule(PresentationModule, UserModule);
 			RoomModule = new RoomModule();
 
 			//Add to list
@@ -70,8 +73,8 @@ namespace CinemaManager.MainView
 				CinemaModule,
 				FilmModule,
 				PresentationModule,
-				//ReservationModule,*/
 				UserModule,
+				ReservationModule,
 				RoomModule
 			};
 

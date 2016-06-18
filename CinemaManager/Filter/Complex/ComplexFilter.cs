@@ -12,13 +12,13 @@ namespace CinemaManager.Filter.Complex
 	{
 		private readonly Func<TM, IEnumerable<T>> _valueToCompareTo;
 
-		public ComplexFilter(string label, TM module, Func<TM, IEnumerable<T>> valueToCompareTo)
+		public ComplexFilter(TM module, Func<TM, IEnumerable<T>> valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;
 			Module = module;
 			Module.ModuleDataChanged += (sender, e) => OnFilterChanged();
 			IsEnabled = true;
-			Label = label;
+			Label = module.Title;
 		}
 
 		/// <summary>
@@ -28,8 +28,8 @@ namespace CinemaManager.Filter.Complex
 		/// <returns>True, wenn die Daten valid sind</returns>
 		public override bool Check(T data)
 		{
-			var list = _valueToCompareTo.Invoke(Module).ToList();
-			return list.Count == 0 || list.Contains(data);
+			var list = _valueToCompareTo.Invoke(Module)?.ToList();
+			return list != null && list.Contains(data);
 		}
 
 		/// <summary>

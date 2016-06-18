@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using CinemaManager.Filter;
 using CinemaManager.Filter.Complex;
 using Moq;
 using NUnit.Framework;
@@ -14,7 +13,7 @@ namespace CinemaManagerTest.Filter
 	{
 		private void Setup(IDummyModule moduleMock, Func<IDummyModule, IEnumerable<IDummyModel>> setup)
 		{
-			UnitUnderTest = new ComplexFilter<IDummyModel, IDummyModule>(string.Empty, moduleMock, setup);
+			UnitUnderTest = new ComplexFilter<IDummyModel, IDummyModule>(moduleMock, setup);
 		}
 
 		[Test]
@@ -80,7 +79,7 @@ namespace CinemaManagerTest.Filter
 		}
 
 		[Test]
-		public void TestCheckWithEmptyTextReturnTrue()
+		public void TestCheckWithEmptyListReturnFalse()
 		{
 			//Arrange
 			var moduleMock = new Mock<IDummyModule>();
@@ -95,7 +94,7 @@ namespace CinemaManagerTest.Filter
 			var result = UnitUnderTest.Check(dummyData.Object);
 
 			//Assert
-			Assert.That(result, Is.True);
+			Assert.That(result, Is.False);
 		}
 
 		[Test]

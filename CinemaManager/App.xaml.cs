@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using CinemaManager.MainView;
 #if DEBUG
 using CinemaManager.Metrics;
+
 #endif
 
 namespace CinemaManager

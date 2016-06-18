@@ -8,6 +8,7 @@ using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
+using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using Microsoft.Practices.Prism.Commands;
 
@@ -31,29 +32,6 @@ namespace CinemaManager.Modules.User
 				.NumberFilter(new NumberFilter<UserModel>("ID", u => u.UserId));
 
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
-		}
-
-		private void RemoveUser()
-		{
-			UserModels.Remove(SelectedUser);
-
-			Users.Remove(SelectedUser);
-			SelectedUser = Users.FirstOrDefault();
-		}
-
-		private void AddUser()
-		{
-			var user = new UserModel
-			{
-				Name = string.Empty,
-				PhoneNumber = string.Empty,
-				UserId = UserModels.Any() ? UserModels.Max(u => u.UserId) + 1 : 1
-			};
-
-			UserModels.Add(user);
-
-			Users.Add(user);
-			SelectedUser = user;
 		}
 
 		public DelegateCommand RemoveUserCommand { get; set; }
@@ -83,6 +61,7 @@ namespace CinemaManager.Modules.User
 				_selectedUser = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				OnModuleDataChanged();
 				RemoveUserCommand.RaiseCanExecuteChanged();
 			}
 		}
@@ -90,6 +69,29 @@ namespace CinemaManager.Modules.User
 		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		public bool ValueSelected => SelectedUser != null;
+
+		private void RemoveUser()
+		{
+			UserModels.Remove(SelectedUser);
+
+			Users.Remove(SelectedUser);
+			SelectedUser = Users.FirstOrDefault();
+		}
+
+		private void AddUser()
+		{
+			var user = new UserModel
+			{
+				Name = string.Empty,
+				PhoneNumber = string.Empty,
+				UserId = UserModels.Any() ? UserModels.Max(u => u.UserId) + 1 : 1
+			};
+
+			UserModels.Add(user);
+
+			Users.Add(user);
+			SelectedUser = user;
+		}
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

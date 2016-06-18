@@ -185,6 +185,7 @@
     <Compile Include="Filter\String\IStringFilter.cs" />
     <Compile Include="Filter\Number\NumberFilter.cs" />
     <Compile Include="Filter\String\StringFilter.cs" />
+    <Compile Include="Infrastructure\NotifyPropertyChangedBase.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />
     <Compile Include="MainView\ILayoutService.cs" />
@@ -199,6 +200,11 @@
       <DependentUpon>PresentationModuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Presentation\PresentationModule.cs" />
+    <Compile Include="Modules\Reservation\ReservationModule.cs" />
+    <Compile Include="Modules\Reservation\ReservationModuleView.xaml.cs">
+      <DependentUpon>ReservationModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Reservation\ReservationViewModel.cs" />
     <Compile Include="Modules\Room\RoomModule.cs" />
     <Compile Include="Modules\Room\RoomModuleView.xaml.cs">
       <DependentUpon>RoomModuleView.xaml</DependentUpon>
@@ -210,7 +216,7 @@
     <Compile Include="Modules\Room\SeatControl.xaml.cs">
       <DependentUpon>SeatControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Session.cs" />
+    <Compile Include="Infrastructure\Session.cs" />
     <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="MainView\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -227,6 +233,10 @@
     <Page Include="Modules\Presentation\PresentationModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Reservation\ReservationModuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Room\RoomModuleView.xaml">
       <SubType>Designer</SubType>
@@ -286,6 +296,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -339,9 +350,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\Reservation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
