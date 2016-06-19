@@ -27,9 +27,9 @@ namespace CinemaManager.Modules.User
 			RemoveUserCommand = new DelegateCommand(RemoveUser, () => ValueSelected);
 
 			UserFilterConfigurator
-				.StringFilter(new StringFilter<UserModel>("Name", u => u.Name))
-				.StringFilter(new StringFilter<UserModel>("Phone", u => u.PhoneNumber))
-				.NumberFilter(new NumberFilter<UserModel>("ID", u => u.UserId));
+				.StringFilter("Name", u => u.Name)
+				.StringFilter("Phone", u => u.PhoneNumber)
+				.NumberFilter("ID", u => u.UserId);
 
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}

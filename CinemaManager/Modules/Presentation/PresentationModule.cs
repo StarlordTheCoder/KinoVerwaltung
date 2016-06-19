@@ -13,8 +13,8 @@ namespace CinemaManager.Modules.Presentation
 		public PresentationModule()
 		{
 			PresentationFilterConfigurator
-				.NumberFilter(new NumberFilter<PresentationModel>("ID", p => p.FilmId))
-				.DateFilter(new DateFilter<PresentationModel>("Day", p => p.StartTime));
+				.NumberFilter("ID", p => p.FilmId)
+				.DateFilter("Day", p => p.StartTime);
 		}
 
 		/// <summary>

@@ -23,7 +23,7 @@ namespace CinemaManager.Modules.Cinema
 		{
 			_refreshModules = refreshModules;
 			CinemaFilterConfigurator
-				.StringFilter(new StringFilter<CinemaModel>("Name / Address", c => c.Name, c => c.Address));
+				.StringFilter("Name / Address", c => c.Name, c => c.Address);
 
 			CinemaFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
