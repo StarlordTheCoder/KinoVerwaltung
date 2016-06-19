@@ -2,8 +2,6 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using CinemaManager.Filter;
-using CinemaManager.Filter.Date;
-using CinemaManager.Filter.Number;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Presentation

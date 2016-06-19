@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace CinemaManagerTest.Filter
 {
-	public class FilterConfiguratorTest : UnitTestBase<IFilterConfigurator<IDummyModel>>
+	public class FilterConfiguratorTest : UnitTestBase<FilterConfigurator<IDummyModel>>
 	{
 		private static IDummyModel EmptyDummyModel => new Mock<IDummyModel>().Object;
 
@@ -20,6 +20,31 @@ namespace CinemaManagerTest.Filter
 			UnitUnderTest = new FilterConfigurator<IDummyModel>();
 
 			base.DoSetup();
+		}
+
+		[Test]
+		public void ComplexFilterCorrectlyAddsFilter()
+		{
+			//Arrange
+			var module = new Mock<IDummyModule>().Object;
+
+			//Act
+			UnitUnderTest.ComplexFilter(module, d => d.ExampleList);
+
+			//Assert
+			Assert.That(UnitUnderTest.ComplexFilters, Has.Count.EqualTo(1));
+			Assert.That(UnitUnderTest.AllFilters.ToList(), Has.Count.EqualTo(1));
+		}
+
+		[Test]
+		public void DateFilterCorrectlyAddsFilter()
+		{
+			//Act
+			UnitUnderTest.DateFilter("Example Label", d => d.DateTimeProperty);
+
+			//Assert
+			Assert.That(UnitUnderTest.DateFilters, Has.Count.EqualTo(1));
+			Assert.That(UnitUnderTest.AllFilters.ToList(), Has.Count.EqualTo(1));
 		}
 
 		[Test]
@@ -182,6 +207,28 @@ namespace CinemaManagerTest.Filter
 
 			//Assert
 			Assert.That(result, Is.Empty);
+		}
+
+		[Test]
+		public void NumberFilterCorrectlyAddsFilter()
+		{
+			//Act
+			UnitUnderTest.NumberFilter("Example Label", d => d.NumberProperty);
+
+			//Assert
+			Assert.That(UnitUnderTest.NumberFilters, Has.Count.EqualTo(1));
+			Assert.That(UnitUnderTest.AllFilters.ToList(), Has.Count.EqualTo(1));
+		}
+
+		[Test]
+		public void StringFilterCorrectlyAddsFilter()
+		{
+			//Act
+			UnitUnderTest.StringFilter("Example Label", d => d.StringProperty);
+
+			//Assert
+			Assert.That(UnitUnderTest.StringFilters, Has.Count.EqualTo(1));
+			Assert.That(UnitUnderTest.AllFilters.ToList(), Has.Count.EqualTo(1));
 		}
 	}
 }
