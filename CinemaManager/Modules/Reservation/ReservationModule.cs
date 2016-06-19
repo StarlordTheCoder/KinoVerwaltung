@@ -6,8 +6,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using CinemaManager.Filter;
-using CinemaManager.Filter.Complex;
-using CinemaManager.Filter.Number;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using CinemaManager.Modules.Presentation;

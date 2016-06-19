@@ -7,12 +7,12 @@ using NUnit.Framework;
 
 namespace CinemaManagerTest.MainView
 {
-	public class MainWindowViewModelTest : UnitTestBase<MainWindowViewModel>
+	public class MainWindowViewModelTest : IntegrationTestBase<MainWindowViewModel>
 	{
 		[Test]
 		public void TestSatanDataStartupFileIsUsed()
 		{
-			var startupFile = "example.satanData";
+			const string startupFile = "example.satanData";
 
 			UnitUnderTest = new MainWindowViewModel(startupFile);
 
@@ -23,7 +23,7 @@ namespace CinemaManagerTest.MainView
 		[Test]
 		public void TestSatanStartupFileIsUsed()
 		{
-			var startupFile = "example.satan";
+			const string startupFile = "example.satan";
 
 			UnitUnderTest = new MainWindowViewModel(startupFile);
 

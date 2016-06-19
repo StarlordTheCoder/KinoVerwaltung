@@ -25,6 +25,7 @@ namespace CinemaManager.Metrics
 		/// </summary>
 		/// <param name="app"></param>
 		[UsedImplicitly]
+		// ReSharper disable once UnusedMember.Global
 		public void Configuration(IAppBuilder app)
 		{
 			JsonConvert.DefaultSettings = () => new JsonSerializerSettings
