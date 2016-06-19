@@ -5,25 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CinemaManager.Modules.Room"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
-             xmlns:dynamicGrid="clr-namespace:CinemaManager.DynamicGrid"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="500"
              d:DataContext="{d:DesignInstance local:RoomModule}"
              IsEnabled="{Binding Enabled}">
 
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*" />
-			<ColumnDefinition Width="5*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition />
-			<RowDefinition />
+			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0" />
-		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
-		          SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
+		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
 					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
@@ -32,11 +31,23 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<TextBlock Text="{Binding RoomNumber}" />
+						<TextBlock Text="{Binding Model.RoomNumber}" />
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" />
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}"/>
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"/>
+		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" />
+		<Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBox Text="{Binding SelectedRoom.SelectedSeats[0].Model.Number}" VerticalAlignment="Center"/>
+			<ComboBox ItemsSource="{Binding SeatTypes}" SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}" DisplayMemberPath="DisplayName" Grid.Row="1" VerticalAlignment="Center">
+				
+			</ComboBox>
+		</Grid>
 	</Grid>
 </UserControl>

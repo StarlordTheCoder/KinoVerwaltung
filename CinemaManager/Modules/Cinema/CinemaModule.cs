@@ -90,6 +90,7 @@ namespace CinemaManager.Modules.Cinema
 				Presentations = new List<PresentationModel>(),
 				Users = new List<UserModel>(),
 				Rooms = new List<RoomModel>(),
+				SeatTypes = new List<SeatType>(),
 				IsActive = true
 			};
 

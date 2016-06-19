@@ -8,9 +8,14 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:RoomViewModel}">
 	<ListView ItemsSource="{Binding Rows}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<ListView.ItemContainerStyle>
+			<Style TargetType="ListViewItem">
+				<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			</Style>
+		</ListView.ItemContainerStyle>
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<ItemsControl ItemsSource="{Binding Seats}" HorizontalAlignment="Center">
+				<ItemsControl ItemsSource="{Binding Seats}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
 							<StackPanel Orientation="Horizontal" />

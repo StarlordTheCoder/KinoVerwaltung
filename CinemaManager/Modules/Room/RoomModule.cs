@@ -26,6 +26,8 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public override bool Enabled => RoomModels != null;
 
+		public bool ValueSelected => SelectedRoom != null;
+
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
@@ -52,10 +54,13 @@ namespace CinemaManager.Modules.Room
 				if (Equals(value, _selectedRoom)) return;
 				_selectedRoom = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
 			}
 		}
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
+
+		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

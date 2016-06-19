@@ -24,6 +24,6 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Platzart. Beispielsweise Sofa
 		/// </summary>
-		public SeatType SeatType { get; set; }
+		public int SeatTypeId { get; set; }
 	}
 }

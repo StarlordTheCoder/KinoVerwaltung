@@ -21,10 +21,5 @@ namespace CinemaManager.Model
 		///     Die Plätze im Saal
 		/// </summary>
 		public List<SeatModel> Seats { get; set; }
-
-		/// <summary>
-		///     Looks if Room is Selectet in List
-		/// </summary>
-		public bool IsActive { get; set; }
 	}
 }

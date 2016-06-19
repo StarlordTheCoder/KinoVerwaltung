@@ -33,7 +33,7 @@ namespace CinemaManager.Model
 		public List<ReservationModel> Reservations { get; set; }
 
 		/// <summary>
-		///     Ob diese Vorstellung 3D-unterstützt - TODO
+		///     Ob diese Vorstellung 3D-unterstützt
 		/// </summary>
 		public bool Is3D { get; set; }
 	}
