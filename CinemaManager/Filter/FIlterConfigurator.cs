@@ -11,11 +11,17 @@ using CinemaManager.Filter.Date;
 using CinemaManager.Filter.Number;
 using CinemaManager.Filter.String;
 using CinemaManager.Infrastructure;
+using CinemaManager.Modules;
 
 namespace CinemaManager.Filter
 {
-	public class FilterConfigurator<T> : NotifyPropertyChangedBase, IFilterConfigurator<T>
+	/// <summary>
+	///     Implementation für <see cref="IFilterConfigurator{T}"/>
+	/// </summary>
+	public sealed class FilterConfigurator<T> : NotifyPropertyChangedBase, IFilterConfigurator<T>
 	{
+		#region Columns
+
 		public GridLength StringColumnWidth
 			=> StringFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
@@ -27,6 +33,10 @@ namespace CinemaManager.Filter
 
 		public GridLength ComplexColumnWidth
 			=> ComplexFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+
+		#endregion
+
+		#region ObservableCollections
 
 		/// <summary>
 		///     List der <see cref="IDateFilter{T}" />
@@ -43,27 +53,45 @@ namespace CinemaManager.Filter
 		/// </summary>
 		public ObservableCollection<IFilter<T>> NumberFilters { get; } = new ObservableCollection<IFilter<T>>();
 
-
 		/// <summary>
 		///     List der <see cref="IComplexFilter{T,TM}" />
 		/// </summary>
 		public ObservableCollection<IFilter<T>> ComplexFilters { get; } = new ObservableCollection<IFilter<T>>();
 
+		#endregion
+
+		/// <summary>
+		///     Ruft <see cref="StringFilter(IStringFilter{T})"/> auf
+		/// </summary>
+		/// <returns>This</returns>
+		public IFilterConfigurator<T> StringFilter(string label, params Func<T, string>[] valueToCompareTo)
+		{
+			return StringFilter(new StringFilter<T>(label, valueToCompareTo));
+		}
 
 		/// <summary>
 		///     Fügt einen <see cref="IStringFilter{T}" /> hinzu
 		/// </summary>
-		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
-		public IFilterConfigurator<T> StringFilter(IFilter<T> filter)
+		public IFilterConfigurator<T> StringFilter(IStringFilter<T> filter)
 		{
-			StringFilters.Add(filter);
-
 			filter.FilterChanged += (sender, e) => OnFilterChanged();
+
+			StringFilters.Add(filter);
 
 			OnPropertyChanged(nameof(StringColumnWidth));
 
 			return this;
+		}
+
+
+		/// <summary>
+		///     Ruft <see cref="IFilterConfigurator{T}.NumberFilter(CinemaManager.Filter.Number.INumberFilter{T})"/> auf
+		/// </summary>
+		/// <returns>This</returns>
+		public IFilterConfigurator<T> NumberFilter(string label, params Func<T, int>[] valueToCompareTo)
+		{
+			return NumberFilter(new NumberFilter<T>(label, valueToCompareTo));
 		}
 
 		/// <summary>
@@ -71,7 +99,7 @@ namespace CinemaManager.Filter
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
-		public IFilterConfigurator<T> NumberFilter(IFilter<T> filter)
+		public IFilterConfigurator<T> NumberFilter(INumberFilter<T> filter)
 		{
 			NumberFilters.Add(filter);
 
@@ -82,17 +110,22 @@ namespace CinemaManager.Filter
 			return this;
 		}
 
+
 		/// <summary>
-		///     Einer der Filter hat <see cref="IFilter{T}.FilterChanged" /> geworfen
+		///     Ruft <see cref="IFilterConfigurator{T}.DateFilter(IDateFilter{T})" /> auf
 		/// </summary>
-		public event EventHandler FilterChanged;
+		/// <returns>This</returns>
+		public IFilterConfigurator<T> DateFilter(string label, params Func<T, DateTime?>[] valueToCompareTo)
+		{
+			return DateFilter(new DateFilter<T>(label, valueToCompareTo));
+		}
 
 		/// <summary>
 		///     Fügt einen <see cref="IDateFilter{T}" /> hinzu
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
-		public IFilterConfigurator<T> DateFilter(IFilter<T> filter)
+		public IFilterConfigurator<T> DateFilter(IDateFilter<T> filter)
 		{
 			DateFilters.Add(filter);
 
@@ -104,11 +137,21 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
+		///     Ruft <see cref="ComplexFilter{TM}(IComplexFilter{T,TM})" /> auf
+		/// </summary>
+		/// <returns>This</returns>
+		public IFilterConfigurator<T> ComplexFilter<TM>(TM module, Func<TM, IEnumerable<T>> valueToCompareTo) where TM : IModule
+		{
+			return ComplexFilter(new ComplexFilter<T, TM>(module, valueToCompareTo));
+		}
+
+
+		/// <summary>
 		///     Fügt einen <see cref="IComplexFilter{T,TM}" /> hinzu
 		/// </summary>
 		/// <param name="filter">Filter</param>
 		/// <returns>This</returns>
-		public IFilterConfigurator<T> ComplexFilter(IFilter<T> filter)
+		public IFilterConfigurator<T> ComplexFilter<TM>(IComplexFilter<T, TM> filter) where TM : IModule
 		{
 			ComplexFilters.Add(filter);
 
@@ -148,12 +191,21 @@ namespace CinemaManager.Filter
 			}
 		}
 
+		#region FilterChanged
+
+		/// <summary>
+		///     Einer der Filter hat <see cref="IFilter{T}.FilterChanged" /> geworfen
+		/// </summary>
+		public event EventHandler FilterChanged;
+
 		/// <summary>
 		///     Event invokator for <see cref="FilterChanged" />
 		/// </summary>
-		protected virtual void OnFilterChanged()
+		private void OnFilterChanged()
 		{
 			FilterChanged?.Invoke(this, EventArgs.Empty);
 		}
+
+		#endregion
 	}
 }

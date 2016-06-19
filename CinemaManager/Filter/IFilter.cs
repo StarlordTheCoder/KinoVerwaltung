@@ -28,6 +28,9 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		bool Check(T data);
 
+		/// <summary>
+		///     Der Filter hat sich verändert
+		/// </summary>
 		event EventHandler FilterChanged;
 	}
 }

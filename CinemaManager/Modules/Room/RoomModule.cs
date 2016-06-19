@@ -17,7 +17,7 @@ namespace CinemaManager.Modules.Room
 		public RoomModule()
 		{
 			RoomFilterConfigurator
-				.NumberFilter(new NumberFilter<RoomModel>("Room Number", c => c.RoomNumber));
+				.NumberFilter("Room Number", c => c.RoomNumber);
 
 			RoomFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}

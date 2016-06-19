@@ -24,8 +24,8 @@ namespace CinemaManager.Modules.Film
 			RemoveFilmCommand = new DelegateCommand(RemoveFilm, () => ValueSelected);
 
 			FilmFilterConfigurator
-				.StringFilter(new StringFilter<FilmModel>("Name", f => f.FilmName))
-				.StringFilter(new StringFilter<FilmModel>("Director", f => f.Director, f => f.Publisher));
+				.StringFilter("Name", f => f.FilmName)
+				.StringFilter("Director", f => f.Director, f => f.Publisher);
 
 			FilmFilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
 		}

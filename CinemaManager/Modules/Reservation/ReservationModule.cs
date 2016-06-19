@@ -30,10 +30,9 @@ namespace CinemaManager.Modules.Reservation
 			RemoveReservationCommand = new DelegateCommand(RemoveReservation, () => ValueSelected);
 
 			ReservationFilterConfigurator
-				.NumberFilter(new NumberFilter<ReservationModel>("ID", c => c.ReservatorId))
-				.ComplexFilter(new ComplexFilter<ReservationModel, PresentationModule>(presentationModule,
-					p => p.SelectedPresentation?.Reservations))
-				.ComplexFilter(new ComplexFilter<ReservationModel, UserModule>(userModule, u => GetReservations(u.SelectedUser)));
+				.NumberFilter("ID", c => c.ReservatorId)
+				.ComplexFilter(presentationModule, p => p.SelectedPresentation?.Reservations)
+				.ComplexFilter(userModule, u => GetReservations(u.SelectedUser));
 
 			ReservationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}

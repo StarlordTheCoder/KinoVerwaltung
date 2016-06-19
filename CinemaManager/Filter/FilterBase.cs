@@ -52,6 +52,9 @@ namespace CinemaManager.Filter
 		/// <returns>True, wenn die Daten valid sind</returns>
 		public abstract bool Check(T data);
 
+		/// <summary>
+		///     Der Filter hat sich verändert
+		/// </summary>
 		public event EventHandler FilterChanged;
 
 		/// <summary>Tritt ein, wenn sich ein Eigenschaftswert ändert.</summary>
