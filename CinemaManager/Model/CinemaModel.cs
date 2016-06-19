@@ -33,14 +33,19 @@ namespace CinemaManager.Model
 		public List<UserModel> Users { get; set; }
 
 		/// <summary>
-		///     Adresse des Kinos
-		/// </summary>
-		public string Address { get; set; }
-
-		/// <summary>
 		///     Filme des Kinos
 		/// </summary>
 		public List<FilmModel> Films { get; set; }
+
+		/// <summary>
+		///     Die verschiedenen Sitzarten, welche das Kino unterstützt
+		/// </summary>
+		public List<SeatType> SeatTypes { get; set; }
+
+		/// <summary>
+		///     Adresse des Kinos
+		/// </summary>
+		public string Address { get; set; }
 
 		/// <summary>
 		///     Ist das aktive Kino.

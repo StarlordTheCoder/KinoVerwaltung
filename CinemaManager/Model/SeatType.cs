@@ -11,11 +11,24 @@ namespace CinemaManager.Model
 	[Serializable]
 	public class SeatType
 	{
-		public static SeatType Basic;
-		public static SeatType Double;
-		public static SeatType Lounge;
+		/// <summary>
+		///     Die ID der Sitzart
+		/// </summary>
+		public int Id { get; set; }
 
+		/// <summary>
+		///     Die Anzahl Personen, welche auf diesem Sitz platz haben
+		/// </summary>
 		public int Capacity { get; set; }
-		public double PriceAddition { get; set; }
+
+		/// <summary>
+		///     Der Name, welcher im GUI angezeigt wird
+		/// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
+		///     Der Preis-Multiplikator. Beispielsweise 2 für einen Doppelsitz
+		/// </summary>
+		public double PriceMultiplicator { get; set; }
 	}
 }

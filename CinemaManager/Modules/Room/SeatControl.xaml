@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:CinemaManager.Modules.Room"
+             xmlns:room="clr-namespace:CinemaManager.Modules.Room"
+             xmlns:converter="clr-namespace:CinemaManager.Converter"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-	<Grid Background="Aqua" Margin="5" Width="30" Height="30" />
+             Width="30" Height="30" Margin="5" d:DataContext="{d:DesignInstance room:SeatViewModel}">
+	<UserControl.Resources>
+		<converter:BoolToSolidColorBrushConverter x:Key="SelectedToColorConverter" True="Aqua" False="Gray"/>
+	</UserControl.Resources>
+	<Grid Background="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}}" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" />
 </UserControl>
