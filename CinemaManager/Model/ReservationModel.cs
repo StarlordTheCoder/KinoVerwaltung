@@ -17,8 +17,13 @@ namespace CinemaManager.Model
 		public int ReservatorId { get; set; }
 
 		/// <summary>
+		///     Die Reihennummer, welche reserviert wurde
+		/// </summary>
+		public int RowNumber { get; set; }
+
+		/// <summary>
 		///     Die Sitznummer, welche reserviert wurde
 		/// </summary>
-		public int SeatId { get; set; }
+		public int SeatNumber { get; set; }
 	}
 }

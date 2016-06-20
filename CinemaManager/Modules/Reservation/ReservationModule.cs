@@ -24,8 +24,11 @@ namespace CinemaManager.Modules.Reservation
 		{
 			_presentationModule = presentationModule;
 			_userModule = userModule;
-			AddReservationCommand = new DelegateCommand(AddReservation);
+
+			AddReservationCommand = new DelegateCommand(AddReservation, () => presentationModule.ValueSelected);
 			RemoveReservationCommand = new DelegateCommand(RemoveReservation, () => ValueSelected);
+
+			_presentationModule.ModuleDataChanged += (sender, e) => AddReservationCommand.RaiseCanExecuteChanged();
 
 			ReservationFilterConfigurator
 				.NumberFilter("ID", c => c.ReservatorId)
@@ -77,7 +80,7 @@ namespace CinemaManager.Modules.Reservation
 		private static IEnumerable<ReservationModel> ReservationModels
 			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
 
-		public ICommand AddReservationCommand { get; }
+		public DelegateCommand AddReservationCommand { get; }
 
 		public DelegateCommand RemoveReservationCommand { get; }
 
@@ -92,7 +95,11 @@ namespace CinemaManager.Modules.Reservation
 
 		private void AddReservation()
 		{
-			var reservation = new ReservationViewModel(new ReservationModel(), _userModule, _presentationModule);
+			var model = new ReservationModel();
+
+			_presentationModule.SelectedPresentation.Reservations.Add(model);
+
+			var reservation = new ReservationViewModel(model, _userModule, _presentationModule);
 
 			Reservations.Add(reservation);
 			SelectedReservation = reservation;

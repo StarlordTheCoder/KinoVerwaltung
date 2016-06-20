@@ -53,7 +53,7 @@ namespace CinemaManager.Modules.Reservation
 		{
 			get
 			{
-				var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Presentation?.RoomId);
+				var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Presentation?.RoomNumber);
 
 				return roomModel != null ? new RoomViewModel(roomModel) : null;
 			}
