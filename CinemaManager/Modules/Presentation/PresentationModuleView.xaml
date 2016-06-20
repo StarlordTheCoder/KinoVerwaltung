@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
              xmlns:presentation="clr-namespace:CinemaManager.Modules.Presentation"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance presentation:PresentationModule}"
@@ -15,10 +16,26 @@
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="8*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding PresentationFilterConfigurator}" Grid.ColumnSpan="2" />
-
+		<ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Presentations}" SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<StackPanel ToolTip="{Binding FilmId}">
+						<TextBlock Text="{Binding RoomNumber}" />
+						<xctk:DateTimePicker Value="{Binding StartTime, Mode=OneWay}" IsReadOnly="True" />
+					</StackPanel>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}" Command="{Binding AddPresentationCommand}"/>
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}" Command="{Binding RemovePresentationCommand}"/>
+		
+		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+			<xctk:DateTimePicker Value="{Binding SelectedPresentation.StartTime}" VerticalAlignment="Center"/>
+		</Grid>
 	</Grid>
 </UserControl>

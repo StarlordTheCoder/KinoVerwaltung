@@ -8,7 +8,7 @@
              xmlns:room="clr-namespace:CinemaManager.Modules.Room"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance reservation:ReservationModule}"
              IsEnabled="{Binding Enabled}">
 	<Grid>
@@ -34,7 +34,7 @@
 						</StackPanel>
 						<StackPanel>
 							<xctk:DateTimePicker Value="{Binding Presentation.StartTime, Mode=OneWay}" IsReadOnly="True" />
-							<Button Content="Use Presentation from Presentation Module" />
+							<Button Content="Use Presentation from Presentation Module" Command="{Binding ApplyPresentationFromPresentationModule}"/>
 						</StackPanel>
 					</StackPanel>
 				</DataTemplate>

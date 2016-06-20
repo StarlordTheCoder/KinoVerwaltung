@@ -107,9 +107,9 @@ namespace CinemaManager.Modules.User
 				var filteredData = UserFilterConfigurator.FilterData(UserModels);
 				Users.Clear();
 
-				foreach (var cinema in filteredData)
+				foreach (var user in filteredData)
 				{
-					Users.Add(cinema);
+					Users.Add(user);
 				}
 			}
 
