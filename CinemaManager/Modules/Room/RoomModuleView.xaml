@@ -62,7 +62,7 @@
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<TextBox Text="{Binding SelectedRoom.SelectedSeats[0].Model.Number}" VerticalAlignment="Center" />
+			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" VerticalAlignment="Center" />
 			<ComboBox ItemsSource="{Binding SeatTypes}"
 			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}"
 			          DisplayMemberPath="DisplayName" Grid.Row="1" VerticalAlignment="Center" />

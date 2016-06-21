@@ -46,6 +46,16 @@ namespace CinemaManager.Modules.Room
 		///     The Type of the selected Seat
 		/// </summary>
 		public SeatType SelectedSeatType
-			=> Session.Instance.SelectedCinemaModel?.SeatTypes.First(s => s.Id == Model.SeatTypeId);
+		{
+			get { return Session.Instance.SelectedCinemaModel?.SeatTypes.First(s => s.Id == Model.SeatTypeId); }
+			set
+			{
+				Model.SeatTypeId = value.Id;
+				OnPropertyChanged();
+				OnPropertyChanged(nameof(Width));
+			}
+		}
+
+		public double Width => SelectedSeatType.Capacity*30;
 	}
 }
