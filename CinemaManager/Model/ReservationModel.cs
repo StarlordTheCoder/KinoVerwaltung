@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Collections.Generic;
 
 namespace CinemaManager.Model
 {
@@ -17,13 +18,8 @@ namespace CinemaManager.Model
 		public int ReservatorId { get; set; }
 
 		/// <summary>
-		///     Die Reihennummer, welche reserviert wurde
+		///     Die reservierten Sitze. Die erste Zahl ist die Reihennummer, die zweite die Sitznummer
 		/// </summary>
-		public int RowNumber { get; set; }
-
-		/// <summary>
-		///     Die Sitznummer, welche reserviert wurde
-		/// </summary>
-		public int SeatNumber { get; set; }
+		public Dictionary<int, int> Seats { get; set; }
 	}
 }

@@ -52,6 +52,33 @@ C#-WPF-Client. Verantwortlich für die Darstellung und das Verwalten der Daten.
 ** Diese Filter sind eng verbunden
 *** Der Anwender muss in der Lage sein, anhand seines ausgewählten Filmes im "Film suchen" die Darstellung des "Aufführung suchen" anzupassen
 
+=== Ablauf
+
+[uml,file="media/Activity_Reservieren.png"]
+--
+
+title: Reservation erstellen
+
+(*) --> "Vorstellung selektieren"
+--> "Reservation hinzufügen"
+if "User selektiert" then
+  -->[true] "Übernehme User aus User-Modul"
+  -right-> "Sitze selektieren"
+else
+  -->[false]"Sitze selektieren"
+endif
+
+"Sitze selektieren" -> "Reservation speichern"
+
+if "User in Vorstellung vorhanden" then
+  -->[true] (*)
+else
+  -->[false] "User-Feedback"
+  --> "Übernehme User aus User-Modul"
+endif
+
+--
+
 == Konzepte
 
 === Filter
@@ -59,6 +86,7 @@ Um die Daten der Kinoverwaltung zu filtern, entschieden wir uns dafür, dass jed
 
 [uml,file="media/filter.png"]
 --
+
 interface IFilter<T> {
     bool IsEnalbed
     string Label
@@ -83,12 +111,14 @@ IFilter <|.down. StringFilter
 IFilter <|.down. NumberFilter
 IFilter <|.down. DateFilter
 IFilter <|.down. ComplexFilter
+
 --
 
 Dieser Modul-übergreifender Filter ist nötig, damit man die Reservationen einer Person von einem bestimmen Film ansehen kann. Die Module können über den FilterConfigurator ihren Filter konfigurieren. Sie können zum Beispiel einen Stringfilter für den Filmnamen, einen Numberfilter für die ID und einen DateFilter für das Präsentationsdatum anfordern. Dem Filter wird zusätzlich die Liste mit den zu filternden Daten mitgegeben. Beim ComplexFilter wird angegeben, nach welcher Liste im anderen Modul gefiltert werden muss. Zusätzlich wird angegeben welche Liste im eigenen Modul den werten des anderen Modules entsprechen müssen. Der Filter und die Liste können dynamisch im GUI angezeigt werden und sind einfach erweiterbar. Allgemein benötigt man als Entwickler nur wenige Minuten um einen Filter hinzuzufügen, welcher direkt verwendet und im GUI angezeigt wird. 
 
 [uml,file="media/filterConfigurator.png"]
 --
+
 interface IFilterConfigurator<T> {
     IFilterConfigurator StringFilter(string label, params Func<T, string>[] valueToCompareTo)
     IFilterConfigurator NumberFilter(string label, params Func<T, int>[] valueToCompareTo)
