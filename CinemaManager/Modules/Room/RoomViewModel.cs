@@ -28,6 +28,9 @@ namespace CinemaManager.Modules.Room
 		public RoomModel Model { get; }
 	}
 
+	/// <summary>
+	/// VIewmodel of the Rows
+	/// </summary>
 	public class RowViewModel
 	{
 		public RowViewModel(int rowNumber, IEnumerable<SeatModel> seats)

@@ -9,6 +9,7 @@ using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using Microsoft.Practices.Prism.Commands;
+using Xceed.Wpf.DataGrid;
 
 namespace CinemaManager.Modules.Room
 {
@@ -40,6 +41,9 @@ namespace CinemaManager.Modules.Room
 		public DelegateCommand RemoveSeatCommand { get; }
 		private RoomViewModel _selectedRoom;
 
+		/// <summary>
+		/// Manages The Gui of the Rooms
+		/// </summary>
 		public RoomModule()
 		{
 			AddRoomCommand = new DelegateCommand(AddRoom);
@@ -60,6 +64,9 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public override bool Enabled => RoomModels != null;
 
+		/// <summary>
+		/// Shows if there is a selected Room
+		/// </summary>
 		public bool ValueSelected => SelectedRoom != null;
 
 		/// <summary>
@@ -95,6 +102,9 @@ namespace CinemaManager.Modules.Room
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 
+		/// <summary>
+		/// Seattypes for showing in GUI
+		/// </summary>
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		private void AddRoom()
@@ -120,7 +130,13 @@ namespace CinemaManager.Modules.Room
 
 		private void AddRow()
 		{
-			//TODO: Add row
+			SelectedRoom.Rows.Add(new RowViewModel(1, new List<SeatModel>
+			{
+				new SeatModel {Number = 1, Row = 1},
+				new SeatModel {Number = 2, Row = 1},
+				new SeatModel {Number = 3, Row = 1},
+				new SeatModel {Number = 4, Row = 1}
+			}));
 		}
 
 		private void RemoveRow()
