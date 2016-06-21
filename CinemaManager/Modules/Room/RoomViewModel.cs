@@ -1,14 +1,17 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Room
 {
-	public class RoomViewModel
+	public class RoomViewModel : NotifyPropertyChangedBase
 	{
 		public RoomViewModel(RoomModel roomModel)
 		{
@@ -18,6 +21,28 @@ namespace CinemaManager.Modules.Room
 			{
 				Rows.Add(new RowViewModel(seats.Key, seats.Select(g => g)));
 			}
+
+			foreach (var seatViewModel in Rows.SelectMany(r => r.Seats))
+			{
+				seatViewModel.PropertyChanged += SeatViewModelOnPropertyChanged;
+			}
+
+			SelectedSeats = new ObservableCollection<SeatViewModel>(SelectedSeatModels);
+		}
+
+		private IEnumerable<SeatViewModel> SelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
+
+		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
+			{
+				SelectedSeats.Clear();
+
+				foreach (var seat in SelectedSeatModels)
+				{
+					SelectedSeats.Add(seat);
+				}
+			}
 		}
 
 		/// <summary>
@@ -25,14 +50,11 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public RowViewModel SelectedRow { get; set; }
 
-
 		public ObservableCollection<RowViewModel> Rows { get; } = new ObservableCollection<RowViewModel>();
 
-		public IList<SeatViewModel> SelectedSeats => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected).ToList();
+		public ObservableCollection<SeatViewModel> SelectedSeats { get; }
 
 		public RoomModel Model { get; }
-
-		public bool ValueSelected => true;
 
 		/// <summary>
 		///     Add a Row into a Room

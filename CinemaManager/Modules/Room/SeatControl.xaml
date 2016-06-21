@@ -6,7 +6,7 @@
              xmlns:room="clr-namespace:CinemaManager.Modules.Room"
              xmlns:converter="clr-namespace:CinemaManager.Converter"
              mc:Ignorable="d"
-             Width="30" Height="30" Margin="5" d:DataContext="{d:DesignInstance room:SeatViewModel}">
+             Width="{Binding Width}" Height="30" Margin="5" d:DataContext="{d:DesignInstance room:SeatViewModel}">
 	<UserControl.Resources>
 		<converter:BoolToSolidColorBrushConverter x:Key="SelectedToColorConverter" True="Aqua" False="Gray" />
 	</UserControl.Resources>
