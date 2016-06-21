@@ -22,6 +22,7 @@ namespace CinemaManager.Infrastructure
 
 		private Session()
 		{
+			DataModel = new DataModel();
 		}
 
 		/// <summary>
@@ -29,7 +30,7 @@ namespace CinemaManager.Infrastructure
 		/// </summary>
 		public static Session Instance { get; } = new Session();
 
-		public IDataModel DataModel { get; private set; } = new DataModel();
+		public IDataModel DataModel { get; private set; }
 
 		public CinemaModel SelectedCinemaModel => DataModel.CinemasModel.Cinemas.FirstOrDefault(c => c.IsActive);
 

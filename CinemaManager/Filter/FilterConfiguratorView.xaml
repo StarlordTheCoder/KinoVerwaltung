@@ -38,7 +38,7 @@
 							<CheckBox DockPanel.Dock="Right" HorizontalAlignment="Right"
 							          IsChecked="{Binding IsEnabled}" />
 
-							<xctk:IntegerUpDown Name="Number" DockPanel.Dock="Left"
+							<xctk:IntegerUpDown Name="Number" DockPanel.Dock="Left" Minimum="1"
 							                    Value="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
 							                    IsEnabled="{Binding IsEnabled}" />
 						</DockPanel>

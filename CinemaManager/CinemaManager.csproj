@@ -191,6 +191,7 @@
     <Compile Include="MainView\LayoutService.cs" />
     <Compile Include="Metrics\MetricsManager.cs" />
     <Compile Include="Metrics\Startup.cs" />
+    <Compile Include="Model\SeatIdentifier.cs" />
     <Compile Include="Modules\Film\FilmModule.cs" />
     <Compile Include="Modules\Film\FilmModuleView.xaml.cs">
       <DependentUpon>FilmModuleView.xaml</DependentUpon>

@@ -18,8 +18,8 @@ namespace CinemaManager.Model
 		public int ReservatorId { get; set; }
 
 		/// <summary>
-		///     Die reservierten Sitze. Die erste Zahl ist die Reihennummer, die zweite die Sitznummer
+		///     Die reservierten Sitze
 		/// </summary>
-		public Dictionary<int, int> Seats { get; set; }
+		public List<SeatIdentifier> Seats { get; set; }
 	}
 }

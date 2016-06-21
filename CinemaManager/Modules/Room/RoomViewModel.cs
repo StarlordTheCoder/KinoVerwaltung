@@ -13,7 +13,7 @@ namespace CinemaManager.Modules.Room
 		public RoomViewModel(RoomModel roomModel)
 		{
 			Model = roomModel;
-			var groupedSeats = roomModel.Seats.GroupBy(r => r.Row);
+			var groupedSeats = roomModel.Seats.GroupBy(r => r.Place.Row);
 			foreach (var seats in groupedSeats)
 			{
 				Rows.Add(new RowViewModel(seats.Key, seats.Select(g => g)));
@@ -37,13 +37,7 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void AddRow()
 		{
-			Rows.Add(new RowViewModel(1, new List<SeatModel>
-			{
-				new SeatModel {Number = 1, Row = 1},
-				new SeatModel {Number = 2, Row = 1},
-				new SeatModel {Number = 3, Row = 1},
-				new SeatModel {Number = 4, Row = 1}
-			}));
+			Rows.Add(new RowViewModel(1, new List<SeatModel>()));
 		}
 
 		/// <summary>

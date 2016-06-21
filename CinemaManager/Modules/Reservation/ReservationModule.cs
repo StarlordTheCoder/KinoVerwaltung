@@ -95,7 +95,10 @@ namespace CinemaManager.Modules.Reservation
 
 		private void AddReservation()
 		{
-			var model = new ReservationModel();
+			var model = new ReservationModel
+			{
+				Seats = new List<SeatIdentifier>()
+			};
 
 			_presentationModule.SelectedPresentation.Reservations.Add(model);
 
