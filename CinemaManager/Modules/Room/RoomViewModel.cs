@@ -32,6 +32,8 @@ namespace CinemaManager.Modules.Room
 
 		public RoomModel Model { get; }
 
+		public bool ValueSelected => true;
+
 		/// <summary>
 		///     Add a Row into a Room
 		/// </summary>
@@ -51,6 +53,8 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void RemoveRow()
 		{
+			var seats = Model.Seats.Where(s => s.Row == SelectedRow.RowNumber).ToList();
+			seats.ForEach(s => Model.Seats.Remove(s));
 			Rows.Remove(SelectedRow);
 		}
 
