@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Room
@@ -21,50 +20,52 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
+		/// <summary>
+		///     The currently selected Row
+		/// </summary>
+		public RowViewModel SelectedRow { get; set; }
+
+
 		public ObservableCollection<RowViewModel> Rows { get; } = new ObservableCollection<RowViewModel>();
 
 		public IList<SeatViewModel> SelectedSeats => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected).ToList();
 
 		public RoomModel Model { get; }
-	}
 
-	/// <summary>
-	/// VIewmodel of the Rows
-	/// </summary>
-	public class RowViewModel
-	{
-		public RowViewModel(int rowNumber, IEnumerable<SeatModel> seats)
+		/// <summary>
+		///     Add a Row into a Room
+		/// </summary>
+		public void AddRow()
 		{
-			RowNumber = rowNumber;
-			Seats = new ObservableCollection<SeatViewModel>(seats.Select(s => new SeatViewModel(s)));
-		}
-
-		public ObservableCollection<SeatViewModel> Seats { get; }
-		private int RowNumber { get; }
-	}
-
-	public class SeatViewModel : NotifyPropertyChangedBase
-	{
-		private bool _isSelected;
-		public SeatModel Model { get; }
-
-		public bool IsSelected
-		{
-			get { return _isSelected; }
-			set
+			Rows.Add(new RowViewModel(1, new List<SeatModel>
 			{
-				if (_isSelected == value) return;
-				_isSelected = value;
-				OnPropertyChanged();
-			}
+				new SeatModel {Number = 1, Row = 1},
+				new SeatModel {Number = 2, Row = 1},
+				new SeatModel {Number = 3, Row = 1},
+				new SeatModel {Number = 4, Row = 1}
+			}));
 		}
 
-		public SeatType SelectedSeatType
-			=> Session.Instance.SelectedCinemaModel?.SeatTypes.First(s => s.Id == Model.SeatTypeId);
-
-		public SeatViewModel(SeatModel model)
+		/// <summary>
+		///     Removes the selected row
+		/// </summary>
+		public void RemoveRow()
 		{
-			Model = model;
+			Rows.Remove(SelectedRow);
+		}
+
+		/// <summary>
+		///     Adds a new Seat next to the selected seat
+		/// </summary>
+		public void AddSeat()
+		{
+		}
+
+		/// <summary>
+		///     Removes the selected seat
+		/// </summary>
+		public void RemoveSeat()
+		{
 		}
 	}
 }

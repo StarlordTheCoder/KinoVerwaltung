@@ -212,6 +212,7 @@
     <Compile Include="Modules\Room\Rows.xaml.cs">
       <DependentUpon>Rows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Room\RowViewModel.cs" />
     <Compile Include="Modules\Room\SeatControl.xaml.cs">
       <DependentUpon>SeatControl.xaml</DependentUpon>
     </Compile>
@@ -274,6 +275,7 @@
     </Compile>
     <Compile Include="Modules\ModuleBase.cs" />
     <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\Room\SeatViewModel.cs" />
     <Compile Include="Modules\User\UserModule.cs" />
     <Compile Include="Modules\User\UserModuleView.xaml.cs">
       <DependentUpon>UserModuleView.xaml</DependentUpon>

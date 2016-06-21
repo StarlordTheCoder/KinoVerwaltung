@@ -7,10 +7,11 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:RoomViewModel}">
-	<ListView ItemsSource="{Binding Rows}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+	<ListView ItemsSource="{Binding Rows}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+	          SelectedItem="{Binding SelectedRow}">
 		<ListView.ItemContainerStyle>
 			<Style TargetType="ListViewItem">
-				<Setter Property="HorizontalContentAlignment" Value="Center"/>
+				<Setter Property="HorizontalContentAlignment" Value="Center" />
 			</Style>
 		</ListView.ItemContainerStyle>
 		<ListView.ItemTemplate>

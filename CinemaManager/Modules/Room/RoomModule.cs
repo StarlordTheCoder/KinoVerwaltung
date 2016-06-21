@@ -9,40 +9,15 @@ using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using Microsoft.Practices.Prism.Commands;
-using Xceed.Wpf.DataGrid;
 
 namespace CinemaManager.Modules.Room
 {
 	public class RoomModule : ModuleBase
 	{
-		/// <summary>
-		/// Raum Hunzufügen
-		/// </summary>
-		public ICommand AddRoomCommand { get; }
-		/// <summary>
-		/// Raum entfernen
-		/// </summary>
-		public DelegateCommand RemoveRoomCommand { get; }
-		/// <summary>
-		/// Sitzreie hinzufügen
-		/// </summary>
-		public DelegateCommand AddRowCommand { get; }
-		/// <summary>
-		/// Sizreihe Entfernen
-		/// </summary>
-		public DelegateCommand RemoveRowCommand { get; }
-		/// <summary>
-		/// Sitz hinzufügen
-		/// </summary>
-		public DelegateCommand AddSeatCommand { get; }
-		/// <summary>
-		/// Sitz entfernen
-		/// </summary>
-		public DelegateCommand RemoveSeatCommand { get; }
 		private RoomViewModel _selectedRoom;
 
 		/// <summary>
-		/// Manages The Gui of the Rooms
+		///     Manages The Gui of the Rooms
 		/// </summary>
 		public RoomModule()
 		{
@@ -60,12 +35,42 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
+		///     Raum Hunzufügen
+		/// </summary>
+		public ICommand AddRoomCommand { get; }
+
+		/// <summary>
+		///     Raum entfernen
+		/// </summary>
+		public DelegateCommand RemoveRoomCommand { get; }
+
+		/// <summary>
+		///     Sitzreie hinzufügen
+		/// </summary>
+		public DelegateCommand AddRowCommand { get; }
+
+		/// <summary>
+		///     Sizreihe Entfernen
+		/// </summary>
+		public DelegateCommand RemoveRowCommand { get; }
+
+		/// <summary>
+		///     Sitz hinzufügen
+		/// </summary>
+		public DelegateCommand AddSeatCommand { get; }
+
+		/// <summary>
+		///     Sitz entfernen
+		/// </summary>
+		public DelegateCommand RemoveSeatCommand { get; }
+
+		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
 		public override bool Enabled => RoomModels != null;
 
 		/// <summary>
-		/// Shows if there is a selected Room
+		///     Shows if there is a selected Room
 		/// </summary>
 		public bool ValueSelected => SelectedRoom != null;
 
@@ -96,14 +101,13 @@ namespace CinemaManager.Modules.Room
 				_selectedRoom = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
-				
 			}
 		}
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 
 		/// <summary>
-		/// Seattypes for showing in GUI
+		///     Seattypes for showing in GUI
 		/// </summary>
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
@@ -116,7 +120,7 @@ namespace CinemaManager.Modules.Room
 			};
 			RoomModels.Add(room);
 			var roomRoomModel = new RoomViewModel(room);
-			
+
 			Rooms.Add(roomRoomModel);
 			SelectedRoom = roomRoomModel;
 		}
@@ -130,28 +134,22 @@ namespace CinemaManager.Modules.Room
 
 		private void AddRow()
 		{
-			SelectedRoom.Rows.Add(new RowViewModel(1, new List<SeatModel>
-			{
-				new SeatModel {Number = 1, Row = 1},
-				new SeatModel {Number = 2, Row = 1},
-				new SeatModel {Number = 3, Row = 1},
-				new SeatModel {Number = 4, Row = 1}
-			}));
+			SelectedRoom.AddRow();
 		}
 
 		private void RemoveRow()
 		{
-			//TODO: Remove row
+			SelectedRoom.RemoveRow();
 		}
 
 		private void AddSeat()
 		{
-			//TODO: Add seat
+			SelectedRoom.AddSeat();
 		}
 
 		private void RemoveSeat()
 		{
-			//TODO: remove Seat
+			SelectedRoom.RemoveSeat();
 		}
 
 
