@@ -1,0 +1,14 @@
+Alain Dokumentation Analyse Kinoverwaltungssysetem
+=================================================
+Pascal Honegger
+Version 1.1, 14.06.2016
+
+== Vorgehen
+=== Analyse
+Die Analyse das Auftrages war realtiv schnell gemacht. Da das Pflichtenheft kurz gehalten war, musste ich nicht auf viele Dinge achten. Schon schnell hatte ich die Tabelle mit den Möglichen Klassen, Methoden und Properties. Wir haben diese Liste zusätzlich in der Gruppe verglichen und darüber Diskutiert. Schliesslich ist es wichtig, dass wir uns in der Gruppe einig sind, und die nächsten Schritte vom selben Standpunkt aus machen können.
+
+=== CRC-Karten
+Anahnd der Analyse des Pflichtenhefts erstellten wir nun CRC-Karten (Class Responsibility Contributors). Anfangs habe ich sie noch nach der Analyse gemacht, aber je mehr wir über die Vernatwortlichkeiten der einzelnen Klassen diskutierten, wurde mir kalr, dass es wenig Sinn macht nach den aus dem Pflichtenheft herausgelesenen Vernatwortlichkeiten zu arbeiten.
+
+=== Use Cases
+Gemäss dem Skript sollte man nun mit den CRC-Karten alle Use-Case durchspielen. Bemerkt man Fehler sollte man die CRC-Karten erweiter und weitermachen. Danach werden die CRC_Karten in einem Klassendiagram abgebildet. Diese Methode finde ich ein bisschen zu zeitaufwendig. Wir haben beschlossen zuerst das Klassendiagram digital zu erstellen, und mit diesem dann die Use-Cases durchspielen. Somit konnten wir die Verantwortlichkeiten der Klassen in dem verschiedenen Modulen schon früh aufteilen, und das mit Hilfe der Use-Case Diagrammen. Es braucht viel mehr Zeit zuerst alle Vernatwortlichkeiten auf eine CRC-Karte zu schreiben, und diese dann mühsam aufteilen. Womöglich entstehen dabei noch mehr Fehler und der Entwurf stimmt nicht mehr mit den Use-Cases überein.

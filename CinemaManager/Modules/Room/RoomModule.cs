@@ -3,18 +3,52 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
+using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Room
 {
 	public class RoomModule : ModuleBase
 	{
+		/// <summary>
+		/// Raum Hunzufügen
+		/// </summary>
+		public ICommand AddRoomCommand { get; }
+		/// <summary>
+		/// Raum entfernen
+		/// </summary>
+		public DelegateCommand RemoveRoomCommand { get; }
+		/// <summary>
+		/// Sitzreie hinzufügen
+		/// </summary>
+		public DelegateCommand AddRowCommand { get; }
+		/// <summary>
+		/// Sizreihe Entfernen
+		/// </summary>
+		public DelegateCommand RemoveRowCommand { get; }
+		/// <summary>
+		/// Sitz hinzufügen
+		/// </summary>
+		public DelegateCommand AddSeatCommand { get; }
+		/// <summary>
+		/// Sitz entfernen
+		/// </summary>
+		public DelegateCommand RemoveSeatCommand { get; }
 		private RoomViewModel _selectedRoom;
 
 		public RoomModule()
 		{
+			AddRoomCommand = new DelegateCommand(AddRoom);
+			RemoveRoomCommand = new DelegateCommand(RemoveRoom);
+			AddRowCommand = new DelegateCommand(AddRow);
+			RemoveRowCommand = new DelegateCommand(RemoveRow);
+			AddSeatCommand = new DelegateCommand(AddSeat);
+			RemoveSeatCommand = new DelegateCommand(RemoveSeat);
+
 			RoomFilterConfigurator
 				.NumberFilter("Room Number", c => c.RoomNumber);
 
@@ -55,12 +89,55 @@ namespace CinemaManager.Modules.Room
 				_selectedRoom = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				
 			}
 		}
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+
+		private void AddRoom()
+		{
+			var room = new RoomModel
+			{
+				Seats = new List<SeatModel>(),
+				RoomNumber = RoomModels.Any() ? RoomModels.Max(r => r.RoomNumber) + 1 : 1
+			};
+			RoomModels.Add(room);
+			var roomRoomModel = new RoomViewModel(room);
+			
+			Rooms.Add(roomRoomModel);
+			SelectedRoom = roomRoomModel;
+		}
+
+		private void RemoveRoom()
+		{
+			RoomModels.Remove(SelectedRoom.Model);
+			Rooms.Remove(SelectedRoom);
+			SelectedRoom = Rooms.FirstOrDefault();
+		}
+
+		private void AddRow()
+		{
+			//TODO: Add row
+		}
+
+		private void RemoveRow()
+		{
+			//TODO: Remove row
+		}
+
+		private void AddSeat()
+		{
+			//TODO: Add seat
+		}
+
+		private void RemoveSeat()
+		{
+			//TODO: remove Seat
+		}
+
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

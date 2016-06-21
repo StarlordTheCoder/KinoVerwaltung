@@ -39,7 +39,7 @@ namespace CinemaManager.Modules.Presentation
 		{
 			var presentation = new PresentationModel
 			{
-				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) : 1,
+				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) + 1 : 1,
 				Reservations = new List<ReservationModel>(),
 				StartTime = DateTime.Now
 			};
