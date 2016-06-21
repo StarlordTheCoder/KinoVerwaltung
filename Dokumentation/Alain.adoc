@@ -10,3 +10,6 @@ In diesem Modul geht es darum eine Applikation nach einem gegebenen Pflichtenhef
 = Darstellung und Filter
 Wir waren uns Anfangs nicht einig, wie wir das Programm im GUI darsetllen möchten, dass auch das User Experience gewährleistet ist. 
 
+
+= Serializierung
+Wir haben uns entschieden die Daten nicht in einer Datenbank abzuspeuchern, damit wir geung Zeit zum Implementieren der Kinoverwaltung haben. Deshalb speichern wir die Daten mit Hilfe der Serialisierung in XML-Dateien ab. Über das Serializable Attribut in C# ist das relativ einfach gelöst. Man muss nur sagen wann und wo es gespeichert werden muss, und von wo es beim Start der Applikation die Daten er holt. Somit konnten wir uns viel Zeit sparen, wleche wir sonst für das Datenmodell, die DB aufsetzen und DB-Anbidung gebraucht hätten. 
