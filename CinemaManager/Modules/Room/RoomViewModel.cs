@@ -47,7 +47,7 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void RemoveRow()
 		{
-			var seats = Model.Seats.Where(s => s.Row == SelectedRow.RowNumber).ToList();
+			var seats = Model.Seats.Where(s => s.Place.Row == SelectedRow.RowNumber).ToList();
 			seats.ForEach(s => Model.Seats.Remove(s));
 			Rows.Remove(SelectedRow);
 		}
