@@ -4,12 +4,13 @@ Alain Keller, Pascal Honegger und Seraphin Rihm
 Version 1.1, 24.05.2016
 :toc:
 
+Alle Folgenden Anwendungsfälle sind in der Kategorie Primär solange nicht speziell angegeben. 
+
+
+
 = Vorstellung anhand Film finden
 === Beschreibung
 Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -22,6 +23,22 @@ Primär
 .. Film selektieren
 .. Vorstellungen anzeigen wählen
 . Korrekte Vorstellung des Filmes wird geladen
+Vorstellung suchen) as Vor
+
+[uml,file="media/use_VorstellungVonFilm.png"]
+--
+title: Ziel: Vorstellung eines Filmes anzeigen
+
+:User: as User
+
+rectangle System {
+    (Vorstellung suchen) as Vor
+    
+    note right of Vor : Film selektiert
+    
+    User -right-> Vor
+}
+--
 
 === Nachbedingung
 Erfolg: Korrekte Vorstellungen werden angezeigt
@@ -32,22 +49,20 @@ Fehlschlag: Falsche Daten werden angezeigt
 Keine veränderten Daten
 
 === Akteuere
-Angestellter, Client, Server
+Angestellter, Client
 
 === Auslösendes Ereignis
 User möchte eine Vorstellung finden
+
 
 
 = Vorstellung anhand Datum finden
 === Beschreibung
 Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
 
-=== Kategorie
-Primär
-
 === Vorbedingungen
 * Das Programm ist gestartet
-* Film mit Vorstellung am korrekten Datum existiert
+* Vorstellung am korrekten Datum existiert
 
 === Aktion
 . Vorestellung suchen anwählen
@@ -55,6 +70,21 @@ Primär
 .. Datum eingeben
 . Korrekte Vorstellungen werden geladen
 
+[uml,file="media/use_VorstellungVonDatum.png"]
+--
+title: Ziel: Vorstellung an einem Datum anzeigen
+
+:User: as User
+
+rectangle System {
+    (Vorstellung suchen) as Vor
+    
+    note right of Vor : Datum im GUI eingetragen
+    
+    User -right-> Vor
+}
+--
+
 === Nachbedingung
 Erfolg: Korrekte Vorstellungen werden angezeigt
 
@@ -64,17 +94,16 @@ Fehlschlag: Falsche Daten werden angezeigt
 Keine veränderten Daten
 
 === Akteuere
-Angestellter, Client, Server
+Angestellter, Client
 
 === Auslösendes Ereignis
 User möchte eine Vorstellung finden
 
+
+
 = Freie Plätze einer Vorstellung anzeigen
 === Beschreibung
 Als Kunde möchte ich alle alle freien Plätze erfahren, damit ich einen reservieren kann
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -90,6 +119,21 @@ Primär
 .... Besetzte Plätze sind markiert
 .... Selektierte Plätze sind hervorgehoben
 
+[uml,file="media/use_FreiePlätzeVorstellung.png"]
+--
+title: Ziel: Reservationen einer Vorstellung anzeigen
+
+:User: as User
+
+rectangle System {
+    (Reservation suchen) as Res
+    
+    note right of Res : Vorstellung selektiert
+    
+    User -right-> Res
+}
+--
+
 === Nachbedingung
 Erfolg: Korrekte Vorstellungen werden angezeigt
 
@@ -99,29 +143,42 @@ Fehlschlag: Falsche Daten werden angezeigt
 Keine veränderten Daten
 
 === Akteuere
-Angestellter, Client, Server
+Angestellter, Client
 
 === Auslösendes Ereignis
 User möchte eine Vorstellung finden
 
 
-= Vorstellung reservieren
+
+= Freie Plätze einer Vorstellung reservieren
 === Beschreibung
 Als Kunde möchte ich eine Vorstellung reservieren können
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * UseCase "Freie Plätze einer Vorstellung anzeigen"
 
 === Aktion
-. Film suchen anwählen
-.. Filmsuche öffnet sich
-.. Film suchen
-.. Film selektieren
-.. Vorstellungen anzeigen wählen
-. Korrekte Vorstellung des Filmes wird geladen
+. User auswählen
+.. Wird in ReservationsModul übernommen
+. Freie Sitzplätze sind ersichtlich
+.. Anzahl zu reservierenden Plätze eingeben
+.. Sitzplätze auswählen
+. Reservation speichern
+
+[uml,file="media/use_ReservationVonVorstellung.png"]
+--
+title: Ziel: Reservationen einer Vorstellung anzeigen
+
+:User: as User
+
+rectangle System {
+    (Freie Sitzplätze reservieren) as UseUser
+    
+    note right of UseUser : User auswählen
+    
+    User -right-> UseUser
+}
+--
 
 === Nachbedingung
 Erfolg: Korrekte Vorstellungen werden angezeigt
@@ -131,18 +188,16 @@ Fehlschlag: Falsche Daten werden angezeigt
 Keine veränderten Daten
 
 === Akteuere
-Angestellter, Client, Server
+Angestellter, Client
 
 === Auslösendes Ereignis
 User möchte eine Vorstellung finden
 
 
+
 = Reservierung stornieren
 === Beschreibung
 Als Kunde möchte seine Reservation stornieren
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -155,6 +210,21 @@ Primär
 .. Reservation über "Reservation stornieren" stornieren
 . Reservation ist storniert
 
+[uml,file="media/use_ReservierungStornieren.png"]
+--
+title: Ziel: Reservierung stornieren
+
+:User: as User
+
+rectangle System {
+    (Reservation stornieren) as UseUser
+    
+    note right of UseUser : Reservation auswählen
+    
+    User -right-> UseUser
+}
+--
+
 === Nachbedingung
 Erfolg: Die Reservation wurde erfolgreich storniert und die Plätze sind wieder freigegeben
 Fehlschlag: Die Plätze sind immer noch vom Kunden reserviert
@@ -163,23 +233,43 @@ Fehlschlag: Die Plätze sind immer noch vom Kunden reserviert
 Vorstellung
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 Ein User möchte seine Reservation stornieren.
+
 
 
 = Reservierung anpassen
 === Beschreibung
 Ein Kunde möchte seine Reservierung anpassen. Er möchte zwei weitere Sitze Reservieren
 
-=== Kategorie
-Primär
-
 === Vorbedingungen
 * Das Programm ist gestartet
 * Der Kunde ist erfasst
 * Kunde hat eine Reservation gemacht
+
+=== Aktion
+. Reservationen des Kundes anzeigen
+.. Reservation auswählen
+.. Reservation wird angezeigt
+. Sitze hinzufügen
+.. Speichern
+
+[uml,file="media/use_ReservierungAnpassen.png"]
+--
+title: Ziel: Vorstellung an einem Datum anzeigen
+
+:User: as User
+
+rectangle System {
+    (Sitze hinzufügen) as UseUser
+    
+    note right of UseUser : Reservation des User ist ausgewählt
+    
+    User -right-> UseUser
+}
+--
 
 === Nachbedingung
 Erfolg: Die Anpassung war erfolgreich, der Reservation des Kundens wurden zwei weitere Sitze hinzugefügt
@@ -189,18 +279,16 @@ Fehlschlag: Es war nicht möglich die Reservation anzupassen. Die zwei Sitze wur
 Keine veränderten Daten
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 Ein Kunde möchte seine Reservation ändern.
 
 
+
 = Film anhand Namen suchen
 === Beschreibung
 Als Kunde möchte ich einen Film finden können, von welchem ich nur den Namen kenne.
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -213,6 +301,17 @@ Primär
 .. Film suchen
 . Gesuchter Film wird gefunden
 
+[uml,file="media/use_FilmeAnhandNameSuchen.png"]
+--
+title: Ziel: Filme filtern
+
+:User: as User
+
+rectangle System {
+    User -up-> (Film suchen)
+}
+--
+
 === Nachbedingung
 Erfolg: Der korrekte Film wird gefunden
 Fehlschlag: Falsche Daten werden angezeigt
@@ -221,7 +320,8 @@ Fehlschlag: Falsche Daten werden angezeigt
 Keine veränderten Daten
 
 === Akteuere
-User, Server, Client
+User, Client
+
 === Invarianten
 Keine 
 
@@ -229,12 +329,10 @@ Keine
 Ein neuer Film soll im Kino angeboten werden
 
 
+
 = Film erstellen
 === Beschreibung
 Als Kino möchte ich in der Lage sein, neue Filme zu erfassen.
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -246,6 +344,17 @@ Primär
 .. Dialog bestätigen
 . Film ist erfasst
 
+[uml,file="media/use_FilmErstellen.png"]
+--
+title: Ziel: Film erstellen
+
+:User: as User
+
+rectangle System {
+    User -up-> (Film erstellen)
+}
+--
+
 === Nachbedingung
 Erfolg: Film korrekt erfasst. Kann in anderen Modulen verwendet werden.
 Fehlschlag: Daten wurden nicht korrekt gespeichert
@@ -254,18 +363,16 @@ Fehlschlag: Daten wurden nicht korrekt gespeichert
 Alle Daten ausser Säle und Sitzplätze
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 User will neun Saal erfassen
 
 
+
 = Saal erfassen
 === Beschreibung
 Als User möchte ich einen neuen Saal mit Sitzplätzen erfassen
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -277,6 +384,17 @@ Primär
 .. User erstellt Sitzplätze für neuen Saal
 . Die Daten werden auf der Datenbank geupdatet
 
+[uml,file="media/use_SaalErfassen.png"]
+--
+title: Ziel: Neuen Saal erfassen
+
+:User: as User
+
+rectangle System {
+    User -right-> (Saal erfassen)
+}
+--
+
 === Nachbedingung
 Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
 Fehlschlag: Daten wurden nicht korrekt gespeichert
@@ -285,18 +403,16 @@ Fehlschlag: Daten wurden nicht korrekt gespeichert
 Alle Daten ausser Säle und Sitzplätze
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 User will neun Saal erfassen
 
 
+
 = Saal / Sitzplätze bearbeiten
 === Beschreibung
 Als User möchte ich erfasste Säle und die sitzplätze eines Saales bearbeiten können
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -309,6 +425,22 @@ Primär
 .. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
 . Die Daten werden auf der Datenbank geupdatet
 
+[uml,file="media/use_SaalSitzeBearbeiten.png"]
+--
+title: Ziel: Saal und Sitzplätze editieren
+
+:User: as User
+
+rectangle System {
+    (Saal editieren) as EditRoom
+    
+    note right of EditRoom : Saal ausgewählt
+    
+    User -> EditRoom
+    EditRoom -down-> (Sitzplätze editieren)
+}
+--
+
 === Nachbedingung
 Erfolg: Die Änderungen werden korrekt übernommen und sind beim nächsten logon immernoch vorhanden
 Fehlschlag: Daten wurden nicht korrekt gespeichert
@@ -317,18 +449,16 @@ Fehlschlag: Daten wurden nicht korrekt gespeichert
 Alle Daten ausser Säle und Sitzplätze
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 User möchte einen Saal anpassen
 
 
+
 = Reservation anhand Kunde finden
 === Beschreibung
 Als User möchte ich alle Reservationen eines Kunden finden
-
-=== Kategorie
-Primär
 
 === Vorbedingungen
 * Das Programm ist gestartet
@@ -341,6 +471,21 @@ Primär
 . Reservationen des Kundes werden zurückgegeben
 . Reservation selektieren für mehr Detais
 
+[uml,file="media/use_ReservationAnhandUser.png"]
+--
+title: Ziel: Reservation von Kunde finden
+
+:User: as User
+
+rectangle System {
+    (Reservation suchen) as Res
+    
+    note right of Res : User ausgewählt
+    
+    User -> Res
+}
+--
+
 === Nachbedingung
 Erfolg: Alle Reservationen des Kundes werden angzeigt
 Fehlschlag: Reservationen werden nicht angezeigt
@@ -349,7 +494,7 @@ Fehlschlag: Reservationen werden nicht angezeigt
 Keine veränderten Daten
 
 === Akteuere
-User, Server, Client
+User, Client
 
 === Auslösendes Ereignis
 User möchte Reservationen von Kude finden
