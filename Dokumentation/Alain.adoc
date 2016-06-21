@@ -5,7 +5,7 @@ Version 1.0, 31.05.2016
 :toc:
 
 = Ablauf
-In diesem Modul geht es darum eine Applikation nach einem gegebenen Pflichtenheft zu implementieren. Gemäss dem Skript machten wir am Anfang CRC-Karten. Diese beschreiben die Klassen, deren Aufgaben und beziehungen. Danach prüftn wir anhand von Use-Cases, ob wir alles berücksichtigt haben. Meiner Meinung nach macht es mehr Sinn, wenn man zuerst die Use-Cases erstellt und anhand diesen die Klassen bestimmt. Diese werden dann mit einem Klassendiagramm dargestellt. Einzelne Use-Cases können auc in Sequenzdiagrammen dargestellt werden. Ich denke diese Methode wöre effizienter in der Umsetzung, da man einen Zwischenschritt auslässt. 
+In diesem Modul geht es darum eine Applikation nach einem gegebenen Pflichtenheft zu implementieren. Gemäss dem Skript machten wir am Anfang CRC-Karten. Diese beschreiben die Klassen, deren Aufgaben und beziehungen. Danach prüftn wir anhand von Use-Cases, ob wir alles berücksichtigt haben. Meiner Meinung nach macht es mehr Sinn, wenn man zuerst die Use-Cases erstellt und anhand diesen die Klassen bestimmt. Von deren Beschreibungen kann man auch anhand der Verben und Nomen Klassen und Methoden ableiten. Diese werden dann mit einem Klassendiagramm dargestellt. Einzelne Use-Cases können auc in Sequenzdiagrammen dargestellt werden. Ich denke diese Methode wöre effizienter in der Umsetzung, da man einen Zwischenschritt auslässt. 
 
 = Darstellung und Filter
 Wir waren uns Anfangs nicht einig, wie wir das Programm im GUI darsetllen möchten, dass auch das User Experience gewährleistet ist. 

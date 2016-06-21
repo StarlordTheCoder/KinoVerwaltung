@@ -21,8 +21,10 @@
 			<RowDefinition />
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
-		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
+		<filter:FilterConfiguratorView DataContext="{Binding RoomFilterConfigurator}" 
+									   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0" 
+				  SelectedItem="{Binding SelectedRoom}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
 					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
@@ -36,16 +38,28 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}"/>
-		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"/>
-		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" />
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}" Margin="20,0,0,0" 
+				Command="{Binding AddRoomCommand }"/>
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"
+				Command="{Binding RemoveRoomCommand }"/>
+		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.Row="1" />
+		<Button Grid.Column="1" Grid.Row="2" Style="{StaticResource AddButton}" Margin="20,0,0,0" 
+				Command="{Binding AddRoomCommand }"/>
+		<Button Grid.Column="1" Grid.Row="2" Style="{StaticResource RemoveButton}"
+				Command="{Binding RemoveRoomCommand }" Margin="0,0,144.4,0"/>
+		<Button Grid.Column="1" Grid.Row="2" Style="{StaticResource AddButton}" Margin="144.2,0,0,0" 
+				Command="{Binding AddRoomCommand }"/>
+		<Button Grid.Column="1" Grid.Row="2" Style="{StaticResource RemoveButton}"
+				Command="{Binding RemoveRoomCommand }"/>
 		<Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<TextBox Text="{Binding SelectedRoom.SelectedSeats[0].Model.Number}" VerticalAlignment="Center"/>
-			<ComboBox ItemsSource="{Binding SeatTypes}" SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}" DisplayMemberPath="DisplayName" Grid.Row="1" VerticalAlignment="Center">
+			<ComboBox ItemsSource="{Binding SeatTypes}" 
+					  SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}" 
+					  DisplayMemberPath="DisplayName" Grid.Row="1" VerticalAlignment="Center">
 				
 			</ComboBox>
 		</Grid>
