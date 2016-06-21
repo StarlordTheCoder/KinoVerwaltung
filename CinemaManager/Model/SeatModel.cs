@@ -12,14 +12,9 @@ namespace CinemaManager.Model
 	public class SeatModel
 	{
 		/// <summary>
-		///     Reihe
+		///     Die Reihe und Sitznummer
 		/// </summary>
-		public int Row { get; set; }
-
-		/// <summary>
-		///     Platznummer
-		/// </summary>
-		public int Number { get; set; }
+		public SeatIdentifier Place { get; set; }
 
 		/// <summary>
 		///     Platzart. Beispielsweise Sofa
