@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:filter="clr-namespace:CinemaManager.Filter"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignData local:FilterConfigurator}">
+             d:DataContext="{d:DesignInstance filter:FilterConfigurator}">
 	<StackPanel>
 		<Grid HorizontalAlignment="Stretch">
 			<Grid.ColumnDefinitions>
