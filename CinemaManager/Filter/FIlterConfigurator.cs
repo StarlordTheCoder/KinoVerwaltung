@@ -18,7 +18,7 @@ namespace CinemaManager.Filter
 	/// <summary>
 	///     Implementation für <see cref="IFilterConfigurator{T}" />
 	/// </summary>
-	public sealed class FilterConfigurator<T> : NotifyPropertyChangedBase, IFilterConfigurator<T>
+	public class FilterConfigurator<T> : NotifyPropertyChangedBase, IFilterConfigurator<T>
 	{
 		/// <summary>
 		///     Alle Filter in einer Liste kombiniert
@@ -217,4 +217,6 @@ namespace CinemaManager.Filter
 
 		#endregion
 	}
+
+	public class FilterConfigurator : FilterConfigurator<object> { }
 }
