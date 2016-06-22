@@ -21,7 +21,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding PresentationFilterConfigurator}" Grid.ColumnSpan="2" />
-		<ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Presentations}" SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single">
+		<ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Presentations}" SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single" Grid.RowSpan="2">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel ToolTip="{Binding FilmId}">

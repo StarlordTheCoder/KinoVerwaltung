@@ -12,6 +12,7 @@
 		<ListView.ItemContainerStyle>
 			<Style TargetType="ListViewItem">
 				<Setter Property="HorizontalContentAlignment" Value="Center" />
+				<Setter Property="Height" Value="40" />
 			</Style>
 		</ListView.ItemContainerStyle>
 		<ListView.ItemTemplate>
