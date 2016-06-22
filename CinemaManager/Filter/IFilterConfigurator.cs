@@ -39,7 +39,7 @@ namespace CinemaManager.Filter
 		IFilterConfigurator<T> ComplexFilter<TM>(TM module, Func<TM, IEnumerable<T>> valueToCompareTo) where TM : IModule;
 
 		/// <summary>
-		///     Filter die Daten
+		///     Filtert die Daten
 		/// </summary>
 		/// <param name="data">Zu filternde Daten</param>
 		/// <returns>Gefilterte Daten</returns>

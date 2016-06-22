@@ -13,6 +13,8 @@ namespace CinemaManager.Modules.Room
 {
 	public class RoomViewModel : NotifyPropertyChangedBase
 	{
+		private RowViewModel _selectedRow;
+
 		public RoomViewModel(RoomModel roomModel)
 		{
 			Model = roomModel;
@@ -48,7 +50,16 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     The currently selected Row
 		/// </summary>
-		public RowViewModel SelectedRow { get; set; }
+		public RowViewModel SelectedRow
+		{
+			get { return _selectedRow; }
+			set
+			{
+				if (Equals(_selectedRow, value)) return;
+				_selectedRow = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public ObservableCollection<RowViewModel> Rows { get; } = new ObservableCollection<RowViewModel>();
 
@@ -61,7 +72,9 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void AddRow()
 		{
-			Rows.Add(new RowViewModel(1, new List<SeatModel>()));
+			var row = new RowViewModel(1, new List<SeatModel>());
+			Rows.Add(row);
+			SelectedRow = row;
 		}
 
 		/// <summary>

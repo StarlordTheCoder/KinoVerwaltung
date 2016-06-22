@@ -76,6 +76,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\satan.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Metrics, Version=0.3.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Metrics.NET.0.3.7\lib\net45\Metrics.dll</HintPath>

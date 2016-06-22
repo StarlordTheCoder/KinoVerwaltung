@@ -53,7 +53,7 @@ namespace CinemaManager.Modules.Cinema
 		/// <summary>
 		///     Filter-Konfigurator für die Kinos
 		/// </summary>
-		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; } = new FilterConfigurator<CinemaModel>();
+		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>();
 
 		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
 
@@ -73,14 +73,14 @@ namespace CinemaManager.Modules.Cinema
 
 		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
 
-		private void RemoveCinema()
+		public void RemoveCinema()
 		{
 			CinemaModels.Remove(SelectedCinema);
 			Cinemas.Remove(SelectedCinema);
 			SelectedCinema = Cinemas.FirstOrDefault();
 		}
 
-		private void AddCinema()
+		public void AddCinema()
 		{
 			var newCinema = new CinemaModel
 			{
@@ -96,6 +96,11 @@ namespace CinemaManager.Modules.Cinema
 
 			CinemaModels.Add(newCinema);
 			Cinemas.Add(newCinema);
+
+			if (SelectedCinema != null)
+			{
+				SelectedCinema.IsActive = false;
+			}
 
 			SelectedCinema = newCinema;
 		}
@@ -118,6 +123,8 @@ namespace CinemaManager.Modules.Cinema
 			{
 				Cinemas.Add(cinema);
 			}
+
+			SelectedCinema = Cinemas.FirstOrDefault(c => c.IsActive);
 		}
 	}
 }

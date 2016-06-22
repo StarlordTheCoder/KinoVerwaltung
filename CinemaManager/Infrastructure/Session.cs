@@ -30,8 +30,14 @@ namespace CinemaManager.Infrastructure
 		/// </summary>
 		public static Session Instance { get; } = new Session();
 
-		public IDataModel DataModel { get; private set; }
+		/// <summary>
+		///     Die Daten dieser Session
+		/// </summary>
+		public IDataModel DataModel { get; set; }
 
+		/// <summary>
+		///     Das ausgewählte Kino. Shortcut für <see cref="CinemasModel.Cinemas"/>, welches <see cref="CinemaModel.IsActive"/> ist.
+		/// </summary>
 		public CinemaModel SelectedCinemaModel => DataModel.CinemasModel.Cinemas.FirstOrDefault(c => c.IsActive);
 
 		/// <summary>
