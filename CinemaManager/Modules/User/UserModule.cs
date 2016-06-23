@@ -46,7 +46,7 @@ namespace CinemaManager.Modules.User
 		/// </summary>
 		public override bool Enabled => UserModels != null;
 
-		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
+		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
 
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
 
