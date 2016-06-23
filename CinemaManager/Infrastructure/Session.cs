@@ -73,20 +73,6 @@ namespace CinemaManager.Infrastructure
 			}
 		}
 
-
-		/// <summary>
-		///     Tritt ein, wenn der User versucht die Daten zu spiecher. Gibt den Modulen die Möglichkeit ihre Daten zu speichern.
-		/// </summary>
-		public event EventHandler PrepareForSave;
-
-		/// <summary>
-		///     Event invokator for <see cref="PrepareForSave" />
-		/// </summary>
-		public void OnPrepareForSave()
-		{
-			PrepareForSave?.Invoke(this, EventArgs.Empty);
-		}
-
 		/// <summary>
 		///     Gibt einem Objekt Gelegenheit zu dem Versuch, Ressourcen freizugeben und andere Bereinigungen durchzuführen,
 		///     bevor es von der Garbage Collection freigegeben wird.
@@ -96,7 +82,6 @@ namespace CinemaManager.Infrastructure
 			Ticker?.Stop();
 			Ticker?.Dispose();
 			Ticker = null;
-			PrepareForSave = null;
 			DataModel = null;
 		}
 	}

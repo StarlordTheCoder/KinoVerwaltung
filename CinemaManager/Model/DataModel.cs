@@ -37,8 +37,6 @@ namespace CinemaManager.Model
 		/// </summary>
 		public void Save()
 		{
-			Session.OnPrepareForSave();
-
 			var folder = Path.GetDirectoryName(Session.DataPath);
 			if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder))
 			{
