@@ -25,6 +25,6 @@ namespace CinemaManager.Modules.Room
 		}
 
 		public ObservableCollection<SeatViewModel> Seats { get; }
-		public int RowNumber { get; }
+		public int RowNumber { get; set; }
 	}
 }

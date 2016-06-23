@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System.Collections.Generic;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 using CinemaManager.Modules.User;
@@ -14,42 +13,17 @@ namespace CinemaManagerTest.Modules
 		protected override void DoSetup()
 		{
 			base.DoSetup();
-			UnitUnderTest = new UserModule()
+			UnitUnderTest = new UserModule
 			{
 				UserFilterConfigurator = CreateTrueFilterConfigurator<UserModel>()
 			};
 		}
 
 		[Test]
-		public void CorrectlyLoadUserData()
-		{
-			//Arrange
-			var model = new CinemasModel();
-			var cinema = new CinemaModel()
-			{
-				IsActive = true
-			};
-			model.Cinemas.Add(cinema);
-			var user1 = new UserModel();
-			var user2 = new UserModel();
-
-			cinema.Users.Add(user1);
-			cinema.Users.Add(user2);
-
-			Session.Instance.DataModel = CreateData(model);
-
-			//Act
-			UnitUnderTest.Refresh();
-
-			//Assert
-			Assert.That(UnitUnderTest.Users, Is.EqualTo(cinema.Users));
-		}
-
-		[Test]
 		public void AddCorrectlyAddFilm()
 		{
 			var model = new CinemasModel();
-			var cinema = new CinemaModel()
+			var cinema = new CinemaModel
 			{
 				IsActive = true
 			};
@@ -72,11 +46,36 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void RemoveCorrectlyRemoveFilm()
+		public void CorrectlyLoadUserData()
 		{
 			//Arrange
 			var model = new CinemasModel();
-			var cinema = new CinemaModel()
+			var cinema = new CinemaModel
+			{
+				IsActive = true
+			};
+			model.Cinemas.Add(cinema);
+			var user1 = new UserModel();
+			var user2 = new UserModel();
+
+			cinema.Users.Add(user1);
+			cinema.Users.Add(user2);
+
+			Session.Instance.DataModel = CreateData(model);
+
+			//Act
+			UnitUnderTest.Refresh();
+
+			//Assert
+			Assert.That(UnitUnderTest.Users, Is.EqualTo(cinema.Users));
+		}
+
+		[Test]
+		public void RemoveCorrectlyRemovesFilm()
+		{
+			//Arrange
+			var model = new CinemasModel();
+			var cinema = new CinemaModel
 			{
 				IsActive = true
 			};
