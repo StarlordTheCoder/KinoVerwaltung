@@ -68,7 +68,7 @@ namespace CinemaManager.Modules.User
 
 		public bool ValueSelected => SelectedUser != null;
 
-		private void RemoveUser()
+		public void RemoveUser()
 		{
 			UserModels.Remove(SelectedUser);
 
@@ -76,7 +76,7 @@ namespace CinemaManager.Modules.User
 			SelectedUser = Users.FirstOrDefault();
 		}
 
-		private void AddUser()
+		public void AddUser()
 		{
 			var user = new UserModel
 			{

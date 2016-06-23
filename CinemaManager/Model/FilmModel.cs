@@ -40,7 +40,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Hauptdarsteller
 		/// </summary>
-		public List<string> MainActors { get; set; }
+		public List<string> MainActors { get; set; } = new List<string>();
 
 		/// <summary>
 		///     Altersfreigabe

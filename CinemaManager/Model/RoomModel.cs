@@ -20,6 +20,6 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Die Plätze im Saal
 		/// </summary>
-		public List<SeatModel> Seats { get; set; }
+		public List<SeatModel> Seats { get; set; } = new List<SeatModel>();
 	}
 }
