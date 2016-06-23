@@ -11,7 +11,7 @@ using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Room
 {
-	public class RoomViewModel : NotifyPropertyChangedBase
+	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
 	{
 		private RowViewModel _selectedRow;
 
@@ -65,7 +65,7 @@ namespace CinemaManager.Modules.Room
 
 		public ObservableCollection<SeatViewModel> SelectedSeats { get; }
 
-		public RoomModel Model { get; }
+		public RoomModel Model { get; set; }
 
 		/// <summary>
 		///     Add a Row into a Room
