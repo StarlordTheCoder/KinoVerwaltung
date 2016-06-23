@@ -33,7 +33,6 @@ namespace CinemaManagerTest.Modules
 			model.Cinemas.Add(cinema);
 			var film1 = new FilmModel();
 			var film2 = new FilmModel();
-			cinema.Films = new List<FilmModel>();
 			cinema.Films.Add(film1);
 			cinema.Films.Add(film2);
 
@@ -58,7 +57,6 @@ namespace CinemaManagerTest.Modules
 			model.Cinemas.Add(cinema);
 			var film1 = new FilmModel();
 			var film2 = new FilmModel();
-			cinema.Films = new List<FilmModel>();
 			cinema.Films.Add(film1);
 			cinema.Films.Add(film2);
 
@@ -85,7 +83,6 @@ namespace CinemaManagerTest.Modules
 			model.Cinemas.Add(cinema);
 			var film1 = new FilmModel();
 			var film2 = new FilmModel();
-			cinema.Films = new List<FilmModel>();
 			cinema.Films.Add(film1);
 			cinema.Films.Add(film2);
 

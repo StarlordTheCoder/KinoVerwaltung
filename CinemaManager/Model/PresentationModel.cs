@@ -30,7 +30,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Die Reservationen für diese Vorstellung
 		/// </summary>
-		public List<ReservationModel> Reservations { get; set; }
+		public List<ReservationModel> Reservations { get; set; } = new List<ReservationModel>();
 
 		/// <summary>
 		///     Ob diese Vorstellung 3D-unterstützt
