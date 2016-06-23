@@ -87,7 +87,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Filter-Configurator für die Räume
 		/// </summary>
-		public IFilterConfigurator<RoomModel> RoomFilterConfigurator { get; } = new FilterConfigurator<RoomModel>();
+		public IFilterConfigurator<RoomModel> RoomFilterConfigurator { get; set; } = new FilterConfigurator<RoomModel>();
 
 		/// <summary>
 		///     Ausgewählter Raum
@@ -111,7 +111,7 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
-		private void AddRoom()
+		public void AddRoom()
 		{
 			var room = new RoomModel
 			{
@@ -125,29 +125,29 @@ namespace CinemaManager.Modules.Room
 			SelectedRoom = roomRoomModel;
 		}
 
-		private void RemoveRoom()
+		public void RemoveRoom()
 		{
 			RoomModels.Remove(SelectedRoom.Model);
 			Rooms.Remove(SelectedRoom);
 			SelectedRoom = Rooms.FirstOrDefault();
 		}
 
-		private void AddRow()
+		public void AddRow()
 		{
 			SelectedRoom.AddRow();
 		}
 
-		private void RemoveRow()
+		public void RemoveRow()
 		{
 			SelectedRoom.RemoveRow();
 		}
 
-		private void AddSeat()
+		public void AddSeat()
 		{
 			SelectedRoom.AddSeat();
 		}
 
-		private void RemoveSeat()
+		public void RemoveSeat()
 		{
 			SelectedRoom.RemoveSeat();
 		}

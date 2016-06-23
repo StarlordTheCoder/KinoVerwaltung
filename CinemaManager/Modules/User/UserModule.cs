@@ -46,7 +46,7 @@ namespace CinemaManager.Modules.User
 		/// </summary>
 		public override bool Enabled => UserModels != null;
 
-		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; } = new FilterConfigurator<UserModel>();
+		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
 
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
 
@@ -68,7 +68,7 @@ namespace CinemaManager.Modules.User
 
 		public bool ValueSelected => SelectedUser != null;
 
-		private void RemoveUser()
+		public void RemoveUser()
 		{
 			UserModels.Remove(SelectedUser);
 
@@ -76,7 +76,7 @@ namespace CinemaManager.Modules.User
 			SelectedUser = Users.FirstOrDefault();
 		}
 
-		private void AddUser()
+		public void AddUser()
 		{
 			var user = new UserModel
 			{

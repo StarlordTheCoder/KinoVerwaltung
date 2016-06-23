@@ -29,13 +29,13 @@ namespace CinemaManager.Modules.Presentation
 			PresentationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
 
-		private void RemovePresentation()
+		public void RemovePresentation()
 		{
 			PresentationModels.Remove(SelectedPresentation);
 			Presentations.Remove(SelectedPresentation);
 		}
 
-		private void AddPresentation()
+		public void AddPresentation()
 		{
 			var presentation = new PresentationModel
 			{
@@ -51,7 +51,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Filter-Konfigurator für die Kinos
 		/// </summary>
-		public IFilterConfigurator<PresentationModel> PresentationFilterConfigurator { get; } =
+		public IFilterConfigurator<PresentationModel> PresentationFilterConfigurator { get; set; } =
 			new FilterConfigurator<PresentationModel>();
 
 		/// <summary>
