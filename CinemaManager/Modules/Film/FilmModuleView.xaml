@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:CinemaManager.Modules.Film"
              xmlns:filter="clr-namespace:CinemaManager.Filter"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:infrastructure="clr-namespace:CinemaManager.Infrastructure"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:FilmModule}"
              IsEnabled="{Binding Enabled}">
@@ -13,11 +14,11 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildAutoElseHidden}" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
-			<ColumnDefinition />
+			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}"/>
 		</Grid.ColumnDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding FilmFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Films}" Grid.Row="1" Grid.Column="0"
