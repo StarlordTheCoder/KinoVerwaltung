@@ -39,7 +39,10 @@ namespace CinemaManager.Modules.Film
 		/// </summary>
 		public override string Title => "Filme";
 
-		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; } = new FilterConfigurator<FilmModel>();
+		/// <summary>
+		/// FilterKonfigurator
+		/// </summary>
+		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
 
 		public ObservableCollection<FilmModel> Films { get; set; } = new ObservableCollection<FilmModel>();
 
@@ -70,14 +73,14 @@ namespace CinemaManager.Modules.Film
 
 		public bool ValueSelected => SelectedFilm != null;
 
-		private void RemoveFilm()
+		public void RemoveFilm()
 		{
 			FilmModels.Remove(SelectedFilm);
 			Films.Remove(SelectedFilm);
 			SelectedFilm = Films.FirstOrDefault();
 		}
 
-		private void AddFilm()
+		public void AddFilm()
 		{
 			var newFilm = new FilmModel
 			{
