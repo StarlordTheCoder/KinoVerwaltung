@@ -45,6 +45,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\CinemaManager.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +55,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>CinemaManager.App</StartupObject>
@@ -78,6 +80,16 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\satan.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Reservations|AnyCPU'">
+    <OutputPath>bin\Reservations\</OutputPath>
+    <DefineConstants>TRACE;RESERVATIONS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Metrics, Version=0.3.7.0, Culture=neutral, processorArchitecture=MSIL">
@@ -187,6 +199,7 @@
     <Compile Include="Filter\String\IStringFilter.cs" />
     <Compile Include="Filter\Number\NumberFilter.cs" />
     <Compile Include="Filter\String\StringFilter.cs" />
+    <Compile Include="Infrastructure\DebugReleaseStylePicker.cs" />
     <Compile Include="Infrastructure\NotifyPropertyChangedBase.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />
