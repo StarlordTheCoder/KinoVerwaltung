@@ -11,7 +11,7 @@ using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Room
 {
-	public class RoomViewModel : NotifyPropertyChangedBase
+	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
 	{
 		private RowViewModel _selectedRow;
 
@@ -65,14 +65,26 @@ namespace CinemaManager.Modules.Room
 
 		public ObservableCollection<SeatViewModel> SelectedSeats { get; }
 
-		public RoomModel Model { get; }
+		public RoomModel Model { get; set; }
 
 		/// <summary>
 		///     Add a Row into a Room
 		/// </summary>
 		public void AddRow()
 		{
-			var row = new RowViewModel(1, new List<SeatModel>());
+			RowViewModel row;
+			if (SelectedRow != null)
+			{
+				row = new RowViewModel(SelectedRow.RowNumber + 1, new List<SeatModel>());
+				foreach (var r in Rows.Where(r => r.RowNumber > SelectedRow.RowNumber))
+				{
+					r.RowNumber++;
+				}
+			}
+			else
+			{
+				row = new RowViewModel(Rows.Any() ? Rows.Max(r => r.RowNumber) + 1 : 1, new List<SeatModel>());
+			}
 			Rows.Add(row);
 			SelectedRow = row;
 		}

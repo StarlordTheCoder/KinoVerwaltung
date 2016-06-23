@@ -221,6 +221,7 @@
       <DependentUpon>ReservationModuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Reservation\ReservationViewModel.cs" />
+    <Compile Include="Modules\Room\IRoomViewModel.cs" />
     <Compile Include="Modules\Room\RoomModule.cs" />
     <Compile Include="Modules\Room\RoomModuleView.xaml.cs">
       <DependentUpon>RoomModuleView.xaml</DependentUpon>

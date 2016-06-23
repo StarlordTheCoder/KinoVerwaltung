@@ -20,27 +20,27 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Säle des Kinos
 		/// </summary>
-		public List<RoomModel> Rooms { get; set; }
+		public List<RoomModel> Rooms { get; set; } = new List<RoomModel>();
 
 		/// <summary>
 		///     Vorstellungen des Kinos
 		/// </summary>
-		public List<PresentationModel> Presentations { get; set; }
+		public List<PresentationModel> Presentations { get; set; } = new List<PresentationModel>();
 
 		/// <summary>
 		///     Benutzer des Kinos
 		/// </summary>
-		public List<UserModel> Users { get; set; }
+		public List<UserModel> Users { get; set; } = new List<UserModel>();
 
 		/// <summary>
 		///     Filme des Kinos
 		/// </summary>
-		public List<FilmModel> Films { get; set; }
+		public List<FilmModel> Films { get; set; } = new List<FilmModel>();
 
 		/// <summary>
 		///     Die verschiedenen Sitzarten, welche das Kino unterstützt
 		/// </summary>
-		public List<SeatType> SeatTypes { get; set; }
+		public List<SeatType> SeatTypes { get; set; } = new List<SeatType>();
 
 		/// <summary>
 		///     Adresse des Kinos

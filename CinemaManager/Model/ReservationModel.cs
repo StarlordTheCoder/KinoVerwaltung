@@ -20,6 +20,6 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Die reservierten Sitze
 		/// </summary>
-		public List<SeatIdentifier> Seats { get; set; }
+		public List<SeatIdentifier> Seats { get; set; } = new List<SeatIdentifier>();
 	}
 }

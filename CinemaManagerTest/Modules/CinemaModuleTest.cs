@@ -18,30 +18,6 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void CorrectlyLoadsModelData()
-		{
-			//Arrange
-			var model = new CinemasModel();
-			var cinema1 = new CinemaModel
-			{
-				IsActive = true
-			};
-
-			var cinema2 = new CinemaModel();
-
-			model.Cinemas.Add(cinema1);
-			model.Cinemas.Add(cinema2);
-
-			Session.Instance.DataModel = CreateData(model);
-
-			//Act
-			UnitUnderTest.Refresh();
-
-			//Assert
-			Assert.That(UnitUnderTest.Cinemas, Is.EquivalentTo(model.Cinemas));
-		}
-
-		[Test]
 		public void AddCorrectlyAddsCinema()
 		{
 			//Arrange
@@ -66,6 +42,30 @@ namespace CinemaManagerTest.Modules
 			Assert.That(UnitUnderTest.Cinemas, Has.Count.EqualTo(3));
 			Assert.That(model.Cinemas, Has.Count.EqualTo(3));
 			Assert.That(cinema1.IsActive, Is.False);
+		}
+
+		[Test]
+		public void CorrectlyLoadsModelData()
+		{
+			//Arrange
+			var model = new CinemasModel();
+			var cinema1 = new CinemaModel
+			{
+				IsActive = true
+			};
+
+			var cinema2 = new CinemaModel();
+
+			model.Cinemas.Add(cinema1);
+			model.Cinemas.Add(cinema2);
+
+			Session.Instance.DataModel = CreateData(model);
+
+			//Act
+			UnitUnderTest.Refresh();
+
+			//Assert
+			Assert.That(UnitUnderTest.Cinemas, Is.EquivalentTo(model.Cinemas));
 		}
 
 		[Test]
