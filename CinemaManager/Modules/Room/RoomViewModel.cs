@@ -11,10 +11,17 @@ using CinemaManager.Model;
 
 namespace CinemaManager.Modules.Room
 {
+	/// <summary>
+	/// ViewModel of the RoomModel
+	/// </summary>
 	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
 	{
 		private RowViewModel _selectedRow;
 
+		/// <summary>
+		/// Contains methods and Datas of a room for the gui
+		/// </summary>
+		/// <param name="roomModel">Model of the Room</param>
 		public RoomViewModel(RoomModel roomModel)
 		{
 			Model = roomModel;
@@ -61,10 +68,19 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
+		/// <summary>
+		/// List of the Rows if the Room
+		/// </summary>
 		public ObservableCollection<RowViewModel> Rows { get; } = new ObservableCollection<RowViewModel>();
 
+		/// <summary>
+		/// Currently selected Seats in the GUI
+		/// </summary>
 		public ObservableCollection<SeatViewModel> SelectedSeats { get; }
 
+		/// <summary>
+		/// Model of the Room
+		/// </summary>
 		public RoomModel Model { get; set; }
 
 		/// <summary>

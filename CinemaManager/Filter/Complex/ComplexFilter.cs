@@ -8,6 +8,11 @@ using CinemaManager.Modules;
 
 namespace CinemaManager.Filter.Complex
 {
+	/// <summary>
+	/// FIlter, welcher erlaubt nach Komplexen Datentypen wie zum beispiel Modulen zu filtern
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="TM"></typeparam>
 	public class ComplexFilter<T, TM> : FilterBase<T>, IComplexFilter<T, TM> where TM : IModule
 	{
 		private readonly Func<TM, IEnumerable<T>> _valueToCompareTo;

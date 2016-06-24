@@ -19,6 +19,9 @@ namespace CinemaManager.Modules.User
 	{
 		private UserModel _selectedUser;
 
+		/// <summary>
+		/// Modul zum Anzeigen des Users
+		/// </summary>
 		public UserModule()
 		{
 			AddUserCommand = new DelegateCommand(AddUser);
@@ -32,8 +35,14 @@ namespace CinemaManager.Modules.User
 			UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
 
+		/// <summary>
+		/// Command für <see cref="RemoveUser"/>
+		/// </summary>
 		public DelegateCommand RemoveUserCommand { get; set; }
 
+		/// <summary>
+		/// Command für <see cref="AddUser"/>
+		/// </summary>
 		public ICommand AddUserCommand { get; set; }
 
 		/// <summary>
@@ -46,10 +55,19 @@ namespace CinemaManager.Modules.User
 		/// </summary>
 		public override bool Enabled => UserModels != null;
 
+		/// <summary>
+		/// Filter des Benutzermodules
+		/// </summary>
 		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
 
+		/// <summary>
+		/// Liste aller <see cref="UserModel"/>
+		/// </summary>
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
 
+		/// <summary>
+		/// <see cref="UserModel"/> des ausgewählten Benutzers
+		/// </summary>
 		public UserModel SelectedUser
 		{
 			get { return _selectedUser; }
@@ -66,8 +84,14 @@ namespace CinemaManager.Modules.User
 
 		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
+		/// <summary>
+		/// Gibt den Ausgewählten Benutzer zurück
+		/// </summary>
 		public bool ValueSelected => SelectedUser != null;
 
+		/// <summary>
+		/// Entfernt den ausgewählten User
+		/// </summary>
 		public void RemoveUser()
 		{
 			UserModels.Remove(SelectedUser);
@@ -76,6 +100,9 @@ namespace CinemaManager.Modules.User
 			SelectedUser = Users.FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Fügt einen neuen User hinzu
+		/// </summary>
 		public void AddUser()
 		{
 			var user = new UserModel

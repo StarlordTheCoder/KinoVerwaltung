@@ -37,6 +37,9 @@ namespace CinemaManager.Modules.Reservation
 
 		public ReservationModel Model { get; }
 
+		/// <summary>
+		/// Usermodel des Reservierers
+		/// </summary>
 		public UserModel Reservator
 		{
 			get { return _reservator; }
@@ -61,6 +64,9 @@ namespace CinemaManager.Modules.Reservation
 
 		private static CinemaModel Cinema => Session.Instance.SelectedCinemaModel;
 
+		/// <summary>
+		/// Model der Präseantation
+		/// </summary>
 		public PresentationModel Presentation
 		{
 			get { return _presentation; }

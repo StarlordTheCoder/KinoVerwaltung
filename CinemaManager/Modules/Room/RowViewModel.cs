@@ -24,7 +24,13 @@ namespace CinemaManager.Modules.Room
 			Seats = new ObservableCollection<SeatViewModel>(seats.Select(s => new SeatViewModel(s)));
 		}
 
+		/// <summary>
+		/// Liste der <see cref="SeatViewModel"/> in einer Reihe
+		/// </summary>
 		public ObservableCollection<SeatViewModel> Seats { get; }
+		/// <summary>
+		/// Nummer/Position der Reihe
+		/// </summary>
 		public int RowNumber { get; set; }
 	}
 }
