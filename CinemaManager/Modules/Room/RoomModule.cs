@@ -112,6 +112,9 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
+		/// <summary>
+		/// Fügt einen neuen Raum hinzu
+		/// </summary>
 		public void AddRoom()
 		{
 			var room = new RoomModel
@@ -126,6 +129,9 @@ namespace CinemaManager.Modules.Room
 			SelectedRoom = roomRoomModel;
 		}
 
+		/// <summary>
+		/// Entfernt den ausgewählten Raum
+		/// </summary>
 		public void RemoveRoom()
 		{
 			RoomModels.Remove(SelectedRoom?.Model);
@@ -133,21 +139,33 @@ namespace CinemaManager.Modules.Room
 			SelectedRoom = Rooms.FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Fügt eine neue Reihe hinzu
+		/// </summary>
 		public void AddRow()
 		{
 			SelectedRoom.AddRow();
 		}
 
+		/// <summary>
+		/// Entfernt die Ausgewählte Reihe
+		/// </summary>
 		public void RemoveRow()
 		{
 			SelectedRoom.RemoveRow();
 		}
 
+		/// <summary>
+		/// Fügt einen neuen Sitz hinzu
+		/// </summary>
 		public void AddSeat()
 		{
 			SelectedRoom.AddSeat();
 		}
 
+		/// <summary>
+		/// Entfernt den ausgewählten Sitz
+		/// </summary>
 		public void RemoveSeat()
 		{
 			SelectedRoom.RemoveSeat();

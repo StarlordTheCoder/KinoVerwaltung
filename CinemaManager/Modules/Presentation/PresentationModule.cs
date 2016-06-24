@@ -29,12 +29,18 @@ namespace CinemaManager.Modules.Presentation
 			PresentationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
 
+		/// <summary>
+		/// Entfernt die ausgewählte Präsentation
+		/// </summary>
 		public void RemovePresentation()
 		{
 			PresentationModels.Remove(SelectedPresentation);
 			Presentations.Remove(SelectedPresentation);
 		}
 
+		/// <summary>
+		/// Fügt eine neue Präsentation hinzu
+		/// </summary>
 		public void AddPresentation()
 		{
 			var presentation = new PresentationModel
@@ -74,6 +80,9 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public override string Title => "Presentation";
 
+		/// <summary>
+		/// Model der ausgewählten Präsentation
+		/// </summary>
 		public PresentationModel SelectedPresentation
 		{
 			get { return _selectedPresentation; }
@@ -87,8 +96,14 @@ namespace CinemaManager.Modules.Presentation
 			}
 		}
 
+		/// <summary>
+		/// Liste Aller präsenatationen
+		/// </summary>
 		public ObservableCollection<PresentationModel> Presentations { get; } = new ObservableCollection<PresentationModel>();
 
+		/// <summary>
+		/// Gibt zurück, ob eine Präsentation ausgewählt ist
+		/// </summary>
 		public bool ValueSelected => SelectedPresentation != null;
 
 		/// <summary>

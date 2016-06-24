@@ -13,11 +13,18 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Cinema
 {
+	/// <summary>
+	/// Module of the Cinemas in the GUI
+	/// </summary>
 	public class CinemaModule : ModuleBase
 	{
 		private readonly Action<IModule> _refreshModules;
 		private CinemaModel _selectedCinema;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="refreshModules"></param>
 		public CinemaModule(Action<IModule> refreshModules)
 		{
 			_refreshModules = refreshModules;
@@ -55,8 +62,14 @@ namespace CinemaManager.Modules.Cinema
 		/// </summary>
 		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>();
 
+		/// <summary>
+		/// Liste der <see cref="CinemaModel"/>
+		/// </summary>
 		public ObservableCollection<CinemaModel> Cinemas { get; } = new ObservableCollection<CinemaModel>();
 
+		/// <summary>
+		/// Gibt das Ausgewählte Kino im Gui zurück
+		/// </summary>
 		public CinemaModel SelectedCinema
 		{
 			get { return _selectedCinema; }
@@ -73,6 +86,9 @@ namespace CinemaManager.Modules.Cinema
 
 		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
 
+		/// <summary>
+		/// Entfernt ein Kino
+		/// </summary>
 		public void RemoveCinema()
 		{
 			CinemaModels.Remove(SelectedCinema);
@@ -80,6 +96,9 @@ namespace CinemaManager.Modules.Cinema
 			SelectedCinema = Cinemas.FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Fügt ein neues Kino mit Defaultdaten hinzu
+		/// </summary>
 		public void AddCinema()
 		{
 			var newCinema = new CinemaModel

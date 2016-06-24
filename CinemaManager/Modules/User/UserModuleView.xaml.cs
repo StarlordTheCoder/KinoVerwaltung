@@ -8,6 +8,9 @@ namespace CinemaManager.Modules.User
 	/// </summary>
 	public partial class UserModuleView
 	{
+		/// <summary>
+		/// Initialisiert das <see cref="UserModuleView"/>
+		/// </summary>
 		public UserModuleView()
 		{
 			InitializeComponent();
