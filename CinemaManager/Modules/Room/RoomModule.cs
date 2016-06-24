@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
@@ -127,7 +128,7 @@ namespace CinemaManager.Modules.Room
 
 		public void RemoveRoom()
 		{
-			RoomModels.Remove(SelectedRoom.Model);
+			RoomModels.Remove(SelectedRoom?.Model);
 			Rooms.Remove(SelectedRoom);
 			SelectedRoom = Rooms.FirstOrDefault();
 		}
