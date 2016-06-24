@@ -57,7 +57,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Grösse des Sitzes für Anzeig im GUI
+		///     Grösse des Sitzes für Anzeig im GUI
 		/// </summary>
 		public double Width => SelectedSeatType.Capacity*30;
 	}

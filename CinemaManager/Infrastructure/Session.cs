@@ -36,7 +36,8 @@ namespace CinemaManager.Infrastructure
 		public IDataModel DataModel { get; set; }
 
 		/// <summary>
-		///     Das ausgewählte Kino. Shortcut für <see cref="CinemasModel.Cinemas"/>, welches <see cref="CinemaModel.IsActive"/> ist.
+		///     Das ausgewählte Kino. Shortcut für <see cref="CinemasModel.Cinemas" />, welches <see cref="CinemaModel.IsActive" />
+		///     ist.
 		/// </summary>
 		public CinemaModel SelectedCinemaModel => DataModel.CinemasModel.Cinemas.FirstOrDefault(c => c.IsActive);
 

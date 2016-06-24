@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
@@ -113,7 +112,7 @@ namespace CinemaManager.Modules.Room
 		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		/// <summary>
-		/// Fügt einen neuen Raum hinzu
+		///     Fügt einen neuen Raum hinzu
 		/// </summary>
 		public void AddRoom()
 		{
@@ -130,7 +129,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Entfernt den ausgewählten Raum
+		///     Entfernt den ausgewählten Raum
 		/// </summary>
 		public void RemoveRoom()
 		{
@@ -140,7 +139,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Fügt eine neue Reihe hinzu
+		///     Fügt eine neue Reihe hinzu
 		/// </summary>
 		public void AddRow()
 		{
@@ -148,7 +147,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Entfernt die Ausgewählte Reihe
+		///     Entfernt die Ausgewählte Reihe
 		/// </summary>
 		public void RemoveRow()
 		{
@@ -156,7 +155,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Fügt einen neuen Sitz hinzu
+		///     Fügt einen neuen Sitz hinzu
 		/// </summary>
 		public void AddSeat()
 		{
@@ -164,7 +163,7 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Entfernt den ausgewählten Sitz
+		///     Entfernt den ausgewählten Sitz
 		/// </summary>
 		public void RemoveSeat()
 		{

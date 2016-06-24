@@ -9,7 +9,7 @@ namespace CinemaManager.Modules.Room
 	public partial class Rows
 	{
 		/// <summary>
-		/// Initialisert die ReihenView
+		///     Initialisert die ReihenView
 		/// </summary>
 		public Rows()
 		{

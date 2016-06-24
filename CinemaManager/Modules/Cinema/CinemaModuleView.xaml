@@ -12,7 +12,7 @@
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
-			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}"/>
+			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

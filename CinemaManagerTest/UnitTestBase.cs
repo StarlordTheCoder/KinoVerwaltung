@@ -32,6 +32,7 @@ namespace CinemaManagerTest
 			mock.Setup(m => m.FilterData(It.IsAny<IEnumerable<TDto>>())).Returns<IEnumerable<TDto>>(d => d);
 			return mock.Object;
 		}
+
 		protected IDataModel CreateData(CinemasModel data)
 		{
 			var mock = new Mock<IDataModel>();

@@ -18,7 +18,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
-			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}"/>
+			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}" />
 		</Grid.ColumnDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding FilmFilterConfigurator}" Grid.ColumnSpan="2" />
 		<ListView ItemsSource="{Binding Films}" Grid.Row="1" Grid.Column="0"

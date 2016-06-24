@@ -20,7 +20,7 @@ namespace CinemaManager.Modules.User
 		private UserModel _selectedUser;
 
 		/// <summary>
-		/// Modul zum Anzeigen des Users
+		///     Modul zum Anzeigen des Users
 		/// </summary>
 		public UserModule()
 		{
@@ -36,12 +36,12 @@ namespace CinemaManager.Modules.User
 		}
 
 		/// <summary>
-		/// Command für <see cref="RemoveUser"/>
+		///     Command für <see cref="RemoveUser" />
 		/// </summary>
 		public DelegateCommand RemoveUserCommand { get; set; }
 
 		/// <summary>
-		/// Command für <see cref="AddUser"/>
+		///     Command für <see cref="AddUser" />
 		/// </summary>
 		public ICommand AddUserCommand { get; set; }
 
@@ -56,17 +56,17 @@ namespace CinemaManager.Modules.User
 		public override bool Enabled => UserModels != null;
 
 		/// <summary>
-		/// Filter des Benutzermodules
+		///     Filter des Benutzermodules
 		/// </summary>
 		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
 
 		/// <summary>
-		/// Liste aller <see cref="UserModel"/>
+		///     Liste aller <see cref="UserModel" />
 		/// </summary>
 		public ObservableCollection<UserModel> Users { get; } = new ObservableCollection<UserModel>();
 
 		/// <summary>
-		/// <see cref="UserModel"/> des ausgewählten Benutzers
+		///     <see cref="UserModel" /> des ausgewählten Benutzers
 		/// </summary>
 		public UserModel SelectedUser
 		{
@@ -85,12 +85,12 @@ namespace CinemaManager.Modules.User
 		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
-		/// Gibt den Ausgewählten Benutzer zurück
+		///     Gibt den Ausgewählten Benutzer zurück
 		/// </summary>
 		public bool ValueSelected => SelectedUser != null;
 
 		/// <summary>
-		/// Entfernt den ausgewählten User
+		///     Entfernt den ausgewählten User
 		/// </summary>
 		public void RemoveUser()
 		{
@@ -101,7 +101,7 @@ namespace CinemaManager.Modules.User
 		}
 
 		/// <summary>
-		/// Fügt einen neuen User hinzu
+		///     Fügt einen neuen User hinzu
 		/// </summary>
 		public void AddUser()
 		{

@@ -30,31 +30,6 @@ namespace CinemaManager.Modules.Presentation
 		}
 
 		/// <summary>
-		/// Entfernt die ausgewählte Präsentation
-		/// </summary>
-		public void RemovePresentation()
-		{
-			PresentationModels.Remove(SelectedPresentation);
-			Presentations.Remove(SelectedPresentation);
-		}
-
-		/// <summary>
-		/// Fügt eine neue Präsentation hinzu
-		/// </summary>
-		public void AddPresentation()
-		{
-			var presentation = new PresentationModel
-			{
-				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) + 1 : 1,
-				Reservations = new List<ReservationModel>(),
-				StartTime = DateTime.Now
-			};
-
-			PresentationModels.Add(presentation);
-			Presentations.Add(presentation);
-		}
-
-		/// <summary>
 		///     Filter-Konfigurator für die Kinos
 		/// </summary>
 		public IFilterConfigurator<PresentationModel> PresentationFilterConfigurator { get; set; } =
@@ -81,7 +56,7 @@ namespace CinemaManager.Modules.Presentation
 		public override string Title => "Presentation";
 
 		/// <summary>
-		/// Model der ausgewählten Präsentation
+		///     Model der ausgewählten Präsentation
 		/// </summary>
 		public PresentationModel SelectedPresentation
 		{
@@ -97,14 +72,41 @@ namespace CinemaManager.Modules.Presentation
 		}
 
 		/// <summary>
-		/// Liste Aller präsenatationen
+		///     Liste Aller präsenatationen
 		/// </summary>
 		public ObservableCollection<PresentationModel> Presentations { get; } = new ObservableCollection<PresentationModel>();
 
 		/// <summary>
-		/// Gibt zurück, ob eine Präsentation ausgewählt ist
+		///     Gibt zurück, ob eine Präsentation ausgewählt ist
 		/// </summary>
 		public bool ValueSelected => SelectedPresentation != null;
+
+		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
+
+		/// <summary>
+		///     Entfernt die ausgewählte Präsentation
+		/// </summary>
+		public void RemovePresentation()
+		{
+			PresentationModels.Remove(SelectedPresentation);
+			Presentations.Remove(SelectedPresentation);
+		}
+
+		/// <summary>
+		///     Fügt eine neue Präsentation hinzu
+		/// </summary>
+		public void AddPresentation()
+		{
+			var presentation = new PresentationModel
+			{
+				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) + 1 : 1,
+				Reservations = new List<ReservationModel>(),
+				StartTime = DateTime.Now
+			};
+
+			PresentationModels.Add(presentation);
+			Presentations.Add(presentation);
+		}
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
@@ -114,8 +116,6 @@ namespace CinemaManager.Modules.Presentation
 		{
 			FilterChanged();
 		}
-
-		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
 
 		private void FilterChanged()
 		{
