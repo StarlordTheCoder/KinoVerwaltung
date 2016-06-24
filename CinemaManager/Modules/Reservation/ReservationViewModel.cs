@@ -20,7 +20,9 @@ namespace CinemaManager.Modules.Reservation
 		{
 			Model = model;
 
-			Reservator = Model.ReservatorId != 0 ? Cinema.Users.First(u => u.UserId == Model.ReservatorId) : userModule.SelectedUser;
+			Reservator = Model.ReservatorId != 0
+				? Cinema.Users.First(u => u.UserId == Model.ReservatorId)
+				: userModule.SelectedUser;
 
 			Presentation = Cinema.Presentations.FirstOrDefault(p => p.Reservations.Contains(Model));
 
@@ -38,7 +40,7 @@ namespace CinemaManager.Modules.Reservation
 		public ReservationModel Model { get; }
 
 		/// <summary>
-		/// Usermodel des Reservierers
+		///     Usermodel des Reservierers
 		/// </summary>
 		public UserModel Reservator
 		{
@@ -65,7 +67,7 @@ namespace CinemaManager.Modules.Reservation
 		private static CinemaModel Cinema => Session.Instance.SelectedCinemaModel;
 
 		/// <summary>
-		/// Model der Präseantation
+		///     Model der Präseantation
 		/// </summary>
 		public PresentationModel Presentation
 		{

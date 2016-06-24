@@ -25,11 +25,12 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// Liste der <see cref="SeatViewModel"/> in einer Reihe
+		///     Liste der <see cref="SeatViewModel" /> in einer Reihe
 		/// </summary>
 		public ObservableCollection<SeatViewModel> Seats { get; }
+
 		/// <summary>
-		/// Nummer/Position der Reihe
+		///     Nummer/Position der Reihe
 		/// </summary>
 		public int RowNumber { get; set; }
 	}

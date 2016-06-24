@@ -218,5 +218,7 @@ namespace CinemaManager.Filter
 		#endregion
 	}
 
-	public class FilterConfigurator : FilterConfigurator<object> { }
+	public class FilterConfigurator : FilterConfigurator<object>
+	{
+	}
 }

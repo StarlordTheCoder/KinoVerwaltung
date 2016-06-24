@@ -18,10 +18,11 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<filter:FilterConfiguratorView DataContext="{Binding PresentationFilterConfigurator}" Grid.ColumnSpan="2" />
-		<ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Presentations}" SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single" Grid.RowSpan="2">
+		<ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Presentations}"
+		          SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single" Grid.RowSpan="2">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel ToolTip="{Binding FilmId}">
@@ -31,11 +32,12 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}" Command="{Binding AddPresentationCommand}"/>
-		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}" Command="{Binding RemovePresentationCommand}"/>
-		
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}" Command="{Binding AddPresentationCommand}" />
+		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"
+		        Command="{Binding RemovePresentationCommand}" />
+
 		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
-			<xctk:DateTimePicker Value="{Binding SelectedPresentation.StartTime}" VerticalAlignment="Center"/>
+			<xctk:DateTimePicker Value="{Binding SelectedPresentation.StartTime}" VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

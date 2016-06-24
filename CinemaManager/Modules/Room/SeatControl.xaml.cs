@@ -11,7 +11,7 @@ namespace CinemaManager.Modules.Room
 	public partial class SeatControl
 	{
 		/// <summary>
-		/// Initialisiert das Usercontrol des Sitzes
+		///     Initialisiert das Usercontrol des Sitzes
 		/// </summary>
 		public SeatControl()
 		{

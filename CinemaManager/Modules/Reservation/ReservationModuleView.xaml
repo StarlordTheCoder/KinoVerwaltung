@@ -34,7 +34,8 @@
 						</StackPanel>
 						<StackPanel>
 							<xctk:DateTimePicker Value="{Binding Presentation.StartTime, Mode=OneWay}" IsReadOnly="True" />
-							<Button Content="Use Presentation from Presentation Module" Command="{Binding ApplyPresentationFromPresentationModule}"/>
+							<Button Content="Use Presentation from Presentation Module"
+							        Command="{Binding ApplyPresentationFromPresentationModule}" />
 						</StackPanel>
 					</StackPanel>
 				</DataTemplate>

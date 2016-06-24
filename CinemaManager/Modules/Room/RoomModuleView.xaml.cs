@@ -11,7 +11,7 @@ namespace CinemaManager.Modules.Room
 	public partial class RoomModuleView : UserControl
 	{
 		/// <summary>
-		/// Initialisiert die RoomModelView
+		///     Initialisiert die RoomModelView
 		/// </summary>
 		public RoomModuleView()
 		{

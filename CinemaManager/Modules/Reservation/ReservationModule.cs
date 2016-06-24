@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;

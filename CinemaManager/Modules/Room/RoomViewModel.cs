@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,14 +11,14 @@ using CinemaManager.Model;
 namespace CinemaManager.Modules.Room
 {
 	/// <summary>
-	/// ViewModel of the RoomModel
+	///     ViewModel of the RoomModel
 	/// </summary>
 	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
 	{
 		private RowViewModel _selectedRow;
 
 		/// <summary>
-		/// Contains methods and Datas of a room for the gui
+		///     Contains methods and Datas of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
 		public RoomViewModel(RoomModel roomModel)
@@ -41,19 +40,6 @@ namespace CinemaManager.Modules.Room
 
 		private IEnumerable<SeatViewModel> SelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
 
-		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-		{
-			if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
-			{
-				SelectedSeats.Clear();
-
-				foreach (var seat in SelectedSeatModels)
-				{
-					SelectedSeats.Add(seat);
-				}
-			}
-		}
-
 		/// <summary>
 		///     The currently selected Row
 		/// </summary>
@@ -69,17 +55,17 @@ namespace CinemaManager.Modules.Room
 		}
 
 		/// <summary>
-		/// List of the Rows if the Room
+		///     List of the Rows if the Room
 		/// </summary>
 		public ObservableCollection<RowViewModel> Rows { get; } = new ObservableCollection<RowViewModel>();
 
 		/// <summary>
-		/// Currently selected Seats in the GUI
+		///     Currently selected Seats in the GUI
 		/// </summary>
 		public ObservableCollection<SeatViewModel> SelectedSeats { get; }
 
 		/// <summary>
-		/// Model of the Room
+		///     Model of the Room
 		/// </summary>
 		public RoomModel Model { get; set; }
 
@@ -127,6 +113,19 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void RemoveSeat()
 		{
+		}
+
+		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
+			{
+				SelectedSeats.Clear();
+
+				foreach (var seat in SelectedSeatModels)
+				{
+					SelectedSeats.Add(seat);
+				}
+			}
 		}
 	}
 }

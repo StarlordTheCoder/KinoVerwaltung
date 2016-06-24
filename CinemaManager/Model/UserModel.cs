@@ -9,7 +9,7 @@ namespace CinemaManager.Model
 	public class UserModel
 	{
 		/// <summary>
-		/// ID des Users
+		///     ID des Users
 		/// </summary>
 		public int UserId { get; set; }
 

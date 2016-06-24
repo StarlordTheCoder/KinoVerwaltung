@@ -9,7 +9,7 @@ using CinemaManager.Modules;
 namespace CinemaManager.Filter.Complex
 {
 	/// <summary>
-	/// FIlter, welcher erlaubt nach Komplexen Datentypen wie zum beispiel Modulen zu filtern
+	///     FIlter, welcher erlaubt nach Komplexen Datentypen wie zum beispiel Modulen zu filtern
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <typeparam name="TM"></typeparam>

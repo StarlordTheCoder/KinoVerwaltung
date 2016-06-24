@@ -14,7 +14,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace CinemaManager.Modules.Film
 {
 	/// <summary>
-	/// GUi module des Filmes
+	///     GUi module des Filmes
 	/// </summary>
 	public class FilmModule : ModuleBase
 	{
@@ -43,7 +43,7 @@ namespace CinemaManager.Modules.Film
 		public override string Title => "Filme";
 
 		/// <summary>
-		/// FilterKonfigurator
+		///     FilterKonfigurator
 		/// </summary>
 		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
 
@@ -67,29 +67,29 @@ namespace CinemaManager.Modules.Film
 		}
 
 		/// <summary>
-		/// Command für <see cref="AddFilm"/>
+		///     Command für <see cref="AddFilm" />
 		/// </summary>
 		public ICommand AddFilmCommand { get; }
 
 		/// <summary>
-		/// Command für <see cref="RemoveFilm"/>
+		///     Command für <see cref="RemoveFilm" />
 		/// </summary>
 		public DelegateCommand RemoveFilmCommand { get; }
 
 		private static IList<FilmModel> FilmModels => Session.Instance.SelectedCinemaModel?.Films;
 
 		/// <summary>
-		/// Altersbeschränkung des Filmes
+		///     Altersbeschränkung des Filmes
 		/// </summary>
 		public IEnumerable<AgeRestriction> AgeRestrictions => Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
 
 		/// <summary>
-		/// Gibt zurück, ob ein FIl Ausgewählt ist
+		///     Gibt zurück, ob ein FIl Ausgewählt ist
 		/// </summary>
 		public bool ValueSelected => SelectedFilm != null;
 
 		/// <summary>
-		/// Entfernt den ausgewählten film
+		///     Entfernt den ausgewählten film
 		/// </summary>
 		public void RemoveFilm()
 		{
@@ -99,7 +99,7 @@ namespace CinemaManager.Modules.Film
 		}
 
 		/// <summary>
-		/// Fügt einen neuen Film mit Dfaultdaten hinzu
+		///     Fügt einen neuen Film mit Dfaultdaten hinzu
 		/// </summary>
 		public void AddFilm()
 		{
