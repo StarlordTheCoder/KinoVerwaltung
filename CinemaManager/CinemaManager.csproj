@@ -199,6 +199,7 @@
     <Compile Include="Filter\String\IStringFilter.cs" />
     <Compile Include="Filter\Number\NumberFilter.cs" />
     <Compile Include="Filter\String\StringFilter.cs" />
+    <Compile Include="Infrastructure\AutoSaver.cs" />
     <Compile Include="Infrastructure\DebugReleaseStylePicker.cs" />
     <Compile Include="Infrastructure\NotifyPropertyChangedBase.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
