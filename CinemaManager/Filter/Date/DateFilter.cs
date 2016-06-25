@@ -16,6 +16,11 @@ namespace CinemaManager.Filter.Date
 		private DateTime? _endDate;
 		private DateTime? _startDate;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="label">Label for GUI</param>
+		/// <param name="valueToCompareTo">Configurable values, which the User-Input is compared to</param>
 		public DateFilter(string label, params Func<T, DateTime?>[] valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;

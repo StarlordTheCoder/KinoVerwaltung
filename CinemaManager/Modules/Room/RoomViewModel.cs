@@ -13,7 +13,7 @@ namespace CinemaManager.Modules.Room
 	/// <summary>
 	///     ViewModel of the RoomModel
 	/// </summary>
-	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
+	public class RoomViewModel : NotifyPropertyChangedBase
 	{
 		private RowViewModel _selectedRow;
 

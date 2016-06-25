@@ -14,6 +14,9 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Room
 {
+	/// <summary>
+	///     Module zum Verwalten der Säle
+	/// </summary>
 	public class RoomModule : ModuleBase
 	{
 		private RoomViewModel _selectedRoom;

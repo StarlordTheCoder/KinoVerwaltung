@@ -11,7 +11,14 @@ namespace CinemaManager.Filter.Date
 	/// <typeparam name="T"></typeparam>
 	public interface IDateFilter<in T> : IFilter<T>
 	{
+		/// <summary>
+		///     Startdatum. Von-Datum
+		/// </summary>
 		DateTime? StartDate { get; set; }
+
+		/// <summary>
+		///     Enddatum. Bis-Datum
+		/// </summary>
 		DateTime? EndDate { get; set; }
 	}
 }

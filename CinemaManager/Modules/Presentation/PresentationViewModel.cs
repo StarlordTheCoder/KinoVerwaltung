@@ -8,13 +8,25 @@ using CinemaManager.Modules.Room;
 
 namespace CinemaManager.Modules.Presentation
 {
+	/// <summary>
+	///     ViewModel für <see cref="PresentationModel" />
+	/// </summary>
 	public class PresentationViewModel : NotifyPropertyChangedBase
 	{
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="model">
+		///     <see cref="Model" />
+		/// </param>
 		public PresentationViewModel(PresentationModel model)
 		{
 			Model = model;
 		}
 
+		/// <summary>
+		///     Der Film, welcher gespielt wird
+		/// </summary>
 		public FilmModel Film
 		{
 			get { return Cinema.Films.FirstOrDefault(f => f.FilmId == Model.FilmId); }
@@ -26,6 +38,9 @@ namespace CinemaManager.Modules.Presentation
 			}
 		}
 
+		/// <summary>
+		///     Der Saal, in welchem diese Vorstellung ist
+		/// </summary>
 		public RoomViewModel RoomViewModel
 		{
 			get
@@ -44,6 +59,10 @@ namespace CinemaManager.Modules.Presentation
 
 		private static CinemaModel Cinema => Session.Instance.SelectedCinemaModel;
 
+
+		/// <summary>
+		///     Das Original-Model
+		/// </summary>
 		public PresentationModel Model { get; }
 	}
 }

@@ -15,12 +15,20 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Presentation
 {
+	/// <summary>
+	///     Modul zum Verwallten der Vorstellungen
+	/// </summary>
 	public class PresentationModule : ModuleBase
 	{
 		private readonly FilmModule _filmModule;
 		private readonly RoomModule _roomModule;
 		private PresentationViewModel _selectedPresentation;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="filmModule">Modul für Modulübergreifende Filter</param>
+		/// <param name="roomModule">Modul für Modulübergreifende Filter</param>
 		public PresentationModule(FilmModule filmModule, RoomModule roomModule)
 		{
 			_filmModule = filmModule;
@@ -98,7 +106,14 @@ namespace CinemaManager.Modules.Presentation
 
 		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
 
+		/// <summary>
+		///     Command for <see cref="ApplyFilmFromFilmModule" />
+		/// </summary>
 		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="ApplyRoomFromRoomModule" />
+		/// </summary>
 		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
 
 		private bool CanApplyRoomFromRoomModule()

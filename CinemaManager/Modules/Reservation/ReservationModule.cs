@@ -13,12 +13,20 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Reservation
 {
+	/// <summary>
+	///     Modul zum Verwalten der Reser
+	/// </summary>
 	public class ReservationModule : ModuleBase
 	{
 		private readonly PresentationModule _presentationModule;
 		private readonly UserModule _userModule;
 		private ReservationViewModel _selectedReservation;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="presentationModule">Modul für Modulübergreifende Filter</param>
+		/// <param name="userModule">Modul für Modulübergreifende Filter</param>
 		public ReservationModule(PresentationModule presentationModule, UserModule userModule)
 		{
 			_presentationModule = presentationModule;
@@ -37,6 +45,9 @@ namespace CinemaManager.Modules.Reservation
 			ReservationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
 
+		/// <summary>
+		///     Shows if there is a selected Reservation
+		/// </summary>
 		public bool ValueSelected => SelectedReservation != null;
 
 		/// <summary>
@@ -79,8 +90,14 @@ namespace CinemaManager.Modules.Reservation
 		private static IEnumerable<ReservationModel> ReservationModels
 			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
 
+		/// <summary>
+		///     Command for <see cref="AddReservation" />
+		/// </summary>
 		public DelegateCommand AddReservationCommand { get; }
 
+		/// <summary>
+		///     Command for <see cref="RemoveReservation" />
+		/// </summary>
 		public DelegateCommand RemoveReservationCommand { get; }
 
 		private void RemoveReservation()

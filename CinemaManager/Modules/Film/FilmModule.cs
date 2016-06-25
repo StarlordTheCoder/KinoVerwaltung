@@ -20,6 +20,9 @@ namespace CinemaManager.Modules.Film
 	{
 		private FilmModel _selectedFilm;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public FilmModule()
 		{
 			AddFilmCommand = new DelegateCommand(AddFilm);
@@ -47,6 +50,9 @@ namespace CinemaManager.Modules.Film
 		/// </summary>
 		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
 
+		/// <summary>
+		///     Alle gefilterten Filme
+		/// </summary>
 		public ObservableCollection<FilmModel> Films { get; set; } = new ObservableCollection<FilmModel>();
 
 		/// <summary>

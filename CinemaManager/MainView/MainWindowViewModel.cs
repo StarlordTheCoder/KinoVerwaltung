@@ -28,8 +28,12 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public class MainWindowViewModel
 	{
-		public AutoSaver autosaver;
+		private readonly IAutoSaveService _autosaver;
 
+		/// <summary>
+		///     Starts all tasks so the application can procceed normally
+		/// </summary>
+		/// <param name="startupFile">Used to load a different layout or file at startup</param>
 		public MainWindowViewModel(string startupFile)
 		{
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
@@ -40,11 +44,11 @@ namespace CinemaManager.MainView
 
 				if (Equals(extension, ".satan"))
 				{
-					Session.LayoutPath = startupFile;
+					Session.Instance.LayoutPath = startupFile;
 				}
 				else if (Equals(extension, ".satanData"))
 				{
-					Session.DataPath = startupFile;
+					Session.Instance.DataPath = startupFile;
 				}
 				else
 				{
@@ -54,19 +58,21 @@ namespace CinemaManager.MainView
 
 			DataSourceService = new DataSourceService();
 			LayoutService = new LayoutService();
-			autosaver = new AutoSaver();
+			_autosaver = new AutoSaveService();
 
 			InitialiseModules();
 			CheckAutoSave();
 		}
 
-		public static Session Session => Session.Instance;
-
+		/// <summary>
+		///     Wird serialisiert. Falls true, speichert alle Daten regelmässig ab
+		/// </summary>
 		public bool AutoSaveEnabled
 		{
 			get { return Settings.Default.AutoSaveEnabled; }
 			set
 			{
+				if (Settings.Default.AutoSaveEnabled == value) return;
 				Settings.Default.AutoSaveEnabled = value;
 				Settings.Default.Save();
 				CheckAutoSave();
@@ -77,11 +83,11 @@ namespace CinemaManager.MainView
 		{
 			if (AutoSaveEnabled)
 			{
-				autosaver.StartSave();
+				_autosaver.EnableAutoSave();
 			}
 			else
 			{
-				autosaver.StopSave();
+				_autosaver.DisableAutoSave();
 			}
 		}
 
@@ -120,26 +126,63 @@ namespace CinemaManager.MainView
 
 		#region Properties
 
+		/// <summary>
+		///     Service zum Verwalten der Datenquelle
+		/// </summary>
 		public IDataSourceService DataSourceService { get; set; }
+
+		/// <summary>
+		///     Service zum Verwalten des Layouts
+		/// </summary>
 		public ILayoutService LayoutService { get; set; }
 
 		#endregion
 
 		#region Modules
 
+		/// <summary>
+		///     Liste aller Module für das Docking-Framework
+		/// </summary>
 		public ObservableCollection<IModule> Modules { get; private set; }
 
+
+		/// <summary>
+		///     Kino-Modul
+		/// </summary>
 		public CinemaModule CinemaModule { get; private set; }
+
+		/// <summary>
+		///     Film-Modul
+		/// </summary>
 		public FilmModule FilmModule { get; private set; }
+
+		/// <summary>
+		///     Vorstellungs-Modul
+		/// </summary>
 		public PresentationModule PresentationModule { get; private set; }
-		public IModule ReservationModule { get; private set; }
+
+		/// <summary>
+		///     Reservierungs-Modul
+		/// </summary>
+		public ReservationModule ReservationModule { get; private set; }
+
+		/// <summary>
+		///     Benutzer-Modul
+		/// </summary>
 		public UserModule UserModule { get; private set; }
+
+		/// <summary>
+		///     Saal-Modul
+		/// </summary>
 		public RoomModule RoomModule { get; private set; }
 
 		#endregion
 
 		#region About
 
+		/// <summary>
+		///     Command for displaying the <see cref="AboutMessage" />
+		/// </summary>
 		public ICommand AboutCommand { get; }
 
 		private static readonly string AboutMessage =
@@ -156,6 +199,9 @@ namespace CinemaManager.MainView
 			}
 		}
 
+		/// <summary>
+		///     Die Command-Binding. Verbindet alle Command mit den dazugehörigen Aktionen
+		/// </summary>
 		public ICollection CommandBindings
 			=> LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
 

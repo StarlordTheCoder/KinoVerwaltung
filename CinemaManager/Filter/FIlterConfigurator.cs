@@ -161,15 +161,27 @@ namespace CinemaManager.Filter
 
 		#region Columns
 
+		/// <summary>
+		///     Die Spaltenbreite der <see cref="StringFilters" />
+		/// </summary>
 		public GridLength StringColumnWidth
 			=> StringFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
+		/// <summary>
+		///     Die Spaltenbreite der <see cref="NumberFilters" />
+		/// </summary>
 		public GridLength NumberColumnWidth
 			=> NumberFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
+		/// <summary>
+		///     Die Spaltenbreite der <see cref="DateFilters" />
+		/// </summary>
 		public GridLength DateColumnWidth
 			=> DateFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
+		/// <summary>
+		///     Die Spaltenbreite der <see cref="ComplexFilters" />
+		/// </summary>
 		public GridLength ComplexColumnWidth
 			=> ComplexFilters.Any() ? new GridLength(1, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
 
@@ -218,6 +230,9 @@ namespace CinemaManager.Filter
 		#endregion
 	}
 
+	/// <summary>
+	///     Dummy-Class for XAML
+	/// </summary>
 	public class FilterConfigurator : FilterConfigurator<object>
 	{
 	}

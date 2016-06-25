@@ -38,6 +38,9 @@ namespace CinemaManager.Modules
 			}
 		}
 
+		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
 		public abstract bool Enabled { get; }
 
 		/// <summary>

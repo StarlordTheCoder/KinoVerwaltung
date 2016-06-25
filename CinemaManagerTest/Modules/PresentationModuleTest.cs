@@ -73,7 +73,7 @@ namespace CinemaManagerTest.Modules
 			UnitUnderTest.Refresh();
 
 			//Assert
-			Assert.That(UnitUnderTest.Presentations, Is.EqualTo(cinema.Presentations));
+			Assert.That(UnitUnderTest.Presentations.Select(p => p.Model), Is.EquivalentTo(cinema.Presentations));
 		}
 
 		[Test]

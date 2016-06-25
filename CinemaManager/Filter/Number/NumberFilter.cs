@@ -15,6 +15,11 @@ namespace CinemaManager.Filter.Number
 		private readonly Func<T, int>[] _valueToCompareTo;
 		private int? _number;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="label">Label for GUI</param>
+		/// <param name="valueToCompareTo">Configurable values, which the User-Input is compared to</param>
 		public NumberFilter(string label, params Func<T, int>[] valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;

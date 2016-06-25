@@ -22,8 +22,8 @@ namespace CinemaManagerTest.Filter
 		{
 			//Arrange
 			Setup(d => d.DateTimeProperty);
-			UnitUnderTest.StartDate = start;
 			UnitUnderTest.EndDate = end;
+			UnitUnderTest.StartDate = start;
 
 			var dummyData = new Mock<IDummyModel>();
 			dummyData.Setup(d => d.DateTimeProperty).Returns(input);

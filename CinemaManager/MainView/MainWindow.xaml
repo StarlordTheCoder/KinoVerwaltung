@@ -30,7 +30,7 @@
 				<MenuItem Command="{Binding DataSourceService.SynchronizeCommand}"
 				          ToolTip="Save and reload all data" />
 				<MenuItem Header="About" Command="{Binding AboutCommand}" />
-				<MenuItem Header="AutoSave" IsCheckable="True" IsChecked="{Binding AutoSaveEnabled}" />
+				<MenuItem Header="Auto save" IsCheckable="True" IsChecked="{Binding AutoSaveEnabled}" />
 
 			</MenuItem>
 			<MenuItem Header="Tools">

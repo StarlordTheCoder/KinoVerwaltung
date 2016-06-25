@@ -8,6 +8,9 @@ namespace CinemaManager.Modules.Presentation
 	/// </summary>
 	public partial class PresentationModuleView
 	{
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public PresentationModuleView()
 		{
 			InitializeComponent();

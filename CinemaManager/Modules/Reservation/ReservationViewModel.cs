@@ -10,6 +10,9 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Reservation
 {
+	/// <summary>
+	///     ViewModel für <see cref="ReservationModel" />
+	/// </summary>
 	public class ReservationViewModel : NotifyPropertyChangedBase
 	{
 		private readonly PresentationModule _presentationModule;
@@ -17,6 +20,13 @@ namespace CinemaManager.Modules.Reservation
 		private PresentationViewModel _presentation;
 		private UserModel _reservator;
 
+
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="model">ReservationModel</param>
+		/// <param name="userModule"></param>
+		/// <param name="presentationModule"></param>
 		public ReservationViewModel(ReservationModel model, UserModule userModule, PresentationModule presentationModule)
 		{
 			_userModule = userModule;
@@ -38,6 +48,9 @@ namespace CinemaManager.Modules.Reservation
 				(sender, e) => ApplyPresentationFromPresentationModuleCommand.RaiseCanExecuteChanged();
 		}
 
+		/// <summary>
+		///     Das Original-Model
+		/// </summary>
 		public ReservationModel Model { get; }
 
 		/// <summary>
@@ -78,7 +91,14 @@ namespace CinemaManager.Modules.Reservation
 			}
 		}
 
+		/// <summary>
+		///     Command for <see cref="ApplyUserFromUserModule" />
+		/// </summary>
 		public DelegateCommand ApplyUserFromUserModuleCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="ApplyPresentationFromPresentationModule" />
+		/// </summary>
 		public DelegateCommand ApplyPresentationFromPresentationModuleCommand { get; }
 
 		private bool CanApplyPresentationFromPresentationModule()
