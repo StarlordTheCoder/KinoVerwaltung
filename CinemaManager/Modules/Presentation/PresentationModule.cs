@@ -41,26 +41,6 @@ namespace CinemaManager.Modules.Presentation
 			roomModule.ModuleDataChanged += (sender, e) => ApplyRoomFromRoomModuleCommand.RaiseCanExecuteChanged();
 		}
 
-		private bool CanApplyRoomFromRoomModule()
-		{
-			return _roomModule.ValueSelected;
-		}
-
-		private void ApplyRoomFromRoomModule()
-		{
-			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
-		}
-
-		private bool CanApplyFilmFromFilmModule()
-		{
-			return _filmModule.ValueSelected;
-		}
-
-		private void ApplyFilmFromFilmModule()
-		{
-			SelectedPresentation.Film = _filmModule.SelectedFilm;
-		}
-
 		/// <summary>
 		///     Filter-Konfigurator für die Kinos
 		/// </summary>
@@ -108,7 +88,8 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Liste Aller präsenatationen
 		/// </summary>
-		public ObservableCollection<PresentationViewModel> Presentations { get; } = new ObservableCollection<PresentationViewModel>();
+		public ObservableCollection<PresentationViewModel> Presentations { get; } =
+			new ObservableCollection<PresentationViewModel>();
 
 		/// <summary>
 		///     Gibt zurück, ob eine Präsentation ausgewählt ist
@@ -116,6 +97,29 @@ namespace CinemaManager.Modules.Presentation
 		public bool ValueSelected => SelectedPresentation != null;
 
 		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
+
+		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
+		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
+
+		private bool CanApplyRoomFromRoomModule()
+		{
+			return _roomModule.ValueSelected;
+		}
+
+		private void ApplyRoomFromRoomModule()
+		{
+			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
+		}
+
+		private bool CanApplyFilmFromFilmModule()
+		{
+			return _filmModule.ValueSelected;
+		}
+
+		private void ApplyFilmFromFilmModule()
+		{
+			SelectedPresentation.Film = _filmModule.SelectedFilm;
+		}
 
 		/// <summary>
 		///     Entfernt die ausgewählte Präsentation
@@ -169,8 +173,5 @@ namespace CinemaManager.Modules.Presentation
 
 			OnPropertyChanged(nameof(Enabled));
 		}
-
-		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
-		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
 	}
 }

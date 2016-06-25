@@ -38,13 +38,14 @@
 								<ColumnDefinition />
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
-							<TextBlock Text="{Binding Reservator.Name}" Grid.Row="0" Grid.Column="0"/>
-							<TextBlock Text="{Binding Reservator.PhoneNumber}" Grid.Row="1" Grid.Column="0"/>
+							<TextBlock Text="{Binding Reservator.Name}" Grid.Row="0" Grid.Column="0" />
+							<TextBlock Text="{Binding Reservator.PhoneNumber}" Grid.Row="1" Grid.Column="0" />
 							<Button Content="Apply User Module" Command="{Binding ApplyUserFromUserModuleCommand}" Grid.Column="1"
-							        Grid.Row="0" Grid.RowSpan="2"/>
+							        Grid.Row="0" Grid.RowSpan="2" />
 
-							<TextBlock Text="{Binding Presentation.Film.FilmName}" Grid.Row="2" Grid.Column="0"/>
-							<xctk:DateTimePicker Value="{Binding Presentation.Model.StartTime, Mode=OneWay}" Grid.Row="3" Grid.Column="0" IsReadOnly="True" />
+							<TextBlock Text="{Binding Presentation.Film.FilmName}" Grid.Row="2" Grid.Column="0" />
+							<xctk:DateTimePicker Value="{Binding Presentation.Model.StartTime, Mode=OneWay}" Grid.Row="3" Grid.Column="0"
+							                     IsReadOnly="True" />
 
 							<Button Content="Apply Presentation Module" Grid.Row="2" Grid.Column="1"
 							        Command="{Binding ApplyPresentationFromPresentationModuleCommand}" />

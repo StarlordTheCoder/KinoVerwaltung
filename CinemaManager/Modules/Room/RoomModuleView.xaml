@@ -41,23 +41,23 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource AddButton}"
-		        Command="{Binding AddRoomCommand }" />
+		        Command="{Binding AddRoomCommand }" ToolTip="Add Room"/>
 		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"
-		        Command="{Binding RemoveRoomCommand }" />
+		        Command="{Binding RemoveRoomCommand }" ToolTip="Remove Room"/>
 		<local:Rows DataContext="{Binding SelectedRoom}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
-		<Button IsEnabled="{Binding ValueSelected}" Grid.Column="1" Grid.Row="2"
-		        Style="{StaticResource AddButton}" Command="{Binding AddRowCommand }" />
-		<Button IsEnabled="{Binding ValueSelected}" Grid.Column="1" Grid.Row="2"
+		<Button Grid.Column="1" Grid.Row="2"
+		        Style="{StaticResource AddButton}" Command="{Binding AddRowCommand }" ToolTip="Add Row"/>
+		<Button Grid.Column="1" Grid.Row="2"
 		        Style="{StaticResource RemoveButton}"
-		        Command="{Binding RemoveRowCommand }" />
-		<Button IsEnabled="{Binding ValueSelected}" Grid.Column="2" Grid.Row="2"
-		        Style="{StaticResource AddButton}" Command="{Binding AddSeatCommand }" />
-		<Button IsEnabled="{Binding ValueSelected}" Grid.Column="2" Grid.Row="2"
+		        Command="{Binding RemoveRowCommand }" ToolTip="Remove Row"/>
+		<Button Grid.Column="2" Grid.Row="2"
+		        Style="{StaticResource AddButton}" Command="{Binding AddSeatCommand }" ToolTip="Add Seat"/>
+		<Button Grid.Column="2" Grid.Row="2"
 		        Style="{StaticResource RemoveButton}"
-		        Command="{Binding RemoveSeatCommand }" />
+		        Command="{Binding RemoveSeatCommand }" ToolTip="Remove Seat"/>
 		<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" VerticalAlignment="Center" />
