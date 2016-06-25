@@ -141,6 +141,7 @@ namespace CinemaManager.Modules.Room
 			newSeat.PropertyChanged += SeatViewModelOnPropertyChanged;
 
 			SelectedRow.Seats.Insert(index, newSeat);
+			Model.Seats.Add(newSeat.Model);
 			SelectedSeats.Clear();
 			newSeat.IsSelected = true;
 		}
@@ -150,9 +151,15 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public void RemoveSeat()
 		{
-			Model.Seats.Remove(SelectedSeats.First().Model);
-			SelectedSeats.First().PropertyChanged -= SeatViewModelOnPropertyChanged;
-			SelectedSeats.Remove(SelectedSeats.First());
+			var seatToRemove = SelectedSeats.First();
+
+			Model.Seats.Remove(seatToRemove.Model);
+			seatToRemove.PropertyChanged -= SeatViewModelOnPropertyChanged;
+			SelectedSeats.Remove(seatToRemove);
+			foreach (var row in Rows)
+			{
+				row.Seats.Remove(seatToRemove);
+			}
 		}
 
 		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
