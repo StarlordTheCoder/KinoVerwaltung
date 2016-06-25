@@ -35,9 +35,9 @@
 		<Button Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" Command="{Binding RemoveUserCommand}" />
 		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
