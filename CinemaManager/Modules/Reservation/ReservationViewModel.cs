@@ -13,7 +13,7 @@ namespace CinemaManager.Modules.Reservation
 {
 	public class ReservationViewModel : NotifyPropertyChangedBase
 	{
-		private PresentationModel _presentation;
+		private PresentationViewModel _presentation;
 		private UserModel _reservator;
 
 		public ReservationViewModel(ReservationModel model, UserModule userModule, PresentationModule presentationModule)
@@ -24,7 +24,7 @@ namespace CinemaManager.Modules.Reservation
 				? Cinema.Users.First(u => u.UserId == Model.ReservatorId)
 				: userModule.SelectedUser;
 
-			Presentation = Cinema.Presentations.FirstOrDefault(p => p.Reservations.Contains(Model));
+			Presentation = new PresentationViewModel(Cinema.Presentations.FirstOrDefault(p => p.Reservations.Contains(Model)));
 
 			ApplyUserFromUserModule = new DelegateCommand(() => Reservator = userModule.SelectedUser,
 				() => userModule.ValueSelected);
@@ -54,37 +54,26 @@ namespace CinemaManager.Modules.Reservation
 			}
 		}
 
-		public RoomViewModel RoomViewModel
-		{
-			get
-			{
-				var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Presentation?.RoomNumber);
-
-				return roomModel != null ? new RoomViewModel(roomModel) : null;
-			}
-		}
-
 		private static CinemaModel Cinema => Session.Instance.SelectedCinemaModel;
 
 		/// <summary>
 		///     Model der Präseantation
 		/// </summary>
-		public PresentationModel Presentation
+		public PresentationViewModel Presentation
 		{
 			get { return _presentation; }
 			set
 			{
 				if (Equals(_presentation, value)) return;
-				_presentation?.Reservations?.Remove(Model);
+				_presentation?.Model.Reservations?.Remove(Model);
 
 				_presentation = value;
 
-				if (!_presentation.Reservations.Contains(Model))
+				if (!_presentation.Model.Reservations.Contains(Model))
 				{
-					_presentation.Reservations.Add(Model);
+					_presentation.Model.Reservations.Add(Model);
 				}
 				OnPropertyChanged();
-				OnPropertyChanged(nameof(RoomViewModel));
 			}
 		}
 

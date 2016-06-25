@@ -27,16 +27,27 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<StackPanel ToolTip="{Binding Reservator.UserId}">
-							<TextBlock Text="{Binding Reservator.Name}" />
-							<TextBlock Text="{Binding Reservator.PhoneNumber}" />
-							<Button Content="Use User from User Module" Command="{Binding ApplyUserFromUserModule}" />
-						</StackPanel>
-						<StackPanel>
-							<xctk:DateTimePicker Value="{Binding Presentation.StartTime, Mode=OneWay}" IsReadOnly="True" />
-							<Button Content="Use Presentation from Presentation Module"
+						<Grid ToolTip="{Binding Reservator.UserId}">
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="{Binding Reservator.Name}" Grid.Row="0" Grid.Column="0"/>
+							<TextBlock Text="{Binding Reservator.PhoneNumber}" Grid.Row="1" Grid.Column="0"/>
+							<Button Content="Use User from User Module" Command="{Binding ApplyUserFromUserModule}" Grid.Column="1"
+							        Grid.Row="0" Grid.RowSpan="2"/>
+
+							<TextBlock Text="{Binding Presentation.Film.FilmName}" Grid.Row="2" Grid.Column="0"/>
+							<Button Content="Use Presentation from Presentation Module" Grid.Row="2" Grid.Column="1"
 							        Command="{Binding ApplyPresentationFromPresentationModule}" />
-						</StackPanel>
+						</Grid>
+
+						<xctk:DateTimePicker Value="{Binding Presentation.StartTime, Mode=OneWay}" IsReadOnly="True" Grid.Row="0"/>
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
