@@ -1,8 +1,11 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using CinemaManager.Filter;
@@ -22,11 +25,11 @@ namespace CinemaManager.Modules.Room
 		public RoomModule()
 		{
 			AddRoomCommand = new DelegateCommand(AddRoom);
-			RemoveRoomCommand = new DelegateCommand(RemoveRoom);
-			AddRowCommand = new DelegateCommand(AddRow);
-			RemoveRowCommand = new DelegateCommand(RemoveRow);
-			AddSeatCommand = new DelegateCommand(AddSeat);
-			RemoveSeatCommand = new DelegateCommand(RemoveSeat);
+			RemoveRoomCommand = new DelegateCommand(RemoveRoom, () => ValueSelected);
+			AddRowCommand = new DelegateCommand(AddRow, () => ValueSelected);
+			RemoveRowCommand = new DelegateCommand(RemoveRow, () => SelectedRoom?.SelectedRow != null);
+			AddSeatCommand = new DelegateCommand(AddSeat, () => SelectedRoom?.SelectedRow != null);
+			RemoveSeatCommand = new DelegateCommand(RemoveSeat, () => SelectedRoom?.SelectedSeats.Any() ?? false);
 
 			RoomFilterConfigurator
 				.NumberFilter("Room Number", c => c.RoomNumber);
@@ -98,11 +101,39 @@ namespace CinemaManager.Modules.Room
 			set
 			{
 				if (Equals(value, _selectedRoom)) return;
+				if (_selectedRoom != null)
+				{
+					_selectedRoom.PropertyChanged -= SelectedRoomOnPropertyChanged;
+					_selectedRoom.SelectedSeats.CollectionChanged -= SelectedSeatsOnCollectionChanged;
+				}
 				_selectedRoom = value;
+				_selectedRoom.PropertyChanged += SelectedRoomOnPropertyChanged;
+				_selectedRoom.SelectedSeats.CollectionChanged += SelectedSeatsOnCollectionChanged;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				RaiseCanExecuteChanged();
 			}
 		}
+
+		private void SelectedSeatsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+		{
+			RaiseCanExecuteChanged();
+		}
+
+		private void SelectedRoomOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			RaiseCanExecuteChanged();
+		}
+
+		private void RaiseCanExecuteChanged()
+		{
+			AddSeatCommand.RaiseCanExecuteChanged();
+			RemoveSeatCommand.RaiseCanExecuteChanged();
+			RemoveRowCommand.RaiseCanExecuteChanged();
+			RemoveRoomCommand.RaiseCanExecuteChanged();
+			AddRowCommand.RaiseCanExecuteChanged();
+		}
+
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 

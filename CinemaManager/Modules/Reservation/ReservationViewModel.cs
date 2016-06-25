@@ -12,8 +12,8 @@ namespace CinemaManager.Modules.Reservation
 {
 	public class ReservationViewModel : NotifyPropertyChangedBase
 	{
-		private readonly UserModule _userModule;
 		private readonly PresentationModule _presentationModule;
+		private readonly UserModule _userModule;
 		private PresentationViewModel _presentation;
 		private UserModel _reservator;
 
@@ -36,26 +36,6 @@ namespace CinemaManager.Modules.Reservation
 				new DelegateCommand(ApplyPresentationFromPresentationModule, CanApplyPresentationFromPresentationModule);
 			presentationModule.ModuleDataChanged +=
 				(sender, e) => ApplyPresentationFromPresentationModuleCommand.RaiseCanExecuteChanged();
-		}
-
-		private bool CanApplyPresentationFromPresentationModule()
-		{
-			return _presentationModule.ValueSelected;
-		}
-
-		private void ApplyPresentationFromPresentationModule()
-		{
-			Presentation = _presentationModule.SelectedPresentation;
-		}
-
-		private bool CanApplyUserFromUserModule()
-		{
-			return _userModule.ValueSelected;
-		}
-
-		private void ApplyUserFromUserModule()
-		{
-			Reservator = _userModule.SelectedUser;
 		}
 
 		public ReservationModel Model { get; }
@@ -100,5 +80,25 @@ namespace CinemaManager.Modules.Reservation
 
 		public DelegateCommand ApplyUserFromUserModuleCommand { get; }
 		public DelegateCommand ApplyPresentationFromPresentationModuleCommand { get; }
+
+		private bool CanApplyPresentationFromPresentationModule()
+		{
+			return _presentationModule.ValueSelected;
+		}
+
+		private void ApplyPresentationFromPresentationModule()
+		{
+			Presentation = _presentationModule.SelectedPresentation;
+		}
+
+		private bool CanApplyUserFromUserModule()
+		{
+			return _userModule.ValueSelected;
+		}
+
+		private void ApplyUserFromUserModule()
+		{
+			Reservator = _userModule.SelectedUser;
+		}
 	}
 }

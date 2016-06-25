@@ -81,7 +81,8 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Altersbeschränkung des Filmes
 		/// </summary>
-		public IEnumerable<AgeRestriction> AgeRestrictions => Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
+		public static IEnumerable<AgeRestriction> AgeRestrictions
+			=> Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
 
 		/// <summary>
 		///     Gibt zurück, ob ein FIl Ausgewählt ist
