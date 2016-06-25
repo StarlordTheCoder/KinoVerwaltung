@@ -39,7 +39,14 @@
 		        Command="{Binding RemovePresentationCommand}" />
 
 		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
-			<xctk:DateTimePicker Value="{Binding SelectedPresentation.StartTime}" VerticalAlignment="Center" />
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Button Grid.Row="0" Content="Apply film module" VerticalAlignment="Center" Command="{Binding ApplyFilmFromFilmModuleCommand}"/>
+			<Button Grid.Row="1" Content="Apply room module" VerticalAlignment="Center" Command="{Binding ApplyRoomFromRoomModuleCommand}"/>
+			<xctk:DateTimePicker Grid.Row="2" Value="{Binding SelectedPresentation.Model.StartTime}" VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

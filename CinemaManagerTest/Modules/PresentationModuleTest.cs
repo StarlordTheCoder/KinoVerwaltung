@@ -1,9 +1,13 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System.Linq;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
+using CinemaManager.Modules.Film;
 using CinemaManager.Modules.Presentation;
+using CinemaManager.Modules.Room;
+using Moq;
 using NUnit.Framework;
 
 namespace CinemaManagerTest.Modules
@@ -13,7 +17,9 @@ namespace CinemaManagerTest.Modules
 		protected override void DoSetup()
 		{
 			base.DoSetup();
-			UnitUnderTest = new PresentationModule
+			var filmModule = new Mock<FilmModule>();
+			var roomModule = new Mock<RoomModule>();
+			UnitUnderTest = new PresentationModule(filmModule.Object, roomModule.Object)
 			{
 				PresentationFilterConfigurator = CreateTrueFilterConfigurator<PresentationModel>()
 			};
@@ -90,7 +96,7 @@ namespace CinemaManagerTest.Modules
 
 			//Act
 			UnitUnderTest.Refresh();
-			UnitUnderTest.SelectedPresentation = null; //TODO pres2;
+			UnitUnderTest.SelectedPresentation = UnitUnderTest.Presentations.First(p => Equals(p.Model, pres2));
 			UnitUnderTest.RemovePresentation();
 
 			//Assert

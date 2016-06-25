@@ -32,22 +32,23 @@
 								<RowDefinition />
 								<RowDefinition />
 								<RowDefinition />
+								<RowDefinition />
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition />
-								<ColumnDefinition />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 							<TextBlock Text="{Binding Reservator.Name}" Grid.Row="0" Grid.Column="0"/>
 							<TextBlock Text="{Binding Reservator.PhoneNumber}" Grid.Row="1" Grid.Column="0"/>
-							<Button Content="Use User from User Module" Command="{Binding ApplyUserFromUserModule}" Grid.Column="1"
+							<Button Content="Apply User Module" Command="{Binding ApplyUserFromUserModuleCommand}" Grid.Column="1"
 							        Grid.Row="0" Grid.RowSpan="2"/>
 
 							<TextBlock Text="{Binding Presentation.Film.FilmName}" Grid.Row="2" Grid.Column="0"/>
-							<Button Content="Use Presentation from Presentation Module" Grid.Row="2" Grid.Column="1"
-							        Command="{Binding ApplyPresentationFromPresentationModule}" />
-						</Grid>
+							<xctk:DateTimePicker Value="{Binding Presentation.Model.StartTime, Mode=OneWay}" Grid.Row="3" Grid.Column="0" IsReadOnly="True" />
 
-						<xctk:DateTimePicker Value="{Binding Presentation.StartTime, Mode=OneWay}" IsReadOnly="True" Grid.Row="0"/>
+							<Button Content="Apply Presentation Module" Grid.Row="2" Grid.Column="1"
+							        Command="{Binding ApplyPresentationFromPresentationModuleCommand}" />
+						</Grid>
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
@@ -58,7 +59,7 @@
 		        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" />
 
 		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
-			<room:Rows DataContext="{Binding SelectedReservation.RoomViewModel}" />
+			<room:Rows DataContext="{Binding SelectedReservation.Presentation.RoomViewModel}" />
 		</Grid>
 	</Grid>
 
