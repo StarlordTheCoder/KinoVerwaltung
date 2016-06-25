@@ -31,7 +31,7 @@ namespace CinemaManager.Modules.Reservation
 
 			ReservationFilterConfigurator
 				.NumberFilter("ID", c => c.ReservatorId)
-				.ComplexFilter(presentationModule, p => p.SelectedPresentation?.Reservations)
+				.ComplexFilter(presentationModule, p => p.SelectedPresentation?.Model.Reservations)
 				.ComplexFilter(userModule, u => GetReservations(u.SelectedUser));
 
 			ReservationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
@@ -85,7 +85,7 @@ namespace CinemaManager.Modules.Reservation
 
 		private void RemoveReservation()
 		{
-			SelectedReservation.Presentation.Reservations.Remove(SelectedReservation.Model);
+			SelectedReservation.Presentation.Model.Reservations.Remove(SelectedReservation.Model);
 
 			Reservations.Remove(SelectedReservation);
 
@@ -94,12 +94,9 @@ namespace CinemaManager.Modules.Reservation
 
 		private void AddReservation()
 		{
-			var model = new ReservationModel
-			{
-				Seats = new List<SeatIdentifier>()
-			};
+			var model = new ReservationModel();
 
-			_presentationModule.SelectedPresentation.Reservations.Add(model);
+			_presentationModule.SelectedPresentation.Model.Reservations.Add(model);
 
 			var reservation = new ReservationViewModel(model, _userModule, _presentationModule);
 

@@ -118,7 +118,6 @@ namespace CinemaManager.Modules.Room
 		{
 			var room = new RoomModel
 			{
-				Seats = new List<SeatModel>(),
 				RoomNumber = RoomModels.Any() ? RoomModels.Max(r => r.RoomNumber) + 1 : 1
 			};
 			RoomModels.Add(room);

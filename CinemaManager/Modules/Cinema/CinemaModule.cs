@@ -105,11 +105,6 @@ namespace CinemaManager.Modules.Cinema
 			{
 				Address = "Examplestreet 42",
 				Name = $"Cinema #{CinemaModels.Count + 1}",
-				Films = new List<FilmModel>(),
-				Presentations = new List<PresentationModel>(),
-				Users = new List<UserModel>(),
-				Rooms = new List<RoomModel>(),
-				SeatTypes = new List<SeatType>(),
 				IsActive = true
 			};
 

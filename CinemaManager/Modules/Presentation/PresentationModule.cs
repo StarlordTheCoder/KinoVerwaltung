@@ -15,7 +15,7 @@ namespace CinemaManager.Modules.Presentation
 {
 	public class PresentationModule : ModuleBase
 	{
-		private PresentationModel _selectedPresentation;
+		private PresentationViewModel _selectedPresentation;
 
 		public PresentationModule()
 		{
@@ -48,7 +48,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
-		public override bool Enabled => true;
+		public override bool Enabled => PresentationModels != null;
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -58,7 +58,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Model der ausgewählten Präsentation
 		/// </summary>
-		public PresentationModel SelectedPresentation
+		public PresentationViewModel SelectedPresentation
 		{
 			get { return _selectedPresentation; }
 			set
@@ -74,7 +74,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Liste Aller präsenatationen
 		/// </summary>
-		public ObservableCollection<PresentationModel> Presentations { get; } = new ObservableCollection<PresentationModel>();
+		public ObservableCollection<PresentationViewModel> Presentations { get; } = new ObservableCollection<PresentationViewModel>();
 
 		/// <summary>
 		///     Gibt zurück, ob eine Präsentation ausgewählt ist
@@ -88,7 +88,7 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public void RemovePresentation()
 		{
-			PresentationModels.Remove(SelectedPresentation);
+			PresentationModels.Remove(SelectedPresentation.Model);
 			Presentations.Remove(SelectedPresentation);
 		}
 
@@ -100,12 +100,11 @@ namespace CinemaManager.Modules.Presentation
 			var presentation = new PresentationModel
 			{
 				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) + 1 : 1,
-				Reservations = new List<ReservationModel>(),
 				StartTime = DateTime.Now
 			};
 
 			PresentationModels.Add(presentation);
-			Presentations.Add(presentation);
+			Presentations.Add(new PresentationViewModel(presentation));
 		}
 
 		/// <summary>
@@ -124,7 +123,7 @@ namespace CinemaManager.Modules.Presentation
 				var filteredData = PresentationFilterConfigurator.FilterData(PresentationModels);
 				Presentations.Clear();
 
-				foreach (var presentation in filteredData)
+				foreach (var presentation in filteredData.Select(p => new PresentationViewModel(p)))
 				{
 					Presentations.Add(presentation);
 				}
