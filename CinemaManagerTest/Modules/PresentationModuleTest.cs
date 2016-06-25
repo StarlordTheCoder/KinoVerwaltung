@@ -90,7 +90,7 @@ namespace CinemaManagerTest.Modules
 
 			//Act
 			UnitUnderTest.Refresh();
-			UnitUnderTest.SelectedPresentation = pres2;
+			UnitUnderTest.SelectedPresentation = null; //TODO pres2;
 			UnitUnderTest.RemovePresentation();
 
 			//Assert
