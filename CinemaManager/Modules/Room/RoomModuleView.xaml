@@ -57,13 +57,13 @@
 		        Command="{Binding RemoveSeatCommand }" />
 		<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition />
+				<RowDefinition Height="Auto"/>
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" VerticalAlignment="Center" />
 			<ComboBox ItemsSource="{Binding SeatTypes}"
 			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}"
-			          DisplayMemberPath="DisplayName" Grid.Row="1" VerticalAlignment="Center" />
+			          DisplayMemberPath="DisplayName" Grid.Row="0" VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>
