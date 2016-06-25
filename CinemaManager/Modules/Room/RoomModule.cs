@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -115,7 +114,16 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
-		private void SelectedSeatsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+
+		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
+
+		/// <summary>
+		///     Seattypes for showing in GUI
+		/// </summary>
+		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+
+		private void SelectedSeatsOnCollectionChanged(object sender,
+			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
 		{
 			RaiseCanExecuteChanged();
 		}
@@ -133,14 +141,6 @@ namespace CinemaManager.Modules.Room
 			RemoveRoomCommand.RaiseCanExecuteChanged();
 			AddRowCommand.RaiseCanExecuteChanged();
 		}
-
-
-		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
-
-		/// <summary>
-		///     Seattypes for showing in GUI
-		/// </summary>
-		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		/// <summary>
 		///     Fügt einen neuen Raum hinzu
