@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System;
 
 namespace CinemaManager.Infrastructure
 {
 	public class AutoSaver
 	{
-		Session session;
+		private readonly Session session;
 
-		private void Save(Object s , EventArgs e)
+
+		public AutoSaver()
+		{
+			session = Session.Instance;
+			session.Ticker.Start();
+		}
+
+		private void Save(object s, EventArgs e)
 		{
 			session.DataModel.Save();
 		}
@@ -23,14 +29,6 @@ namespace CinemaManager.Infrastructure
 		public void StopSave()
 		{
 			session.Ticker.Elapsed -= Save;
-		}
-
-
-		public AutoSaver()
-		{
-			session = Session.Instance;
-			session.Ticker.Start();
-
 		}
 	}
 }

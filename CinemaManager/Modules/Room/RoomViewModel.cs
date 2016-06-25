@@ -39,7 +39,6 @@ namespace CinemaManager.Modules.Room
 			{
 				SelectedSeats.Add(selectedSeat);
 			}
-
 		}
 
 		private IEnumerable<SeatViewModel> SelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);

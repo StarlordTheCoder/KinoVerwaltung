@@ -28,6 +28,8 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public class MainWindowViewModel
 	{
+		public AutoSaver autosaver;
+
 		public MainWindowViewModel(string startupFile)
 		{
 			AboutCommand = new DelegateCommand(() => MessageBox.Show(AboutMessage));
@@ -56,12 +58,9 @@ namespace CinemaManager.MainView
 
 			InitialiseModules();
 			CheckAutoSave();
-			
 		}
 
 		public static Session Session => Session.Instance;
-
-		public AutoSaver autosaver;
 
 		public bool AutoSaveEnabled
 		{
@@ -76,7 +75,7 @@ namespace CinemaManager.MainView
 
 		private void CheckAutoSave()
 		{
-			if (AutoSaveEnabled == true)
+			if (AutoSaveEnabled)
 			{
 				autosaver.StartSave();
 			}
