@@ -14,7 +14,7 @@
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
-			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}"/>
+			<ColumnDefinition Width="{x:Static infrastructure:DebugReleaseStylePicker.DebugBuildStarElseHidden}" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -26,7 +26,7 @@
 		          SelectedItem="{Binding SelectedPresentation}" SelectionMode="Single">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<StackPanel >
+					<StackPanel>
 						<TextBlock Text="{Binding Film.FilmName}" />
 						<TextBlock Text="{Binding Model.RoomNumber}" />
 						<xctk:DateTimePicker Value="{Binding Model.StartTime, Mode=OneWay}" IsReadOnly="True" />
@@ -38,12 +38,17 @@
 		<Button Grid.Column="0" Grid.Row="2" Style="{StaticResource RemoveButton}"
 		        Command="{Binding RemovePresentationCommand}" />
 
-		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition />
+				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<xctk:DateTimePicker Value="{Binding SelectedPresentation.StartTime}" VerticalAlignment="Center" Grid.Row="0"/>
+			<Button Grid.Row="0" Content="Apply film module" VerticalAlignment="Center"
+			        Command="{Binding ApplyFilmFromFilmModuleCommand}" />
+			<Button Grid.Row="1" Content="Apply room module" VerticalAlignment="Center"
+			        Command="{Binding ApplyRoomFromRoomModuleCommand}" />
+			<xctk:DateTimePicker Grid.Row="2" Value="{Binding SelectedPresentation.Model.StartTime}" VerticalAlignment="Center" />
 		</Grid>
 	</Grid>
 </UserControl>

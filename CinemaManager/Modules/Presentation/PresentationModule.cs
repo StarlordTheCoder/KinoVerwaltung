@@ -9,16 +9,22 @@ using System.Windows.Input;
 using CinemaManager.Filter;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
+using CinemaManager.Modules.Film;
+using CinemaManager.Modules.Room;
 using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Presentation
 {
 	public class PresentationModule : ModuleBase
 	{
+		private readonly FilmModule _filmModule;
+		private readonly RoomModule _roomModule;
 		private PresentationViewModel _selectedPresentation;
 
-		public PresentationModule()
+		public PresentationModule(FilmModule filmModule, RoomModule roomModule)
 		{
+			_filmModule = filmModule;
+			_roomModule = roomModule;
 			AddPresentationCommand = new DelegateCommand(AddPresentation);
 			RemovePresentationCommand = new DelegateCommand(RemovePresentation, () => ValueSelected);
 
@@ -27,6 +33,12 @@ namespace CinemaManager.Modules.Presentation
 				.DateFilter("Day", p => p.StartTime);
 
 			PresentationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
+
+			ApplyFilmFromFilmModuleCommand = new DelegateCommand(ApplyFilmFromFilmModule, CanApplyFilmFromFilmModule);
+			filmModule.ModuleDataChanged += (sender, e) => ApplyFilmFromFilmModuleCommand.RaiseCanExecuteChanged();
+
+			ApplyRoomFromRoomModuleCommand = new DelegateCommand(ApplyRoomFromRoomModule, CanApplyRoomFromRoomModule);
+			roomModule.ModuleDataChanged += (sender, e) => ApplyRoomFromRoomModuleCommand.RaiseCanExecuteChanged();
 		}
 
 		/// <summary>
@@ -68,13 +80,16 @@ namespace CinemaManager.Modules.Presentation
 				OnPropertyChanged();
 				OnModuleDataChanged();
 				RemovePresentationCommand.RaiseCanExecuteChanged();
+				ApplyFilmFromFilmModuleCommand.RaiseCanExecuteChanged();
+				ApplyRoomFromRoomModuleCommand.RaiseCanExecuteChanged();
 			}
 		}
 
 		/// <summary>
 		///     Liste Aller präsenatationen
 		/// </summary>
-		public ObservableCollection<PresentationViewModel> Presentations { get; } = new ObservableCollection<PresentationViewModel>();
+		public ObservableCollection<PresentationViewModel> Presentations { get; } =
+			new ObservableCollection<PresentationViewModel>();
 
 		/// <summary>
 		///     Gibt zurück, ob eine Präsentation ausgewählt ist
@@ -82,6 +97,29 @@ namespace CinemaManager.Modules.Presentation
 		public bool ValueSelected => SelectedPresentation != null;
 
 		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
+
+		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
+		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
+
+		private bool CanApplyRoomFromRoomModule()
+		{
+			return _roomModule.ValueSelected;
+		}
+
+		private void ApplyRoomFromRoomModule()
+		{
+			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
+		}
+
+		private bool CanApplyFilmFromFilmModule()
+		{
+			return _filmModule.ValueSelected;
+		}
+
+		private void ApplyFilmFromFilmModule()
+		{
+			SelectedPresentation.Film = _filmModule.SelectedFilm;
+		}
 
 		/// <summary>
 		///     Entfernt die ausgewählte Präsentation
@@ -95,16 +133,20 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Fügt eine neue Präsentation hinzu
 		/// </summary>
-		public void AddPresentation()
+		public async void AddPresentation()
 		{
 			var presentation = new PresentationModel
 			{
-				FilmId = PresentationModels.Any() ? PresentationModels.Max(p => p.FilmId) + 1 : 1,
 				StartTime = DateTime.Now
 			};
 
 			PresentationModels.Add(presentation);
-			Presentations.Add(new PresentationViewModel(presentation));
+			var presentationViewModel = new PresentationViewModel(presentation);
+			Presentations.Add(presentationViewModel);
+			SelectedPresentation = presentationViewModel;
+
+			await ApplyFilmFromFilmModuleCommand.Execute();
+			await ApplyRoomFromRoomModuleCommand.Execute();
 		}
 
 		/// <summary>

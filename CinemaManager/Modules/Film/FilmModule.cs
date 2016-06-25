@@ -81,7 +81,8 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Altersbeschränkung des Filmes
 		/// </summary>
-		public IEnumerable<AgeRestriction> AgeRestrictions => Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
+		public static IEnumerable<AgeRestriction> AgeRestrictions
+			=> Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
 
 		/// <summary>
 		///     Gibt zurück, ob ein FIl Ausgewählt ist
@@ -106,7 +107,8 @@ namespace CinemaManager.Modules.Film
 			var newFilm = new FilmModel
 			{
 				Director = "Director",
-				FilmName = "Film #" + FilmModels.Count
+				FilmName = "Film #" + FilmModels.Count,
+				FilmId = Films.Any() ? Films.Max(f => f.FilmId) + 1 : 1
 			};
 
 			Films.Add(newFilm);
