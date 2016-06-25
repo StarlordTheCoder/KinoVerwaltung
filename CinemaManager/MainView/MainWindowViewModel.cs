@@ -91,10 +91,10 @@ namespace CinemaManager.MainView
 			//Create Module instances
 			CinemaModule = new CinemaModule(RefreshModules);
 			FilmModule = new FilmModule();
-			PresentationModule = new PresentationModule();
+			RoomModule = new RoomModule();
+			PresentationModule = new PresentationModule(FilmModule, RoomModule);
 			UserModule = new UserModule();
 			ReservationModule = new ReservationModule(PresentationModule, UserModule);
-			RoomModule = new RoomModule();
 
 			//Add to list
 			Modules = new ObservableCollection<IModule>

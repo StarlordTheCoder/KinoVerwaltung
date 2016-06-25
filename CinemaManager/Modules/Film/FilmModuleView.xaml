@@ -39,12 +39,12 @@
 
 		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
