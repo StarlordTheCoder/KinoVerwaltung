@@ -44,7 +44,7 @@ namespace CinemaManager.Infrastructure
 		/// <summary>
 		///     Global Ticker for Project
 		/// </summary>
-		public Timer Ticker { get; private set; } = new Timer(TimeSpan.FromSeconds(30).Ticks);
+		public Timer Ticker { get; private set; } = new Timer(100);
 
 		/// <summary>
 		///     Expanded <see cref="Settings.Default" /> DefaultDataPath

@@ -18,6 +18,7 @@ using CinemaManager.Modules.Presentation;
 using CinemaManager.Modules.Reservation;
 using CinemaManager.Modules.Room;
 using CinemaManager.Modules.User;
+using CinemaManager.Properties;
 using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.MainView
@@ -51,11 +52,39 @@ namespace CinemaManager.MainView
 
 			DataSourceService = new DataSourceService();
 			LayoutService = new LayoutService();
+			autosaver = new AutoSaver();
 
 			InitialiseModules();
+			CheckAutoSave();
+			
 		}
 
 		public static Session Session => Session.Instance;
+
+		public AutoSaver autosaver;
+
+		public bool AutoSaveEnabled
+		{
+			get { return Settings.Default.AutoSaveEnabled; }
+			set
+			{
+				Settings.Default.AutoSaveEnabled = value;
+				Settings.Default.Save();
+				CheckAutoSave();
+			}
+		}
+
+		private void CheckAutoSave()
+		{
+			if (AutoSaveEnabled == true)
+			{
+				autosaver.StartSave();
+			}
+			else
+			{
+				autosaver.StopSave();
+			}
+		}
 
 		private void InitialiseModules()
 		{
