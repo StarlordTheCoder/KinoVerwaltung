@@ -106,7 +106,8 @@ namespace CinemaManager.Modules.Film
 			var newFilm = new FilmModel
 			{
 				Director = "Director",
-				FilmName = "Film #" + FilmModels.Count
+				FilmName = "Film #" + FilmModels.Count,
+				FilmId = Films.Any() ? Films.Max(f => f.FilmId) + 1 : 1
 			};
 
 			Films.Add(newFilm);
