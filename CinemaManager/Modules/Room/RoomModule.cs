@@ -155,7 +155,7 @@ namespace CinemaManager.Modules.Room
 				RoomNumber = RoomModels.Any() ? RoomModels.Max(r => r.RoomNumber) + 1 : 1
 			};
 			RoomModels.Add(room);
-			var roomRoomModel = new RoomViewModel(room);
+			var roomRoomModel = new RoomViewModel(room, AllowedSelection);
 
 			Rooms.Add(roomRoomModel);
 			SelectedRoom = roomRoomModel;
@@ -222,11 +222,13 @@ namespace CinemaManager.Modules.Room
 
 				foreach (var room in filteredData)
 				{
-					Rooms.Add(new RoomViewModel(room));
+					Rooms.Add(new RoomViewModel(room, AllowedSelection));
 				}
 			}
 
 			OnPropertyChanged(nameof(Enabled));
 		}
+
+		private const uint AllowedSelection = 1;
 	}
 }

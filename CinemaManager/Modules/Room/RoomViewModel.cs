@@ -16,13 +16,16 @@ namespace CinemaManager.Modules.Room
 	public class RoomViewModel : NotifyPropertyChangedBase
 	{
 		private RowViewModel _selectedRow;
+		private uint _maximumSelected;
 
 		/// <summary>
 		///     Contains methods and Datas of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
-		public RoomViewModel(RoomModel roomModel)
+		/// <param name="maximumSelected"><see cref="MaximumSelected"/></param>
+		public RoomViewModel(RoomModel roomModel, uint maximumSelected = 0)
 		{
+			_maximumSelected = maximumSelected;
 			Model = roomModel;
 			var groupedSeats = roomModel.Seats.GroupBy(r => r.Place.Row);
 			foreach (var seats in groupedSeats)
@@ -34,14 +37,24 @@ namespace CinemaManager.Modules.Room
 			{
 				seatViewModel.PropertyChanged += SeatViewModelOnPropertyChanged;
 			}
-
-			foreach (var selectedSeat in SelectedSeatModels)
-			{
-				SelectedSeats.Add(selectedSeat);
-			}
 		}
 
-		private IEnumerable<SeatViewModel> SelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
+		private IEnumerable<SeatViewModel> AllSelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
+
+		/// <summary>
+		///     Die maximale Anzahl der Sitze, welche gleichzeitig selektiert sein darf
+		/// </summary>
+		public uint MaximumSelected
+		{
+			get { return _maximumSelected; }
+			set
+			{
+				if (_maximumSelected == value) return;
+				_maximumSelected = value;
+				OnPropertyChanged();
+				RecalculateSelection();
+			}
+		}
 
 		/// <summary>
 		///     The currently selected Row
@@ -163,15 +176,36 @@ namespace CinemaManager.Modules.Room
 
 		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 		{
-			if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
+			if (!_isUpdatingSelection && Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
 			{
-				SelectedSeats.Clear();
-
-				foreach (var seat in SelectedSeatModels)
-				{
-					SelectedSeats.Add(seat);
-				}
+				RecalculateSelection();
 			}
+		}
+
+		private bool _isUpdatingSelection;
+
+		private void RecalculateSelection()
+		{
+			_isUpdatingSelection = true;
+
+			foreach (var seat in SelectedSeats.Where(s => !s.IsSelected).ToList())
+			{
+				SelectedSeats.Remove(seat);
+			}
+
+			foreach (var seat in AllSelectedSeatModels.Except(SelectedSeats).ToList())
+			{
+				SelectedSeats.Add(seat);
+			}
+
+			while (SelectedSeats.Count > 0 && SelectedSeats.Count > MaximumSelected)
+			{
+				var seatToRemove = SelectedSeats.First();
+				seatToRemove.IsSelected = false;
+				SelectedSeats.Remove(seatToRemove);
+			}
+
+			_isUpdatingSelection = false;
 		}
 	}
 }
