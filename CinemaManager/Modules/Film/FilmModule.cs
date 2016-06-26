@@ -58,7 +58,7 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Ausgewählter Film
 		/// </summary>
-		public FilmModel SelectedFilm
+		public virtual FilmModel SelectedFilm
 		{
 			get { return _selectedFilm; }
 			set

@@ -13,6 +13,8 @@ namespace CinemaManager.Modules.Room
 	/// </summary>
 	public class RowViewModel
 	{
+		private int _rowNumber;
+
 		/// <summary>
 		///     Viewmodel of the Row
 		/// </summary>
@@ -20,7 +22,7 @@ namespace CinemaManager.Modules.Room
 		/// <param name="seats">List of Seats in this row</param>
 		public RowViewModel(int rowNumber, IEnumerable<SeatModel> seats)
 		{
-			RowNumber = rowNumber;
+			_rowNumber = rowNumber;
 			Seats = new ObservableCollection<SeatViewModel>(seats.Select(s => new SeatViewModel(s)));
 		}
 
@@ -32,6 +34,17 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Nummer/Position der Reihe
 		/// </summary>
-		public int RowNumber { get; set; }
+		public int RowNumber
+		{
+			get { return _rowNumber; }
+			set
+			{
+				_rowNumber = value;
+				foreach (var seat in Seats)
+				{
+					seat.Model.Place.Row = _rowNumber;
+				}
+			}
+		}
 	}
 }

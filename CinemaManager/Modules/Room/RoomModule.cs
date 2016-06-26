@@ -28,10 +28,10 @@ namespace CinemaManager.Modules.Room
 		{
 			AddRoomCommand = new DelegateCommand(AddRoom);
 			RemoveRoomCommand = new DelegateCommand(RemoveRoom, () => ValueSelected);
-			AddRowCommand = new DelegateCommand(AddRow, () => ValueSelected);
-			RemoveRowCommand = new DelegateCommand(RemoveRow, () => SelectedRoom?.SelectedRow != null);
-			AddSeatCommand = new DelegateCommand(AddSeat, () => SelectedRoom?.SelectedRow != null);
-			RemoveSeatCommand = new DelegateCommand(RemoveSeat, () => SelectedRoom?.SelectedSeats.Any() ?? false);
+			AddRowCommand = new DelegateCommand(()  => SelectedRoom.AddRow(), () => ValueSelected);
+			RemoveRowCommand = new DelegateCommand(() => SelectedRoom.RemoveRow(), () => SelectedRoom?.SelectedRow != null);
+			AddSeatCommand = new DelegateCommand(() => SelectedRoom.AddSeat(), () => SelectedRoom?.SelectedRow != null);
+			RemoveSeatCommand = new DelegateCommand(() => SelectedRoom.RemoveSeat(), () => SelectedRoom?.SelectedSeats.Any() ?? false);
 
 			RoomFilterConfigurator
 				.NumberFilter("Room Number", c => c.RoomNumber);
@@ -97,7 +97,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Ausgewählter Raum
 		/// </summary>
-		public RoomViewModel SelectedRoom
+		public virtual RoomViewModel SelectedRoom
 		{
 			get { return _selectedRoom; }
 			set
@@ -123,7 +123,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Seattypes for showing in GUI
 		/// </summary>
-		public IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+		public IList<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		private void SelectedSeatsOnCollectionChanged(object sender,
 			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -170,39 +170,6 @@ namespace CinemaManager.Modules.Room
 			Rooms.Remove(SelectedRoom);
 			SelectedRoom = Rooms.FirstOrDefault();
 		}
-
-		/// <summary>
-		///     Fügt eine neue Reihe hinzu
-		/// </summary>
-		public void AddRow()
-		{
-			SelectedRoom.AddRow();
-		}
-
-		/// <summary>
-		///     Entfernt die Ausgewählte Reihe
-		/// </summary>
-		public void RemoveRow()
-		{
-			SelectedRoom.RemoveRow();
-		}
-
-		/// <summary>
-		///     Fügt einen neuen Sitz hinzu
-		/// </summary>
-		public void AddSeat()
-		{
-			SelectedRoom.AddSeat();
-		}
-
-		/// <summary>
-		///     Entfernt den ausgewählten Sitz
-		/// </summary>
-		public void RemoveSeat()
-		{
-			SelectedRoom.RemoveSeat();
-		}
-
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

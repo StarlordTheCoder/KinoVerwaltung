@@ -114,7 +114,13 @@ namespace CinemaManager.Modules.Room
 		{
 			var seats = Model.Seats.Where(s => s.Place.Row == SelectedRow.RowNumber).ToList();
 			seats.ForEach(s => Model.Seats.Remove(s));
+			foreach (var row in Rows.Where(r => r.RowNumber > SelectedRow.RowNumber))
+			{
+				row.RowNumber--;
+			}
+
 			Rows.Remove(SelectedRow);
+			SelectedRow = null;
 		}
 
 		/// <summary>
@@ -124,19 +130,19 @@ namespace CinemaManager.Modules.Room
 		{
 			var selectedSeat = SelectedRow.Seats.FirstOrDefault(s => s.IsSelected);
 
-			int index;
+			int seatNumber;
 
 			if (selectedSeat != null)
 			{
-				index = selectedSeat.Model.Place.Number + 1;
-				foreach (var seat in SelectedRow.Seats.Where(s => s.Model.Place.Number >= index))
+				seatNumber = selectedSeat.Model.Place.Number + 1;
+				foreach (var seat in SelectedRow.Seats.Where(s => s.Model.Place.Number >= seatNumber))
 				{
 					seat.Model.Place.Number++;
 				}
 			}
 			else
 			{
-				index = SelectedRow.Seats.Any() ? SelectedRow.Seats.Max(s => s.Model.Place.Number) + 1 : 0;
+				seatNumber = SelectedRow.Seats.Any() ? SelectedRow.Seats.Max(s => s.Model.Place.Number) + 1 : 1;
 			}
 
 			var newModel = new SeatModel
@@ -144,7 +150,7 @@ namespace CinemaManager.Modules.Room
 				Place = new SeatIdentifier
 				{
 					Row = SelectedRow.RowNumber,
-					Number = index
+					Number = seatNumber
 				}
 			};
 
@@ -152,7 +158,7 @@ namespace CinemaManager.Modules.Room
 
 			newSeat.PropertyChanged += SeatViewModelOnPropertyChanged;
 
-			SelectedRow.Seats.Insert(index, newSeat);
+			SelectedRow.Seats.Insert(seatNumber - 1, newSeat);
 			Model.Seats.Add(newSeat.Model);
 			SelectedSeats.Clear();
 			newSeat.IsSelected = true;
@@ -165,13 +171,18 @@ namespace CinemaManager.Modules.Room
 		{
 			var seatToRemove = SelectedSeats.First();
 
+			var rowOfSeat = Rows.First(r => r.RowNumber == seatToRemove.Model.Place.Row);
+
+			foreach (var seat in rowOfSeat.Seats.Where(s => s.Model.Place.Number > seatToRemove.Model.Place.Number))
+			{
+				seat.Model.Place.Number--;
+			}
+
 			Model.Seats.Remove(seatToRemove.Model);
 			seatToRemove.PropertyChanged -= SeatViewModelOnPropertyChanged;
 			SelectedSeats.Remove(seatToRemove);
-			foreach (var row in Rows)
-			{
-				row.Seats.Remove(seatToRemove);
-			}
+
+			rowOfSeat.Seats.Remove(seatToRemove);
 		}
 
 		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

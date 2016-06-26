@@ -14,11 +14,19 @@ namespace CinemaManagerTest.Modules
 {
 	public class PresentationModuleTest : UnitTestBase<PresentationModule>
 	{
+		private FilmModel _selectedFilmModel = new FilmModel();
+		private RoomModel _selectedRoomModel = new RoomModel();
+
 		protected override void DoSetup()
 		{
 			base.DoSetup();
+
 			var filmModule = new Mock<FilmModule>();
+			filmModule.Setup(f => f.SelectedFilm).Returns(_selectedFilmModel);
+
 			var roomModule = new Mock<RoomModule>();
+			roomModule.Setup(f => f.SelectedRoom).Returns(new RoomViewModel(_selectedRoomModel));
+
 			UnitUnderTest = new PresentationModule(filmModule.Object, roomModule.Object)
 			{
 				PresentationFilterConfigurator = CreateTrueFilterConfigurator<PresentationModel>()
