@@ -102,7 +102,7 @@ namespace CinemaManager.Modules.Room
 			get { return _selectedRoom; }
 			set
 			{
-				if (Equals(value, _selectedRoom)) return;
+				if (value == null || Equals(value, _selectedRoom)) return;
 				if (_selectedRoom != null)
 				{
 					_selectedRoom.PropertyChanged -= SelectedRoomOnPropertyChanged;
@@ -113,10 +113,10 @@ namespace CinemaManager.Modules.Room
 				_selectedRoom.SelectedSeats.CollectionChanged += SelectedSeatsOnCollectionChanged;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				OnModuleDataChanged();
 				RaiseCanExecuteChanged();
 			}
 		}
-
 
 		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
 

@@ -32,7 +32,7 @@ namespace CinemaManager.Modules.Presentation
 			get { return Cinema.Films.FirstOrDefault(f => f.FilmId == Model.FilmId); }
 			set
 			{
-				if (Equals(value.FilmId, Model.FilmId)) return;
+				if (value == null || Equals(value.FilmId, Model.FilmId)) return;
 				Model.FilmId = value.FilmId;
 				OnPropertyChanged();
 			}
@@ -47,11 +47,19 @@ namespace CinemaManager.Modules.Presentation
 			{
 				var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Model.RoomNumber);
 
-				return roomModel != null ? new RoomViewModel(roomModel) : null;
+				if(roomModel == null) return null;
+				var roomViewModel = new RoomViewModel(roomModel);
+
+				foreach (var seat in roomViewModel.Rows.SelectMany(r => r.Seats))
+				{
+					seat.IsReserved = Model.Reservations.SelectMany(r => r.Seats).Contains(seat.Model.Place);
+				}
+
+				return roomViewModel;
 			}
 			set
 			{
-				if (Equals(value.Model.RoomNumber, Model.RoomNumber)) return;
+				if (value?.Model == null || Equals(value.Model.RoomNumber, Model.RoomNumber)) return;
 				Model.RoomNumber = value.Model.RoomNumber;
 				OnPropertyChanged();
 			}

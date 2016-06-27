@@ -86,6 +86,7 @@ namespace CinemaManager.Modules.Presentation
 				if (Equals(_selectedPresentation, value)) return;
 				_selectedPresentation = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
 				OnModuleDataChanged();
 				RemovePresentationCommand.RaiseCanExecuteChanged();
 				ApplyFilmFromFilmModuleCommand.RaiseCanExecuteChanged();

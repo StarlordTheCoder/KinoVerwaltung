@@ -31,6 +31,11 @@ namespace CinemaManager.MainView
 		private readonly IAutoSaveService _autosaver;
 
 		/// <summary>
+		///     Used in XAML
+		/// </summary>
+		public Session Session => Session.Instance;
+
+		/// <summary>
 		///     Starts all tasks so the application can procceed normally
 		/// </summary>
 		/// <param name="startupFile">Used to load a different layout or file at startup</param>
@@ -56,7 +61,7 @@ namespace CinemaManager.MainView
 				}
 			}
 
-			DataSourceService = new DataSourceService();
+			DataSourceService = new DataSourceService(RefreshModules);
 			LayoutService = new LayoutService();
 			_autosaver = new AutoSaveService();
 

@@ -1,12 +1,14 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
+using CinemaManager.Modules;
 using Microsoft.Win32;
 
 namespace CinemaManager.MainView
@@ -16,12 +18,16 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public class DataSourceService : IDataSourceService
 	{
+		private static Action<IModule> _refreshModules;
+
 		/// <summary>
 		///     Loads the default data
 		///     Creates the Command and CommandBindings
 		/// </summary>
-		public DataSourceService()
+		/// <param name="refreshModules"></param>
+		public DataSourceService(Action<IModule> refreshModules)
 		{
+			_refreshModules = refreshModules;
 			LoadData(Session.DataPath);
 
 			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
@@ -115,6 +121,7 @@ namespace CinemaManager.MainView
 		{
 			Session.DataModel.Save();
 			Session.DataModel.Load();
+			_refreshModules(null);
 		}
 
 		/// <summary>

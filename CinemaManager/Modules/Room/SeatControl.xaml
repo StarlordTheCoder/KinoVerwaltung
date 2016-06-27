@@ -4,12 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:room="clr-namespace:CinemaManager.Modules.Room"
-             xmlns:converter="clr-namespace:CinemaManager.Converter"
              mc:Ignorable="d"
-             Width="{Binding Width}" Height="30" Margin="5" d:DataContext="{d:DesignInstance room:SeatViewModel}">
-	<UserControl.Resources>
-		<converter:BoolToSolidColorBrushConverter x:Key="SelectedToColorConverter" True="Aqua" False="Gray" />
-	</UserControl.Resources>
-	<Grid Background="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}}"
-	      MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" />
-</UserControl>
+             Width="{Binding Width}" Height="30" Margin="5"
+             d:DataContext="{d:DesignInstance room:SeatViewModel}" Background="{Binding BackgroundColor}"
+             MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" />

@@ -19,7 +19,7 @@ namespace CinemaManager.Modules.Room
 		private uint _maximumSelected;
 
 		/// <summary>
-		///     Contains methods and Datas of a room for the gui
+		///     Contains methods and Data of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
 		/// <param name="maximumSelected"><see cref="MaximumSelected"/></param>
