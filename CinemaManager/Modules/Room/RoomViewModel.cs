@@ -154,14 +154,17 @@ namespace CinemaManager.Modules.Room
 				}
 			};
 
-			var newSeat = new SeatViewModel(newModel);
+			var newSeat = new SeatViewModel(newModel)
+			{
+				IsSelected = true
+			};
 
 			newSeat.PropertyChanged += SeatViewModelOnPropertyChanged;
 
 			SelectedRow.Seats.Insert(seatNumber - 1, newSeat);
 			Model.Seats.Add(newSeat.Model);
-			SelectedSeats.Clear();
-			newSeat.IsSelected = true;
+
+			RecalculateSelection();
 		}
 
 		/// <summary>
