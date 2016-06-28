@@ -97,21 +97,21 @@ namespace CinemaManager.Model
                     Capacity = 1,
                     DisplayName = "Einzelitz",
                     PriceMultiplicator = 1,
-                    Id = 1
+                    Id = 0
                 });
                 cinema.SeatTypes.Add(new SeatType()
                 {
                     Capacity = 2,
                     DisplayName = "Sofa",
                     PriceMultiplicator = 1.5,
-                    Id = 2
+                    Id = 1
                 });
                 cinema.SeatTypes.Add(new SeatType()
                 {
                     Capacity = 2,
                     DisplayName = "Vip-Sofa",
                     PriceMultiplicator = 2,
-                    Id = 3
+                    Id = 2
                 });
             }
 		}

@@ -62,7 +62,7 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<ComboBox ItemsSource="{Binding SeatTypes}"
-			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType, Mode=TwoWay}"
 			          DisplayMemberPath="DisplayName" Grid.Row="0" VerticalAlignment="Center" />
 			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" Grid.Row="1"
 			           VerticalAlignment="Center" />
