@@ -38,7 +38,8 @@ namespace CinemaManager.Modules.Presentation
 
 			PresentationFilterConfigurator
 				.NumberFilter("ID", p => p.FilmId)
-				.DateFilter("Day", p => p.StartTime);
+				.DateFilter("Day", p => p.StartTime)
+				.ComplexFilter(_filmModule, f => PresentationModels.Where(p => p.FilmId == f.SelectedFilm.FilmId));
 
 			PresentationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
