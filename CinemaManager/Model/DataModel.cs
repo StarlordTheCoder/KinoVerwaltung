@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Shell;
@@ -42,12 +43,19 @@ namespace CinemaManager.Model
 			{
 				Directory.CreateDirectory(folder);
 			}
-
-			using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
-			{
-				stream.SetLength(0);
-				_serializer.Serialize(stream, CinemasModel);
-			}
+		    try
+		    {
+		        using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
+		        {
+		            stream.SetLength(0);
+		            _serializer.Serialize(stream, CinemasModel);
+		        }
+		    }
+		    catch (IOException)
+		    {
+		        //TODO AUTASVE FAILED (We will never do this)
+		    }
+			
 		}
 
 		/// <summary>
@@ -78,9 +86,34 @@ namespace CinemaManager.Model
 		{
 			if (CinemasModel.Cinemas.Any() && CinemasModel.Cinemas.Count(c => c.IsActive) != 1)
 			{
-				CinemasModel.Cinemas.ForEach(c => c.IsActive = false);
+                CinemasModel.Cinemas.ForEach(c => c.IsActive = false);
 				CinemasModel.Cinemas.First().IsActive = true;
 			}
+            // Laden der Sitze
+            foreach (var cinema in CinemasModel.Cinemas.Where(c => c.SeatTypes.Count == 0))
+		    {
+                cinema.SeatTypes.Add(new SeatType()
+                {
+                    Capacity = 1,
+                    DisplayName = "Einzelitz",
+                    PriceMultiplicator = 1,
+                    Id = 1
+                });
+                cinema.SeatTypes.Add(new SeatType()
+                {
+                    Capacity = 2,
+                    DisplayName = "Sofa",
+                    PriceMultiplicator = 1.5,
+                    Id = 2
+                });
+                cinema.SeatTypes.Add(new SeatType()
+                {
+                    Capacity = 2,
+                    DisplayName = "Vip-Sofa",
+                    PriceMultiplicator = 2,
+                    Id = 3
+                });
+            }
 		}
 	}
 }
