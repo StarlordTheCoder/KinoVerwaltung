@@ -28,7 +28,6 @@ namespace CinemaManager.MainView
 		public DataSourceService(Action<IModule> refreshModules)
 		{
 			_refreshModules = refreshModules;
-			LoadData(Session.DataPath);
 
 			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
@@ -80,13 +79,14 @@ namespace CinemaManager.MainView
 		///     Try to load the Datafile at the specified <paramref name="path" />/>
 		/// </summary>
 		/// <param name="path">Path to load data from</param>
-		private static void LoadData(string path)
+		public void LoadData(string path)
 		{
 			Session.DataPath = path;
 
 			try
 			{
 				Session.DataModel.Load();
+				_refreshModules(null);
 			}
 			catch
 			{
@@ -117,17 +117,16 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Calls Load and Save on the <see cref="IDataModel" />
 		/// </summary>
-		private static void SynchronizeData()
+		private void SynchronizeData()
 		{
 			Session.DataModel.Save();
-			Session.DataModel.Load();
-			_refreshModules(null);
+			LoadData(Session.DataPath);
 		}
 
 		/// <summary>
 		///     Opens a open file dialog
 		/// </summary>
-		private static void OpenDataFile()
+		private void OpenDataFile()
 		{
 			var dialog = new OpenFileDialog
 			{

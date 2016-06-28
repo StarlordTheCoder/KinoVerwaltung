@@ -29,6 +29,7 @@
 					<StackPanel>
 						<TextBlock Text="{Binding Film.FilmName}" />
 						<TextBlock Text="{Binding Model.RoomNumber}" />
+						<TextBlock Text="{Binding RoomViewModel.AvailableSeats}" />
 						<xctk:DateTimePicker Value="{Binding Model.StartTime, Mode=OneWay}" IsReadOnly="True" />
 					</StackPanel>
 				</DataTemplate>
@@ -40,9 +41,9 @@
 
 		<Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsEnabled="{Binding ValueSelected}">
 			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<Button Grid.Row="0" Content="Apply film module" VerticalAlignment="Center"
 			        Command="{Binding ApplyFilmFromFilmModuleCommand}" />

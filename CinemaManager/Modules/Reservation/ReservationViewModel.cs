@@ -20,7 +20,6 @@ namespace CinemaManager.Modules.Reservation
 		private PresentationViewModel _presentation;
 		private UserModel _reservator;
 
-
 		/// <summary>
 		///     Constructor
 		/// </summary>
@@ -33,9 +32,7 @@ namespace CinemaManager.Modules.Reservation
 			_presentationModule = presentationModule;
 			Model = model;
 
-			Reservator = Model.ReservatorId != 0
-				? Cinema.Users.First(u => u.UserId == Model.ReservatorId)
-				: userModule.SelectedUser;
+			Reservator = Cinema.Users.FirstOrDefault(u => u.UserId == Model.ReservatorId);
 
 			Presentation = new PresentationViewModel(Cinema.Presentations.FirstOrDefault(p => p.Reservations.Contains(Model)));
 

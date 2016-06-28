@@ -82,7 +82,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Room Module";
+		public override string Title => "Rooms";
 
 		/// <summary>
 		///     Alle gefilterten Räume
@@ -102,17 +102,21 @@ namespace CinemaManager.Modules.Room
 			get { return _selectedRoom; }
 			set
 			{
-				if (value == null || Equals(value, _selectedRoom)) return;
+				if (Equals(value, _selectedRoom)) return;
 				if (_selectedRoom != null)
 				{
 					_selectedRoom.PropertyChanged -= SelectedRoomOnPropertyChanged;
 					_selectedRoom.SelectedSeats.CollectionChanged -= SelectedSeatsOnCollectionChanged;
 				}
 				_selectedRoom = value;
-				_selectedRoom.PropertyChanged += SelectedRoomOnPropertyChanged;
-				_selectedRoom.SelectedSeats.CollectionChanged += SelectedSeatsOnCollectionChanged;
+				if (_selectedRoom != null)
+				{
+					_selectedRoom.PropertyChanged += SelectedRoomOnPropertyChanged;
+					_selectedRoom.SelectedSeats.CollectionChanged += SelectedSeatsOnCollectionChanged;
+				}
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				OnPropertyChanged(nameof(CurrentSelectedSeat));
 				OnModuleDataChanged();
 				RaiseCanExecuteChanged();
 			}
@@ -123,12 +127,27 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Seattypes for showing in GUI
 		/// </summary>
-		public IList<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+		public static IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+
+		/// <summary>
+		///     Die ausgewählte Sitzart
+		/// </summary>
+		public SeatViewModel CurrentSelectedSeat
+		{
+			get { return SelectedRoom?.SelectedSeats.FirstOrDefault(); }
+			set
+			{
+				if (SelectedRoom?.SelectedSeats.FirstOrDefault() == null) return;
+				SelectedRoom.SelectedSeats[0] = value;
+				OnPropertyChanged();
+			}
+		}
 
 		private void SelectedSeatsOnCollectionChanged(object sender,
 			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
 		{
 			RaiseCanExecuteChanged();
+			OnPropertyChanged(nameof(CurrentSelectedSeat));
 		}
 
 		private void SelectedRoomOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -196,6 +215,6 @@ namespace CinemaManager.Modules.Room
 			OnPropertyChanged(nameof(Enabled));
 		}
 
-		private const uint AllowedSelection = 1;
+		private const int AllowedSelection = 1;
 	}
 }

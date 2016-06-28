@@ -56,18 +56,25 @@
 		        Style="{StaticResource RemoveButton}"
 		        Command="{Binding RemoveSeatCommand }" ToolTip="Remove Seat" />
 		<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
-			<ComboBox ItemsSource="{Binding SeatTypes}"
-			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType, Mode=TwoWay}"
-			          DisplayMemberPath="DisplayName" Grid.Row="0" VerticalAlignment="Center" />
-			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" Grid.Row="1"
-			           VerticalAlignment="Center" />
-			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Row, Mode=OneWay}" Grid.Row="2"
-			           VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=SeatTypes}" Content="Type" />
+			<ComboBox Grid.Column="1"
+			          Name="SeatTypes" ItemsSource="{Binding SeatTypes}"
+			          SelectedItem="{Binding CurrentSelectedSeat.SelectedSeatType, Mode=TwoWay}"
+			          DisplayMemberPath="DisplayName" Grid.Row="0" />
+			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Number}" Content="Row" />
+			<TextBlock Name="Number" Text="{Binding CurrentSelectedSeat.Model.Place.Number, Mode=OneWay}" Grid.Row="1"
+			           Grid.Column="1" />
+			<Label Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=Row}" Content="Row" />
+			<TextBlock Name="Row" Text="{Binding CurrentSelectedSeat.Model.Place.Row, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
 		</Grid>
 	</Grid>
 </UserControl>

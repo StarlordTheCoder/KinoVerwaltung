@@ -120,7 +120,7 @@ namespace CinemaManager.MainView
 			};
 
 			//Load data
-			RefreshModules(null);
+			DataSourceService.LoadData(Session.DataPath);
 		}
 
 

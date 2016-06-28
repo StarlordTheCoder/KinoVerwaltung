@@ -60,7 +60,12 @@
 		        Grid.Row="2" Grid.Column="0" Style="{StaticResource RemoveButton}" />
 
 		<Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" IsEnabled="{Binding ValueSelected}">
-			<room:Rows DataContext="{Binding SelectedReservation.Presentation.RoomViewModel}" />
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<xctk:IntegerUpDown Minimum="1" Increment="1" Value="{Binding SelectedReservation.Presentation.RoomViewModel.MaximumSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			<room:Rows DataContext="{Binding SelectedReservation.Presentation.RoomViewModel}" Grid.Row="1"/>
 		</Grid>
 	</Grid>
 

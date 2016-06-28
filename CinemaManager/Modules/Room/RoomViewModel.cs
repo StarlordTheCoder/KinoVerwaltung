@@ -16,14 +16,14 @@ namespace CinemaManager.Modules.Room
 	public class RoomViewModel : NotifyPropertyChangedBase
 	{
 		private RowViewModel _selectedRow;
-		private uint _maximumSelected;
+		private int _maximumSelected;
 
 		/// <summary>
 		///     Contains methods and Data of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
 		/// <param name="maximumSelected"><see cref="MaximumSelected"/></param>
-		public RoomViewModel(RoomModel roomModel, uint maximumSelected = 0)
+		public RoomViewModel(RoomModel roomModel, int maximumSelected = 0)
 		{
 			_maximumSelected = maximumSelected;
 			Model = roomModel;
@@ -44,7 +44,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Die maximale Anzahl der Sitze, welche gleichzeitig selektiert sein darf
 		/// </summary>
-		public uint MaximumSelected
+		public int MaximumSelected
 		{
 			get { return _maximumSelected; }
 			set
@@ -84,6 +84,14 @@ namespace CinemaManager.Modules.Room
 		///     Model of the Room
 		/// </summary>
 		public RoomModel Model { get; set; }
+
+		/// <summary>
+		///     Die Anzahl freier Sitze
+		/// </summary>
+		public int AvailableSeats
+		{
+			get { return Rows.SelectMany(r => r.Seats).Count(s => !s.IsReserved); }
+		}
 
 		/// <summary>
 		///     Add a Row into a Room
@@ -193,6 +201,10 @@ namespace CinemaManager.Modules.Room
 			if (!_isUpdatingSelection && Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
 			{
 				RecalculateSelection();
+			}
+			else if(Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsReserved)))
+			{
+				OnPropertyChanged(nameof(AvailableSeats));
 			}
 		}
 

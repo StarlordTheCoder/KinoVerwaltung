@@ -32,16 +32,16 @@ C#-WPF-Client. Verantwortlich für die Darstellung und das Verwalten der Daten.
 * Saal
 ** Es können Säle erstellt, angesehen und bearbeitet werden
 ** Verfügt über mehrere Sitze und Reihen
+** Sitze werden graphisch dargestellt
 
 * Sitzplatz
-** Kann auch ein Spezial-Sitz sein
+** Kann auch ein Spezial-Sitz sein (Sitzarten)
 *** Möglicher Preiszuschlag
 *** Eventuell mehr als eine Person pro Sitzplatz (Sofa)
 ** Wird im GUI dargestellt
 
 * Film
 ** Es können Filme erstellt, angesehen und bearbeitet werden
-** Ein Film hat ein Cover und einen optionalen Trailer-Link
 
 * Filter
 ** Der Anwender kann in der Applikation diverse Daten suchen / filtern

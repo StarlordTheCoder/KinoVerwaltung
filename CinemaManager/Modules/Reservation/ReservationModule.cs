@@ -58,7 +58,7 @@ namespace CinemaManager.Modules.Reservation
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Reservation Module";
+		public override string Title => "Reservations";
 
 		/// <summary>
 		///     Alle gefilterten Resrvationen
@@ -110,13 +110,16 @@ namespace CinemaManager.Modules.Reservation
 			SelectedReservation = null;
 		}
 
-		private void AddReservation()
+		private async void AddReservation()
 		{
 			var model = new ReservationModel();
 
 			_presentationModule.SelectedPresentation.Model.Reservations.Add(model);
 
 			var reservation = new ReservationViewModel(model, _userModule, _presentationModule);
+
+			await reservation.ApplyUserFromUserModuleCommand.Execute();
+			await reservation.ApplyPresentationFromPresentationModuleCommand.Execute();
 
 			Reservations.Add(reservation);
 			SelectedReservation = reservation;

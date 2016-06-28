@@ -54,7 +54,7 @@ namespace CinemaManager.Modules.Cinema
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Cinema Manager";
+		public override string Title => "Cinemas";
 
 		/// <summary>
 		///     Filter-Konfigurator für die Kinos

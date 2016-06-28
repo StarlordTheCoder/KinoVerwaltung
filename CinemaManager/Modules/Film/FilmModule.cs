@@ -43,7 +43,7 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Filme";
+		public override string Title => "Films";
 
 		/// <summary>
 		///     FilterKonfigurator

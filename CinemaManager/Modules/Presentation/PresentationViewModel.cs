@@ -24,6 +24,20 @@ namespace CinemaManager.Modules.Presentation
 			Model = model;
 		}
 
+		private RoomViewModel CalculateRoomViewModel()
+		{
+			var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Model.RoomNumber);
+
+			if (roomModel == null) return null;
+			var roomViewModel = new RoomViewModel(roomModel, 1);
+
+			foreach (var seat in roomViewModel.Rows.SelectMany(r => r.Seats))
+			{
+				seat.IsReserved = Model.Reservations.SelectMany(r => r.Seats).Contains(seat.Model.Place);
+			}
+			return roomViewModel;
+		}
+
 		/// <summary>
 		///     Der Film, welcher gespielt wird
 		/// </summary>
@@ -38,29 +52,19 @@ namespace CinemaManager.Modules.Presentation
 			}
 		}
 
+		private RoomViewModel _roomViewModel;
+
 		/// <summary>
 		///     Der Saal, in welchem diese Vorstellung ist
 		/// </summary>
 		public RoomViewModel RoomViewModel
 		{
-			get
-			{
-				var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Model.RoomNumber);
-
-				if(roomModel == null) return null;
-				var roomViewModel = new RoomViewModel(roomModel);
-
-				foreach (var seat in roomViewModel.Rows.SelectMany(r => r.Seats))
-				{
-					seat.IsReserved = Model.Reservations.SelectMany(r => r.Seats).Contains(seat.Model.Place);
-				}
-
-				return roomViewModel;
-			}
+			get { return _roomViewModel ?? (_roomViewModel = CalculateRoomViewModel()); }
 			set
 			{
 				if (value?.Model == null || Equals(value.Model.RoomNumber, Model.RoomNumber)) return;
 				Model.RoomNumber = value.Model.RoomNumber;
+				_roomViewModel = CalculateRoomViewModel();
 				OnPropertyChanged();
 			}
 		}

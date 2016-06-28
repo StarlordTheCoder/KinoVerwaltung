@@ -48,7 +48,7 @@ namespace CinemaManager.Modules.User
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "User Module";
+		public override string Title => "Users";
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.

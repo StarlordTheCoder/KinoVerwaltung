@@ -73,7 +73,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Presentation";
+		public override string Title => "Presentations";
 
 		/// <summary>
 		///     Model der ausgewählten Präsentation
