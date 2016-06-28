@@ -13,6 +13,8 @@ namespace CinemaManager.Modules.Presentation
 	/// </summary>
 	public class PresentationViewModel : NotifyPropertyChangedBase
 	{
+		private RoomViewModel _roomViewModel;
+
 		/// <summary>
 		///     Constructor
 		/// </summary>
@@ -22,20 +24,6 @@ namespace CinemaManager.Modules.Presentation
 		public PresentationViewModel(PresentationModel model)
 		{
 			Model = model;
-		}
-
-		private RoomViewModel CalculateRoomViewModel()
-		{
-			var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Model.RoomNumber);
-
-			if (roomModel == null) return null;
-			var roomViewModel = new RoomViewModel(roomModel, 1);
-
-			foreach (var seat in roomViewModel.Rows.SelectMany(r => r.Seats))
-			{
-				seat.IsReserved = Model.Reservations.SelectMany(r => r.Seats).Contains(seat.Model.Place);
-			}
-			return roomViewModel;
 		}
 
 		/// <summary>
@@ -51,8 +39,6 @@ namespace CinemaManager.Modules.Presentation
 				OnPropertyChanged();
 			}
 		}
-
-		private RoomViewModel _roomViewModel;
 
 		/// <summary>
 		///     Der Saal, in welchem diese Vorstellung ist
@@ -76,5 +62,19 @@ namespace CinemaManager.Modules.Presentation
 		///     Das Original-Model
 		/// </summary>
 		public PresentationModel Model { get; }
+
+		private RoomViewModel CalculateRoomViewModel()
+		{
+			var roomModel = Cinema.Rooms.FirstOrDefault(r => r.RoomNumber == Model.RoomNumber);
+
+			if (roomModel == null) return null;
+			var roomViewModel = new RoomViewModel(roomModel, 1);
+
+			foreach (var seat in roomViewModel.Rows.SelectMany(r => r.Seats))
+			{
+				seat.IsReserved = Model.Reservations.SelectMany(r => r.Seats).Contains(seat.Model.Place);
+			}
+			return roomViewModel;
+		}
 	}
 }

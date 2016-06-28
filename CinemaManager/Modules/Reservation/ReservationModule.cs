@@ -84,7 +84,7 @@ namespace CinemaManager.Modules.Reservation
 				_selectedReservation = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
-                RemoveReservationCommand.RaiseCanExecuteChanged();
+				RemoveReservationCommand.RaiseCanExecuteChanged();
 			}
 		}
 

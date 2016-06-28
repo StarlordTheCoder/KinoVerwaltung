@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,11 +30,6 @@ namespace CinemaManager.MainView
 	public class MainWindowViewModel
 	{
 		private readonly IAutoSaveService _autosaver;
-
-		/// <summary>
-		///     Used in XAML
-		/// </summary>
-		public Session Session => Session.Instance;
 
 		/// <summary>
 		///     Starts all tasks so the application can procceed normally
@@ -67,9 +63,12 @@ namespace CinemaManager.MainView
 
 			InitialiseModules();
 			CheckAutoSave();
-
-
 		}
+
+		/// <summary>
+		///     Used in XAML
+		/// </summary>
+		public Session Session => Session.Instance;
 
 		/// <summary>
 		///     Wird serialisiert. Falls true, speichert alle Daten regelmässig ab
@@ -126,12 +125,12 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Beim Schliessen wird ein Popup angezeigt welches nach dem Speichern fragt
 		/// </summary>
-		public void Exit(System.ComponentModel.CancelEventArgs e)
+		public void Exit(CancelEventArgs e)
 		{
 			const MessageBoxButton buttons = MessageBoxButton.YesNoCancel;
 			const string message = "Save changes?";
 			const string caption = "Save?";
-			var result = MessageBox.Show(message, caption, buttons, MessageBoxImage.Question); 
+			var result = MessageBox.Show(message, caption, buttons, MessageBoxImage.Question);
 
 			switch (result)
 			{
@@ -217,7 +216,8 @@ namespace CinemaManager.MainView
 		/// </summary>
 		public ICommand AboutCommand { get; }
 
-		private static readonly string AboutMessage = "Created by Seraphin Rihm, Pascal Honegger & Alain Keller" + Environment.NewLine + "Version " + ApplicationVersion;
+		private static readonly string AboutMessage = "Created by Seraphin Rihm, Pascal Honegger & Alain Keller" +
+		                                              Environment.NewLine + "Version " + ApplicationVersion;
 
 		private static string ApplicationVersion
 		{
@@ -232,7 +232,8 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Die Command-Binding. Verbindet alle Command mit den dazugehörigen Aktionen
 		/// </summary>
-		public ICollection CommandBindings => LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
+		public ICollection CommandBindings
+			=> LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
 
 		#endregion
 	}

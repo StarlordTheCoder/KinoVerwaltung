@@ -12,12 +12,6 @@ namespace CinemaManager.MainView
 	public interface IDataSourceService
 	{
 		/// <summary>
-		///     Try to load the Datafile at the specified <paramref name="path" />
-		/// </summary>
-		/// <param name="path">Path to load data from</param>
-		void LoadData(string path);
-
-		/// <summary>
 		///     List of the used <see cref="CommandBindings" />
 		///     Binds the commands to the associated actions
 		/// </summary>
@@ -37,5 +31,11 @@ namespace CinemaManager.MainView
 		///     Command to save the current file and reload it
 		/// </summary>
 		RoutedUICommand SynchronizeCommand { get; }
+
+		/// <summary>
+		///     Try to load the Datafile at the specified <paramref name="path" />
+		/// </summary>
+		/// <param name="path">Path to load data from</param>
+		void LoadData(string path);
 	}
 }

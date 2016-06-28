@@ -1,7 +1,6 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -57,7 +56,8 @@ namespace CinemaManager.Modules.Reservation
 		{
 			get
 			{
-				return $"{Presentation.RoomViewModel.SelectedSeats.Sum(s => s.SelectedSeatType.PriceMultiplicator) * (double)Presentation.Film.BasePricePerSeat:C}";
+				return
+					$"{Presentation.RoomViewModel.SelectedSeats.Sum(s => s.SelectedSeatType.PriceMultiplicator)*(double) Presentation.Film.BasePricePerSeat:C}";
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace CinemaManager.Modules.Reservation
 			set
 			{
 				if (Equals(_presentation, value)) return;
-				
+
 				if (_presentation != null)
 				{
 					_presentation.Model.Reservations?.Remove(Model);
@@ -115,20 +115,6 @@ namespace CinemaManager.Modules.Reservation
 			}
 		}
 
-		private void SelectedSeatsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-		{
-			OnPropertyChanged(nameof(Price));
-			SaveReservationCommand.RaiseCanExecuteChanged();
-		}
-
-		private void PresentationOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-		{
-			if(Equals(propertyChangedEventArgs.PropertyName, nameof(PresentationViewModel.Film)))
-			{
-				OnPropertyChanged(nameof(Price));
-			}
-		}
-
 		/// <summary>
 		///     Command for <see cref="ApplyUserFromUserModule" />
 		/// </summary>
@@ -138,6 +124,26 @@ namespace CinemaManager.Modules.Reservation
 		///     Command for <see cref="SaveReservation" />
 		/// </summary>
 		public DelegateCommand SaveReservationCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="ApplyPresentationFromPresentationModule" />
+		/// </summary>
+		public DelegateCommand ApplyPresentationFromPresentationModuleCommand { get; }
+
+		private void SelectedSeatsOnCollectionChanged(object sender,
+			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+		{
+			OnPropertyChanged(nameof(Price));
+			SaveReservationCommand.RaiseCanExecuteChanged();
+		}
+
+		private void PresentationOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			if (Equals(propertyChangedEventArgs.PropertyName, nameof(PresentationViewModel.Film)))
+			{
+				OnPropertyChanged(nameof(Price));
+			}
+		}
 
 		private void SaveReservation()
 		{
@@ -150,11 +156,6 @@ namespace CinemaManager.Modules.Reservation
 		{
 			return Presentation.RoomViewModel.SelectedSeats.Count == Presentation.RoomViewModel.MaximumSelected;
 		}
-
-		/// <summary>
-		///     Command for <see cref="ApplyPresentationFromPresentationModule" />
-		/// </summary>
-		public DelegateCommand ApplyPresentationFromPresentationModuleCommand { get; }
 
 		private bool CanApplyPresentationFromPresentationModule()
 		{

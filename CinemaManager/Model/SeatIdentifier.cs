@@ -11,6 +11,16 @@ namespace CinemaManager.Model
 	[Serializable]
 	public class SeatIdentifier
 	{
+		/// <summary>
+		///     Nummer des Sitzes
+		/// </summary>
+		public int Number { get; set; }
+
+		/// <summary>
+		///     Reihe, in welcher sich der Sitz befindet
+		/// </summary>
+		public int Row { get; set; }
+
 		private bool Equals(SeatIdentifier other)
 		{
 			return Number == other.Number && Row == other.Row;
@@ -24,7 +34,7 @@ namespace CinemaManager.Model
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
+			if (obj.GetType() != GetType()) return false;
 			return Equals((SeatIdentifier) obj);
 		}
 
@@ -38,15 +48,5 @@ namespace CinemaManager.Model
 				return (Number*397) ^ Row;
 			}
 		}
-
-		/// <summary>
-		///     Nummer des Sitzes
-		/// </summary>
-		public int Number { get; set; }
-
-		/// <summary>
-		///     Reihe, in welcher sich der Sitz befindet
-		/// </summary>
-		public int Row { get; set; }
 	}
 }

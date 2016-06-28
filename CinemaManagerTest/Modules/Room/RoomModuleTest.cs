@@ -104,6 +104,5 @@ namespace CinemaManagerTest.Modules.Room
 			Assert.That(cinema.Rooms, Has.Count.EqualTo(1));
 			Assert.That(cinema.Rooms.Contains(room2));
 		}
-
 	}
 }

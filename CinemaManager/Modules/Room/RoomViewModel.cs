@@ -15,14 +15,17 @@ namespace CinemaManager.Modules.Room
 	/// </summary>
 	public class RoomViewModel : NotifyPropertyChangedBase
 	{
-		private RowViewModel _selectedRow;
+		private bool _isUpdatingSelection;
 		private int _maximumSelected;
+		private RowViewModel _selectedRow;
 
 		/// <summary>
 		///     Contains methods and Data of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
-		/// <param name="maximumSelected"><see cref="MaximumSelected"/></param>
+		/// <param name="maximumSelected">
+		///     <see cref="MaximumSelected" />
+		/// </param>
 		public RoomViewModel(RoomModel roomModel, int maximumSelected = 0)
 		{
 			_maximumSelected = maximumSelected;
@@ -202,13 +205,11 @@ namespace CinemaManager.Modules.Room
 			{
 				RecalculateSelection();
 			}
-			else if(Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsReserved)))
+			else if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsReserved)))
 			{
 				OnPropertyChanged(nameof(AvailableSeats));
 			}
 		}
-
-		private bool _isUpdatingSelection;
 
 		private void RecalculateSelection()
 		{

@@ -14,8 +14,8 @@ namespace CinemaManagerTest.Modules
 {
 	public class PresentationModuleTest : UnitTestBase<PresentationModule>
 	{
-		private FilmModel _selectedFilmModel = new FilmModel();
-		private RoomModel _selectedRoomModel = new RoomModel();
+		private readonly FilmModel _selectedFilmModel = new FilmModel();
+		private readonly RoomModel _selectedRoomModel = new RoomModel();
 
 		protected override void DoSetup()
 		{

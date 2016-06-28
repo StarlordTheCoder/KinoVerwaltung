@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System.Collections.Generic;
 using System.Linq;
 using CinemaManager.Model;
 using CinemaManager.Modules.Room;
@@ -23,6 +26,29 @@ namespace CinemaManagerTest.Modules.Room
 			//Assert
 			Assert.That(UnitUnderTest.Rows.First().RowNumber, Is.EqualTo(1));
 			Assert.That(UnitUnderTest.Rows.Last().RowNumber, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void AddRowWithoutSelectionAddsRowAtTheBottom()
+		{
+			//Arrange
+			var room = new RoomModel();
+
+			UnitUnderTest = new RoomViewModel(room);
+
+			var row1 = new RowViewModel(1, new List<SeatModel>());
+			var row2 = new RowViewModel(2, new List<SeatModel>());
+
+			UnitUnderTest.Rows.Add(row1);
+			UnitUnderTest.Rows.Add(row2);
+
+			//Act
+			UnitUnderTest.AddRow();
+
+			//Assert
+			Assert.That(row1.RowNumber, Is.EqualTo(1));
+			Assert.That(row2.RowNumber, Is.EqualTo(2));
+			Assert.That(UnitUnderTest.Rows.Last().RowNumber, Is.EqualTo(3));
 		}
 
 		[Test]
@@ -51,29 +77,6 @@ namespace CinemaManagerTest.Modules.Room
 		}
 
 		[Test]
-		public void AddRowWithoutSelectionAddsRowAtTheBottom()
-		{
-			//Arrange
-			var room = new RoomModel();
-
-			UnitUnderTest = new RoomViewModel(room);
-
-			var row1 = new RowViewModel(1, new List<SeatModel>());
-			var row2 = new RowViewModel(2, new List<SeatModel>());
-
-			UnitUnderTest.Rows.Add(row1);
-			UnitUnderTest.Rows.Add(row2);
-
-			//Act
-			UnitUnderTest.AddRow();
-
-			//Assert
-			Assert.That(row1.RowNumber, Is.EqualTo(1));
-			Assert.That(row2.RowNumber, Is.EqualTo(2));
-			Assert.That(UnitUnderTest.Rows.Last().RowNumber, Is.EqualTo(3));
-		}
-
-		[Test]
 		public void AddSeatWithoutSelectionAddsSeatAtTheEnd()
 		{
 			//Arrange
@@ -95,33 +98,6 @@ namespace CinemaManagerTest.Modules.Room
 			Assert.That(row1.Seats, Has.Count.EqualTo(2));
 			Assert.That(row1.Seats.First().Model.Place.Number, Is.EqualTo(1));
 			Assert.That(row1.Seats.Last().Model.Place.Number, Is.EqualTo(2));
-		}
-
-		[Test]
-		public void RemoveRowUpdatesRowNumbers()
-		{
-			//Arrange
-			var room = new RoomModel();
-
-			UnitUnderTest = new RoomViewModel(room);
-
-			var row1 = new RowViewModel(1, new List<SeatModel>());
-			var row2 = new RowViewModel(2, new List<SeatModel>());
-			var row3 = new RowViewModel(3, new List<SeatModel>());
-
-			UnitUnderTest.Rows.Add(row1);
-			UnitUnderTest.Rows.Add(row2);
-			UnitUnderTest.Rows.Add(row3);
-
-			UnitUnderTest.SelectedRow = row1;
-
-			//Act
-			UnitUnderTest.RemoveRow();
-
-			//Assert
-			Assert.That(UnitUnderTest.Rows.Contains(row1), Is.False);
-			Assert.That(row2.RowNumber, Is.EqualTo(1));
-			Assert.That(row3.RowNumber, Is.EqualTo(2));
 		}
 
 		[Test]
@@ -157,7 +133,9 @@ namespace CinemaManagerTest.Modules.Room
 			{
 				Seats = new List<SeatModel>
 				{
-					seat1, seat2, seat3
+					seat1,
+					seat2,
+					seat3
 				}
 			};
 
@@ -169,6 +147,33 @@ namespace CinemaManagerTest.Modules.Room
 			Assert.That(UnitUnderTest.Rows.First().Seats.Select(s => s.Model), Contains.Item(seat1));
 			Assert.That(UnitUnderTest.Rows.First().Seats.Select(s => s.Model), Contains.Item(seat2));
 			Assert.That(UnitUnderTest.Rows.Last().Seats.Select(s => s.Model), Contains.Item(seat3));
+		}
+
+		[Test]
+		public void RemoveRowUpdatesRowNumbers()
+		{
+			//Arrange
+			var room = new RoomModel();
+
+			UnitUnderTest = new RoomViewModel(room);
+
+			var row1 = new RowViewModel(1, new List<SeatModel>());
+			var row2 = new RowViewModel(2, new List<SeatModel>());
+			var row3 = new RowViewModel(3, new List<SeatModel>());
+
+			UnitUnderTest.Rows.Add(row1);
+			UnitUnderTest.Rows.Add(row2);
+			UnitUnderTest.Rows.Add(row3);
+
+			UnitUnderTest.SelectedRow = row1;
+
+			//Act
+			UnitUnderTest.RemoveRow();
+
+			//Assert
+			Assert.That(UnitUnderTest.Rows.Contains(row1), Is.False);
+			Assert.That(row2.RowNumber, Is.EqualTo(1));
+			Assert.That(row3.RowNumber, Is.EqualTo(2));
 		}
 
 		[Test]
@@ -204,7 +209,9 @@ namespace CinemaManagerTest.Modules.Room
 			{
 				Seats = new List<SeatModel>
 				{
-					seat1, seat2, seat3
+					seat1,
+					seat2,
+					seat3
 				}
 			};
 

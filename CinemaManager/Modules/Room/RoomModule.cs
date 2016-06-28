@@ -19,6 +19,7 @@ namespace CinemaManager.Modules.Room
 	/// </summary>
 	public class RoomModule : ModuleBase
 	{
+		private const int AllowedSelection = 1;
 		private RoomViewModel _selectedRoom;
 
 		/// <summary>
@@ -28,10 +29,11 @@ namespace CinemaManager.Modules.Room
 		{
 			AddRoomCommand = new DelegateCommand(AddRoom);
 			RemoveRoomCommand = new DelegateCommand(RemoveRoom, () => ValueSelected);
-			AddRowCommand = new DelegateCommand(()  => SelectedRoom.AddRow(), () => ValueSelected);
+			AddRowCommand = new DelegateCommand(() => SelectedRoom.AddRow(), () => ValueSelected);
 			RemoveRowCommand = new DelegateCommand(() => SelectedRoom.RemoveRow(), () => SelectedRoom?.SelectedRow != null);
 			AddSeatCommand = new DelegateCommand(() => SelectedRoom.AddSeat(), () => SelectedRoom?.SelectedRow != null);
-			RemoveSeatCommand = new DelegateCommand(() => SelectedRoom.RemoveSeat(), () => SelectedRoom?.SelectedSeats.Any() ?? false);
+			RemoveSeatCommand = new DelegateCommand(() => SelectedRoom.RemoveSeat(),
+				() => SelectedRoom?.SelectedSeats.Any() ?? false);
 
 			RoomFilterConfigurator
 				.NumberFilter("Room Number", c => c.RoomNumber);
@@ -214,7 +216,5 @@ namespace CinemaManager.Modules.Room
 
 			OnPropertyChanged(nameof(Enabled));
 		}
-
-		private const int AllowedSelection = 1;
 	}
 }
