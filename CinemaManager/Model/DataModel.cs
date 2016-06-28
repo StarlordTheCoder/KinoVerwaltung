@@ -53,7 +53,7 @@ namespace CinemaManager.Model
 		    }
 		    catch (IOException)
 		    {
-		        //TODO AUTASVE FAILED (We will never do this)
+		        //TODO Autosave failed
 		    }
 			
 		}

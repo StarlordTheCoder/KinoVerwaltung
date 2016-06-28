@@ -1,6 +1,9 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
@@ -36,6 +39,8 @@ namespace CinemaManager.Modules.Reservation
 
 			Presentation = new PresentationViewModel(Cinema.Presentations.FirstOrDefault(p => p.Reservations.Contains(Model)));
 
+			SaveReservationCommand = new DelegateCommand(SaveReservation, CanSaveReservation);
+
 			ApplyUserFromUserModuleCommand = new DelegateCommand(ApplyUserFromUserModule, CanApplyUserFromUserModule);
 			userModule.ModuleDataChanged += (sender, e) => ApplyUserFromUserModuleCommand.RaiseCanExecuteChanged();
 
@@ -43,6 +48,17 @@ namespace CinemaManager.Modules.Reservation
 				new DelegateCommand(ApplyPresentationFromPresentationModule, CanApplyPresentationFromPresentationModule);
 			presentationModule.ModuleDataChanged +=
 				(sender, e) => ApplyPresentationFromPresentationModuleCommand.RaiseCanExecuteChanged();
+		}
+
+		/// <summary>
+		///     Total price
+		/// </summary>
+		public string Price
+		{
+			get
+			{
+				return $"{Presentation.RoomViewModel.SelectedSeats.Sum(s => s.SelectedSeatType.PriceMultiplicator) * (double)Presentation.Film.BasePricePerSeat:C}";
+			}
 		}
 
 		/// <summary>
@@ -76,9 +92,20 @@ namespace CinemaManager.Modules.Reservation
 			set
 			{
 				if (Equals(_presentation, value)) return;
-				_presentation?.Model.Reservations?.Remove(Model);
+				
+				if (_presentation != null)
+				{
+					_presentation.Model.Reservations?.Remove(Model);
+
+					_presentation.PropertyChanged -= PresentationOnPropertyChanged;
+
+					_presentation.RoomViewModel.SelectedSeats.CollectionChanged -= SelectedSeatsOnCollectionChanged;
+				}
 
 				_presentation = value;
+
+				_presentation.PropertyChanged += PresentationOnPropertyChanged;
+				_presentation.RoomViewModel.SelectedSeats.CollectionChanged += SelectedSeatsOnCollectionChanged;
 
 				if (!_presentation.Model.Reservations.Contains(Model))
 				{
@@ -88,10 +115,41 @@ namespace CinemaManager.Modules.Reservation
 			}
 		}
 
+		private void SelectedSeatsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+		{
+			OnPropertyChanged(nameof(Price));
+			SaveReservationCommand.RaiseCanExecuteChanged();
+		}
+
+		private void PresentationOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			if(Equals(propertyChangedEventArgs.PropertyName, nameof(PresentationViewModel.Film)))
+			{
+				OnPropertyChanged(nameof(Price));
+			}
+		}
+
 		/// <summary>
 		///     Command for <see cref="ApplyUserFromUserModule" />
 		/// </summary>
 		public DelegateCommand ApplyUserFromUserModuleCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="SaveReservation" />
+		/// </summary>
+		public DelegateCommand SaveReservationCommand { get; }
+
+		private void SaveReservation()
+		{
+			Model.Seats.Clear();
+
+			Model.Seats.AddRange(Presentation.RoomViewModel.SelectedSeats.Select(s => s.Model.Place));
+		}
+
+		private bool CanSaveReservation()
+		{
+			return Presentation.RoomViewModel.SelectedSeats.Count == Presentation.RoomViewModel.MaximumSelected;
+		}
 
 		/// <summary>
 		///     Command for <see cref="ApplyPresentationFromPresentationModule" />
