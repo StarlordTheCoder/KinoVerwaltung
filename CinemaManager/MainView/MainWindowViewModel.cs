@@ -123,25 +123,29 @@ namespace CinemaManager.MainView
 			DataSourceService.LoadData(Session.DataPath);
 		}
 
-
 		/// <summary>
 		///     Beim Schliessen wird ein Popup angezeigt welches nach dem Speichern fragt
 		/// </summary>
 		public void Exit(System.ComponentModel.CancelEventArgs e)
 		{
-			MessageBoxButton buttons = MessageBoxButton.YesNoCancel;
-			string message = "Wollen Sie speichern";
-			string caption = "Speichern";
-			MessageBoxResult result = MessageBox.Show(message, caption, buttons, MessageBoxImage.Stop); 
+			const MessageBoxButton buttons = MessageBoxButton.YesNoCancel;
+			const string message = "Save changes?";
+			const string caption = "Save?";
+			var result = MessageBox.Show(message, caption, buttons, MessageBoxImage.Question); 
 
-			if(result == MessageBoxResult.Yes)
+			switch (result)
 			{
-				Session.DataModel.Save();
-			} else if(result == MessageBoxResult.Cancel)
-			{
-				e.Cancel = true;
+				case MessageBoxResult.Yes:
+					Session.DataModel.Save();
+					break;
+				case MessageBoxResult.Cancel:
+					e.Cancel = true;
+					break;
+				case MessageBoxResult.No:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-
 		}
 
 		private void RefreshModules(IModule except)
@@ -213,9 +217,7 @@ namespace CinemaManager.MainView
 		/// </summary>
 		public ICommand AboutCommand { get; }
 
-		private static readonly string AboutMessage =
-			"Created by Seraphin Rihm, Pascal Honegger & Alain Keller" + Environment.NewLine
-			+ "Version " + ApplicationVersion;
+		private static readonly string AboutMessage = "Created by Seraphin Rihm, Pascal Honegger & Alain Keller" + Environment.NewLine + "Version " + ApplicationVersion;
 
 		private static string ApplicationVersion
 		{
@@ -230,8 +232,7 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Die Command-Binding. Verbindet alle Command mit den dazugehörigen Aktionen
 		/// </summary>
-		public ICollection CommandBindings
-			=> LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
+		public ICollection CommandBindings => LayoutService.CommandBindings.Concat(DataSourceService.CommandBindings).ToArray();
 
 		#endregion
 	}

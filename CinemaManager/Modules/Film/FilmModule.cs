@@ -30,7 +30,8 @@ namespace CinemaManager.Modules.Film
 
 			FilmFilterConfigurator
 				.StringFilter("Name", f => f.FilmName)
-				.StringFilter("Director", f => f.Director, f => f.Publisher);
+				.StringFilter("Director", f => f.Director, f => f.Publisher)
+				.NumberFilter("Age", f => (int) f.AgeRestriction);
 
 			FilmFilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
 		}

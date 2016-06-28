@@ -95,7 +95,7 @@ namespace CinemaManager.Model
                 cinema.SeatTypes.Add(new SeatType()
                 {
                     Capacity = 1,
-                    DisplayName = "Einzelitz",
+                    DisplayName = "Single seat",
                     PriceMultiplicator = 1,
                     Id = 0
                 });
@@ -109,7 +109,7 @@ namespace CinemaManager.Model
                 cinema.SeatTypes.Add(new SeatType()
                 {
                     Capacity = 2,
-                    DisplayName = "Vip-Sofa",
+                    DisplayName = "VIP-Sofa",
                     PriceMultiplicator = 2,
                     Id = 2
                 });

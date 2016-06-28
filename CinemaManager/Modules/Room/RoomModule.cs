@@ -206,7 +206,7 @@ namespace CinemaManager.Modules.Room
 				var filteredData = RoomFilterConfigurator.FilterData(RoomModels);
 				Rooms.Clear();
 
-				foreach (var room in filteredData)
+				foreach (var room in filteredData.OrderBy(r => r.RoomNumber))
 				{
 					Rooms.Add(new RoomViewModel(room, AllowedSelection));
 				}

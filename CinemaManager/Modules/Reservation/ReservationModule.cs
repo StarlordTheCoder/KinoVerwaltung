@@ -84,6 +84,7 @@ namespace CinemaManager.Modules.Reservation
 				_selectedReservation = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				OnPropertyChanged(nameof(Price));
                 RemoveReservationCommand.RaiseCanExecuteChanged();
 			}
 		}
@@ -100,6 +101,19 @@ namespace CinemaManager.Modules.Reservation
 		///     Command for <see cref="RemoveReservation" />
 		/// </summary>
 		public DelegateCommand RemoveReservationCommand { get; }
+
+		/// <summary>
+		///     Total price
+		/// </summary>
+		public string Price
+		{
+			get
+			{
+				return SelectedReservation != null ? 
+					$"{SelectedReservation.Presentation.RoomViewModel.SelectedSeats.Sum(s => s.SelectedSeatType.PriceMultiplicator) * (double) SelectedReservation.Presentation.Film.BasePricePerSeat:C}"
+					: string.Empty;
+			}
+		}
 
 		private void RemoveReservation()
 		{
