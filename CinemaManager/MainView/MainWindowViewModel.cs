@@ -67,6 +67,8 @@ namespace CinemaManager.MainView
 
 			InitialiseModules();
 			CheckAutoSave();
+
+
 		}
 
 		/// <summary>
@@ -119,6 +121,27 @@ namespace CinemaManager.MainView
 
 			//Load data
 			RefreshModules(null);
+		}
+
+
+		/// <summary>
+		///     Beim Schliessen wird ein Popup angezeigt welches nach dem Speichern fragt
+		/// </summary>
+		public void Exit(System.ComponentModel.CancelEventArgs e)
+		{
+			MessageBoxButton buttons = MessageBoxButton.YesNoCancel;
+			string message = "Wollen Sie speichern";
+			string caption = "Speichern";
+			MessageBoxResult result = MessageBox.Show(message, caption, buttons, MessageBoxImage.Stop); 
+
+			if(result == MessageBoxResult.Yes)
+			{
+				Session.DataModel.Save();
+			} else if(result == MessageBoxResult.Cancel)
+			{
+				e.Cancel = true;
+			}
+
 		}
 
 		private void RefreshModules(IModule except)

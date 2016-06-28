@@ -34,5 +34,10 @@ namespace CinemaManager.MainView
 		{
 			(DataContext as MainWindowViewModel)?.LayoutService.Initialize(DockingManager);
 		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			(DataContext as MainWindowViewModel)?.Exit(e);
+		}
 	}
 }
