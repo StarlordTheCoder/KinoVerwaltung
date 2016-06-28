@@ -1,0 +1,170 @@
+Dokumentation
+=============
+Alain Keller, Pascal Honegger und Seraphin Rihm
+Version 1.1, 24.05.2016
+:toc:
+
+
+
+= Vorstellung anhand Film finden
+
+=== Aktion
+. Kino Sihlcity auswählen
+. Film Modul öffnen
+.. Filmname "billy" eingeben
+. Öffne Präsentations Modul
+
+=== Ergebnis Tabelle
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Es wird die Vorstellung "Billy The Kid" wird angezeigt|☑
+|=======================
+
+
+= Vorstellung anhand Datum finden
+
+=== Aktion
+. Vorestellung suchen anwählen
+.. Vorestellung suchen öffnet sich
+.. Datum eingeben
+
+=== Ergebnis Tabelle
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Korrekte Vorstellungen werden geladen|
+|=======================
+
+
+= Freie Plätze einer Vorstellung anzeigen
+
+=== Aktion
+. Vorstellung suchen anwählen
+.. Vorstellung suchen öffnet sich
+.. Vorstellung mit freien Sitzplätzen selektieren
+.. Platz reservieren anwählen
+
+=== Ergebnis Tabelle
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Platz reservieren öffnet sich|
+|Freie Plätze sind ersichtlich|
+|Besetzte Plätze sind markiert|
+|Selektierte Plätze sind hervorgehoben|
+|=======================
+
+
+= Freie Plätze einer Vorstellung reservieren
+
+=== Aktion
+. User auswählen
+.. Wird in ReservationsModul übernommen
+. Freie Sitzplätze sind ersichtlich
+.. Anzahl zu reservierenden Plätze eingeben
+.. Sitzplätze auswählen
+. Reservation speichern
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservierte Plätze werden gespeichert und sind in späteren Reservationen ersichtlich|
+|=======================
+
+
+= Reservierung stornieren
+
+=== Aktion
+. Reservationen anzeigen anwählen
+.. Reservationen anzeigen öffnet sich
+.. Gewünschte Reservation suchen
+.. Reservation über "Reservation stornieren" stornieren
+
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservation ist storniert|
+|=======================
+
+= Reservierung anpassen
+
+=== Aktion
+. Reservationen des Kundes anzeigen
+.. Reservation auswählen
+.. Reservation wird angezeigt
+. Sitze hinzufügen
+.. Speichern
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Hinzugefügte sitze werden überall übernommen und als reserviert markiert|
+|=======================
+
+= Film anhand Namen suchen
+
+=== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Namen eingeben
+.. Film suchen
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Gesuchter Film wird gefunden|
+|=======================
+
+= Film erstellen
+
+=== Aktion
+. Film erfassen anwählen
+.. Film erfassen öffnet sich
+.. Daten für den Film eintragen
+.. Dialog bestätigen
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Film ist erfasst|
+|=======================
+
+= Saal erfassen
+
+=== Aktion
+. Saal Erfassungsmaske öffnen
+.. Erfassungsmaske öffnet sich
+.. User erstellt einen neuen Saal
+.. User erstellt Sitzplätze für neuen Saal
+. Die Daten werden auf der Datenbank geupdatet
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Saal wird erstellt|
+|Sitze werden erstellt|
+|=======================
+
+= Saal / Sitzplätze bearbeiten
+
+=== Aktion
+. Bearbeitungsmaske öffnen
+.. Bearbeitungsmaske öffnet sich
+.. Der User wählt einen Saal aus
+.. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
+. Die Daten werden auf der Datenbank geupdatet
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Änderungen werden übernommen|
+|=======================
+
+= Reservation anhand Kunde finden
+
+=== Aktion
+. Reservationsfilter asuwählen
+.. Reservationsfilterung öffnet sich
+.. User gibt Kunden Name oder Telefonnummer ein
+. Reservationen des Kundes werden zurückgegeben
+. Reservation selektieren für mehr Detais
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservationen des Kundes werden zurückgegeben|
+|=======================
