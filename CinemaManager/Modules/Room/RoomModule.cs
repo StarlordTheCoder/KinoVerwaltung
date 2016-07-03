@@ -72,6 +72,18 @@ namespace CinemaManager.Modules.Room
 		public DelegateCommand RemoveSeatCommand { get; }
 
 		/// <summary>
+		///     Filter-Configurator für die Räume
+		/// </summary>
+		public IFilterConfigurator<RoomModel> RoomFilterConfigurator { get; set; } = new FilterConfigurator<RoomModel>();
+
+		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
+
+		/// <summary>
+		///     Seattypes for showing in GUI
+		/// </summary>
+		public static IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
+
+		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
 		public override bool Enabled => RoomModels != null;
@@ -90,11 +102,6 @@ namespace CinemaManager.Modules.Room
 		///     Alle gefilterten Räume
 		/// </summary>
 		public ObservableCollection<RoomViewModel> Rooms { get; } = new ObservableCollection<RoomViewModel>();
-
-		/// <summary>
-		///     Filter-Configurator für die Räume
-		/// </summary>
-		public IFilterConfigurator<RoomModel> RoomFilterConfigurator { get; set; } = new FilterConfigurator<RoomModel>();
 
 		/// <summary>
 		///     Ausgewählter Raum
@@ -124,13 +131,6 @@ namespace CinemaManager.Modules.Room
 			}
 		}
 
-		private static IList<RoomModel> RoomModels => Session.Instance.SelectedCinemaModel?.Rooms;
-
-		/// <summary>
-		///     Seattypes for showing in GUI
-		/// </summary>
-		public static IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
-
 		/// <summary>
 		///     Der ausgewählte Sitz
 		/// </summary>
@@ -143,27 +143,6 @@ namespace CinemaManager.Modules.Room
 				SelectedRoom.SelectedSeats[0] = value;
 				OnPropertyChanged();
 			}
-		}
-
-		private void SelectedSeatsOnCollectionChanged(object sender,
-			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-		{
-			RaiseCanExecuteChanged();
-			OnPropertyChanged(nameof(SelectedSeat));
-		}
-
-		private void SelectedRoomOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-		{
-			RaiseCanExecuteChanged();
-		}
-
-		private void RaiseCanExecuteChanged()
-		{
-			AddSeatCommand.RaiseCanExecuteChanged();
-			RemoveSeatCommand.RaiseCanExecuteChanged();
-			RemoveRowCommand.RaiseCanExecuteChanged();
-			RemoveRoomCommand.RaiseCanExecuteChanged();
-			AddRowCommand.RaiseCanExecuteChanged();
 		}
 
 		/// <summary>
@@ -199,6 +178,27 @@ namespace CinemaManager.Modules.Room
 		public override void Refresh()
 		{
 			FilterChanged();
+		}
+
+		private void SelectedSeatsOnCollectionChanged(object sender,
+			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+		{
+			RaiseCanExecuteChanged();
+			OnPropertyChanged(nameof(SelectedSeat));
+		}
+
+		private void SelectedRoomOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			RaiseCanExecuteChanged();
+		}
+
+		private void RaiseCanExecuteChanged()
+		{
+			AddSeatCommand.RaiseCanExecuteChanged();
+			RemoveSeatCommand.RaiseCanExecuteChanged();
+			RemoveRowCommand.RaiseCanExecuteChanged();
+			RemoveRoomCommand.RaiseCanExecuteChanged();
+			AddRowCommand.RaiseCanExecuteChanged();
 		}
 
 		private void FilterChanged()

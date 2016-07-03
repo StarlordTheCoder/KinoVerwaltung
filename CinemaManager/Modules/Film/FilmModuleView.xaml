@@ -63,8 +63,9 @@
 			                     Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
 			<Label Target="{Binding ElementName=Price}" Content="Price" Grid.Row="2" Grid.Column="0"
 			       VerticalAlignment="Center" />
-			<xctk:DecimalUpDown FormatString="C2" Minimum="0" Increment="0.05" Name="Price" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
-				Text="{Binding SelectedFilm.BasePricePerSeat, StringFormat='C2', UpdateSourceTrigger=PropertyChanged}" />
+			<xctk:DecimalUpDown FormatString="C2" Minimum="0" Increment="0.05" Name="Price" Grid.Row="2" Grid.Column="1"
+			                    VerticalAlignment="Center"
+			                    Text="{Binding SelectedFilm.BasePricePerSeat, StringFormat='C2', UpdateSourceTrigger=PropertyChanged}" />
 			<Label Target="{Binding ElementName=Publisher}" Content="Publisher" Grid.Row="3" Grid.Column="0"
 			       VerticalAlignment="Center" />
 			<TextBox Name="Publisher" Text="{Binding SelectedFilm.Publisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

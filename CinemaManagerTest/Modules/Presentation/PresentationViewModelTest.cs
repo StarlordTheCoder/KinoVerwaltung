@@ -89,7 +89,6 @@ namespace CinemaManagerTest.Modules.Presentation
 			//4 Seats total, 2 available
 			Assert.That(UnitUnderTest.RoomViewModel.Rows.SelectMany(r => r.Seats).Count(), Is.EqualTo(4));
 			Assert.That(UnitUnderTest.RoomViewModel.AvailableSeats, Is.EqualTo(2));
-
 		}
 	}
 }

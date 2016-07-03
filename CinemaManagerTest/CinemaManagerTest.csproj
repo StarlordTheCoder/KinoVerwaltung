@@ -92,7 +92,6 @@
     <Compile Include="Modules\Room\RoomViewModelTest.cs" />
     <Compile Include="Modules\User\UserModuleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IntegrationTestBase.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

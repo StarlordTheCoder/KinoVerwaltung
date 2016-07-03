@@ -154,7 +154,8 @@ namespace CinemaManager.Modules.Reservation
 
 		private bool CanSaveReservation()
 		{
-			return Presentation.RoomViewModel.SelectedSeats.Count == Presentation.RoomViewModel.MaximumSelected;
+			return Presentation.RoomViewModel.SelectedSeats.Count == Presentation.RoomViewModel.MaximumSelected &&
+			       Presentation.RoomViewModel.SelectedSeats.Any();
 		}
 
 		private bool CanApplyPresentationFromPresentationModule()

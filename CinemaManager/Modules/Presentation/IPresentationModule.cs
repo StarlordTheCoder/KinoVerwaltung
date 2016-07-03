@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
+// Copyright (c) 2016 All Rights Reserved
+
+using System.Collections.ObjectModel;
 
 namespace CinemaManager.Modules.Presentation
 {
 	/// <summary>
-	///     Interface for <see cref="PresentationModule"/>
+	///     Interface for <see cref="PresentationModule" />
 	/// </summary>
 	public interface IPresentationModule : IModule
 	{

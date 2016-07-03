@@ -46,9 +46,11 @@ namespace CinemaManager.Modules.User
 		public ICommand AddUserCommand { get; set; }
 
 		/// <summary>
-		///     Titel für das Dockingframework
+		///     Filter des Benutzermodules
 		/// </summary>
-		public override string Title => "Users";
+		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
+
+		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
@@ -56,9 +58,9 @@ namespace CinemaManager.Modules.User
 		public override bool Enabled => UserModels != null;
 
 		/// <summary>
-		///     Filter des Benutzermodules
+		///     Titel für das Dockingframework
 		/// </summary>
-		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
+		public override string Title => "Users";
 
 		/// <summary>
 		///     Liste aller <see cref="UserModel" />
@@ -81,8 +83,6 @@ namespace CinemaManager.Modules.User
 				RemoveUserCommand.RaiseCanExecuteChanged();
 			}
 		}
-
-		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
 		///     Gibt true zurück, wenn ein Benutzer ausgewählt ist

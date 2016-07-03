@@ -24,6 +24,11 @@ namespace CinemaManager.Modules
 		}
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public abstract bool Enabled { get; }
+
+		/// <summary>
 		///     Wird das Modul angezeigt
 		/// </summary>
 		public bool IsVisible
@@ -37,11 +42,6 @@ namespace CinemaManager.Modules
 				OnPropertyChanged();
 			}
 		}
-
-		/// <summary>
-		///     True, wenn das Modul aktiv ist.
-		/// </summary>
-		public abstract bool Enabled { get; }
 
 		/// <summary>
 		///     Titel für das Dockingframework

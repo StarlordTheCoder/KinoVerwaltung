@@ -60,7 +60,7 @@ namespace CinemaManager.Filter
 		}
 
 		/// <summary>
-		///     Ruft <see cref="ComplexFilter{TM}(IComplexFilter{T,TM})" /> auf
+		///     Ruft ComplexFilter{TM}(IComplexFilter{T,TM}) auf
 		/// </summary>
 		/// <returns>This</returns>
 		public IFilterConfigurator<T> ComplexFilter<TM>(TM module, Func<TM, IEnumerable<T>> valueToCompareTo)
@@ -233,6 +233,7 @@ namespace CinemaManager.Filter
 	/// <summary>
 	///     Dummy-Class for XAML
 	/// </summary>
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class FilterConfigurator : FilterConfigurator<object>
 	{
 	}

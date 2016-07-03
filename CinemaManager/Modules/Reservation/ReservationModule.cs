@@ -46,14 +46,33 @@ namespace CinemaManager.Modules.Reservation
 		}
 
 		/// <summary>
-		///     Shows if there is a selected Reservation
+		///     Filter-Configurator für die Reservationen
 		/// </summary>
-		public override bool ValueSelected => SelectedReservation != null;
+		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; set; } =
+			new FilterConfigurator<ReservationModel>();
+
+		private static IEnumerable<ReservationModel> ReservationModels
+			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
+
+		/// <summary>
+		///     Command for <see cref="AddReservation" />
+		/// </summary>
+		public DelegateCommand AddReservationCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="RemoveReservation" />
+		/// </summary>
+		public DelegateCommand RemoveReservationCommand { get; }
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
 		public override bool Enabled => ReservationModels != null;
+
+		/// <summary>
+		///     Shows if there is a selected Reservation
+		/// </summary>
+		public override bool ValueSelected => SelectedReservation != null;
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -65,12 +84,6 @@ namespace CinemaManager.Modules.Reservation
 		/// </summary>
 		public ObservableCollection<ReservationViewModel> Reservations { get; } =
 			new ObservableCollection<ReservationViewModel>();
-
-		/// <summary>
-		///     Filter-Configurator für die Reservationen
-		/// </summary>
-		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; set; } =
-			new FilterConfigurator<ReservationModel>();
 
 		/// <summary>
 		///     Ausgewählte Reservation
@@ -88,21 +101,8 @@ namespace CinemaManager.Modules.Reservation
 			}
 		}
 
-		private static IEnumerable<ReservationModel> ReservationModels
-			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
-
 		/// <summary>
-		///     Command for <see cref="AddReservation" />
-		/// </summary>
-		public DelegateCommand AddReservationCommand { get; }
-
-		/// <summary>
-		///     Command for <see cref="RemoveReservation" />
-		/// </summary>
-		public DelegateCommand RemoveReservationCommand { get; }
-
-		/// <summary>
-		///     Remove the <see cref="SelectedReservation"/>
+		///     Remove the <see cref="SelectedReservation" />
 		/// </summary>
 		public void RemoveReservation()
 		{
@@ -131,13 +131,6 @@ namespace CinemaManager.Modules.Reservation
 			SelectedReservation = reservation;
 		}
 
-		private static IEnumerable<ReservationModel> GetReservations(UserModel user)
-		{
-			return user != null
-				? ReservationModels.Where(r => r.ReservatorId == user.UserId)
-				: Enumerable.Empty<ReservationModel>();
-		}
-
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.
 		///     Beispielsweise wenn sich die Daten verändert haben.
@@ -145,6 +138,13 @@ namespace CinemaManager.Modules.Reservation
 		public override void Refresh()
 		{
 			FilterChanged();
+		}
+
+		private static IEnumerable<ReservationModel> GetReservations(UserModel user)
+		{
+			return user != null
+				? ReservationModels.Where(r => r.ReservatorId == user.UserId)
+				: Enumerable.Empty<ReservationModel>();
 		}
 
 		private void FilterChanged()

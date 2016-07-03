@@ -47,6 +47,14 @@ namespace CinemaManager.Modules.Cinema
 		public DelegateCommand RemoveCinemaCommand { get; }
 
 		/// <summary>
+		///     Filter-Konfigurator für die Kinos
+		/// </summary>
+		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>()
+			;
+
+		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
+
+		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
 		public override bool Enabled { get; } = true;
@@ -55,11 +63,6 @@ namespace CinemaManager.Modules.Cinema
 		///     Titel für das Dockingframework
 		/// </summary>
 		public override string Title => "Cinemas";
-
-		/// <summary>
-		///     Filter-Konfigurator für die Kinos
-		/// </summary>
-		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>();
 
 		/// <summary>
 		///     Liste der <see cref="CinemaModel" />
@@ -81,18 +84,6 @@ namespace CinemaManager.Modules.Cinema
 
 				_refreshModules.Invoke(this);
 			}
-		}
-
-		private static IList<CinemaModel> CinemaModels => Session.Instance.DataModel.CinemasModel.Cinemas;
-
-		/// <summary>
-		///     Entfernt ein Kino
-		/// </summary>
-		public void RemoveCinema()
-		{
-			CinemaModels.Remove(SelectedCinema);
-			Cinemas.Remove(SelectedCinema);
-			SelectedCinema = Cinemas.FirstOrDefault();
 		}
 
 		/// <summary>
@@ -125,6 +116,16 @@ namespace CinemaManager.Modules.Cinema
 		public override void Refresh()
 		{
 			FilterChanged();
+		}
+
+		/// <summary>
+		///     Entfernt ein Kino
+		/// </summary>
+		public void RemoveCinema()
+		{
+			CinemaModels.Remove(SelectedCinema);
+			Cinemas.Remove(SelectedCinema);
+			SelectedCinema = Cinemas.FirstOrDefault();
 		}
 
 		private void FilterChanged()

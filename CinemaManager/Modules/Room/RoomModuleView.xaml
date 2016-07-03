@@ -27,11 +27,6 @@
 		                               Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" />
 		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0"
 		          SelectedItem="{Binding SelectedRoom}" SelectionMode="Single" Grid.ColumnSpan="2">
-			<ListView.ItemContainerStyle>
-				<Style TargetType="ListViewItem">
-					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
-				</Style>
-			</ListView.ItemContainerStyle>
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>

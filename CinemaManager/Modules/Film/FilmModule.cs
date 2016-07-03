@@ -37,6 +37,29 @@ namespace CinemaManager.Modules.Film
 		}
 
 		/// <summary>
+		///     FilterKonfigurator
+		/// </summary>
+		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
+
+		/// <summary>
+		///     Command für <see cref="AddFilm" />
+		/// </summary>
+		public ICommand AddFilmCommand { get; }
+
+		/// <summary>
+		///     Command für <see cref="RemoveFilm" />
+		/// </summary>
+		public DelegateCommand RemoveFilmCommand { get; }
+
+		private static IList<FilmModel> FilmModels => Session.Instance.SelectedCinemaModel?.Films;
+
+		/// <summary>
+		///     Altersbeschränkung des Filmes
+		/// </summary>
+		public static IEnumerable<AgeRestriction> AgeRestrictions
+			=> Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
+
+		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
 		public override bool Enabled => FilmModels != null;
@@ -45,11 +68,6 @@ namespace CinemaManager.Modules.Film
 		///     Titel für das Dockingframework
 		/// </summary>
 		public override string Title => "Films";
-
-		/// <summary>
-		///     FilterKonfigurator
-		/// </summary>
-		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
 
 		/// <summary>
 		///     Alle gefilterten Filme
@@ -72,24 +90,6 @@ namespace CinemaManager.Modules.Film
 				RemoveFilmCommand.RaiseCanExecuteChanged();
 			}
 		}
-
-		/// <summary>
-		///     Command für <see cref="AddFilm" />
-		/// </summary>
-		public ICommand AddFilmCommand { get; }
-
-		/// <summary>
-		///     Command für <see cref="RemoveFilm" />
-		/// </summary>
-		public DelegateCommand RemoveFilmCommand { get; }
-
-		private static IList<FilmModel> FilmModels => Session.Instance.SelectedCinemaModel?.Films;
-
-		/// <summary>
-		///     Altersbeschränkung des Filmes
-		/// </summary>
-		public static IEnumerable<AgeRestriction> AgeRestrictions
-			=> Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
 
 		/// <summary>
 		///     Gibt zurück, ob ein FIl Ausgewählt ist

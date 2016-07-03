@@ -66,6 +66,18 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public DelegateCommand RemovePresentationCommand { get; }
 
+		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
+
+		/// <summary>
+		///     Command for <see cref="ApplyFilmFromFilmModule" />
+		/// </summary>
+		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="ApplyRoomFromRoomModule" />
+		/// </summary>
+		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
+
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
@@ -106,38 +118,6 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public override bool ValueSelected => SelectedPresentation != null;
 
-		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
-
-		/// <summary>
-		///     Command for <see cref="ApplyFilmFromFilmModule" />
-		/// </summary>
-		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
-
-		/// <summary>
-		///     Command for <see cref="ApplyRoomFromRoomModule" />
-		/// </summary>
-		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
-
-		private bool CanApplyRoomFromRoomModule()
-		{
-			return _roomModule.ValueSelected;
-		}
-
-		private void ApplyRoomFromRoomModule()
-		{
-			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
-		}
-
-		private bool CanApplyFilmFromFilmModule()
-		{
-			return _filmModule.ValueSelected;
-		}
-
-		private void ApplyFilmFromFilmModule()
-		{
-			SelectedPresentation.Film = _filmModule.SelectedFilm;
-		}
-
 		/// <summary>
 		///     Entfernt die ausgewählte Präsentation
 		/// </summary>
@@ -173,6 +153,26 @@ namespace CinemaManager.Modules.Presentation
 		public override void Refresh()
 		{
 			FilterChanged();
+		}
+
+		private bool CanApplyRoomFromRoomModule()
+		{
+			return _roomModule.ValueSelected;
+		}
+
+		private void ApplyRoomFromRoomModule()
+		{
+			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
+		}
+
+		private bool CanApplyFilmFromFilmModule()
+		{
+			return _filmModule.ValueSelected;
+		}
+
+		private void ApplyFilmFromFilmModule()
+		{
+			SelectedPresentation.Film = _filmModule.SelectedFilm;
 		}
 
 		private void FilterChanged()

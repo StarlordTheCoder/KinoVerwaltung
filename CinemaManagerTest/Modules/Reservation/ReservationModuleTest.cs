@@ -102,7 +102,7 @@ namespace CinemaManagerTest.Modules.Reservation
 			Assert.That(_selectedPresentationModel.Reservations, Has.Count.EqualTo(1));
 			Assert.That(_selectedPresentationModel.Reservations.First().ReservatorId, Is.EqualTo(_selectedUserModel.UserId));
 		}
-		
+
 		[Test]
 		public void CorrectlyLoadPresentationData()
 		{

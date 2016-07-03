@@ -1,13 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
-using System.Collections.Generic;
-using System.Linq;
-using CinemaManager.Infrastructure;
-using CinemaManager.Model;
-using CinemaManager.Modules.Presentation;
 using CinemaManager.Modules.Reservation;
-using NUnit.Framework;
 
 namespace CinemaManagerTest.Modules.Reservation
 {
