@@ -2,9 +2,11 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Threading;
 using CinemaManager.MainView;
 #if DEBUG
@@ -21,6 +23,12 @@ namespace CinemaManager
 	{
 		private void App_OnStartup(object sender, StartupEventArgs e)
 		{
+			FrameworkElement.LanguageProperty.OverrideMetadata(
+				typeof(FrameworkElement),
+				new FrameworkPropertyMetadata(
+					XmlLanguage.GetLanguage(
+						CultureInfo.CurrentCulture.IetfLanguageTag)));
+
 			var startupFile =
 				AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData?.FirstOrDefault(File.Exists) ??
 				e.Args.FirstOrDefault(File.Exists);
