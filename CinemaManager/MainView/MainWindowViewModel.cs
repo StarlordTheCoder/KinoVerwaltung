@@ -180,32 +180,32 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Kino-Modul
 		/// </summary>
-		public CinemaModule CinemaModule { get; private set; }
+		public ICinemaModule CinemaModule { get; private set; }
 
 		/// <summary>
 		///     Film-Modul
 		/// </summary>
-		public FilmModule FilmModule { get; private set; }
+		public IFilmModule FilmModule { get; private set; }
 
 		/// <summary>
 		///     Vorstellungs-Modul
 		/// </summary>
-		public PresentationModule PresentationModule { get; private set; }
+		public IPresentationModule PresentationModule { get; private set; }
 
 		/// <summary>
 		///     Reservierungs-Modul
 		/// </summary>
-		public ReservationModule ReservationModule { get; private set; }
+		public IReservationModule ReservationModule { get; private set; }
 
 		/// <summary>
 		///     Benutzer-Modul
 		/// </summary>
-		public UserModule UserModule { get; private set; }
+		public IUserModule UserModule { get; private set; }
 
 		/// <summary>
 		///     Saal-Modul
 		/// </summary>
-		public RoomModule RoomModule { get; private set; }
+		public IRoomModule RoomModule { get; private set; }
 
 		#endregion
 

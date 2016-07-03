@@ -65,6 +65,11 @@ namespace CinemaManager.Modules
 		public event EventHandler ModuleDataChanged;
 
 		/// <summary>
+		///     True if there is a selected value. True if no value can be selected
+		/// </summary>
+		public virtual bool ValueSelected => true;
+
+		/// <summary>
 		///     Event invokator for <see cref="ModuleDataChanged" />
 		/// </summary>
 		protected void OnModuleDataChanged()

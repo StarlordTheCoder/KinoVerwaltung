@@ -15,7 +15,7 @@ namespace CinemaManager.Modules.User
 	/// <summary>
 	///     Modul zum Anzeigen der User.
 	/// </summary>
-	public class UserModule : ModuleBase
+	public class UserModule : ModuleBase, IUserModule
 	{
 		private UserModel _selectedUser;
 
@@ -85,9 +85,9 @@ namespace CinemaManager.Modules.User
 		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
-		///     Gibt den Ausgewählten Benutzer zurück
+		///     Gibt true zurück, wenn ein Benutzer ausgewählt ist
 		/// </summary>
-		public bool ValueSelected => SelectedUser != null;
+		public override bool ValueSelected => SelectedUser != null;
 
 		/// <summary>
 		///     Entfernt den ausgewählten User

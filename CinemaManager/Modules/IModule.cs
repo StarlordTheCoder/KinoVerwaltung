@@ -42,5 +42,10 @@ namespace CinemaManager.Modules
 		///     Die Moduldate, welche für die Filter der anderen Module relevant sind, haben sich verändert.
 		/// </summary>
 		event EventHandler ModuleDataChanged;
+
+		/// <summary>
+		///     True if there is a selected value. True if no value can be selected
+		/// </summary>
+		bool ValueSelected { get; }
 	}
 }

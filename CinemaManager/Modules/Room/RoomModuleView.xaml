@@ -68,13 +68,13 @@
 			<Label Target="{Binding ElementName=SeatTypes}" Content="Type" />
 			<ComboBox Grid.Column="1"
 			          Name="SeatTypes" ItemsSource="{Binding SeatTypes}"
-			          SelectedItem="{Binding CurrentSelectedSeat.SelectedSeatType, Mode=TwoWay}"
+			          SelectedItem="{Binding SelectedSeat.SelectedSeatType, Mode=TwoWay}"
 			          DisplayMemberPath="DisplayName" Grid.Row="0" />
 			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Number}" Content="Number" />
-			<TextBlock Name="Number" Text="{Binding CurrentSelectedSeat.Model.Place.Number, Mode=OneWay}" Grid.Row="1"
+			<TextBlock Name="Number" Text="{Binding SelectedSeat.Model.Place.Number, Mode=OneWay}" Grid.Row="1"
 			           Grid.Column="1" />
 			<Label Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=Row}" Content="Row" />
-			<TextBlock Name="Row" Text="{Binding CurrentSelectedSeat.Model.Place.Row, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
+			<TextBlock Name="Row" Text="{Binding SelectedSeat.Model.Place.Row, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
 		</Grid>
 	</Grid>
 </UserControl>

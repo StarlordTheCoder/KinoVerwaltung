@@ -16,10 +16,10 @@ namespace CinemaManager.Modules.Reservation
 	/// <summary>
 	///     Modul zum Verwalten der Reser
 	/// </summary>
-	public class ReservationModule : ModuleBase
+	public class ReservationModule : ModuleBase, IReservationModule
 	{
-		private readonly PresentationModule _presentationModule;
-		private readonly UserModule _userModule;
+		private readonly IPresentationModule _presentationModule;
+		private readonly IUserModule _userModule;
 		private ReservationViewModel _selectedReservation;
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace CinemaManager.Modules.Reservation
 		/// </summary>
 		/// <param name="presentationModule">Modul für Modulübergreifende Filter</param>
 		/// <param name="userModule">Modul für Modulübergreifende Filter</param>
-		public ReservationModule(PresentationModule presentationModule, UserModule userModule)
+		public ReservationModule(IPresentationModule presentationModule, IUserModule userModule)
 		{
 			_presentationModule = presentationModule;
 			_userModule = userModule;
@@ -48,7 +48,7 @@ namespace CinemaManager.Modules.Reservation
 		/// <summary>
 		///     Shows if there is a selected Reservation
 		/// </summary>
-		public bool ValueSelected => SelectedReservation != null;
+		public override bool ValueSelected => SelectedReservation != null;
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
@@ -61,7 +61,7 @@ namespace CinemaManager.Modules.Reservation
 		public override string Title => "Reservations";
 
 		/// <summary>
-		///     Alle gefilterten Resrvationen
+		///     Alle gefilterten Reservationen
 		/// </summary>
 		public ObservableCollection<ReservationViewModel> Reservations { get; } =
 			new ObservableCollection<ReservationViewModel>();
@@ -69,7 +69,7 @@ namespace CinemaManager.Modules.Reservation
 		/// <summary>
 		///     Filter-Configurator für die Reservationen
 		/// </summary>
-		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; } =
+		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; set; } =
 			new FilterConfigurator<ReservationModel>();
 
 		/// <summary>
@@ -101,7 +101,10 @@ namespace CinemaManager.Modules.Reservation
 		/// </summary>
 		public DelegateCommand RemoveReservationCommand { get; }
 
-		private void RemoveReservation()
+		/// <summary>
+		///     Remove the <see cref="SelectedReservation"/>
+		/// </summary>
+		public void RemoveReservation()
 		{
 			SelectedReservation.Presentation.Model.Reservations.Remove(SelectedReservation.Model);
 
@@ -110,7 +113,10 @@ namespace CinemaManager.Modules.Reservation
 			SelectedReservation = null;
 		}
 
-		private async void AddReservation()
+		/// <summary>
+		///     Fügt eine Reservation hinzu
+		/// </summary>
+		public async void AddReservation()
 		{
 			var model = new ReservationModel();
 

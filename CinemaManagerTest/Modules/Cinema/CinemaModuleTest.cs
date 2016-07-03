@@ -7,7 +7,7 @@ using CinemaManager.Model;
 using CinemaManager.Modules.Cinema;
 using NUnit.Framework;
 
-namespace CinemaManagerTest.Modules
+namespace CinemaManagerTest.Modules.Cinema
 {
 	public class CinemaModuleTest : UnitTestBase<CinemaModule>
 	{

@@ -17,7 +17,7 @@ namespace CinemaManager.Modules.Room
 	/// <summary>
 	///     Module zum Verwalten der Säle
 	/// </summary>
-	public class RoomModule : ModuleBase
+	public class RoomModule : ModuleBase, IRoomModule
 	{
 		private const int AllowedSelection = 1;
 		private RoomViewModel _selectedRoom;
@@ -79,7 +79,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Shows if there is a selected Room
 		/// </summary>
-		public bool ValueSelected => SelectedRoom != null;
+		public override bool ValueSelected => SelectedRoom != null;
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -99,7 +99,7 @@ namespace CinemaManager.Modules.Room
 		/// <summary>
 		///     Ausgewählter Raum
 		/// </summary>
-		public virtual RoomViewModel SelectedRoom
+		public RoomViewModel SelectedRoom
 		{
 			get { return _selectedRoom; }
 			set
@@ -118,7 +118,7 @@ namespace CinemaManager.Modules.Room
 				}
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
-				OnPropertyChanged(nameof(CurrentSelectedSeat));
+				OnPropertyChanged(nameof(SelectedSeat));
 				OnModuleDataChanged();
 				RaiseCanExecuteChanged();
 			}
@@ -132,9 +132,9 @@ namespace CinemaManager.Modules.Room
 		public static IEnumerable<SeatType> SeatTypes => Session.Instance.SelectedCinemaModel?.SeatTypes;
 
 		/// <summary>
-		///     Die ausgewählte Sitzart
+		///     Der ausgewählte Sitz
 		/// </summary>
-		public SeatViewModel CurrentSelectedSeat
+		public SeatViewModel SelectedSeat
 		{
 			get { return SelectedRoom?.SelectedSeats.FirstOrDefault(); }
 			set
@@ -149,7 +149,7 @@ namespace CinemaManager.Modules.Room
 			NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
 		{
 			RaiseCanExecuteChanged();
-			OnPropertyChanged(nameof(CurrentSelectedSeat));
+			OnPropertyChanged(nameof(SelectedSeat));
 		}
 
 		private void SelectedRoomOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

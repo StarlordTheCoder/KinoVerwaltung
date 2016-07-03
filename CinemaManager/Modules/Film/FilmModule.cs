@@ -16,7 +16,7 @@ namespace CinemaManager.Modules.Film
 	/// <summary>
 	///     GUi module des Filmes
 	/// </summary>
-	public class FilmModule : ModuleBase
+	public class FilmModule : ModuleBase, IFilmModule
 	{
 		private FilmModel _selectedFilm;
 
@@ -59,7 +59,7 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Ausgewählter Film
 		/// </summary>
-		public virtual FilmModel SelectedFilm
+		public FilmModel SelectedFilm
 		{
 			get { return _selectedFilm; }
 			set
@@ -94,7 +94,7 @@ namespace CinemaManager.Modules.Film
 		/// <summary>
 		///     Gibt zurück, ob ein FIl Ausgewählt ist
 		/// </summary>
-		public bool ValueSelected => SelectedFilm != null;
+		public override bool ValueSelected => SelectedFilm != null;
 
 		/// <summary>
 		///     Entfernt den ausgewählten film
@@ -107,7 +107,7 @@ namespace CinemaManager.Modules.Film
 		}
 
 		/// <summary>
-		///     Fügt einen neuen Film mit Dfaultdaten hinzu
+		///     Fügt einen neuen Film mit Defaultdaten hinzu
 		/// </summary>
 		public void AddFilm()
 		{

@@ -21,7 +21,7 @@ namespace CinemaManagerTest.Modules.Room
 		}
 
 		[Test]
-		public void AddCorrectlyAddRoom()
+		public void AddCorrectlyAddsRoom()
 		{
 			//Arrange
 			var model = new CinemasModel();

@@ -17,8 +17,8 @@ namespace CinemaManager.Modules.Reservation
 	/// </summary>
 	public class ReservationViewModel : NotifyPropertyChangedBase
 	{
-		private readonly PresentationModule _presentationModule;
-		private readonly UserModule _userModule;
+		private readonly IPresentationModule _presentationModule;
+		private readonly IUserModule _userModule;
 		private PresentationViewModel _presentation;
 		private UserModel _reservator;
 
@@ -28,7 +28,7 @@ namespace CinemaManager.Modules.Reservation
 		/// <param name="model">ReservationModel</param>
 		/// <param name="userModule"></param>
 		/// <param name="presentationModule"></param>
-		public ReservationViewModel(ReservationModel model, UserModule userModule, PresentationModule presentationModule)
+		public ReservationViewModel(ReservationModel model, IUserModule userModule, IPresentationModule presentationModule)
 		{
 			_userModule = userModule;
 			_presentationModule = presentationModule;

@@ -83,6 +83,9 @@ namespace CinemaManager.Modules.Room
 		/// </summary>
 		public double Width => (SelectedSeatType?.Capacity ?? 1)*30;
 
+		/// <summary>
+		///     Die Hintergrundfarbe. Abhängig ob reserviert oder selektiert
+		/// </summary>
 		public SolidColorBrush BackgroundColor
 			=> IsSelected ? (IsReserved ? SelectedAndReservedBrush : SelectedBrush) : (IsReserved ? ReserverBrush : NormalBrush);
 	}

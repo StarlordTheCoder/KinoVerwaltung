@@ -16,7 +16,7 @@ namespace CinemaManager.Modules.Cinema
 	/// <summary>
 	///     Module of the Cinemas in the GUI
 	/// </summary>
-	public class CinemaModule : ModuleBase
+	public class CinemaModule : ModuleBase, ICinemaModule
 	{
 		private readonly Action<IModule> _refreshModules;
 		private CinemaModel _selectedCinema;
@@ -59,8 +59,7 @@ namespace CinemaManager.Modules.Cinema
 		/// <summary>
 		///     Filter-Konfigurator für die Kinos
 		/// </summary>
-		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>()
-			;
+		public IFilterConfigurator<CinemaModel> CinemaFilterConfigurator { get; set; } = new FilterConfigurator<CinemaModel>();
 
 		/// <summary>
 		///     Liste der <see cref="CinemaModel" />
