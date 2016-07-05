@@ -6,7 +6,7 @@ Version 1.1, 13.06.2016
 == Vorgehen
 Das Arbeiten nach dem vorgegebenen Beschreibungstextes ging schnell voran. Innert kürzester Zeit hatte ich eine Tabelle mit wichtigen Komponenten und deren Verantwortlichkeiten (Verben).  
 
-image::..\media\Substantive_Pascal.JPG[Tabelle der Substantive & Verben]
+image::..\media\Substantive_Pascal.jpg[Tabelle der Substantive & Verben]
 
 == Probleme
 === Kinobuchungssystem

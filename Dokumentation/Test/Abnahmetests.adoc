@@ -182,3 +182,10 @@ Die Testdaten müssen für jeden Test ernuet von link:https://github.com/Starlor
 |Erwaretes Ergebnis|Ergebnis      
 |Reservationen des Kundes werden zurückgegeben|
 |=======================
+
+= Automatisierte Tests
+image::..\media\coverage.png[Coverage]
+image::..\media\hot_spots.png[Hot Spots]
+
+= Fazit
+Alle essenziellen Komponenten sind abgedeckt. Die Applikation besteht alle Abnahmetests.

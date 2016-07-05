@@ -152,7 +152,7 @@ class FilterConfigurator<T> {
     ObservableColletion<ComplexFilter> ComplexFilters
 }
 
-FilterConfigurator .down.|> IFilterConfigurator
+FilterConfigurator .up.|> IFilterConfigurator
 
 --
 
