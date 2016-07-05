@@ -2,7 +2,7 @@
 <CinemasModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Cinemas>
     <CinemaModel>
-      <Name>Silhcity</Name>
+      <Name>Sihlcity</Name>
       <Rooms>
         <RoomModel>
           <RoomNumber>1</RoomNumber>
@@ -1305,7 +1305,6 @@
         <FilmModel>
           <FilmName>X-Men</FilmName>
           <FilmId>1</FilmId>
-          <Length />
           <Publisher>Sony Pictures</Publisher>
           <Director>Lord Gaben</Director>
           <MainActors />
@@ -1314,7 +1313,6 @@
         <FilmModel>
           <FilmName>Billy The Kid</FilmName>
           <FilmId>2</FilmId>
-          <Length />
           <Publisher>Western Digital</Publisher>
           <Director>James Joyce</Director>
           <MainActors />
@@ -1323,7 +1321,6 @@
         <FilmModel>
           <FilmName>The Long Island</FilmName>
           <FilmId>3</FilmId>
-          <Length />
           <Publisher>El Salvadore</Publisher>
           <Director>Cameron</Director>
           <MainActors />
@@ -2657,7 +2654,6 @@
         <FilmModel>
           <FilmName>X-Men</FilmName>
           <FilmId>1</FilmId>
-          <Length />
           <Publisher>Sony Pictures</Publisher>
           <Director>Lord Gaben</Director>
           <MainActors />
@@ -2666,7 +2662,6 @@
         <FilmModel>
           <FilmName>Billy The Kid</FilmName>
           <FilmId>2</FilmId>
-          <Length />
           <Publisher>Western Digital</Publisher>
           <Director>James Joyce</Director>
           <MainActors />
@@ -2675,7 +2670,6 @@
         <FilmModel>
           <FilmName>The Long Island</FilmName>
           <FilmId>3</FilmId>
-          <Length />
           <Publisher>El Salvadore</Publisher>
           <Director>Cameron</Director>
           <MainActors />
@@ -2686,7 +2680,7 @@
         <SeatType>
           <Id>1</Id>
           <Capacity>1</Capacity>
-          <DisplayName>Einzelitz</DisplayName>
+          <DisplayName>Single seat</DisplayName>
           <PriceMultiplicator>1</PriceMultiplicator>
         </SeatType>
         <SeatType>
