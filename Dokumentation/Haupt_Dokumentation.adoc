@@ -36,6 +36,10 @@ link:https://ci.appveyor.com/project/PascalHonegger/kinoverwaltung[AppVeyor] unt
 === link:https://github.com/StarlordTheCoder/KinoVerwaltung[Client]
 C#-WPF-Client. Verantwortlich für die Darstellung und das Verwalten der Daten.
 
+== Scrum
+=== link:https://tree.taiga.io/project/lordmcfungus-kinoverwaltungssystem/backlog[Taiga]
+Unsere Scrum-Stories werden auf Taiga verwaltet.
+
 == Pflichtenheft
 
 === Anforderungen
