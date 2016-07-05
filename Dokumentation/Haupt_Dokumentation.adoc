@@ -1,7 +1,7 @@
 Dokumentation
 =============
 Alain Keller, Pascal Honegger und Seraphin Rihm
-Version 1.1, 24.05.2016
+Version 1.3, 05.07.2016
 :toc:
 
 == Framework
@@ -13,6 +13,21 @@ Wir werden C#6 / .Net 4.6.1 verwenden. Das Projekt wird als WPF-Applikation umge
 
 === Aufbau des Projektordner
 Die Dateien werden in verschiedene Ordner (Namespaces) unterteilt. Diese werden nach Überthemen des Projektes geordnet. Die Ordner sind doppelt vorhanden, einmal im Haupt-Projekt und einmal im Test-Projekt.
+
+
+[tree]
+--
+Project Root
+|-- CinemaManager.sln
+|-- CinemaManager
+|   `-- Modules
+|      `-- ExampleModule.cs
+|--CinemaManagerTest
+|   `-- Modules
+|      `-- ExampleModuleTest.cs
+`-- Dokumentation
+--
+
 
 == Continous Integration
 link:https://ci.appveyor.com/project/PascalHonegger/kinoverwaltung[AppVeyor] unterstützt als einzige CI neben Travis C#, benötigt aber weniger Konfigurationen (One-Click-Setup).
@@ -54,7 +69,7 @@ C#-WPF-Client. Verantwortlich für die Darstellung und das Verwalten der Daten.
 
 === Ablauf
 
-[uml,file="media/Activity_Reservieren.png"]
+[uml]
 --
 
 title: Reservation erstellen
@@ -84,7 +99,7 @@ endif
 === Filter
 Um die Daten der Kinoverwaltung zu filtern, entschieden wir uns dafür, dass jedes Modul seine eigene Filter besizt. Damit die Filter im Code zentral verwaltet werden können, machten wir diese generisch. Es gibt einen Filter für jeden relevanten Filtertyp. Es gibt einen DateFilter, StringFilter, NumberFilter und einen ComplexFilter, wobei letzterer nach Werten von anderen Modulen filtern kann. 
 
-[uml,file="media/filter.png"]
+[uml]
 --
 
 interface IFilter<T> {
@@ -116,7 +131,7 @@ IFilter <|.down. ComplexFilter
 
 Dieser Modul-übergreifender Filter ist nötig, damit man die Reservationen einer Person von einem bestimmen Film ansehen kann. Die Module können über den FilterConfigurator ihren Filter konfigurieren. Sie können zum Beispiel einen Stringfilter für den Filmnamen, einen Numberfilter für die ID und einen DateFilter für das Präsentationsdatum anfordern. Dem Filter wird zusätzlich die Liste mit den zu filternden Daten mitgegeben. Beim ComplexFilter wird angegeben, nach welcher Liste im anderen Modul gefiltert werden muss. Zusätzlich wird angegeben welche Liste im eigenen Modul den werten des anderen Modules entsprechen müssen. Der Filter und die Liste können dynamisch im GUI angezeigt werden und sind einfach erweiterbar. Allgemein benötigt man als Entwickler nur wenige Minuten um einen Filter hinzuzufügen, welcher direkt verwendet und im GUI angezeigt wird. 
 
-[uml,file="media/filterConfigurator.png"]
+[uml]
 --
 
 interface IFilterConfigurator<T> {
