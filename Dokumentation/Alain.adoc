@@ -14,6 +14,9 @@ Wir waren uns Anfangs nicht einig, wie wir das Programm im GUI darsetllen möcht
 = Serializierung
 Wir haben uns entschieden die Daten nicht in einer Datenbank abzuspeichern, damit wir geung Zeit zum Implementieren der Kinoverwaltung haben. Deshalb speichern wir die Daten mit Hilfe der Serialisierung in XML-Dateien ab. Über das Serializable Attribut in C# ist das relativ einfach gelöst. Man muss nur sagen wann und wo es gespeichert werden muss, und von wo es beim Start der Applikation die Daten er holt. Somit konnten wir uns viel Zeit sparen, wleche wir sonst für das Datenmodell, die DB aufsetzen und DB-Anbidung gebraucht hätten. Die Daten werden in .satanData dateien gespeichert.
 
+= Guthub
+Da Seraphin sein GIT bei sich falsch konfiguriert hatte, gab es Probleme mit den Grafiken. Dies löste Pascal indem er die GIT-History umschrieb. Das hatte jedoch zur Folge, dass bei jedem von uns die lokale History nicht mit der Online-History übereinstimmte, und es zu Merge-Problemen kam. Um dies zu lösen, mussten wir den Origin-Master fetchen und danach einen Hard Pull machen. 
+
 = Fazit
 In deisem Projekt habe ich viele Erfarungen mit Frmaeworks gemacht. Dazu gehörte vor allem das Benutzen von schon vorhandenen Klassen und Methoden. Auch im erstellen von Views habe ich Fortschritte gemacht.
 
