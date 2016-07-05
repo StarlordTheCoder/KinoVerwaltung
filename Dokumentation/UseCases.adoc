@@ -1,7 +1,7 @@
 Dokumentation
 =============
 Alain Keller, Pascal Honegger und Seraphin Rihm
-Version 1.1, 24.05.2016
+Version 1.2, 05.07.2016
 :toc:
 
 Alle Folgenden Anwendungsfälle sind in der Kategorie Primär solange nicht speziell angegeben. 
@@ -25,7 +25,7 @@ Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
 . Korrekte Vorstellung des Filmes wird geladen
 Vorstellung suchen) as Vor
 
-[uml,file="media/use_VorstellungVonFilm.png"]
+[uml]
 --
 title: Ziel: Vorstellung eines Filmes anzeigen
 
@@ -70,7 +70,7 @@ Als Kunde möchte ich alle Vorstellungen zu einem Film einsehen können
 .. Datum eingeben
 . Korrekte Vorstellungen werden geladen
 
-[uml,file="media/use_VorstellungVonDatum.png"]
+[uml]
 --
 title: Ziel: Vorstellung an einem Datum anzeigen
 
@@ -119,7 +119,7 @@ Als Kunde möchte ich alle alle freien Plätze erfahren, damit ich einen reservi
 .... Besetzte Plätze sind markiert
 .... Selektierte Plätze sind hervorgehoben
 
-[uml,file="media/use_FreiePlätzeVorstellung.png"]
+[uml]
 --
 title: Ziel: Reservationen einer Vorstellung anzeigen
 
@@ -165,7 +165,7 @@ Als Kunde möchte ich eine Vorstellung reservieren können
 .. Sitzplätze auswählen
 . Reservation speichern
 
-[uml,file="media/use_ReservationVonVorstellung.png"]
+[uml]
 --
 title: Ziel: Reservationen einer Vorstellung anzeigen
 
@@ -210,7 +210,7 @@ Als Kunde möchte seine Reservation stornieren
 .. Reservation über "Reservation stornieren" stornieren
 . Reservation ist storniert
 
-[uml,file="media/use_ReservierungStornieren.png"]
+[uml]
 --
 title: Ziel: Reservierung stornieren
 
@@ -256,7 +256,7 @@ Ein Kunde möchte seine Reservierung anpassen. Er möchte zwei weitere Sitze Res
 . Sitze hinzufügen
 .. Speichern
 
-[uml,file="media/use_ReservierungAnpassen.png"]
+[uml]
 --
 title: Ziel: Vorstellung an einem Datum anzeigen
 
@@ -301,7 +301,7 @@ Als Kunde möchte ich einen Film finden können, von welchem ich nur den Namen k
 .. Film suchen
 . Gesuchter Film wird gefunden
 
-[uml,file="media/use_FilmeAnhandNameSuchen.png"]
+[uml]
 --
 title: Ziel: Filme filtern
 
@@ -344,7 +344,7 @@ Als Kino möchte ich in der Lage sein, neue Filme zu erfassen.
 .. Dialog bestätigen
 . Film ist erfasst
 
-[uml,file="media/use_FilmErstellen.png"]
+[uml]
 --
 title: Ziel: Film erstellen
 
@@ -384,7 +384,7 @@ Als User möchte ich einen neuen Saal mit Sitzplätzen erfassen
 .. User erstellt Sitzplätze für neuen Saal
 . Die Daten werden auf der Datenbank geupdatet
 
-[uml,file="media/use_SaalErfassen.png"]
+[uml]
 --
 title: Ziel: Neuen Saal erfassen
 
@@ -425,7 +425,7 @@ Als User möchte ich erfasste Säle und die sitzplätze eines Saales bearbeiten 
 .. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
 . Die Daten werden auf der Datenbank geupdatet
 
-[uml,file="media/use_SaalSitzeBearbeiten.png"]
+[uml]
 --
 title: Ziel: Saal und Sitzplätze editieren
 
@@ -471,7 +471,7 @@ Als User möchte ich alle Reservationen eines Kunden finden
 . Reservationen des Kundes werden zurückgegeben
 . Reservation selektieren für mehr Detais
 
-[uml,file="media/use_ReservationAnhandUser.png"]
+[uml]
 --
 title: Ziel: Reservation von Kunde finden
 
