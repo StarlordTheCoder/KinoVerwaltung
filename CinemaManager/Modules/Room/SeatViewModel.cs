@@ -72,6 +72,7 @@ namespace CinemaManager.Modules.Room
 			get { return Session.Instance.SelectedCinemaModel?.SeatTypes.FirstOrDefault(s => s.Id == Model.SeatTypeId); }
 			set
 			{
+				if (Model.SeatTypeId == value.Id) return;
 				Model.SeatTypeId = value.Id;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(Width));
