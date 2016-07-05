@@ -74,7 +74,7 @@
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="{Binding SelectedReservation.Price}" Grid.Column="0" />
-			<Button Content="Save Reservation" Grid.Column="1" Command="{Binding SelectedReservation.SaveReservationCommand}" />
+			<Button Content="Save Reservation" Grid.Column="1" Command="{Binding SelectedReservation.SaveReservationCommand}" IsEnabled="{Binding ValueSelected}" />
 		</Grid>
 	</Grid>
 

@@ -38,26 +38,28 @@
     <HelpTitle>Cinema Manager API-Dokumentation</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="SpaceInvaders_Test" isDocumented="False">Das allgemeine Testprojekt</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="(global)" isDocumented="True">SpaceInvaders</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders" isDocumented="True">Das allgemeine Projekt</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Control" isDocumented="True">Alle Controls für das GUI</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Enums" isDocumented="True">Alle verwendeten Enums</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.EventArgs" isDocumented="True">Alle EventArgs-Klassen</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.ExtensionMethods" isDocumented="True">Alle ExtensionMethods unabhaengig davon, wo diese verwendet werden</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Ship" isDocumented="True">Alle Schiffe inklusive Texturen</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Shot" isDocumented="True">Alle Schüsse inklusive Texturen</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Annotations" isDocumented="False">ReSharper generiert</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Control.Converter" isDocumented="True">Alle Converter für das XAML</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Properties" isDocumented="False">Projekt Properties</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Ship.Invaders" isDocumented="True">Alle Invader</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders.Ship.Players" isDocumented="True">Alle Spieler</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="SpaceInvaders_Test.Ship.Invaders" isDocumented="False" />
-      <NamespaceSummaryItem name="SpaceInvaders_Test.Ship.Players" isDocumented="False" />
-      <NamespaceSummaryItem name="SpaceInvaders_Test.TestBases" isDocumented="False" />
-      <NamespaceSummaryItem name="SpaceInvaders_Test.ViewModel" isDocumented="False" />
-      <NamespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
-    </NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="True">Cinema Manager</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager" isDocumented="True">Main NameSpace</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Converter" isDocumented="True">All XAML-Converter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter (Group)" isGroup="True" isDocumented="True">Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter" isDocumented="True">Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter.Complex" isDocumented="True">Module Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter.Date" isDocumented="True">Date Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter.Number" isDocumented="True">Number Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Filter.String" isDocumented="True">Text Filter</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Infrastructure" isDocumented="True">Infrastructure like BaseClass, NotifyPropertyChanged</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.MainView" isDocumented="True">MainView that is started at application start</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Metrics" isDocumented="True">Debug-Metrics</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Model" isDocumented="True">Data</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules (Group)" isGroup="True" isDocumented="True">All Modules</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules" isDocumented="True">All Modules</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.Cinema" isDocumented="True">Cinema Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.Film" isDocumented="True">Film Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.Presentation" isDocumented="True">Presentation Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.Reservation" isDocumented="True">Reservation Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.Room" isDocumented="True">Room Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Modules.User" isDocumented="True">User Module</NamespaceSummaryItem>
+<NamespaceSummaryItem name="CinemaManager.Properties" isDocumented="True">Generated Properties</NamespaceSummaryItem></NamespaceSummaries>
     <CopyrightText>MIT-Licence</CopyrightText>
     <ProjectSummary>Cinema Manager by Alain, Seraphin and Pascal! Created for M326</ProjectSummary>
     <RootNamespaceTitle>Cinema Manager</RootNamespaceTitle>

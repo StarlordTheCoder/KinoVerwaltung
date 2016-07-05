@@ -1,60 +1,76 @@
 Dokumentation
 =============
 Alain Keller, Pascal Honegger und Seraphin Rihm
-Version 1.2, 05.07.2016
+Version 1.3, 05.07.2016
 :toc:
 
-= Vorstellung anhand Film finden
+= Vorbedingungen
+
+== Betriebssystem
+Testfälle müssen unter einem aktuellen Windows-Betriebssystem durchgeführt werden (Windows 7+)
+
+== Installation
+Die aktuelle Version des CinemaManagers muss als RELEASE-Build (Admin-Build) installiert sein. Ausserdem muss ein kompatibles .Net-Framework installiert sein.
+
+== Testdaten
+Die Testdaten müssen für jeden Test ernuet von link:https://github.com/StarlordTheCoder/KinoVerwaltung/blob/master/Dokumentation/Test/data/Default.satanData[GitHub] heruntergeladen und geöffnet werden.
+
+= Abnahmetests
+
+== Vorstellung anhand Film finden
 
 === Aktion
 . Kino Sihlcity auswählen
 . Film Modul öffnen
 .. Filmname "billy" eingeben
 . Öffne Präsentations Modul
+. Nur Film-Filter aktivieren
 
-=== Ergebnis Tabelle
-
+.Ergebnis
+[options=header]
 |=======================
 |Erwaretes Ergebnis|Ergebnis      
-|Es wird die Vorstellung "Billy The Kid" wird angezeigt|☑
+|Es wird die Vorstellung "Billy The Kid" wird angezeigt|✓
 |=======================
 
 
-= Vorstellung anhand Datum finden
+== Vorstellung anhand Datum finden
 
 === Aktion
-. Vorestellung suchen anwählen
-.. Vorestellung suchen öffnet sich
-.. Datum eingeben
+. Vorestellung Modul öffnen
+.. Nur Datums-Filter selektieren
+.. Datumsbereich 14.06.2016 - 16.06.2016 eingeben
 
-=== Ergebnis Tabelle
-
+.Ergebnis
+[options=header]
 |=======================
 |Erwaretes Ergebnis|Ergebnis      
-|Korrekte Vorstellungen werden geladen|
+|Drei Vorstellungen vom 15.06 werden angezeigt|✓
 |=======================
 
 
-= Freie Plätze einer Vorstellung anzeigen
+== Freie Plätze einer Vorstellung anzeigen
 
 === Aktion
-. Vorstellung suchen anwählen
-.. Vorstellung suchen öffnet sich
-.. Vorstellung mit freien Sitzplätzen selektieren
-.. Platz reservieren anwählen
+. Vorstellung Modul öffnen
+.. Filter deaktivieren
+.. Erste Vorstellung The Long Island selektieren
+. Reservations Modul öffnen
+. Neue Reservation erstellen (+Button)
 
-=== Ergebnis Tabelle
 
+.Ergebnis
+[options=header]
 |=======================
-|Erwaretes Ergebnis|Ergebnis      
-|Platz reservieren öffnet sich|
-|Freie Plätze sind ersichtlich|
-|Besetzte Plätze sind markiert|
-|Selektierte Plätze sind hervorgehoben|
+|Erwaretes Ergebnis|Ergebnis
+|Freie Plätze sind ersichtlich|✓
+|Anzahl Freie Plätze stimmt mit dem Vorstellungsmodul überein|✓
+|Besetzte Plätze sind markiert|✓
+|Selektierte Plätze werden hervorgehoben|✓
 |=======================
 
 
-= Freie Plätze einer Vorstellung reservieren
+== Freie Plätze einer Vorstellung reservieren
 
 === Aktion
 . User auswählen
@@ -70,7 +86,7 @@ Version 1.2, 05.07.2016
 |=======================
 
 
-= Reservierung stornieren
+== Reservierung stornieren
 
 === Aktion
 . Reservationen anzeigen anwählen
@@ -84,7 +100,7 @@ Version 1.2, 05.07.2016
 |Reservation ist storniert|
 |=======================
 
-= Reservierung anpassen
+== Reservierung anpassen
 
 === Aktion
 . Reservationen des Kundes anzeigen
@@ -98,7 +114,7 @@ Version 1.2, 05.07.2016
 |Hinzugefügte sitze werden überall übernommen und als reserviert markiert|
 |=======================
 
-= Film anhand Namen suchen
+== Film anhand Namen suchen
 
 === Aktion
 . Film suchen anwählen
@@ -111,7 +127,7 @@ Version 1.2, 05.07.2016
 |Gesuchter Film wird gefunden|
 |=======================
 
-= Film erstellen
+== Film erstellen
 
 === Aktion
 . Film erfassen anwählen
@@ -124,7 +140,7 @@ Version 1.2, 05.07.2016
 |Film ist erfasst|
 |=======================
 
-= Saal erfassen
+== Saal erfassen
 
 === Aktion
 . Saal Erfassungsmaske öffnen
@@ -139,7 +155,7 @@ Version 1.2, 05.07.2016
 |Sitze werden erstellt|
 |=======================
 
-= Saal / Sitzplätze bearbeiten
+== Saal / Sitzplätze bearbeiten
 
 === Aktion
 . Bearbeitungsmaske öffnen
@@ -153,7 +169,7 @@ Version 1.2, 05.07.2016
 |Änderungen werden übernommen|
 |=======================
 
-= Reservation anhand Kunde finden
+== Reservation anhand Kunde finden
 
 === Aktion
 . Reservationsfilter asuwählen
