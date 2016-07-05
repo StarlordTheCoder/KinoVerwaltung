@@ -95,6 +95,24 @@ namespace CinemaManager.Modules.Reservation
 			{
 				if (Equals(value, _selectedReservation)) return;
 				_selectedReservation = value;
+
+				if (_selectedReservation != null)
+				{
+					_selectedReservation.Presentation.RoomViewModel.MaximumSelected = 0;
+
+					foreach (var seat in
+						_selectedReservation.Presentation.RoomViewModel.Rows.SelectMany(r => r.Seats)
+							.Where(s => s.IsReserved))
+					{
+						if (_selectedReservation.Model.Seats.Contains(seat.Model.Place))
+						{
+							++_selectedReservation.Presentation.RoomViewModel.MaximumSelected;
+							seat.IsSelected = true;
+						}
+					}
+				}
+
+
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
 				RemoveReservationCommand.RaiseCanExecuteChanged();
@@ -122,7 +140,7 @@ namespace CinemaManager.Modules.Reservation
 
 			_presentationModule.SelectedPresentation.Model.Reservations.Add(model);
 
-			var reservation = new ReservationViewModel(model, _userModule, _presentationModule);
+			var reservation = new ReservationViewModel(model, Refresh, _userModule, _presentationModule);
 
 			await reservation.ApplyUserFromUserModuleCommand.Execute();
 			await reservation.ApplyPresentationFromPresentationModuleCommand.Execute();
@@ -156,7 +174,7 @@ namespace CinemaManager.Modules.Reservation
 
 				foreach (var reservation in filteredData)
 				{
-					Reservations.Add(new ReservationViewModel(reservation, _userModule, _presentationModule));
+					Reservations.Add(new ReservationViewModel(reservation, Refresh, _userModule, _presentationModule));
 				}
 			}
 
