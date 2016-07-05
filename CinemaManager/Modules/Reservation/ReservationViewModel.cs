@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CinemaManager.Modules.Reservation
 	public class ReservationViewModel : NotifyPropertyChangedBase
 	{
 		private readonly IPresentationModule _presentationModule;
+		private readonly Action _refreshReservationModuleAction;
 		private readonly IUserModule _userModule;
 		private PresentationViewModel _presentation;
 		private UserModel _reservator;
@@ -28,8 +30,10 @@ namespace CinemaManager.Modules.Reservation
 		/// <param name="model">ReservationModel</param>
 		/// <param name="userModule"></param>
 		/// <param name="presentationModule"></param>
-		public ReservationViewModel(ReservationModel model, IUserModule userModule, IPresentationModule presentationModule)
+		/// <param name="refreshReservationModuleAction"></param>
+		public ReservationViewModel(ReservationModel model, Action refreshReservationModuleAction, IUserModule userModule, IPresentationModule presentationModule)
 		{
+			_refreshReservationModuleAction = refreshReservationModuleAction;
 			_userModule = userModule;
 			_presentationModule = presentationModule;
 			Model = model;
@@ -150,6 +154,8 @@ namespace CinemaManager.Modules.Reservation
 			Model.Seats.Clear();
 
 			Model.Seats.AddRange(Presentation.RoomViewModel.SelectedSeats.Select(s => s.Model.Place));
+
+			_refreshReservationModuleAction.Invoke();
 		}
 
 		private bool CanSaveReservation()
