@@ -1,0 +1,26 @@
+= Analyse
+
+== Verb/Substantiv Verfahren:
+Wir sind auf folgende Klassen gekommen:
+
+. Besucher
+. Sitzplatz
+.. verwaltet Sitznummer
+.. verwaltet Typ
+. Reihe
+. Reservierung
+.. verwaltet Besucher
+.. verwaltet Plätze
+. Vorstellung
+.. verwaltet Saal
+. Saal
+.. verwaltet Siztplätze
+
+== CRC Karten
+Unsere CRC Karten haben wir unter KinoVerwaltung/Dokumentation/media abgelegt.
+
+== Use Cases
+Unsere Use Cases sind hier zu finden:link::../UseCases.adoc[UseCases]
+
+== Klassen Diagramm
+Das Klassen Diagramm haben wir in der HaubtDoku abgelegt.

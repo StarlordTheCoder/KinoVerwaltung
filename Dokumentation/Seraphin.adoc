@@ -1,5 +1,78 @@
 Seraphin Lernjournal
 ====================
-Alain Keller, Pascal Honegger und Seraphin Rihm
+Seraphin Rihm
 Version 1.0, 15.12.2015
 :toc:
+
+= Software analyse
+In diesem Modul haben wir vor der implemetation eine genaue Analyse durchgeführt, welche aus folgenden Schritten bestand:
+
+. Verb/Substantiv Methode
+. CRC Karten¨
+. Use Cases definieren
+. Erstellung des Klassendiagrammes
+
+== Verb/Substantiv Methode
+In dieser Methode geht es darum, dass mann die Klassen und Methode anhand von Nomen und Verben definiert z.B. Das Haus kann Fensert öffnen. In diesem Fall wäre das Haus die Klasse und öffneFenster die Methode. Diese Methode ist sehr effizeint am anfang, da man sich sehr einfach einen Überblick über die Klassen des Projektes verschafen kann. Auch kann man diese Methode gut in einer Gruppe anwendet z.B in einer Diskussion. Nach dieser Methode wandelt man die gesammelten Nomen dann in CRC Karten/Klassen um.
+
+== CRC Karten
+Mit den CRC Karten bringt man die Gesammelten Klassen und Methoden der Verb/Substantiv Methode in eine geordnete und physische Form. Jede Klasse erhält seine eigene CRC-Karte auf welcher ihre Verantwortlichkeiten/Methoden beschrieben sind. Diese Karen kann man dann anschliessend an die Developer des Projektes verteilen und so auf eine einfache art die Arbeit aufteilen. Die Vorteile der CRC-Karten sind, dass man etwas physiches hat und damit eine einfache Projektaufteilung erreichen kann. Jedoch haben sie auch ein paar nachteile: Wenn man viele Klassen hat werden sie schnell unübersichtlich und mann kann die Abhängikeiten nicht direkt abbilden.
+
+== Use Cases definieren
+Nach dem man die Klassen mit all ihren Funktionen hat muss man überprüfen, ob diese Architektur auch alle Anforderungen abdeckt. Dies tut man in dem man Use Cases definiert welche den Anforderungen etsprechen und diese dann mit dem Klassen durchspielt. Falls man irgendwelche Fehler findet muss meine Architektur anpassen sodass man schlussendlich all seine Use Cases durchspeilen kann. Die Use Cases werden dann auch zumm Testen verwendet. Die Abnahmetest basieren meistens auf den Abnahmetest.
+
+== Klassen Diagramm
+Zum schluss wenn definitief alle Klassen mit ihren Abhängigkeiten definiert sind erstellt mann dann das finale Klassen-Diagramml. Je nach umfang des Programmes macht es auch Sinn wenn man mehrere Klassen-Diagramme erstellt um wichtige stellen der Architektur darzustellen. Im Klassen-Diagramm stellt man dann auch die verschieden Abhängikeiten genau dahr.
+
+= Architektur
+== Module
+
+Wir habe uns dafür entschieden die Funktionen in Module zu unterteilen. Dies hat den sinn, dass wir jede Funktion/Modul in eine eigenen Fenster darrstellen wollen. Dafür haben ein Docking-Framework verwenden (AvolonDock), diese Framework ermöglicht es uns Unsere Module als Subfenster eines Mainfensters darzustellen. Diese Subfenster docken sich an das Mainfenster sie können dieses jedoch nicht verlassen. Dies hat den vorteil, dass man die Module so anordnen kann wie man das möchte z.B. wenn man nur Filme erfasst braucht man nur dieses Modul und die anderen müssen nicht angezeigt werden. Erstellte Layouts können natürlich gespeichert werden um sie später wieder zuverwenden. Wir haben folgende Module erstellt:
+
+. Cinema (auswahl/erstellung eines Kinos)
+. User (auswahl/erstellung eines Kunden)
+. Room (ertellung eines neuen Kino-Sales mit zugehörenden Sitzen)
+. Presentation (auswahl/erstellung einer Präsentation (Film, Saal, Zeit))
+. Reservation (hier kann man einen Sitz in einer Vorstellung für einen erfassten User reservieren)
+
+== Filterung
+Um eine Reservation zu ertellen muss man einen User, eine Präsentation und einen Sitz auswählen. Das Programm muss diese Daten von irgendwoher bekommen. Deshalb haben wir uns für Modul übergreiffende Filter entschieden, das heisst wenn ich einen User im User-Modul auswähle wird dieser automatisch für die Reservation verwendent, oder man wählt eine Film aus und wechselt in das Presentation-Modul nun werden nur die Präsentationen des ausgewählten Filmes angezeigt. Auf Code ebene wurde dies so umgesetzt, dass man einen IFilterConfigurator über welchen mann konfigurieren konnte welche Filter das jetzige Modul hat. Wir hatten fogende abhängikeiten:
+
+[ditaa]
+....
+           +--------+
+           |        |
+           | Cinema |
+           |        |
+           +--------+
+               |    
+    +----------+--------+
+    |          |        |
+    v          v        v
++--------+ +-------+ +------+
+|        | |       | |      |
+| Films  | | Room  | | User |
+|        | |       | |      |
++--------+ +-------+ +------+
+    |          |        |
+    +----------+        |
+    |                   | 
+    V                   | 
++--------------+        | 
+|              |        | 
+| Presentation |        |
+|              |        | 
++--------------+        |
+       |                |
+       +----------------+
+                |
+                V
+        +--------------+
+        |              |
+        |  Reservation |
+        |              |
+        +--------------+
+....
+
+= Fazit
+Es war spannend zu sehen, was aus unserer anfänglichen Analyse übrig blieb. Wir haben wärend des Implementierens immer wieder dinge an der Architektur geändert. Die Analyse war jedoch nicht für die Katz, die Use Cases haben uns viel geholfen und unser Model konnten wir fast kommplet aus der Analyse übernehmen. Auch habe ich viele Interessante dinge über das Softwareentwickeln und seine Tücken erfahren. Wie immer hat Pascal wiedereinmal die meisten Zeilen in userem Projekt, was daran liegt, dass er viele der grundlegenden architektonischen Klassen implementiert hat wie z.B. fie Filterung. 
