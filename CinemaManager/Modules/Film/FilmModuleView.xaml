@@ -45,7 +45,6 @@
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
@@ -76,13 +75,11 @@
 			         Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
 			<Label Target="{Binding ElementName=Actors}" Content="Actors" Grid.Row="5" Grid.Column="0"
 			       VerticalAlignment="Center" />
-			<TextBox Name="Actors" Text="{Binding SelectedFilm.MainActors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" />
-			<Label Target="{Binding ElementName=Age}" Content="Age restriction" Grid.Row="6" Grid.Column="0"
+			<Label Target="{Binding ElementName=Age}" Content="Age restriction" Grid.Row="5" Grid.Column="0"
 			       VerticalAlignment="Center" />
 			<ComboBox Name="Age" SelectedItem="{Binding SelectedFilm.AgeRestriction}"
 			          ItemsSource="{Binding AgeRestrictions}"
-			          Grid.Row="6" Grid.Column="1"
+			          Grid.Row="5" Grid.Column="1"
 			          VerticalAlignment="Center" />
 		</Grid>
 	</Grid>

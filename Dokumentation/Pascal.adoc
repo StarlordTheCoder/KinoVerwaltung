@@ -1,7 +1,7 @@
 Pascal Lernjournal
 ==================
 Pascal Honegger
-Version 1.5, 27.06.2016
+Version 1.6, 27.06.2016
 :toc:
 
 == 31.05.2016
@@ -91,7 +91,7 @@ $ git filter-branch --commit-filter '
         fi' HEAD
 --
 
-== Verschiedene Build-Configurationen
+=== Verschiedene Build-Configurationen
 
 
 Unsere Applikation hat sehr viele Möglichkeiten Daten zu bearbeiten. Da man nicht immer alle Daten anzeigen muss haben wir uns für den oben genannten Docking-Manager entschieden. Doch auch in den Modulen selbst gibt es Elemente, welche man nur selten benötigt. 
@@ -112,3 +112,10 @@ gewissen Code nicht kompiliert. Im "RELEASE"-Build werden nicht verwendete Varia
 --
 
 Code in diesen #if-Abschnitten wird beispielsweise nur im Debug-Modus kompiliert. So habe eine eigene Build-Konfiguration erstellt, bei welcher gewisse GUI-Elemente nicht angezeigt werden (Code: DebugReleaseStylePicker.cs).
+
+=== PlantUML
+link:http://de.plantuml.com/[PlantUML] ist ein Open source Projekt, mit welchem UML-Diagramme schnell und einfach erstellt werden können. So muss man lediglich ein paar kleine Zeilen "Code" schreiben, und PlantUML übernimmt die Darstellung.
+Der grösste Vorteil daran ist, dass man keine grossen Bilder hochladen muss und es allgemein besser mit GIT funtkioniert. Im letzten Modul haben wir UMLet verwendet, welcher aber nicht den gewünschten effekt hatte. 
+UMLet ist zwar auch text basiert, speicher aber auch sinnlose Informationen wie Zoomeinstellungen in dem Dokument. 
+Daran gleichzeitig zu arbeiten war daher nicht möglich. Mit PlantUML, welches in AsciiDocFx (Unser Ascii-Doc-Editor) integriert ist, kann man ohne prolbem mehrere Diagramme parallel bearbeiten.
+Ich würde es daher auch jedem herzlichst empfehlen. Es ist einfacher und einfach besser als mit Visio und co Diagramme zu erstellen. Einzig bei sehr komplexen Diagrammen schlägt die Darstellung fehlt (keine Übersicht), aber das sind Ausnahmen und nicht standard.
