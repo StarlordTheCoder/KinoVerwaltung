@@ -1,7 +1,7 @@
 Dokumentation
 =============
 Alain Keller, Pascal Honegger und Seraphin Rihm
-Version 1.3, 05.07.2016
+Version 1.4, 11.07.2016
 :toc:
 
 == Framework
@@ -269,9 +269,9 @@ Wir haben dieses Konzept hauptsächlich für das einfache Anwenden erstellt. Der
     {
     	UserFilterConfigurator
         .StringFilter("Name", u => u.Name)
-	.StringFilter("Phone", u => u.PhoneNumber)
-	.NumberFilter("ID", u => u.UserId);
+        .StringFilter("Phone", u => u.PhoneNumber)
+        .NumberFilter("ID", u => u.UserId);
 
-	UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
+        UserFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
     }
 --
