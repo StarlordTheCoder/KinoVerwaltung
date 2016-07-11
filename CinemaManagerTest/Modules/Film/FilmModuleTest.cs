@@ -6,7 +6,7 @@ using CinemaManager.Model;
 using CinemaManager.Modules.Film;
 using NUnit.Framework;
 
-namespace CinemaManagerTest.Modules
+namespace CinemaManagerTest.Modules.Film
 {
 	public class FilmModuleTest : UnitTestBase<FilmModule>
 	{
@@ -20,7 +20,7 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void AddCorrectlyAddFilm()
+		public void AddCorrectlyAddsFilm()
 		{
 			//Arrange
 			var model = new CinemasModel();

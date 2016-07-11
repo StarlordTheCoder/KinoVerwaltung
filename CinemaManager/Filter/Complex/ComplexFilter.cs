@@ -17,6 +17,11 @@ namespace CinemaManager.Filter.Complex
 	{
 		private readonly Func<TM, IEnumerable<T>> _valueToCompareTo;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="module">The module, which holds the data</param>
+		/// <param name="valueToCompareTo">Configurable variable from the module</param>
 		public ComplexFilter(TM module, Func<TM, IEnumerable<T>> valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;

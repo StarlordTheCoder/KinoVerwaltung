@@ -20,6 +20,9 @@ namespace CinemaManager.MainView
 	{
 		private DockingManager _dockingManager;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public LayoutService()
 		{
 			OpenLayoutCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
@@ -51,11 +54,30 @@ namespace CinemaManager.MainView
 			set { Session.Instance.LayoutPath = value; }
 		}
 
+		/// <summary>
+		///     Command for <see cref="LoadLayout" />
+		/// </summary>
 		public RoutedUICommand OpenLayoutCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="SaveLayoutFile" />
+		/// </summary>
 		public RoutedUICommand SaveAsLayoutCommand { get; }
+
+		/// <summary>
+		///     Command für <see cref="SaveLayout" /> with the current DataPath
+		/// </summary>
 		public RoutedUICommand SaveLayoutCommand { get; }
+
+		/// <summary>
+		///     Die Command-Binding. Verbindet alle Command mit den dazugehörigen Aktionen
+		/// </summary>
 		public IList<CommandBinding> CommandBindings { get; }
 
+		/// <summary>
+		///     Initializes this Service fully
+		/// </summary>
+		/// <param name="dockingManager">Used to save the layout</param>
 		public void Initialize(DockingManager dockingManager)
 		{
 			_dockingManager = dockingManager;

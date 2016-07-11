@@ -15,6 +15,11 @@ namespace CinemaManager.Filter.String
 		private readonly Func<T, string>[] _valueToCompareTo;
 		private string _text;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="label">Label for GUI</param>
+		/// <param name="valueToCompareTo">Configurable values, which the User-Input is compared to</param>
 		public StringFilter(string label, params Func<T, string>[] valueToCompareTo)
 		{
 			_valueToCompareTo = valueToCompareTo;

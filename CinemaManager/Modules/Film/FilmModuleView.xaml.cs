@@ -8,6 +8,9 @@ namespace CinemaManager.Modules.Film
 	/// </summary>
 	public partial class FilmModuleView
 	{
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public FilmModuleView()
 		{
 			InitializeComponent();

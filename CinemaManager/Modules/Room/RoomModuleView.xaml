@@ -27,11 +27,6 @@
 		                               Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" />
 		<ListView ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="0"
 		          SelectedItem="{Binding SelectedRoom}" SelectionMode="Single" Grid.ColumnSpan="2">
-			<ListView.ItemContainerStyle>
-				<Style TargetType="ListViewItem">
-					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
-				</Style>
-			</ListView.ItemContainerStyle>
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
@@ -56,18 +51,25 @@
 		        Style="{StaticResource RemoveButton}"
 		        Command="{Binding RemoveSeatCommand }" ToolTip="Remove Seat" />
 		<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" IsEnabled="{Binding ValueSelected}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
-			<ComboBox ItemsSource="{Binding SeatTypes}"
-			          SelectedItem="{Binding SelectedRoom.SelectedSeats[0].SelectedSeatType}"
-			          DisplayMemberPath="DisplayName" Grid.Row="0" VerticalAlignment="Center" />
-			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Number, Mode=OneWay}" Grid.Row="1"
-			           VerticalAlignment="Center" />
-			<TextBlock Text="{Binding SelectedRoom.SelectedSeats[0].Model.Place.Row, Mode=OneWay}" Grid.Row="2"
-			           VerticalAlignment="Center" />
+			<Label Target="{Binding ElementName=SeatTypes}" Content="Type" />
+			<ComboBox Grid.Column="1"
+			          Name="SeatTypes" ItemsSource="{Binding SeatTypes}"
+			          SelectedItem="{Binding SelectedSeat.SelectedSeatType, Mode=TwoWay}"
+			          DisplayMemberPath="DisplayName" Grid.Row="0" />
+			<Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=Number}" Content="Number" />
+			<TextBlock Name="Number" Text="{Binding SelectedSeat.Model.Place.Number, Mode=OneWay}" Grid.Row="1"
+			           Grid.Column="1" />
+			<Label Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=Row}" Content="Row" />
+			<TextBlock Name="Row" Text="{Binding SelectedSeat.Model.Place.Row, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
 		</Grid>
 	</Grid>
 </UserControl>

@@ -42,11 +42,17 @@ namespace CinemaManager.Model
 			{
 				Directory.CreateDirectory(folder);
 			}
-
-			using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
+			try
 			{
-				stream.SetLength(0);
-				_serializer.Serialize(stream, CinemasModel);
+				using (var stream = File.Open(Session.DataPath, FileMode.OpenOrCreate))
+				{
+					stream.SetLength(0);
+					_serializer.Serialize(stream, CinemasModel);
+				}
+			}
+			catch (IOException)
+			{
+				//TODO Autosave failed
 			}
 		}
 
@@ -80,6 +86,31 @@ namespace CinemaManager.Model
 			{
 				CinemasModel.Cinemas.ForEach(c => c.IsActive = false);
 				CinemasModel.Cinemas.First().IsActive = true;
+			}
+			// Laden der Sitze
+			foreach (var cinema in CinemasModel.Cinemas.Where(c => c.SeatTypes.Count == 0))
+			{
+				cinema.SeatTypes.Add(new SeatType
+				{
+					Capacity = 1,
+					DisplayName = "Single seat",
+					PriceMultiplicator = 1,
+					Id = 0
+				});
+				cinema.SeatTypes.Add(new SeatType
+				{
+					Capacity = 2,
+					DisplayName = "Sofa",
+					PriceMultiplicator = 1.5,
+					Id = 1
+				});
+				cinema.SeatTypes.Add(new SeatType
+				{
+					Capacity = 2,
+					DisplayName = "VIP-Sofa",
+					PriceMultiplicator = 2,
+					Id = 2
+				});
 			}
 		}
 	}

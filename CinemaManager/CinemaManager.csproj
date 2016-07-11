@@ -199,31 +199,36 @@
     <Compile Include="Filter\String\IStringFilter.cs" />
     <Compile Include="Filter\Number\NumberFilter.cs" />
     <Compile Include="Filter\String\StringFilter.cs" />
-    <Compile Include="Infrastructure\AutoSaver.cs" />
+    <Compile Include="MainView\AutoSaveService.cs" />
     <Compile Include="Infrastructure\DebugReleaseStylePicker.cs" />
     <Compile Include="Infrastructure\NotifyPropertyChangedBase.cs" />
     <Compile Include="MainView\DataSourceService.cs" />
+    <Compile Include="MainView\IAutoSaveService.cs" />
     <Compile Include="MainView\IDataSourceService.cs" />
     <Compile Include="MainView\ILayoutService.cs" />
     <Compile Include="MainView\LayoutService.cs" />
     <Compile Include="Metrics\MetricsManager.cs" />
     <Compile Include="Metrics\Startup.cs" />
     <Compile Include="Model\SeatIdentifier.cs" />
+    <Compile Include="Modules\Cinema\ICinemaModule.cs" />
     <Compile Include="Modules\Film\FilmModule.cs" />
     <Compile Include="Modules\Film\FilmModuleView.xaml.cs">
       <DependentUpon>FilmModuleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Film\IFilmModule.cs" />
+    <Compile Include="Modules\Presentation\IPresentationModule.cs" />
     <Compile Include="Modules\Presentation\PresentationModuleView.xaml.cs">
       <DependentUpon>PresentationModuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Presentation\PresentationModule.cs" />
     <Compile Include="Modules\Presentation\PresentationViewModel.cs" />
+    <Compile Include="Modules\Reservation\IReservationModule.cs" />
     <Compile Include="Modules\Reservation\ReservationModule.cs" />
     <Compile Include="Modules\Reservation\ReservationModuleView.xaml.cs">
       <DependentUpon>ReservationModuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Reservation\ReservationViewModel.cs" />
-    <Compile Include="Modules\Room\IRoomViewModel.cs" />
+    <Compile Include="Modules\Room\IRoomModule.cs" />
     <Compile Include="Modules\Room\RoomModule.cs" />
     <Compile Include="Modules\Room\RoomModuleView.xaml.cs">
       <DependentUpon>RoomModuleView.xaml</DependentUpon>
@@ -296,6 +301,7 @@
     <Compile Include="Modules\ModuleBase.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\Room\SeatViewModel.cs" />
+    <Compile Include="Modules\User\IUserModule.cs" />
     <Compile Include="Modules\User\UserModule.cs" />
     <Compile Include="Modules\User\UserModuleView.xaml.cs">
       <DependentUpon>UserModuleView.xaml</DependentUpon>

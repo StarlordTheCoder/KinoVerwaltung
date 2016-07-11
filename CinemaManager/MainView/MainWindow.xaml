@@ -9,6 +9,7 @@
         xmlns:user="clr-namespace:CinemaManager.Modules.User"
         xmlns:film="clr-namespace:CinemaManager.Modules.Film"
         xmlns:presentation="clr-namespace:CinemaManager.Modules.Presentation"
+        Closing="Window_Closing"
         xmlns:mainView="clr-namespace:CinemaManager.MainView"
         xmlns:room="clr-namespace:CinemaManager.Modules.Room"
         xmlns:reservation="clr-namespace:CinemaManager.Modules.Reservation"
@@ -30,7 +31,7 @@
 				<MenuItem Command="{Binding DataSourceService.SynchronizeCommand}"
 				          ToolTip="Save and reload all data" />
 				<MenuItem Header="About" Command="{Binding AboutCommand}" />
-				<MenuItem Header="AutoSave" IsCheckable="True" IsChecked="{Binding AutoSaveEnabled}" />
+				<MenuItem Header="Auto save" IsCheckable="True" IsChecked="{Binding AutoSaveEnabled}" />
 
 			</MenuItem>
 			<MenuItem Header="Tools">

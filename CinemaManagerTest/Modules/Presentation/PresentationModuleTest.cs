@@ -10,15 +10,23 @@ using CinemaManager.Modules.Room;
 using Moq;
 using NUnit.Framework;
 
-namespace CinemaManagerTest.Modules
+namespace CinemaManagerTest.Modules.Presentation
 {
 	public class PresentationModuleTest : UnitTestBase<PresentationModule>
 	{
+		private readonly FilmModel _selectedFilmModel = new FilmModel();
+		private readonly RoomModel _selectedRoomModel = new RoomModel();
+
 		protected override void DoSetup()
 		{
 			base.DoSetup();
-			var filmModule = new Mock<FilmModule>();
-			var roomModule = new Mock<RoomModule>();
+
+			var filmModule = new Mock<IFilmModule>();
+			filmModule.Setup(f => f.SelectedFilm).Returns(_selectedFilmModel);
+
+			var roomModule = new Mock<IRoomModule>();
+			roomModule.Setup(f => f.SelectedRoom).Returns(new RoomViewModel(_selectedRoomModel));
+
 			UnitUnderTest = new PresentationModule(filmModule.Object, roomModule.Object)
 			{
 				PresentationFilterConfigurator = CreateTrueFilterConfigurator<PresentationModel>()
@@ -26,7 +34,7 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void AddCorrectlyAddPresentation()
+		public void AddCorrectlyAddsPresentation()
 		{
 			//Arrange
 			var model = new CinemasModel();
@@ -53,7 +61,7 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void CorrectlyLoadPresenationData()
+		public void CorrectlyLoadPresentationData()
 		{
 			//Arrange
 			var model = new CinemasModel();
@@ -73,7 +81,7 @@ namespace CinemaManagerTest.Modules
 			UnitUnderTest.Refresh();
 
 			//Assert
-			Assert.That(UnitUnderTest.Presentations, Is.EqualTo(cinema.Presentations));
+			Assert.That(UnitUnderTest.Presentations.Select(p => p.Model), Is.EquivalentTo(cinema.Presentations));
 		}
 
 		[Test]

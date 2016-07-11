@@ -82,13 +82,16 @@
     <Compile Include="Filter\StringFilterTest.cs" />
     <Compile Include="Filter\DateFilterTest.cs" />
     <Compile Include="MainView\MainWindowViewModelTest.cs" />
-    <Compile Include="Modules\CinemaModuleTest.cs" />
-    <Compile Include="Modules\FilmModuleTest.cs" />
-    <Compile Include="Modules\PresentationModuleTest.cs" />
-    <Compile Include="Modules\RoomModuleTest.cs" />
-    <Compile Include="Modules\UserModuleTest.cs" />
+    <Compile Include="Modules\Cinema\CinemaModuleTest.cs" />
+    <Compile Include="Modules\Film\FilmModuleTest.cs" />
+    <Compile Include="Modules\Reservation\ReservationModuleTest.cs" />
+    <Compile Include="Modules\Reservation\ReservationViewModelTest.cs" />
+    <Compile Include="Modules\Presentation\PresentationViewModelTest.cs" />
+    <Compile Include="Modules\Presentation\PresentationModuleTest.cs" />
+    <Compile Include="Modules\Room\RoomModuleTest.cs" />
+    <Compile Include="Modules\Room\RoomViewModelTest.cs" />
+    <Compile Include="Modules\User\UserModuleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IntegrationTestBase.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

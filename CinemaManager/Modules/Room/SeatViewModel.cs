@@ -2,6 +2,7 @@
 // Copyright (c) 2016 All Rights Reserved
 
 using System.Linq;
+using System.Windows.Media;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
 
@@ -12,6 +13,11 @@ namespace CinemaManager.Modules.Room
 	/// </summary>
 	public class SeatViewModel : NotifyPropertyChangedBase
 	{
+		private static readonly SolidColorBrush NormalBrush = new SolidColorBrush(Colors.LightGray);
+		private static readonly SolidColorBrush SelectedBrush = new SolidColorBrush(Colors.Aqua);
+		private static readonly SolidColorBrush ReserverBrush = new SolidColorBrush(Colors.DarkRed);
+		private static readonly SolidColorBrush SelectedAndReservedBrush = new SolidColorBrush(Colors.DarkOrange);
+		private bool _isReserved;
 		private bool _isSelected;
 
 		/// <summary>
@@ -29,7 +35,7 @@ namespace CinemaManager.Modules.Room
 		public SeatModel Model { get; }
 
 		/// <summary>
-		///     Returns if this seat is currently selected
+		///     Returns wheter this seat is currently selected
 		/// </summary>
 		public bool IsSelected
 		{
@@ -39,6 +45,22 @@ namespace CinemaManager.Modules.Room
 				if (_isSelected == value) return;
 				_isSelected = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(BackgroundColor));
+			}
+		}
+
+		/// <summary>
+		///     Returns wheter this seat has a reservation or not
+		/// </summary>
+		public bool IsReserved
+		{
+			get { return _isReserved; }
+			set
+			{
+				if (value == _isReserved) return;
+				_isReserved = value;
+				OnPropertyChanged();
+				OnPropertyChanged(nameof(BackgroundColor));
 			}
 		}
 
@@ -50,6 +72,7 @@ namespace CinemaManager.Modules.Room
 			get { return Session.Instance.SelectedCinemaModel?.SeatTypes.FirstOrDefault(s => s.Id == Model.SeatTypeId); }
 			set
 			{
+				if (Model.SeatTypeId == value.Id) return;
 				Model.SeatTypeId = value.Id;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(Width));
@@ -60,5 +83,11 @@ namespace CinemaManager.Modules.Room
 		///     Grösse des Sitzes für Anzeig im GUI
 		/// </summary>
 		public double Width => (SelectedSeatType?.Capacity ?? 1)*30;
+
+		/// <summary>
+		///     Die Hintergrundfarbe. Abhängig ob reserviert oder selektiert
+		/// </summary>
+		public SolidColorBrush BackgroundColor
+			=> IsSelected ? (IsReserved ? SelectedAndReservedBrush : SelectedBrush) : (IsReserved ? ReserverBrush : NormalBrush);
 	}
 }

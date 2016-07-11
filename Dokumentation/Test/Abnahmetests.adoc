@@ -1,0 +1,191 @@
+Dokumentation
+=============
+Alain Keller, Pascal Honegger und Seraphin Rihm
+Version 1.3, 05.07.2016
+:toc:
+
+= Vorbedingungen
+
+== Betriebssystem
+Testfälle müssen unter einem aktuellen Windows-Betriebssystem durchgeführt werden (Windows 7+)
+
+== Installation
+Die aktuelle Version des CinemaManagers muss als RELEASE-Build (Admin-Build) installiert sein. Ausserdem muss ein kompatibles .Net-Framework installiert sein.
+
+== Testdaten
+Die Testdaten müssen für jeden Test ernuet von link:https://github.com/StarlordTheCoder/KinoVerwaltung/blob/master/Dokumentation/Test/data/Default.satanData[GitHub] heruntergeladen und geöffnet werden.
+
+= Abnahmetests
+
+== Vorstellung anhand Film finden
+
+=== Aktion
+. Kino Sihlcity auswählen
+. Film Modul öffnen
+.. Filmname "billy" eingeben
+. Öffne Präsentations Modul
+. Nur Film-Filter aktivieren
+
+.Ergebnis
+[options=header]
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Es wird die Vorstellung "Billy The Kid" wird angezeigt|✓
+|=======================
+
+
+== Vorstellung anhand Datum finden
+
+=== Aktion
+. Vorestellung Modul öffnen
+.. Nur Datums-Filter selektieren
+.. Datumsbereich 14.06.2016 - 16.06.2016 eingeben
+
+.Ergebnis
+[options=header]
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Drei Vorstellungen vom 15.06 werden angezeigt|✓
+|=======================
+
+
+== Freie Plätze einer Vorstellung anzeigen
+
+=== Aktion
+. Vorstellung Modul öffnen
+.. Filter deaktivieren
+.. Erste Vorstellung The Long Island selektieren
+. Reservations Modul öffnen
+. Neue Reservation erstellen (+Button)
+
+
+.Ergebnis
+[options=header]
+|=======================
+|Erwaretes Ergebnis|Ergebnis
+|Freie Plätze sind ersichtlich|✓
+|Anzahl Freie Plätze stimmt mit dem Vorstellungsmodul überein|✓
+|Besetzte Plätze sind markiert|✓
+|Selektierte Plätze werden hervorgehoben|✓
+|=======================
+
+
+== Freie Plätze einer Vorstellung reservieren
+
+=== Aktion
+. User auswählen
+.. Wird in ReservationsModul übernommen
+. Freie Sitzplätze sind ersichtlich
+.. Anzahl zu reservierenden Plätze eingeben
+.. Sitzplätze auswählen
+. Reservation speichern
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservierte Plätze werden gespeichert und sind in späteren Reservationen ersichtlich|
+|=======================
+
+
+== Reservierung stornieren
+
+=== Aktion
+. Reservationen anzeigen anwählen
+.. Reservationen anzeigen öffnet sich
+.. Gewünschte Reservation suchen
+.. Reservation über "Reservation stornieren" stornieren
+
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservation ist storniert|
+|=======================
+
+== Reservierung anpassen
+
+=== Aktion
+. Reservationen des Kundes anzeigen
+.. Reservation auswählen
+.. Reservation wird angezeigt
+. Sitze hinzufügen
+.. Speichern
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Hinzugefügte sitze werden überall übernommen und als reserviert markiert|
+|=======================
+
+== Film anhand Namen suchen
+
+=== Aktion
+. Film suchen anwählen
+.. Filmsuche öffnet sich
+.. Namen eingeben
+.. Film suchen
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Gesuchter Film wird gefunden|
+|=======================
+
+== Film erstellen
+
+=== Aktion
+. Film erfassen anwählen
+.. Film erfassen öffnet sich
+.. Daten für den Film eintragen
+.. Dialog bestätigen
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Film ist erfasst|
+|=======================
+
+== Saal erfassen
+
+=== Aktion
+. Saal Erfassungsmaske öffnen
+.. Erfassungsmaske öffnet sich
+.. User erstellt einen neuen Saal
+.. User erstellt Sitzplätze für neuen Saal
+. Die Daten werden auf der Datenbank geupdatet
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Saal wird erstellt|
+|Sitze werden erstellt|
+|=======================
+
+== Saal / Sitzplätze bearbeiten
+
+=== Aktion
+. Bearbeitungsmaske öffnen
+.. Bearbeitungsmaske öffnet sich
+.. Der User wählt einen Saal aus
+.. Der User kann nun diesen Saal und seine Sitzplätze bearbeiten
+. Die Daten werden auf der Datenbank geupdatet
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Änderungen werden übernommen|
+|=======================
+
+== Reservation anhand Kunde finden
+
+=== Aktion
+. Reservationsfilter asuwählen
+.. Reservationsfilterung öffnet sich
+.. User gibt Kunden Name oder Telefonnummer ein
+. Reservationen des Kundes werden zurückgegeben
+. Reservation selektieren für mehr Detais
+
+|=======================
+|Erwaretes Ergebnis|Ergebnis      
+|Reservationen des Kundes werden zurückgegeben|
+|=======================
+
+= Automatisierte Tests
+image::..\media\coverage.png[Coverage]
+image::..\media\hot_spots.png[Hot Spots]
+
+= Fazit
+Alle essenziellen Komponenten sind abgedeckt. Die Applikation besteht alle Abnahmetests.

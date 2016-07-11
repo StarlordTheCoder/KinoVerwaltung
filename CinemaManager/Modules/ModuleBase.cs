@@ -24,6 +24,11 @@ namespace CinemaManager.Modules
 		}
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public abstract bool Enabled { get; }
+
+		/// <summary>
 		///     Wird das Modul angezeigt
 		/// </summary>
 		public bool IsVisible
@@ -37,8 +42,6 @@ namespace CinemaManager.Modules
 				OnPropertyChanged();
 			}
 		}
-
-		public abstract bool Enabled { get; }
 
 		/// <summary>
 		///     Titel für das Dockingframework
@@ -60,6 +63,11 @@ namespace CinemaManager.Modules
 		///     Die Moduldate, welche für die Filter der anderen Module relevant sind, haben sich verändert.
 		/// </summary>
 		public event EventHandler ModuleDataChanged;
+
+		/// <summary>
+		///     True if there is a selected value. True if no value can be selected
+		/// </summary>
+		public virtual bool ValueSelected => true;
 
 		/// <summary>
 		///     Event invokator for <see cref="ModuleDataChanged" />

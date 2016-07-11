@@ -8,6 +8,9 @@ namespace CinemaManager.Modules.Reservation
 	/// </summary>
 	public partial class ReservationModuleView
 	{
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public ReservationModuleView()
 		{
 			InitializeComponent();

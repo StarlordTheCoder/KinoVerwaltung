@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace CinemaManagerTest.MainView
 {
-	public class MainWindowViewModelTest : IntegrationTestBase<MainWindowViewModel>
+	public class MainWindowViewModelTest : UnitTestBase<MainWindowViewModel>
 	{
 		[Test]
 		public void TestSatanDataStartupFileIsUsed()

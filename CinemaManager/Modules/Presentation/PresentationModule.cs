@@ -15,13 +15,21 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Presentation
 {
-	public class PresentationModule : ModuleBase
+	/// <summary>
+	///     Modul zum Verwallten der Vorstellungen
+	/// </summary>
+	public class PresentationModule : ModuleBase, IPresentationModule
 	{
-		private readonly FilmModule _filmModule;
-		private readonly RoomModule _roomModule;
+		private readonly IFilmModule _filmModule;
+		private readonly IRoomModule _roomModule;
 		private PresentationViewModel _selectedPresentation;
 
-		public PresentationModule(FilmModule filmModule, RoomModule roomModule)
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="filmModule">Modul für Modulübergreifende Filter</param>
+		/// <param name="roomModule">Modul für Modulübergreifende Filter</param>
+		public PresentationModule(IFilmModule filmModule, IRoomModule roomModule)
 		{
 			_filmModule = filmModule;
 			_roomModule = roomModule;
@@ -30,7 +38,8 @@ namespace CinemaManager.Modules.Presentation
 
 			PresentationFilterConfigurator
 				.NumberFilter("ID", p => p.FilmId)
-				.DateFilter("Day", p => p.StartTime);
+				.DateFilter("Day", p => p.StartTime)
+				.ComplexFilter(_filmModule, f => PresentationModels.Where(p => p.FilmId == f.SelectedFilm?.FilmId));
 
 			PresentationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 
@@ -57,6 +66,18 @@ namespace CinemaManager.Modules.Presentation
 		/// </summary>
 		public DelegateCommand RemovePresentationCommand { get; }
 
+		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
+
+		/// <summary>
+		///     Command for <see cref="ApplyFilmFromFilmModule" />
+		/// </summary>
+		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="ApplyRoomFromRoomModule" />
+		/// </summary>
+		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
+
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
 		/// </summary>
@@ -65,10 +86,10 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
-		public override string Title => "Presentation";
+		public override string Title => "Presentations";
 
 		/// <summary>
-		///     Model der ausgewählten Präsentation
+		///     Ausgewählte Präsentation
 		/// </summary>
 		public PresentationViewModel SelectedPresentation
 		{
@@ -78,6 +99,7 @@ namespace CinemaManager.Modules.Presentation
 				if (Equals(_selectedPresentation, value)) return;
 				_selectedPresentation = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
 				OnModuleDataChanged();
 				RemovePresentationCommand.RaiseCanExecuteChanged();
 				ApplyFilmFromFilmModuleCommand.RaiseCanExecuteChanged();
@@ -86,7 +108,7 @@ namespace CinemaManager.Modules.Presentation
 		}
 
 		/// <summary>
-		///     Liste Aller präsenatationen
+		///     Alle gefilterten Präsenatationen
 		/// </summary>
 		public ObservableCollection<PresentationViewModel> Presentations { get; } =
 			new ObservableCollection<PresentationViewModel>();
@@ -94,32 +116,7 @@ namespace CinemaManager.Modules.Presentation
 		/// <summary>
 		///     Gibt zurück, ob eine Präsentation ausgewählt ist
 		/// </summary>
-		public bool ValueSelected => SelectedPresentation != null;
-
-		private static IList<PresentationModel> PresentationModels => Session.Instance.SelectedCinemaModel?.Presentations;
-
-		public DelegateCommand ApplyFilmFromFilmModuleCommand { get; }
-		public DelegateCommand ApplyRoomFromRoomModuleCommand { get; }
-
-		private bool CanApplyRoomFromRoomModule()
-		{
-			return _roomModule.ValueSelected;
-		}
-
-		private void ApplyRoomFromRoomModule()
-		{
-			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
-		}
-
-		private bool CanApplyFilmFromFilmModule()
-		{
-			return _filmModule.ValueSelected;
-		}
-
-		private void ApplyFilmFromFilmModule()
-		{
-			SelectedPresentation.Film = _filmModule.SelectedFilm;
-		}
+		public override bool ValueSelected => SelectedPresentation != null;
 
 		/// <summary>
 		///     Entfernt die ausgewählte Präsentation
@@ -156,6 +153,26 @@ namespace CinemaManager.Modules.Presentation
 		public override void Refresh()
 		{
 			FilterChanged();
+		}
+
+		private bool CanApplyRoomFromRoomModule()
+		{
+			return _roomModule.ValueSelected;
+		}
+
+		private void ApplyRoomFromRoomModule()
+		{
+			SelectedPresentation.RoomViewModel = _roomModule.SelectedRoom;
+		}
+
+		private bool CanApplyFilmFromFilmModule()
+		{
+			return _filmModule.ValueSelected;
+		}
+
+		private void ApplyFilmFromFilmModule()
+		{
+			SelectedPresentation.Film = _filmModule.SelectedFilm;
 		}
 
 		private void FilterChanged()

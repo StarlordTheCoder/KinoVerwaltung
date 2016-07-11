@@ -16,10 +16,13 @@ namespace CinemaManager.Modules.Film
 	/// <summary>
 	///     GUi module des Filmes
 	/// </summary>
-	public class FilmModule : ModuleBase
+	public class FilmModule : ModuleBase, IFilmModule
 	{
 		private FilmModel _selectedFilm;
 
+		/// <summary>
+		///     Constructor
+		/// </summary>
 		public FilmModule()
 		{
 			AddFilmCommand = new DelegateCommand(AddFilm);
@@ -27,44 +30,16 @@ namespace CinemaManager.Modules.Film
 
 			FilmFilterConfigurator
 				.StringFilter("Name", f => f.FilmName)
-				.StringFilter("Director", f => f.Director, f => f.Publisher);
+				.StringFilter("Director", f => f.Director, f => f.Publisher)
+				.NumberFilter("Age", f => (int) f.AgeRestriction);
 
 			FilmFilterConfigurator.FilterChanged += (sender, e) => OnFilterChanged();
 		}
 
 		/// <summary>
-		///     True, wenn das Modul aktiv ist.
-		/// </summary>
-		public override bool Enabled => FilmModels != null;
-
-		/// <summary>
-		///     Titel für das Dockingframework
-		/// </summary>
-		public override string Title => "Filme";
-
-		/// <summary>
 		///     FilterKonfigurator
 		/// </summary>
 		public IFilterConfigurator<FilmModel> FilmFilterConfigurator { get; set; } = new FilterConfigurator<FilmModel>();
-
-		public ObservableCollection<FilmModel> Films { get; set; } = new ObservableCollection<FilmModel>();
-
-		/// <summary>
-		///     Ausgewählter Film
-		/// </summary>
-		public FilmModel SelectedFilm
-		{
-			get { return _selectedFilm; }
-			set
-			{
-				if (Equals(_selectedFilm, value)) return;
-				_selectedFilm = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(ValueSelected));
-				OnModuleDataChanged();
-				RemoveFilmCommand.RaiseCanExecuteChanged();
-			}
-		}
 
 		/// <summary>
 		///     Command für <see cref="AddFilm" />
@@ -85,9 +60,41 @@ namespace CinemaManager.Modules.Film
 			=> Enum.GetValues(typeof(AgeRestriction)).Cast<AgeRestriction>();
 
 		/// <summary>
+		///     True, wenn das Modul aktiv ist.
+		/// </summary>
+		public override bool Enabled => FilmModels != null;
+
+		/// <summary>
+		///     Titel für das Dockingframework
+		/// </summary>
+		public override string Title => "Films";
+
+		/// <summary>
+		///     Alle gefilterten Filme
+		/// </summary>
+		public ObservableCollection<FilmModel> Films { get; set; } = new ObservableCollection<FilmModel>();
+
+		/// <summary>
+		///     Ausgewählter Film
+		/// </summary>
+		public FilmModel SelectedFilm
+		{
+			get { return _selectedFilm; }
+			set
+			{
+				if (Equals(_selectedFilm, value)) return;
+				_selectedFilm = value;
+				OnPropertyChanged();
+				OnPropertyChanged(nameof(ValueSelected));
+				OnModuleDataChanged();
+				RemoveFilmCommand.RaiseCanExecuteChanged();
+			}
+		}
+
+		/// <summary>
 		///     Gibt zurück, ob ein FIl Ausgewählt ist
 		/// </summary>
-		public bool ValueSelected => SelectedFilm != null;
+		public override bool ValueSelected => SelectedFilm != null;
 
 		/// <summary>
 		///     Entfernt den ausgewählten film
@@ -100,7 +107,7 @@ namespace CinemaManager.Modules.Film
 		}
 
 		/// <summary>
-		///     Fügt einen neuen Film mit Dfaultdaten hinzu
+		///     Fügt einen neuen Film mit Defaultdaten hinzu
 		/// </summary>
 		public void AddFilm()
 		{

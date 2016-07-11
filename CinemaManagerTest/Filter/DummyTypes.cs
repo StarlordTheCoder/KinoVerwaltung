@@ -9,13 +9,13 @@ namespace CinemaManagerTest.Filter
 {
 	public interface IDummyModule : IModule
 	{
-		IEnumerable<IDummyModel> ExampleList { get; set; }
+		IEnumerable<IDummyModel> ExampleList { get; }
 	}
 
 	public interface IDummyModel
 	{
-		string StringProperty { get; set; }
-		DateTime? DateTimeProperty { get; set; }
-		int NumberProperty { get; set; }
+		string StringProperty { get; }
+		DateTime? DateTimeProperty { get; }
+		int NumberProperty { get; }
 	}
 }

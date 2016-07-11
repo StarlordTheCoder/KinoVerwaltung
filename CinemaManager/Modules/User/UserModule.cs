@@ -15,7 +15,7 @@ namespace CinemaManager.Modules.User
 	/// <summary>
 	///     Modul zum Anzeigen der User.
 	/// </summary>
-	public class UserModule : ModuleBase
+	public class UserModule : ModuleBase, IUserModule
 	{
 		private UserModel _selectedUser;
 
@@ -46,9 +46,11 @@ namespace CinemaManager.Modules.User
 		public ICommand AddUserCommand { get; set; }
 
 		/// <summary>
-		///     Titel für das Dockingframework
+		///     Filter des Benutzermodules
 		/// </summary>
-		public override string Title => "User Module";
+		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
+
+		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
@@ -56,9 +58,9 @@ namespace CinemaManager.Modules.User
 		public override bool Enabled => UserModels != null;
 
 		/// <summary>
-		///     Filter des Benutzermodules
+		///     Titel für das Dockingframework
 		/// </summary>
-		public IFilterConfigurator<UserModel> UserFilterConfigurator { get; set; } = new FilterConfigurator<UserModel>();
+		public override string Title => "Users";
 
 		/// <summary>
 		///     Liste aller <see cref="UserModel" />
@@ -82,12 +84,10 @@ namespace CinemaManager.Modules.User
 			}
 		}
 
-		private static IList<UserModel> UserModels => Session.Instance.SelectedCinemaModel?.Users;
-
 		/// <summary>
-		///     Gibt den Ausgewählten Benutzer zurück
+		///     Gibt true zurück, wenn ein Benutzer ausgewählt ist
 		/// </summary>
-		public bool ValueSelected => SelectedUser != null;
+		public override bool ValueSelected => SelectedUser != null;
 
 		/// <summary>
 		///     Entfernt den ausgewählten User

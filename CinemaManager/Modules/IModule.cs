@@ -18,11 +18,6 @@ namespace CinemaManager.Modules
 		bool IsVisible { get; set; }
 
 		/// <summary>
-		///     True, wenn das Modul aktiv ist.
-		/// </summary>
-		bool Enabled { get; }
-
-		/// <summary>
 		///     Titel für das Dockingframework
 		/// </summary>
 		string Title { get; }
@@ -31,6 +26,11 @@ namespace CinemaManager.Modules
 		///     Command für das Dockingframework
 		/// </summary>
 		ICommand CloseCommand { get; }
+
+		/// <summary>
+		///     True if there is a selected value. True if no value can be selected
+		/// </summary>
+		bool ValueSelected { get; }
 
 		/// <summary>
 		///     Aktualisiert die Daten im Modul.

@@ -13,13 +13,21 @@ using Microsoft.Practices.Prism.Commands;
 
 namespace CinemaManager.Modules.Reservation
 {
-	public class ReservationModule : ModuleBase
+	/// <summary>
+	///     Modul zum Verwalten der Reser
+	/// </summary>
+	public class ReservationModule : ModuleBase, IReservationModule
 	{
-		private readonly PresentationModule _presentationModule;
-		private readonly UserModule _userModule;
+		private readonly IPresentationModule _presentationModule;
+		private readonly IUserModule _userModule;
 		private ReservationViewModel _selectedReservation;
 
-		public ReservationModule(PresentationModule presentationModule, UserModule userModule)
+		/// <summary>
+		///     Constructor
+		/// </summary>
+		/// <param name="presentationModule">Modul für Modulübergreifende Filter</param>
+		/// <param name="userModule">Modul für Modulübergreifende Filter</param>
+		public ReservationModule(IPresentationModule presentationModule, IUserModule userModule)
 		{
 			_presentationModule = presentationModule;
 			_userModule = userModule;
@@ -37,7 +45,24 @@ namespace CinemaManager.Modules.Reservation
 			ReservationFilterConfigurator.FilterChanged += (sender, e) => FilterChanged();
 		}
 
-		public bool ValueSelected => SelectedReservation != null;
+		/// <summary>
+		///     Filter-Configurator für die Reservationen
+		/// </summary>
+		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; set; } =
+			new FilterConfigurator<ReservationModel>();
+
+		private static IEnumerable<ReservationModel> ReservationModels
+			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
+
+		/// <summary>
+		///     Command for <see cref="AddReservation" />
+		/// </summary>
+		public DelegateCommand AddReservationCommand { get; }
+
+		/// <summary>
+		///     Command for <see cref="RemoveReservation" />
+		/// </summary>
+		public DelegateCommand RemoveReservationCommand { get; }
 
 		/// <summary>
 		///     True, wenn das Modul aktiv ist.
@@ -45,21 +70,20 @@ namespace CinemaManager.Modules.Reservation
 		public override bool Enabled => ReservationModels != null;
 
 		/// <summary>
-		///     Titel für das Dockingframework
+		///     Shows if there is a selected Reservation
 		/// </summary>
-		public override string Title => "Reservation Module";
+		public override bool ValueSelected => SelectedReservation != null;
 
 		/// <summary>
-		///     Alle gefilterten Resrvationen
+		///     Titel für das Dockingframework
+		/// </summary>
+		public override string Title => "Reservations";
+
+		/// <summary>
+		///     Alle gefilterten Reservationen
 		/// </summary>
 		public ObservableCollection<ReservationViewModel> Reservations { get; } =
 			new ObservableCollection<ReservationViewModel>();
-
-		/// <summary>
-		///     Filter-Configurator für die Reservationen
-		/// </summary>
-		public IFilterConfigurator<ReservationModel> ReservationFilterConfigurator { get; } =
-			new FilterConfigurator<ReservationModel>();
 
 		/// <summary>
 		///     Ausgewählte Reservation
@@ -71,19 +95,34 @@ namespace CinemaManager.Modules.Reservation
 			{
 				if (Equals(value, _selectedReservation)) return;
 				_selectedReservation = value;
+
+				if (_selectedReservation != null)
+				{
+					_selectedReservation.Presentation.RoomViewModel.MaximumSelected = 0;
+
+					foreach (var seat in
+						_selectedReservation.Presentation.RoomViewModel.Rows.SelectMany(r => r.Seats)
+							.Where(s => s.IsReserved))
+					{
+						if (_selectedReservation.Model.Seats.Contains(seat.Model.Place))
+						{
+							++_selectedReservation.Presentation.RoomViewModel.MaximumSelected;
+							seat.IsSelected = true;
+						}
+					}
+				}
+
+
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ValueSelected));
+				RemoveReservationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
-		private static IEnumerable<ReservationModel> ReservationModels
-			=> Session.Instance.SelectedCinemaModel?.Presentations.SelectMany(p => p.Reservations);
-
-		public DelegateCommand AddReservationCommand { get; }
-
-		public DelegateCommand RemoveReservationCommand { get; }
-
-		private void RemoveReservation()
+		/// <summary>
+		///     Remove the <see cref="SelectedReservation" />
+		/// </summary>
+		public void RemoveReservation()
 		{
 			SelectedReservation.Presentation.Model.Reservations.Remove(SelectedReservation.Model);
 
@@ -92,23 +131,22 @@ namespace CinemaManager.Modules.Reservation
 			SelectedReservation = null;
 		}
 
-		private void AddReservation()
+		/// <summary>
+		///     Fügt eine Reservation hinzu
+		/// </summary>
+		public async void AddReservation()
 		{
 			var model = new ReservationModel();
 
 			_presentationModule.SelectedPresentation.Model.Reservations.Add(model);
 
-			var reservation = new ReservationViewModel(model, _userModule, _presentationModule);
+			var reservation = new ReservationViewModel(model, Refresh, _userModule, _presentationModule);
+
+			await reservation.ApplyUserFromUserModuleCommand.Execute();
+			await reservation.ApplyPresentationFromPresentationModuleCommand.Execute();
 
 			Reservations.Add(reservation);
 			SelectedReservation = reservation;
-		}
-
-		private static IEnumerable<ReservationModel> GetReservations(UserModel user)
-		{
-			return user != null
-				? ReservationModels.Where(r => r.ReservatorId == user.UserId)
-				: Enumerable.Empty<ReservationModel>();
 		}
 
 		/// <summary>
@@ -120,6 +158,13 @@ namespace CinemaManager.Modules.Reservation
 			FilterChanged();
 		}
 
+		private static IEnumerable<ReservationModel> GetReservations(UserModel user)
+		{
+			return user != null
+				? ReservationModels.Where(r => r.ReservatorId == user.UserId)
+				: Enumerable.Empty<ReservationModel>();
+		}
+
 		private void FilterChanged()
 		{
 			if (ReservationModels != null)
@@ -129,7 +174,7 @@ namespace CinemaManager.Modules.Reservation
 
 				foreach (var reservation in filteredData)
 				{
-					Reservations.Add(new ReservationViewModel(reservation, _userModule, _presentationModule));
+					Reservations.Add(new ReservationViewModel(reservation, Refresh, _userModule, _presentationModule));
 				}
 			}
 

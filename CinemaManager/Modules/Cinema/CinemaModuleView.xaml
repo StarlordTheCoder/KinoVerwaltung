@@ -6,6 +6,7 @@
              xmlns:filter="clr-namespace:CinemaManager.Filter"
              xmlns:cinema="clr-namespace:CinemaManager.Modules.Cinema"
              xmlns:infrastructure="clr-namespace:CinemaManager.Infrastructure"
+             xmlns:model="clr-namespace:CinemaManager.Model"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance cinema:CinemaModule}">
@@ -24,7 +25,7 @@
 		          SelectedItem="{Binding SelectedCinema}" SelectionMode="Single">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListViewItem">
-					<Setter Property="IsSelected" Value="{Binding Path=IsActive, Mode=TwoWay}" />
+					<Setter Property="IsSelected" Value="{Binding Path=(model:CinemaModel.IsActive), Mode=TwoWay}" />
 				</Style>
 			</ListView.ItemContainerStyle>
 			<ListView.ItemTemplate>

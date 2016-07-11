@@ -25,7 +25,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Filmlänge
 		/// </summary>
-		public TimeSpan Length { get; set; }
+		public DateTime Length { get; set; } = DateTime.MinValue.Add(TimeSpan.FromMinutes(90));
 
 		/// <summary>
 		///     Verlag
@@ -46,5 +46,10 @@ namespace CinemaManager.Model
 		///     Altersfreigabe
 		/// </summary>
 		public AgeRestriction AgeRestriction { get; set; }
+
+		/// <summary>
+		///     Preis pro sitz
+		/// </summary>
+		public decimal BasePricePerSeat { get; set; }
 	}
 }

@@ -13,16 +13,22 @@ namespace CinemaManager.Modules.Room
 	/// <summary>
 	///     ViewModel of the RoomModel
 	/// </summary>
-	public class RoomViewModel : NotifyPropertyChangedBase, IRoomViewModel
+	public class RoomViewModel : NotifyPropertyChangedBase
 	{
+		private bool _isUpdatingSelection;
+		private int _maximumSelected;
 		private RowViewModel _selectedRow;
 
 		/// <summary>
-		///     Contains methods and Datas of a room for the gui
+		///     Contains methods and Data of a room for the gui
 		/// </summary>
 		/// <param name="roomModel">Model of the Room</param>
-		public RoomViewModel(RoomModel roomModel)
+		/// <param name="maximumSelected">
+		///     <see cref="MaximumSelected" />
+		/// </param>
+		public RoomViewModel(RoomModel roomModel, int maximumSelected = 0)
 		{
+			_maximumSelected = maximumSelected;
 			Model = roomModel;
 			var groupedSeats = roomModel.Seats.GroupBy(r => r.Place.Row);
 			foreach (var seats in groupedSeats)
@@ -34,14 +40,24 @@ namespace CinemaManager.Modules.Room
 			{
 				seatViewModel.PropertyChanged += SeatViewModelOnPropertyChanged;
 			}
-
-			foreach (var selectedSeat in SelectedSeatModels)
-			{
-				SelectedSeats.Add(selectedSeat);
-			}
 		}
 
-		private IEnumerable<SeatViewModel> SelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
+		private IEnumerable<SeatViewModel> AllSelectedSeatModels => Rows.SelectMany(r => r.Seats).Where(s => s.IsSelected);
+
+		/// <summary>
+		///     Die maximale Anzahl der Sitze, welche gleichzeitig selektiert sein darf
+		/// </summary>
+		public int MaximumSelected
+		{
+			get { return _maximumSelected; }
+			set
+			{
+				if (_maximumSelected == value) return;
+				_maximumSelected = value;
+				OnPropertyChanged();
+				RecalculateSelection();
+			}
+		}
 
 		/// <summary>
 		///     The currently selected Row
@@ -73,6 +89,14 @@ namespace CinemaManager.Modules.Room
 		public RoomModel Model { get; set; }
 
 		/// <summary>
+		///     Die Anzahl freier Sitze
+		/// </summary>
+		public int AvailableSeats
+		{
+			get { return Rows.SelectMany(r => r.Seats).Count(s => !s.IsReserved); }
+		}
+
+		/// <summary>
 		///     Add a Row into a Room
 		/// </summary>
 		public void AddRow()
@@ -101,7 +125,13 @@ namespace CinemaManager.Modules.Room
 		{
 			var seats = Model.Seats.Where(s => s.Place.Row == SelectedRow.RowNumber).ToList();
 			seats.ForEach(s => Model.Seats.Remove(s));
+			foreach (var row in Rows.Where(r => r.RowNumber > SelectedRow.RowNumber))
+			{
+				row.RowNumber--;
+			}
+
 			Rows.Remove(SelectedRow);
+			SelectedRow = null;
 		}
 
 		/// <summary>
@@ -111,19 +141,19 @@ namespace CinemaManager.Modules.Room
 		{
 			var selectedSeat = SelectedRow.Seats.FirstOrDefault(s => s.IsSelected);
 
-			int index;
+			int seatNumber;
 
 			if (selectedSeat != null)
 			{
-				index = selectedSeat.Model.Place.Number + 1;
-				foreach (var seat in SelectedRow.Seats.Where(s => s.Model.Place.Number >= index))
+				seatNumber = selectedSeat.Model.Place.Number + 1;
+				foreach (var seat in SelectedRow.Seats.Where(s => s.Model.Place.Number >= seatNumber))
 				{
 					seat.Model.Place.Number++;
 				}
 			}
 			else
 			{
-				index = SelectedRow.Seats.Any() ? SelectedRow.Seats.Max(s => s.Model.Place.Number) + 1 : 0;
+				seatNumber = SelectedRow.Seats.Any() ? SelectedRow.Seats.Max(s => s.Model.Place.Number) + 1 : 1;
 			}
 
 			var newModel = new SeatModel
@@ -131,18 +161,21 @@ namespace CinemaManager.Modules.Room
 				Place = new SeatIdentifier
 				{
 					Row = SelectedRow.RowNumber,
-					Number = index
+					Number = seatNumber
 				}
 			};
 
-			var newSeat = new SeatViewModel(newModel);
+			var newSeat = new SeatViewModel(newModel)
+			{
+				IsSelected = true
+			};
 
 			newSeat.PropertyChanged += SeatViewModelOnPropertyChanged;
 
-			SelectedRow.Seats.Insert(index, newSeat);
+			SelectedRow.Seats.Insert(seatNumber - 1, newSeat);
 			Model.Seats.Add(newSeat.Model);
-			SelectedSeats.Clear();
-			newSeat.IsSelected = true;
+
+			RecalculateSelection();
 		}
 
 		/// <summary>
@@ -152,26 +185,54 @@ namespace CinemaManager.Modules.Room
 		{
 			var seatToRemove = SelectedSeats.First();
 
+			var rowOfSeat = Rows.First(r => r.RowNumber == seatToRemove.Model.Place.Row);
+
+			foreach (var seat in rowOfSeat.Seats.Where(s => s.Model.Place.Number > seatToRemove.Model.Place.Number))
+			{
+				seat.Model.Place.Number--;
+			}
+
 			Model.Seats.Remove(seatToRemove.Model);
 			seatToRemove.PropertyChanged -= SeatViewModelOnPropertyChanged;
 			SelectedSeats.Remove(seatToRemove);
-			foreach (var row in Rows)
-			{
-				row.Seats.Remove(seatToRemove);
-			}
+
+			rowOfSeat.Seats.Remove(seatToRemove);
 		}
 
 		private void SeatViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 		{
-			if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
+			if (!_isUpdatingSelection && Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsSelected)))
 			{
-				SelectedSeats.Clear();
-
-				foreach (var seat in SelectedSeatModels)
-				{
-					SelectedSeats.Add(seat);
-				}
+				RecalculateSelection();
 			}
+			else if (Equals(propertyChangedEventArgs.PropertyName, nameof(SeatViewModel.IsReserved)))
+			{
+				OnPropertyChanged(nameof(AvailableSeats));
+			}
+		}
+
+		private void RecalculateSelection()
+		{
+			_isUpdatingSelection = true;
+
+			foreach (var seat in SelectedSeats.Where(s => !s.IsSelected).ToList())
+			{
+				SelectedSeats.Remove(seat);
+			}
+
+			foreach (var seat in AllSelectedSeatModels.Except(SelectedSeats).ToList())
+			{
+				SelectedSeats.Add(seat);
+			}
+
+			while (SelectedSeats.Count > 0 && SelectedSeats.Count > MaximumSelected)
+			{
+				var seatToRemove = SelectedSeats.First();
+				seatToRemove.IsSelected = false;
+				SelectedSeats.Remove(seatToRemove);
+			}
+
+			_isUpdatingSelection = false;
 		}
 	}
 }

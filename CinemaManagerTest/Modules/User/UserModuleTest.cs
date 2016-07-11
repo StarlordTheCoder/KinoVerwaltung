@@ -6,7 +6,7 @@ using CinemaManager.Model;
 using CinemaManager.Modules.User;
 using NUnit.Framework;
 
-namespace CinemaManagerTest.Modules
+namespace CinemaManagerTest.Modules.User
 {
 	public class UserModuleTest : UnitTestBase<UserModule>
 	{
@@ -20,7 +20,7 @@ namespace CinemaManagerTest.Modules
 		}
 
 		[Test]
-		public void AddCorrectlyAddFilm()
+		public void AddCorrectlyAddsUser()
 		{
 			var model = new CinemasModel();
 			var cinema = new CinemaModel

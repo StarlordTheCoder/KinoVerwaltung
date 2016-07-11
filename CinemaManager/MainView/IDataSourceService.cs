@@ -31,5 +31,11 @@ namespace CinemaManager.MainView
 		///     Command to save the current file and reload it
 		/// </summary>
 		RoutedUICommand SynchronizeCommand { get; }
+
+		/// <summary>
+		///     Try to load the Datafile at the specified <paramref name="path" />
+		/// </summary>
+		/// <param name="path">Path to load data from</param>
+		void LoadData(string path);
 	}
 }

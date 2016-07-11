@@ -24,6 +24,7 @@ namespace CinemaManager.Model
 		/// <summary>
 		///     Der Name, welcher im GUI angezeigt wird
 		/// </summary>
+		// ReSharper disable once UnusedAutoPropertyAccessor.Global
 		public string DisplayName { get; set; }
 
 		/// <summary>

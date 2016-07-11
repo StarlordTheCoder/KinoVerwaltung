@@ -1,6 +1,7 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System.ComponentModel;
 using System.Windows;
 
 namespace CinemaManager.MainView
@@ -33,6 +34,11 @@ namespace CinemaManager.MainView
 		private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
 		{
 			(DataContext as MainWindowViewModel)?.LayoutService.Initialize(DockingManager);
+		}
+
+		private void Window_Closing(object sender, CancelEventArgs e)
+		{
+			(DataContext as MainWindowViewModel)?.Exit(e);
 		}
 	}
 }

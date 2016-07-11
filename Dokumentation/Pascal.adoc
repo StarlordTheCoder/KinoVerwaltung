@@ -1,15 +1,19 @@
 Pascal Lernjournal
 ==================
 Pascal Honegger
-Version 1.4, 13.06.2016
+Version 1.5, 27.06.2016
 :toc:
 
 == 31.05.2016
 === CRC-Karten
-Nachdem wir bereits das letzte Mal mit den CRC-Karten gearbeitet haben freute ich mich gar nicht auf ein Wiedersehen. Ich bin der festen Überzeugung, dass das Erstellen eines Klassendiagrammes viel schneller und einfacher ist als das Verwalten der CRC-Karten. Falls man in einem Digital-Tool ein Klassendiagramm erstellt (wie UMLet) und dabei die Verantwortlichkeiten der Klassen integriert kann man die Relationen der Klassen viel einfacher darstellen. Dazu kann man die Karten in einem solchen Tool ohne Probleme erweitern, editieren und entfernen! Das Konzept die Klassen mit den Verantwortlichkeiten niederzuschreiben finde ich nicht schlecht, lediglich die Art und Weise wie die Karten funktionieren finde ich nicht optimal.
+Nachdem wir bereits das letzte Mal mit den CRC-Karten gearbeitet hatten freute ich mich gar nicht auf ein Wiedersehen. Ich bin der festen Überzeugung, dass das Erstellen eines Klassendiagrammes viel schneller und einfacher ist als das Verwalten der CRC-Karten.
+Falls man in einem Digital-Tool ein Klassendiagramm erstellt (wie UMLet) und dabei die Verantwortlichkeiten der Klassen integriert kann man die Relationen der Klassen viel einfacher darstellen. Dazu kann man die Karten in einem solchen Tool ohne Probleme erweitern, editieren und entfernen!
+Das Konzept die Klassen mit den Verantwortlichkeiten niederzuschreiben finde ich nicht schlecht, lediglich die Art und Weise wie die Karten funktionieren finde ich nicht optimal.
 
 === Module und Filter
-Wir waren uns zu Beginn unschlüssig, wie wir die UX optimieren können. Um herauszufinden, wie unsere Applikation verwendet wird, haben wir die Use-Cases umstrukturiert. In diesen geht es nun mehr darum, wie der Kunde sein Ziel erreicht. So kamen wir beim Erstellen der Use-Cases auf die Schlussfolgerung, dass der User im Normalfall die verschiedenen "Module" verbinden möchte. So ist ein Use-Case das filtern / suchen von Vorstellungen. Falls man nun die Vorstellungen anhand eines Filmes suchen möchte, muss man einen Film auswählen können. Wir haben uns dafür entschieden, all diese getrennten Themen in Module aufzuteilen. So haben wir ein Film-Modul und ein Vorstellungs-Modul. In dem Film-Modul kann dann ein Film ausgewählt werden und über einen Knopf gesagt werden, dass das Vorstellungs-Modul über diesen Filter verfügt. Alle Daten, welche geladen werden, werden dann durch diese Filter gesendet und gefiltert. Dies erlaubt das dynamische hinzufügen von Filtern, dazu ist es einfach erweiterbar (Falls neue Filtermöglichkeiten dazukommen) und eine angenehme Herausforderung umzusetzen.
+Wir waren uns zu Beginn unschlüssig, wie wir die UX optimieren können. Um herauszufinden, wie unsere Applikation verwendet wird, haben wir die Use-Cases umstrukturiert. In diesen geht es nun mehr darum, wie der Kunde sein Ziel erreicht. So kamen wir beim Erstellen der Use-Cases auf die Schlussfolgerung, dass der User im Normalfall die verschiedenen "Module" verbinden möchte. So ist ein Use-Case das filtern / suchen von Vorstellungen.
+Falls man nun die Vorstellungen anhand eines Filmes suchen möchte, muss man einen Film auswählen können. Wir haben uns dafür entschieden, all diese getrennten Themen in Module aufzuteilen. So haben wir ein Film-Modul und ein Vorstellungs-Modul. In dem Film-Modul kann dann ein Film ausgewählt werden und über einen Knopf gesagt werden, dass das Vorstellungs-Modul über diesen Filter verfügt. Alle Daten, welche geladen werden, werden dann durch diese Filter gesendet und gefiltert. 
+Dies erlaubt das dynamische hinzufügen von Filtern, dazu ist es einfach erweiterbar (Falls neue Filtermöglichkeiten dazukommen) und eine angenehme Herausforderung umzusetzen.
 Die Idee ist, dass jedes Modul beim Start seine Filter definieren kann. Auch andere Filtertypen (String und Date) sollten über diesen Konfigurator erstellt werden. Die Darstellung dieser Filter wird auch zentral umgesetzt und kann von jedem Modul verwendet werden.
 
 === DockingManager
@@ -17,29 +21,34 @@ Beim Diskutieren ist die Darstellung der Module ein Thema geworden. Da wir schlu
 In der Arbeit verwende ich bereits ein solches Framework und habe daher Erfahrungen, wie ein solches verwendet werden kann. Damit die Applikation wirklich personalisierbar ist, muss das Layout auch beim Neustart noch das selbe sein => Es muss serialisiert werden.
 
 === Serialisierung => .satan & .satanData
-Mithilfe der Serialisierung können wir einfach unsere Daten persistieren. Das heisst, dass sie auf die Festplatte geschrieben und von dort gelesen werden. Zuerst war unser Plan nur die Serialisierung des Layouts, doch mit der Zeit wollten wir noch mehr serialisieren. Unsere Daten wollten wir zuerst auf einem zentralen Server verwalten. Aus Zeitlichen Gründen wollten wir bereits andere Funktionen kürzen, damit dieser zentrale Server Platz hat. Ich kam dabei auf die Idee, einfach jegliche Datenbank wegzulassen und die Daten in Form einer Textdatei auf dem Dateisystem des Benutzers zu speichern. Der Nachteil dabei ist, dass wir eine einzelne Datei mit allen Informationen abspeichern müssten => Man könnte nur sehr erschwert zusammen daran arbeiten (Wer zuletzt kommt überschreibt die Änderungen der Anderen!). Aus Zeitmangel entschieden wir uns dafür, diese Kompromisse einzugehen. Wir möchten zwei Dateiendungen mit unserer Applikation verbinden: 
+Mithilfe der Serialisierung können wir einfach unsere Daten persistieren. Das heisst, dass sie auf die Festplatte geschrieben und von dort gelesen werden. Zuerst war unser Plan nur die Serialisierung des Layouts, doch mit der Zeit wollten wir noch mehr serialisieren. 
+Unsere Daten wollten wir zuerst auf einem zentralen Server verwalten. Aus Zeitlichen Gründen wollten wir bereits andere Funktionen kürzen, damit dieser zentrale Server Platz hat.
+Ich kam dabei auf die Idee, einfach jegliche Datenbank wegzulassen und die Daten in Form einer Textdatei auf dem Dateisystem des Benutzers zu speichern. Der Nachteil dabei ist, dass wir eine einzelne Datei mit allen Informationen abspeichern müssten => Man könnte nur sehr erschwert zusammen daran arbeiten (Wer zuletzt kommt überschreibt die Änderungen der Anderen!). Aus Zeitmangel entschieden wir uns dafür, diese Kompromisse einzugehen. Wir möchten zwei Dateiendungen mit unserer Applikation verbinden: 
 
 * .satan speichert das Layout. Die Serialisierung des Layouts übernimmt das Docking-Framework.
 * .satanData speichert unsere Daten. Wir möchten die Daten an sich möglichst gut kapseln, dass ein Umstieg auf einen Server mit Datenbank kein grosser Aufwand wäre. Dies sollte auch der Testbarkeit helfen!
 
 == 06.06.2016
 === Filter
-Das Filterkonzept ist ein sehr zentrales Konzept unserer Applikation. Zuerst wollte ich ein Visitor-Pattern umsetzen. Als ich mit diesem begonnen habe viel mir aber schnell auf, dass es nicht sehr sinnvoll ist. Wir haben spezifische Datentypen und müssen diese jeweils speziell behandeln. Das neue Konzept erinnert eher an ein Chain-Of-Responsibility, ist aber auch dafür keine exakte Implementation. Schlussendlich ist es eine Elegante Möglichkeit die Filter möglichst zentral zu verwalten. Dies erlaubt es auch, die einzelnen Komponenten besser zu testen.
+Das Filterkonzept ist ein sehr zentrales Konzept unserer Applikation. Zuerst wollte ich ein Visitor-Pattern umsetzen. Als ich mit diesem begonnen habe viel mir aber schnell auf, dass es nicht sehr sinnvoll ist. Wir haben spezifische Datentypen und müssen diese jeweils speziell behandeln.
+Das neue Konzept erinnert eher an ein Chain-Of-Responsibility, ist aber auch dafür keine exakte Implementation. Schlussendlich ist es eine Elegante Möglichkeit die Filter möglichst zentral zu verwalten. Dies erlaubt es auch, die einzelnen Komponenten besser zu testen.
 
 === Metrics
-Aus reiner Interesse habe ich Metrics in unser Projekt integriert. Zur Integration musste ich lediglich das NuGet-Package installieren und eine Konfiguration bereitstellen. Metrics ist ein Framework welches das Sammeln von Analysedaten erlaubt. Beim Start unsere Applikations im DEBUG-Modus wird eine lokale Website unter dem Port 1235 gehostet. Auf diese Seite kann man diverse Statistiken über die Applikation einsehen. Man kann auch sogenannte Health-Checks definieren und somit sehen, welche Komponenten nicht korrekt funktionieren. Ich habe beispielsweise in einem Graph die Anzahl der geöffneten Module gespeichert. Mithilfe der Graphen kann man dann beispielsweise die geöffneten Module in Relation zu dem Arbeitsspeicherverbrauch analysieren, und eventuelle Memory-Leaks finden.
+Aus reiner Interesse habe ich Metrics in unser Projekt integriert. Zur Integration musste ich lediglich das NuGet-Package installieren und eine Konfiguration bereitstellen. Metrics ist ein Framework welches das Sammeln von Analysedaten erlaubt. Beim Start unsere Applikation im DEBUG-Modus wird eine lokale Website unter dem Port 1235 gehostet. Auf diese Seite kann man diverse Statistiken über die Applikation einsehen. Man kann auch sogenannte Health-Checks definieren und somit sehen, welche Komponenten nicht korrekt funktionieren. Ich habe beispielsweise in einem Graph die Anzahl der geöffneten Module gespeichert. Mithilfe der Graphen kann man dann beispielsweise die geöffneten Module in Relation zu dem Arbeitsspeicherverbrauch analysieren, und eventuelle Memory-Leaks finden.
 
 image::media/metrics.png[Metrics Beispiel]
 
 == 07.06.2016
 
 === NuGet - DLLs
-Man sollte beim Entwickeln nicht immer das Rad neu erfinden. Für viele bekannte Probleme gibt es ein Pattern, womit man das Problem elegant lösen kann. Hat man nun ein grösseres Anliegen wie beispielsweise das oben genannte Docking-GUI müsste man trotzdem sehr viel Code neu schreiben, obwohl andere Entwickler diesen Code bereits geschrieben haben. Eine Lösung für diese Problem sind sogenannte DLLs. Beispiel: Man kann eine DLL eines Docking-Frameworks im Projekt referenzieren. Dadurch kann man auf die Methoden und GUI-Komponenten davon zugreifen. 
+Man sollte beim Entwickeln nicht immer das Rad neu erfinden. Für viele bekannte Probleme gibt es ein Pattern, womit man das Problem elegant lösen kann. Hat man nun ein grösseres Anliegen wie beispielsweise das oben genannte Docking-GUI müsste man trotzdem sehr viel Code neu schreiben, obwohl andere Entwickler diesen Code bereits geschrieben haben. 
+Eine Lösung für dieses Problem sind sogenannte DLLs. Beispiel: Man kann eine DLL eines Docking-Frameworks im Projekt referenzieren. Dadurch kann man auf die Methoden und GUI-Komponenten davon zugreifen. 
 
-Eine bessere Alternative zu den DLLs ist link:https://www.nuget.org/[NuGet]. NuGet ist der bekannteste Package-Manager für C#-Applikationen. Darüber lassen sich anstelle von DLLs sogenannte Packages (Pakete) mit dem Projekt verbinden. Dieses Paket kann auch DLLs beinhalten und unterscheidet sich von der Funktionalität her nicht gross von einer DLL. Der grosse Vorteil dieser Pakete ist, dass NuGet Updates und Abhängigkeiten übernimmt. So kann ein Paket andere Pakete als Abhängigkeit definieren und diese werden automatisch aufgelöst. Dazu bekommt man in Visual Studio benachrichtigungen, wenn ein Paket eine neue Version hat. Auch das Installieren der Pakete ist sehr einfach und direkt in Visual Studio integriert. Es werden auch keine unnötigen Daten in GIT hinterlegt, lediglich ein Eintrag in einer .packages-Datei mit dem Namen des Paketes.
+Eine bessere Alternative zu den DLLs ist link:https://www.nuget.org/[NuGet]. NuGet ist der bekannteste Package-Manager für C#-Applikationen. Darüber lassen sich anstelle von DLLs sogenannte Packages (Pakete) mit dem Projekt verbinden. Dieses Paket kann auch DLLs beinhalten und unterscheidet sich von der Funktionalität her nicht gross von einer DLL. Der grosse Vorteil dieser Pakete ist, dass NuGet Updates und Abhängigkeiten übernimmt.
+So kann ein Paket andere Pakete als Abhängigkeit definieren und diese werden automatisch aufgelöst. Dazu bekommt man in Visual Studio Benachrichtigungen, wenn ein Paket eine neue Version hat. Auch das Installieren der Pakete ist sehr einfach und direkt in Visual Studio integriert. Es werden auch keine unnötigen Daten in GIT hinterlegt, lediglich ein Eintrag in einer ".packages"-Datei mit dem Namen des Paketes.
 
 === Generics
-Beim Implementieren der Filter habe ich Genercis angewendet. Generics erlaubt es einen Datentypen beim Initialisieren einer Klasse oder beim Aufruf einer Methode anzugeben. So kann man ansteller einer List eine List<T> erstellen. Dieses T stellt dann einen Datentypen dar. Dieser kann in der Klasse beliebig verwendet werden, sowohl als Rerturn-Wert als auch als Paramter-Typ. Es können unendlich viele dieser Datentypen definiert werden, wie Beispielsweise List<T, U>
+Beim Implementieren der Filter habe ich Genercis angewendet. Generics erlaubt es einen Datentyp beim Initialisieren einer Klasse oder beim Aufruf einer Methode anzugeben. So kann man anstelle einer List eine List<T> erstellen. Dieses T stellt dann einen Datentypen dar. Dieser kann in der Klasse beliebig verwendet werden, sowohl als Return-Wert als auch als Paramter-Typ. Es können unendlich viele dieser Datentypen definiert werden, wie Beispielsweise List<T, U>
 
 |====
 | where T: struct | Ein beliebiges Struct (Value-Type) ausser Nullable.
@@ -53,8 +62,53 @@ Beim Implementieren der Filter habe ich Genercis angewendet. Generics erlaubt es
 Die Vorteile von Generic:
 
 * Erlaubt es Typ-Sicheren Code zu schreiben. So beinhaltet eine List<string> garantiert strings, und keine anderen Datentypen!
-* Der Kompiler und die IDE können im falle von falsch verwendeten Datentypen einen Kompiler-Fehler anzeigen.
+* Der Compiler und die IDE können im Falle von falsch verwendeten Datentypen einen Compiler-Fehler anzeigen.
 * Benötigt weniger Casting von und nach object.
-* Erlaubt es generische Klassen zu schreiben. So verwenden List<string> und List<int> den gleichen Code. Man bruacht nicht für jeden Fall eine eigene Implementation.
+* Erlaubt es generische Klassen zu schreiben. So verwenden List<string> und List<int> den gleichen Code. Man braucht nicht für jeden Fall eine eigene Implementation.
 
 In unserem Fall muss man beim Erstellen eines Filters einen Datentyp angeben. Dieser wird dann für die mitgegebenen Actions benötigt. Details dazu in der Filter-Dokumentation.
+
+== 25.06.2016
+=== Geschichte neuschreiben
+Uns ist aufgefallen, dass Seraphins Commits nicht seinem Github-Benutzer zugewiesen wurden. Nach Inspektion der Git-History ist aufgefallen, dass der Author seiner letzte Commits nicht "StarlordTheCoder" (Github-Benutzername) ist, sondern "Seraphin Rihm". 
+Nach einer Frage nach seine Gitconfig hat sich herausgestellt, dass Seraphin auf seinem neuen Computer die Standard-Gitconfig verwendet. Daher war der Benutzername und die Email von seinem Benutzerprofil übernommen. Da wir diese alten Commits trotzdem seinem Github-Benutzer zuweisen können (Statistiken etc.) habe mich daran gesetz Geschichte zu schreiben. 
+Um genau zu sein wollte ich meine lokale Git-History editieren und den Autor korrigieren und diese dann über einen Force-Push auf Github bringen. Dieses Vorhaben hat ein grosses Risiko: Mehrere Entwickler. Sobald man einen Force-Push macht, überschreibt man JEGLICHE History auf dem Remote-Server.
+Sagen wir ich hole die neuste Version lokal und bearbete den Autor, sodass Seraphin korrekt ist. Währenddessen macht Alain einen Push auf Github. Sobald ich den Force-Push mache sind Alains Änderungen für immer verloren.
+Dazu müssen alle Entwickler ihr lokales Repository zurücksetzen, da Git meint, alle "korrigierten" Commity wären neue (git versucht *Master* und *Origin/Master* zu mergen und kommt bei jedem Commit auf einen Conflict, sind ja die gleichen Änderungen). 
+Bei uns war dies kein grosses Problem, da wir lediglich mit Alain absprechen mussten, dass er keine Änderungen vornehmen sollte. Das Anpassen des Autores ansich ging relativ schnell und es gibt sogar eine https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History:[offizielle Anleitung von Git]. Ich musste nur diesen Befehl in Git eingeben und alles wurde korrekt angepasst.
+Das Geschichtsexperiment war ein voller Erfolg. Zwar mussten Seraphin und Alain einen Reset machen, doch alle Änderungen sind nun auf Github und wir können ohne Probleme weiter arbeiten.
+
+[source, java]
+--
+$ git filter-branch --commit-filter '
+        if [ "$GIT_AUTHOR_EMAIL" = "old@mail.com" ];
+        then
+                GIT_AUTHOR_NAME="New Name";
+                GIT_AUTHOR_EMAIL="new@mail.com";
+                git commit-tree "$@";
+        else
+                git commit-tree "$@";
+        fi' HEAD
+--
+
+== Verschiedene Build-Configurationen
+
+
+Unsere Applikation hat sehr viele Möglichkeiten Daten zu bearbeiten. Da man nicht immer alle Daten anzeigen muss haben wir uns für den oben genannten Docking-Manager entschieden. Doch auch in den Modulen selbst gibt es Elemente, welche man nur selten benötigt. 
+So habe ich damit begonnen eine Möglichkeit zu suche, diese selten verwendeten Elemente auszublenden. Dabei stiess ich auf sogenannte "Conditional compilation symbols". 
+So habe ich herausgefunden, dass der C#-Compiler bei verschiedenen Build-Konfigurationen
+gewissen Code nicht kompiliert. Im "RELEASE"-Build werden nicht verwendete Variablen nicht kompiliert. Ausserdem kann man die oben genannten "Conditional compilation symbols" definieren.
+
+[source, csharp]
+
+--
+
+#if DEBUG
+
+                public int  OnlyAvailableInDebug { get; set; }
+
+#endif
+
+--
+
+Code in diesen #if-Abschnitten wird beispielsweise nur im Debug-Modus kompiliert. So habe eine eigene Build-Konfiguration erstellt, bei welcher gewisse GUI-Elemente nicht angezeigt werden (Code: DebugReleaseStylePicker.cs).

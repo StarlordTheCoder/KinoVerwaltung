@@ -1,12 +1,14 @@
 ﻿// CinemaManager created by Seraphin, Pascal & Alain as a school project
 // Copyright (c) 2016 All Rights Reserved
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using CinemaManager.Infrastructure;
 using CinemaManager.Model;
+using CinemaManager.Modules;
 using Microsoft.Win32;
 
 namespace CinemaManager.MainView
@@ -16,13 +18,16 @@ namespace CinemaManager.MainView
 	/// </summary>
 	public class DataSourceService : IDataSourceService
 	{
+		private static Action<IModule> _refreshModules;
+
 		/// <summary>
 		///     Loads the default data
 		///     Creates the Command and CommandBindings
 		/// </summary>
-		public DataSourceService()
+		/// <param name="refreshModules"></param>
+		public DataSourceService(Action<IModule> refreshModules)
 		{
-			LoadData(Session.DataPath);
+			_refreshModules = refreshModules;
 
 			OpenFileCommand = new RoutedUICommand("Open...", "Open...", typeof(MainWindow), new InputGestureCollection
 			{
@@ -74,13 +79,14 @@ namespace CinemaManager.MainView
 		///     Try to load the Datafile at the specified <paramref name="path" />/>
 		/// </summary>
 		/// <param name="path">Path to load data from</param>
-		private static void LoadData(string path)
+		public void LoadData(string path)
 		{
 			Session.DataPath = path;
 
 			try
 			{
 				Session.DataModel.Load();
+				_refreshModules(null);
 			}
 			catch
 			{
@@ -111,16 +117,16 @@ namespace CinemaManager.MainView
 		/// <summary>
 		///     Calls Load and Save on the <see cref="IDataModel" />
 		/// </summary>
-		private static void SynchronizeData()
+		private void SynchronizeData()
 		{
 			Session.DataModel.Save();
-			Session.DataModel.Load();
+			LoadData(Session.DataPath);
 		}
 
 		/// <summary>
 		///     Opens a open file dialog
 		/// </summary>
-		private static void OpenDataFile()
+		private void OpenDataFile()
 		{
 			var dialog = new OpenFileDialog
 			{
