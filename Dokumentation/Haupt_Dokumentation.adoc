@@ -62,6 +62,15 @@ Unsere Scrum-Stories werden auf Taiga verwaltet.
 * Film
 ** Es können Filme erstellt, angesehen und bearbeitet werden
 
+* Reservation
+** Eine Reservation hat einen Preis
+** Eine Reservation kann bearbeitet und storniert werden
+** Eine Reservation kann über mehrere Sitze verfügen
+
+* Vorstellung
+** Eine Vorstellung hat ein Aufführdatum, einen Film und Reservationen
+** Die Anzahl freier Sitze wird angezeigt
+
 * Filter
 ** Der Anwender kann in der Applikation diverse Daten suchen / filtern
 *** Benutzerkonto
@@ -99,6 +108,102 @@ endif
 --
 
 == Konzepte
+
+=== Datenverwaltung
+Die Daten werden in sogenannten DTOs verwaltet. Diese DTOs werden serialsiert und können über IDs miteinander verbunden werden. Die Referenz zu den Objekten wird zu laufzeit über die ViewModel aufgelöst.
+
+[uml]
+--
+
+title: Datenverwaltung
+
+class CinemasModel {
+    + Cinemas: List<CinemaModel>
+}
+
+class CinemaModel {
+    + Name: string
+    + Address: string
+    + IsActive: bool
+    + Rooms: List<RoomModel>
+    + Presentations: List<PresentationModel>
+    + Users: List<UserModel>
+    + Films: List<FilmModel>
+    + SeatTypes: List<SeatType>
+}
+
+class RoomModel {
+    + RoomNumber: int
+    + Seats : List<SeatModel>
+}
+
+class SeatModel {
+    + Number: int
+    + Row: int
+    + SeatType: SeatType
+}
+
+class SeatType {
+    +Capacity: int
+    +DisplayName: string
+}
+
+class PresentationModel {
+    + StartTiome: DateTime
+    + Film: FilmModel
+    + Room: RoomModel
+    + Reservations: List<ReservationModel>
+}
+
+class FilmModel {
+    + Name: string
+    + Length: DateTime
+    + Publisher: string
+    + Director: string
+    + AgeRestriction: AgeRestriction
+    + BasePricePerSeat: decimal
+}
+
+enum AgeRestriction {
+    + None: 0
+    + Six: 6
+    + Twelve: 12
+    + Sixteen: 16
+    + Eighteen: 18
+}
+
+class ReservationModel {
+    + Reservator: User
+    + Seats: List<SeatModel>
+}
+
+class UserModel {
+    + Name: string
+    + PhoneNumber: string
+}
+
+CinemaModel -down-* CinemasModel
+
+RoomModel -down-* CinemaModel
+SeatModel -left-* RoomModel
+
+SeatType --* CinemaModel
+SeatType -down-o SeatModel
+
+PresentationModel -left-* CinemaModel
+RoomModel -down-o PresentationModel
+FilmModel -up-o PresentationModel
+
+FilmModel -up-* CinemaModel
+FilmModel -right-o AgeRestriction
+
+ReservationModel -left-* PresentationModel
+SeatModel -up-o ReservationModel
+
+UserModel --* CinemaModel
+ReservationModel -down-o UserModel
+
+--
 
 === Filter
 Um die Daten der Kinoverwaltung zu filtern, entschieden wir uns dafür, dass jedes Modul seine eigene Filter besizt. Damit die Filter im Code zentral verwaltet werden können, machten wir diese generisch. Es gibt einen Filter für jeden relevanten Filtertyp. Es gibt einen DateFilter, StringFilter, NumberFilter und einen ComplexFilter, wobei letzterer nach Werten von anderen Modulen filtern kann. 
@@ -139,17 +244,17 @@ Dieser Modul-übergreifender Filter ist nötig, damit man die Reservationen eine
 --
 
 interface IFilterConfigurator<T> {
-    IFilterConfigurator StringFilter(string label, params Func<T, string>[] valueToCompareTo)
-    IFilterConfigurator NumberFilter(string label, params Func<T, int>[] valueToCompareTo)
-    IFilterConfigurator DateFilter(string label, params Func<T, DateTime?>[] valueToCompareTo)
-    IFilterConfigurator ComplexFilter<TM>(TM module, Func<TM, IEnumerable<T>> valueToCompareTo)
+    + StringFilter(string label, params Func<T, string>[] valueToCompareTo): IFilterConfigurator
+    + NumberFilter(string label, params Func<T, int>[] valueToCompareTo): IFilterConfigurator
+    + DateFilter(string label, params Func<T, DateTime?>[] valueToCompareTo): IFilterConfigurator
+    + ComplexFilter<TM>(TM module, Func<TM, IEnumerable<T>> valueToCompareTo): IFilterConfigurator
 }
 
 class FilterConfigurator<T> {
-    ObservableColletion<StringFilter> StringFilters
-    ObservableColletion<NumberFilter> NumberFilters
-    ObservableColletion<DateFilter> DateFilters
-    ObservableColletion<ComplexFilter> ComplexFilters
+    + StringFilters: ObservableColletion<StringFilter>
+    + NumberFilters: ObservableColletion<NumberFilter>
+    + ObservableColletion<DateFilter> DateFilters
+    + ObservableColletion<ComplexFilter> ComplexFilters
 }
 
 FilterConfigurator .up.|> IFilterConfigurator
