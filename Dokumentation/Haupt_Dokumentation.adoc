@@ -212,23 +212,23 @@ Um die Daten der Kinoverwaltung zu filtern, entschieden wir uns dafür, dass jed
 --
 
 interface IFilter<T> {
-    bool IsEnalbed
-    string Label
-    bool Check(T data)
+    IsEnalbed: bool
+    Label: string
+    Check(T data): bool
 }
 
 class StringFilter<T> {
-    string Text
+    Text: string
 }
 class NumberFilter<T> {
-    int Number
+    Number: int
 }
 class DateFilter<T> {
-    DateTime StartDate
-    DateTime EndtDate
+    StartDate: DateTime
+    EndtDate: DateTime
 }
 class ComplexFilter<T, TM : IModule> {
-    TM Module
+    Module: TM
 }
 
 IFilter <|.down. StringFilter
